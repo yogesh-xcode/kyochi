@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kyochi — Design System & Theme Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --kyochi-gold-50:#fdf8e7;--kyochi-gold-100:#f9edbe;--kyochi-gold-200:#f3dc8a;
+  --kyochi-gold-300:#ecc84f;--kyochi-gold-400:#d4af35;--kyochi-gold-500:#b8941f;
+  --kyochi-gold-600:#9a7a10;--kyochi-gold-700:#7a5f0a;--kyochi-gold-800:#5c4507;
+  --kyochi-gold-900:#3d2d04;
+  --kyochi-cream-100:#f8f7f4;--kyochi-cream-200:#f2efe9;--kyochi-cream-300:#e8e3d8;
+  --kyochi-green-400:#3fa060;--kyochi-green-700:#144826;
+  --kyochi-red-400:#ef4444;--kyochi-red-600:#b91c1c;
+  --bg:#f8f7f4;--surface:#ffffff;--border:#e8e3d8;
+  --text:#241e15;--text-2:#6b5e4c;--text-3:#a89880;
+  --gold:#d4af35;--gold-light:#fdf8e7;--gold-border:rgba(212,175,53,0.25);
+  --radius:8px;--radius-md:12px;--radius-lg:16px;--radius-xl:24px;--radius-2xl:32px;
+  --shadow-sm:0 2px 8px rgba(107,81,42,0.08);
+  --shadow-md:0 4px 16px rgba(107,81,42,0.10);
+  --shadow-gold:0 4px 20px rgba(212,175,53,0.25);
+  --font-display:'DM Serif Display',Georgia,serif;
+  --font-sans:'Manrope',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--text);line-height:1.6;}
+.page{max-width:1100px;margin:0 auto;padding:48px 24px 80px;}
+.section{margin-bottom:56px;}
+.section-title{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#241e15 0%,#3d2d04 60%,#5c4507 100%);border-radius:var(--radius-2xl);padding:56px 48px;margin-bottom:56px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(212,175,53,0.15) 0%,transparent 70%);pointer-events:none;}
+.hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.hero-title{font-family:var(--font-display);font-size:42px;color:#fdf8e7;line-height:1.15;margin-bottom:12px;}
+.hero-sub{font-size:14px;color:rgba(253,248,231,0.6);max-width:480px;line-height:1.7;}
+.hero-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px;}
+.hero-chip{background:rgba(212,175,53,0.15);border:1px solid rgba(212,175,53,0.3);color:var(--kyochi-gold-200);padding:4px 14px;border-radius:99px;font-size:12px;font-weight:600;}
+
+/* COLOR SWATCHES */
+.swatch-row{display:flex;gap:6px;flex-wrap:wrap;}
+.swatch{width:56px;height:56px;border-radius:var(--radius-md);border:1px solid rgba(0,0,0,0.06);position:relative;cursor:pointer;}
+.swatch-label{font-size:9px;font-weight:700;text-align:center;margin-top:4px;color:var(--text-2);}
+.swatch-group{margin-bottom:20px;}
+.swatch-group-name{font-size:12px;font-weight:700;color:var(--text-2);margin-bottom:8px;}
+
+/* TYPOGRAPHY */
+.type-row{padding:16px 0;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:16px;}
+.type-meta{font-size:11px;color:var(--text-3);min-width:160px;font-weight:600;}
+
+/* COMPONENT SHOWCASE */
+.comp-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:24px;}
+.comp-label{font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;}
+.comp-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+
+/* BUTTONS */
+.k-btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-sans);font-size:13px;font-weight:700;border-radius:var(--radius-md);padding:8px 18px;cursor:pointer;border:none;transition:all 0.15s ease;}
+.k-btn-primary{background:var(--gold);color:#3d2d04;box-shadow:var(--shadow-gold);}
+.k-btn-primary:hover{background:var(--kyochi-gold-500);transform:translateY(-1px);}
+.k-btn-secondary{background:var(--kyochi-cream-200);color:var(--text);border:1px solid var(--border);}
+.k-btn-ghost{background:transparent;color:var(--text-2);border:1px solid var(--border);}
+.k-btn-dark{background:#241e15;color:var(--kyochi-gold-200);}
+.k-btn-sm{font-size:11px;padding:5px 12px;border-radius:6px;}
+.k-btn-lg{font-size:15px;padding:12px 28px;border-radius:var(--radius-lg);}
+.k-btn-icon{width:36px;height:36px;padding:0;border-radius:var(--radius-md);border:1px solid var(--border);background:var(--surface);color:var(--text-2);display:inline-flex;align-items:center;justify-content:center;}
+
+/* BADGES */
+.k-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;border:1px solid transparent;}
+.k-badge-gold{background:rgba(212,175,53,0.12);color:var(--kyochi-gold-700);border-color:rgba(212,175,53,0.3);}
+.k-badge-green{background:#eef7f0;color:var(--kyochi-green-700);border-color:rgba(63,160,96,0.3);}
+.k-badge-red{background:#fef2f2;color:var(--kyochi-red-600);border-color:rgba(239,68,68,0.3);}
+.k-badge-muted{background:var(--kyochi-cream-200);color:var(--text-2);border-color:var(--border);}
+.k-badge-dark{background:#241e15;color:var(--kyochi-gold-200);border-color:rgba(212,175,53,0.2);}
+
+/* CHIPS */
+.k-chip{display:inline-flex;align-items:center;gap:4px;padding:5px 14px;background:var(--kyochi-cream-200);color:var(--text-2);border:1px solid var(--border);border-radius:99px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.15s ease;}
+.k-chip.sel{background:rgba(212,175,53,0.12);border-color:rgba(212,175,53,0.4);color:var(--kyochi-gold-600);}
+
+/* INPUTS */
+.k-input{width:100%;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:var(--radius-md);padding:10px 14px;font-family:var(--font-sans);font-size:13px;outline:none;transition:border-color 0.15s ease,box-shadow 0.15s ease;}
+.k-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,53,0.15);}
+.k-input::placeholder{color:var(--text-3);}
+.k-input-wrap{position:relative;}
+.k-input-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-3);font-size:16px;}
+.k-input-wrap .k-input{padding-left:38px;}
+
+/* CARDS */
+.k-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);box-shadow:var(--shadow-sm);transition:box-shadow 0.2s ease,border-color 0.2s ease;overflow:hidden;}
+.k-card:hover{box-shadow:var(--shadow-md);border-color:rgba(212,175,53,0.3);}
+.k-metric{padding:20px 24px;}
+.k-metric-label{font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
+.k-metric-value{font-size:36px;font-weight:800;color:var(--text);letter-spacing:-0.03em;line-height:1;}
+.k-metric-delta{font-size:12px;font-weight:700;margin-top:8px;display:flex;align-items:center;gap:4px;}
+.delta-pos{color:var(--kyochi-green-400);}
+.delta-neg{color:var(--kyochi-red-400);}
+
+/* PROGRESS */
+.k-progress{width:100%;height:6px;background:var(--kyochi-cream-300);border-radius:99px;overflow:hidden;}
+.k-progress-fill{height:100%;background:linear-gradient(90deg,var(--kyochi-gold-400),var(--kyochi-gold-300));border-radius:99px;}
+.k-progress-fill-green{background:linear-gradient(90deg,var(--kyochi-green-400),#72be8a);}
+
+/* AVATAR */
+.k-avatar{display:flex;align-items:center;justify-content:center;border-radius:99px;font-weight:800;overflow:hidden;flex-shrink:0;border:2px solid var(--border);}
+.k-avatar-gold{border-color:var(--gold);}
+.k-avatar-sm{width:32px;height:32px;font-size:11px;}
+.k-avatar-md{width:40px;height:40px;font-size:13px;}
+.k-avatar-lg{width:56px;height:56px;font-size:18px;}
+.k-avatar-bg{background:var(--kyochi-cream-200);color:var(--kyochi-gold-700);}
+
+/* TABS */
+.k-tabs{display:flex;gap:4px;background:var(--kyochi-cream-200);padding:4px;border-radius:var(--radius-md);}
+.k-tab{flex:1;padding:7px 12px;font-size:12px;font-weight:700;border-radius:6px;text-align:center;cursor:pointer;transition:all 0.15s ease;color:var(--text-2);border:none;background:transparent;}
+.k-tab.active{background:var(--surface);color:var(--text);box-shadow:var(--shadow-sm);}
+
+/* WELLNESS SCORE RING */
+.score-ring{position:relative;display:inline-flex;align-items:center;justify-content:center;width:80px;height:80px;}
+.score-ring svg{position:absolute;top:0;left:0;transform:rotate(-90deg);}
+.score-ring-text{text-align:center;z-index:1;}
+.score-ring-num{font-size:20px;font-weight:800;color:var(--text);line-height:1;}
+.score-ring-label{font-size:9px;font-weight:600;color:var(--text-3);}
+
+/* SPACING */
+.space-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;}
+.space-box{background:rgba(212,175,53,0.2);border:1px solid rgba(212,175,53,0.4);border-radius:4px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;}
+.space-label{font-size:9px;font-weight:700;color:var(--kyochi-gold-700);text-align:center;}
+
+/* ICONS in showcase */
+.icon{font-size:18px;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Design System v1.0</div>
+  <h1 class="hero-title">Kyochi Wellness<br>Intelligence Platform</h1>
+  <p class="hero-sub">Theme guide, token system, and component library for the Kyochi clinical management platform. Built on Manrope + DM Serif Display. Warm gold + wellness neutrals.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">Next.js 14</span>
+    <span class="hero-chip">Supabase</span>
+    <span class="hero-chip">shadcn/ui compatible</span>
+    <span class="hero-chip">Dark mode ready</span>
+    <span class="hero-chip">Mobile-first</span>
+  </div>
+</div>
+
+<!-- COLORS -->
+<div class="section">
+  <div class="section-title">Color Palette</div>
+  <div class="swatch-group">
+    <div class="swatch-group-name">Gold — Primary Brand</div>
+    <div class="swatch-row">
+      <div><div class="swatch" style="background:#fdf8e7;"></div><div class="swatch-label">50</div></div>
+      <div><div class="swatch" style="background:#f9edbe;"></div><div class="swatch-label">100</div></div>
+      <div><div class="swatch" style="background:#f3dc8a;"></div><div class="swatch-label">200</div></div>
+      <div><div class="swatch" style="background:#ecc84f;"></div><div class="swatch-label">300</div></div>
+      <div><div class="swatch" style="background:#d4af35;border:2px solid #9a7a10;"></div><div class="swatch-label" style="color:#9a7a10;font-weight:800;">400 ★</div></div>
+      <div><div class="swatch" style="background:#b8941f;"></div><div class="swatch-label">500</div></div>
+      <div><div class="swatch" style="background:#9a7a10;"></div><div class="swatch-label">600</div></div>
+      <div><div class="swatch" style="background:#7a5f0a;"></div><div class="swatch-label">700</div></div>
+      <div><div class="swatch" style="background:#5c4507;"></div><div class="swatch-label">800</div></div>
+      <div><div class="swatch" style="background:#3d2d04;"></div><div class="swatch-label">900</div></div>
+    </div>
+  </div>
+  <div class="swatch-group">
+    <div class="swatch-group-name">Cream — Backgrounds & Surfaces</div>
+    <div class="swatch-row">
+      <div><div class="swatch" style="background:#fdfcfa;"></div><div class="swatch-label">50</div></div>
+      <div><div class="swatch" style="background:#f8f7f4;"></div><div class="swatch-label">100</div></div>
+      <div><div class="swatch" style="background:#f2efe9;"></div><div class="swatch-label">200</div></div>
+      <div><div class="swatch" style="background:#e8e3d8;"></div><div class="swatch-label">300</div></div>
+      <div><div class="swatch" style="background:#d9d1c2;"></div><div class="swatch-label">400</div></div>
+      <div><div class="swatch" style="background:#c4b99e;"></div><div class="swatch-label">500</div></div>
+      <div><div class="swatch" style="background:#a89880;"></div><div class="swatch-label">600</div></div>
+      <div><div class="swatch" style="background:#8a7a64;"></div><div class="swatch-label">700</div></div>
+      <div><div class="swatch" style="background:#6b5e4c;"></div><div class="swatch-label">800</div></div>
+      <div><div class="swatch" style="background:#4a4035;"></div><div class="swatch-label">900</div></div>
+    </div>
+  </div>
+  <div class="swatch-group" style="display:flex;gap:32px;">
+    <div>
+      <div class="swatch-group-name">Wellness Green — Positive Delta</div>
+      <div class="swatch-row">
+        <div><div class="swatch" style="background:#eef7f0;"></div><div class="swatch-label">50</div></div>
+        <div><div class="swatch" style="background:#a8d8b6;"></div><div class="swatch-label">200</div></div>
+        <div><div class="swatch" style="background:#3fa060;border:2px solid #1e6336;"></div><div class="swatch-label" style="color:#1e6336;font-weight:800;">400 ★</div></div>
+        <div><div class="swatch" style="background:#144826;"></div><div class="swatch-label">700</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="swatch-group-name">Alert Red — Negative Delta</div>
+      <div class="swatch-row">
+        <div><div class="swatch" style="background:#fef2f2;"></div><div class="swatch-label">50</div></div>
+        <div><div class="swatch" style="background:#fbb8b8;"></div><div class="swatch-label">200</div></div>
+        <div><div class="swatch" style="background:#ef4444;border:2px solid #b91c1c;"></div><div class="swatch-label" style="color:#b91c1c;font-weight:800;">400 ★</div></div>
+        <div><div class="swatch" style="background:#b91c1c;"></div><div class="swatch-label">600</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="swatch-group-name">Dark — Base / Sidebar</div>
+      <div class="swatch-row">
+        <div><div class="swatch" style="background:#3d2d04;"></div><div class="swatch-label">Deep</div></div>
+        <div><div class="swatch" style="background:#241e15;"></div><div class="swatch-label">Base</div></div>
+        <div><div class="swatch" style="background:#181410;"></div><div class="swatch-label">Darkest</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TYPOGRAPHY -->
+<div class="section">
+  <div class="section-title">Typography</div>
+  <div class="comp-card">
+    <div class="type-row">
+      <span class="type-meta">Display / DM Serif</span>
+      <span style="font-family:'DM Serif Display',serif;font-size:36px;color:var(--text);">Wellness Intelligence</span>
+    </div>
+    <div class="type-row">
+      <span class="type-meta">H1 / Manrope 800 30px</span>
+      <span style="font-size:30px;font-weight:800;letter-spacing:-0.02em;">Patient Dashboard</span>
+    </div>
+    <div class="type-row">
+      <span class="type-meta">H2 / Manrope 700 24px</span>
+      <span style="font-size:24px;font-weight:700;letter-spacing:-0.02em;">Session Overview</span>
+    </div>
+    <div class="type-row">
+      <span class="type-meta">H3 / Manrope 700 20px</span>
+      <span style="font-size:20px;font-weight:700;">Appointment Details</span>
+    </div>
+    <div class="type-row">
+      <span class="type-meta">Body / Manrope 400 16px</span>
+      <span style="font-size:16px;font-weight:400;">Your stress levels have improved significantly over the last 3 sessions.</span>
+    </div>
+    <div class="type-row">
+      <span class="type-meta">Small / Manrope 600 13px</span>
+      <span style="font-size:13px;font-weight:600;color:var(--text-2);">Relaxation · 60 min · Dr. Priya Menon</span>
+    </div>
+    <div class="type-row" style="border-bottom:none;">
+      <span class="type-meta">Label / Manrope 700 11px</span>
+      <span style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);">WELLNESS SCORE</span>
+    </div>
+  </div>
+</div>
+
+<!-- BUTTONS -->
+<div class="section">
+  <div class="section-title">Buttons</div>
+  <div class="comp-card">
+    <div class="comp-label">Variants</div>
+    <div class="comp-row" style="margin-bottom:16px;">
+      <button class="k-btn k-btn-primary">Book Session</button>
+      <button class="k-btn k-btn-secondary">View History</button>
+      <button class="k-btn k-btn-ghost">Cancel</button>
+      <button class="k-btn k-btn-dark">Export Report</button>
+    </div>
+    <div class="comp-label">Sizes</div>
+    <div class="comp-row" style="margin-bottom:16px;">
+      <button class="k-btn k-btn-primary k-btn-sm">Small</button>
+      <button class="k-btn k-btn-primary">Default</button>
+      <button class="k-btn k-btn-primary k-btn-lg">Large</button>
+    </div>
+    <div class="comp-label">Icon Button</div>
+    <div class="comp-row">
+      <button class="k-btn-icon">＋</button>
+      <button class="k-btn-icon">🔔</button>
+      <button class="k-btn-icon">⚙</button>
+      <button class="k-btn-icon" style="background:var(--gold);border-color:var(--kyochi-gold-500);">↗</button>
+    </div>
+  </div>
+</div>
+
+<!-- BADGES & CHIPS -->
+<div class="section">
+  <div class="section-title">Badges & Chips</div>
+  <div class="grid-2">
+    <div class="comp-card">
+      <div class="comp-label">Badges</div>
+      <div class="comp-row">
+        <span class="k-badge k-badge-gold">Premium</span>
+        <span class="k-badge k-badge-green">▲ +12%</span>
+        <span class="k-badge k-badge-red">▼ −4%</span>
+        <span class="k-badge k-badge-muted">Pending</span>
+        <span class="k-badge k-badge-dark">AI Insight</span>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-label">Filter Chips</div>
+      <div class="comp-row">
+        <span class="k-chip sel">Relaxation</span>
+        <span class="k-chip">De-stress</span>
+        <span class="k-chip">Detox</span>
+        <span class="k-chip">Chronic Pain</span>
+        <span class="k-chip">All</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INPUTS -->
+<div class="section">
+  <div class="section-title">Form Elements</div>
+  <div class="comp-card">
+    <div class="grid-2">
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="comp-label">Text Input</div>
+        <input class="k-input" placeholder="Search patients..." type="text"/>
+        <input class="k-input" value="Priya Menon" type="text"/>
+        <div class="k-input-wrap">
+          <span class="k-input-icon">🔍</span>
+          <input class="k-input" placeholder="Search appointments..." type="text"/>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="comp-label">Custom Slider (Feedback)</div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:600;color:var(--text-3);margin-bottom:8px;"><span>Before session</span><span style="color:var(--text);font-weight:800;">7 / 10</span></div>
+          <input type="range" min="1" max="10" value="7" style="width:100%;accent-color:var(--gold);" />
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-3);margin-top:4px;"><span>Low stress</span><span>High stress</span></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:600;color:var(--text-3);margin-bottom:8px;"><span>After session</span><span style="color:var(--kyochi-green-400);font-weight:800;">3 / 10 ▼</span></div>
+          <input type="range" min="1" max="10" value="3" style="width:100%;accent-color:#3fa060;" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CARDS & METRICS -->
+<div class="section">
+  <div class="section-title">Cards & Metric Components</div>
+  <div class="grid-4">
+    <div class="k-card k-metric">
+      <div class="k-metric-label">Wellness Index</div>
+      <div class="k-metric-value">+18%</div>
+      <div class="k-metric-delta delta-pos">▲ +2.4% this month</div>
+    </div>
+    <div class="k-card k-metric">
+      <div class="k-metric-label">Patient Retention</div>
+      <div class="k-metric-value">92%</div>
+      <div class="k-metric-delta delta-pos">▲ Stable growth</div>
+    </div>
+    <div class="k-card k-metric">
+      <div class="k-metric-label">Monthly Revenue</div>
+      <div class="k-metric-value">₹1.4L</div>
+      <div class="k-metric-delta delta-pos">▲ +12% vs target</div>
+    </div>
+    <div class="k-card k-metric" style="border-color:rgba(212,175,53,0.35);box-shadow:var(--shadow-gold);">
+      <div class="k-metric-label">Avg Session Rating</div>
+      <div class="k-metric-value" style="color:var(--gold);">4.9★</div>
+      <div class="k-metric-delta" style="color:var(--text-3);">Across 440 sessions</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS + WELLNESS RING -->
+<div class="section">
+  <div class="section-title">Progress & Wellness Score</div>
+  <div class="grid-2">
+    <div class="comp-card">
+      <div class="comp-label">Progress Bars</div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px;font-weight:600;"><span style="color:var(--text-2);">Relaxation</span><span style="color:var(--gold);">45%</span></div>
+          <div class="k-progress"><div class="k-progress-fill" style="width:45%;"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px;font-weight:600;"><span style="color:var(--text-2);">De-stress</span><span style="color:var(--gold);">30%</span></div>
+          <div class="k-progress" style="height:6px;"><div class="k-progress-fill" style="width:30%;background:linear-gradient(90deg,var(--kyochi-gold-400),var(--kyochi-gold-200));"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px;font-weight:600;"><span style="color:var(--text-2);">Chronic Pain</span><span style="color:var(--kyochi-green-400);">72%</span></div>
+          <div class="k-progress"><div class="k-progress-fill k-progress-fill-green" style="width:72%;"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px;font-weight:600;"><span style="color:var(--text-2);">Detox</span><span style="color:var(--kyochi-red-400);">22%</span></div>
+          <div class="k-progress"><div class="k-progress-fill" style="width:22%;background:linear-gradient(90deg,var(--kyochi-red-400),var(--kyochi-red-200));"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="comp-card" style="display:flex;flex-direction:column;gap:20px;">
+      <div class="comp-label">Wellness Score Rings</div>
+      <div style="display:flex;gap:24px;align-items:center;">
+        <div style="text-align:center;">
+          <div class="score-ring">
+            <svg width="80" height="80" viewBox="0 0 80 80">
+              <circle cx="40" cy="40" r="32" fill="none" stroke="#e8e3d8" stroke-width="8"/>
+              <circle cx="40" cy="40" r="32" fill="none" stroke="#d4af35" stroke-width="8" stroke-dasharray="201" stroke-dashoffset="50" stroke-linecap="round"/>
+            </svg>
+            <div class="score-ring-text"><div class="score-ring-num">7.8</div><div class="score-ring-label">Wellness</div></div>
+          </div>
+          <div style="font-size:11px;font-weight:600;color:var(--text-3);margin-top:6px;">Current</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="score-ring">
+            <svg width="80" height="80" viewBox="0 0 80 80">
+              <circle cx="40" cy="40" r="32" fill="none" stroke="#e8e3d8" stroke-width="8"/>
+              <circle cx="40" cy="40" r="32" fill="none" stroke="#3fa060" stroke-width="8" stroke-dasharray="201" stroke-dashoffset="30" stroke-linecap="round"/>
+            </svg>
+            <div class="score-ring-text"><div class="score-ring-num" style="color:var(--kyochi-green-400);">8.6</div><div class="score-ring-label">After</div></div>
+          </div>
+          <div style="font-size:11px;font-weight:600;color:var(--kyochi-green-400);margin-top:6px;">▲ +0.8</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="score-ring">
+            <svg width="80" height="80" viewBox="0 0 80 80">
+              <circle cx="40" cy="40" r="32" fill="none" stroke="#e8e3d8" stroke-width="8"/>
+              <circle cx="40" cy="40" r="32" fill="none" stroke="#ef4444" stroke-width="8" stroke-dasharray="201" stroke-dashoffset="130" stroke-linecap="round"/>
+            </svg>
+            <div class="score-ring-text"><div class="score-ring-num" style="color:var(--kyochi-red-400);">4.2</div><div class="score-ring-label">Stress</div></div>
+          </div>
+          <div style="font-size:11px;font-weight:600;color:var(--text-3);margin-top:6px;">Before</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AVATAR & TABS -->
+<div class="section">
+  <div class="section-title">Avatars & Tabs</div>
+  <div class="grid-2">
+    <div class="comp-card">
+      <div class="comp-label">Avatars</div>
+      <div class="comp-row">
+        <div class="k-avatar k-avatar-sm k-avatar-bg k-avatar-gold">PM</div>
+        <div class="k-avatar k-avatar-md k-avatar-bg">RK</div>
+        <div class="k-avatar k-avatar-lg k-avatar-bg k-avatar-gold">AS</div>
+        <div class="k-avatar k-avatar-lg" style="background:#241e15;color:var(--kyochi-gold-200);border-color:var(--gold);">VN</div>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-label">Tabs</div>
+      <div class="k-tabs">
+        <button class="k-tab active">Overview</button>
+        <button class="k-tab">Wellness</button>
+        <button class="k-tab">History</button>
+        <button class="k-tab">Notes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPACING SCALE -->
+<div class="section">
+  <div class="section-title">Spacing Scale</div>
+  <div class="comp-card">
+    <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;">
+      <div style="text-align:center;"><div style="width:4px;height:4px;background:var(--gold);border-radius:2px;margin:0 auto;"></div><div style="font-size:9px;font-weight:700;color:var(--text-3);margin-top:4px;">1 (4px)</div></div>
+      <div style="text-align:center;"><div style="width:8px;height:8px;background:var(--gold);border-radius:2px;margin:0 auto;"></div><div style="font-size:9px;font-weight:700;color:var(--text-3);margin-top:4px;">2 (8px)</div></div>
+      <div style="text-align:center;"><div style="width:12px;height:12px;background:var(--gold);border-radius:2px;margin:0 auto;"></div><div style="font-size:9px;font-weight:700;color:var(--text-3);margin-top:4px;">3 (12px)</div></div>
+      <div style="text-align:center;"><div style="width:16px;height:16px;background:var(--gold);border-radius:2px;margin:0 auto;"></div><div style="font-size:9px;font-weight:700;color:var(--text-3);margin-top:4px;">4 (16px)</div></div>
+      <div style="text-align:center;"><div style="width:20px;height:20px;background:var(--gold);border-radius:2px;margin:0 auto;"></div><div style="font-size:9px;font-weight:700;color:var(--text-3);margin-top:4px;">5 (20px)</div></div>
+      <div style="text-align:center;"><div style="width:24px;height:24px;background:var(--gold);border-radius:2px;margin:0 auto;"></div><div style="font-size:9px;font-weight:700;color:var(--text-3);margin-top:4px;">6 (24px)</div></div>
+      <div style="text-align:center;"><div style="width:32px;height:32px;background:var(--gold);border-radius:2px;margin:0 auto;"></div><div style="font-size:9px;font-weight:700;color:var(--text-3);margin-top:4px;">8 (32px)</div></div>
+      <div style="text-align:center;"><div style="width:40px;height:40px;background:var(--gold);border-radius:2px;margin:0 auto;"></div><div style="font-size:9px;font-weight:700;color:var(--text-3);margin-top:4px;">10 (40px)</div></div>
+      <div style="text-align:center;"><div style="width:48px;height:48px;background:var(--gold);border-radius:2px;margin:0 auto;"></div><div style="font-size:9px;font-weight:700;color:var(--text-3);margin-top:4px;">12 (48px)</div></div>
+      <div style="text-align:center;"><div style="width:64px;height:64px;background:var(--gold);border-radius:2px;margin:0 auto;"></div><div style="font-size:9px;font-weight:700;color:var(--text-3);margin-top:4px;">16 (64px)</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- RADIUS -->
+<div class="section">
+  <div class="section-title">Border Radius Scale</div>
+  <div class="comp-card">
+    <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
+      <div style="text-align:center;"><div style="width:64px;height:40px;background:var(--kyochi-cream-200);border:1px solid var(--border);border-radius:6px;"></div><div style="font-size:9px;font-weight:700;color:var(--text-3);margin-top:6px;">sm 6px</div></div>
+      <div style="text-align:center;"><div style="width:64px;height:40px;background:var(--kyochi-cream-200);border:1px solid var(--border);border-radius:8px;"></div><div style="font-size:9px;font-weight:700;color:var(--text-3);margin-top:6px;">default 8px</div></div>
+      <div style="text-align:center;"><div style="width:64px;height:40px;background:var(--kyochi-cream-200);border:1px solid var(--border);border-radius:12px;"></div><div style="font-size:9px;font-weight:700;color:var(--text-3);margin-top:6px;">md 12px</div></div>
+      <div style="text-align:center;"><div style="width:64px;height:40px;background:var(--kyochi-cream-200);border:1px solid var(--border);border-radius:16px;"></div><div style="font-size:9px;font-weight:700;color:var(--text-3);margin-top:6px;">lg 16px</div></div>
+      <div style="text-align:center;"><div style="width:64px;height:40px;background:var(--kyochi-cream-200);border:1px solid var(--border);border-radius:24px;"></div><div style="font-size:9px;font-weight:700;color:var(--text-3);margin-top:6px;">xl 24px</div></div>
+      <div style="text-align:center;"><div style="width:64px;height:40px;background:var(--kyochi-cream-200);border:1px solid var(--border);border-radius:32px;"></div><div style="font-size:9px;font-weight:700;color:var(--text-3);margin-top:6px;">2xl 32px</div></div>
+      <div style="text-align:center;"><div style="width:64px;height:40px;background:var(--kyochi-cream-200);border:1px solid var(--border);border-radius:999px;"></div><div style="font-size:9px;font-weight:700;color:var(--text-3);margin-top:6px;">full pill</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- AI INSIGHT CARD -->
+<div class="section">
+  <div class="section-title">AI Insight Component</div>
+  <div style="max-width:480px;">
+    <div style="background:linear-gradient(135deg,#241e15,#3d2d04);border:1px solid rgba(212,175,53,0.25);border-radius:24px;padding:24px;box-shadow:var(--shadow-gold);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+        <div style="width:32px;height:32px;background:rgba(212,175,53,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;">✦</div>
+        <div>
+          <div style="font-size:10px;font-weight:700;color:var(--kyochi-gold-300);letter-spacing:0.08em;text-transform:uppercase;">AI Insight</div>
+          <div style="font-size:12px;color:rgba(253,248,231,0.5);">Powered by Claude</div>
+        </div>
+      </div>
+      <p style="font-size:14px;color:var(--kyochi-cream-100);line-height:1.7;margin-bottom:16px;">"Your stress delta has improved by <span style="color:var(--kyochi-gold-300);font-weight:700;">42%</span> over the last 4 sessions. We recommend continuing De-stress therapy and adding a Femme Cycle session this month."</p>
+      <div style="display:flex;gap:8px;">
+        <button class="k-btn k-btn-primary k-btn-sm">Book next session</button>
+        <button class="k-btn k-btn-sm" style="background:rgba(255,255,255,0.08);color:var(--kyochi-cream-200);border:1px solid rgba(255,255,255,0.12);">View full report</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

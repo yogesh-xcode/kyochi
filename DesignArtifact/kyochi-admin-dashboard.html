@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kyochi — Admin Analytics Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+/* ── TOKENS ─────────────────────────────────────────── */
+:root {
+  --gold:#d4af35;--gold-2:#b8941f;--gold-3:#9a7a10;
+  --gold-50:#fdf8e7;--gold-100:#f9edbe;--gold-200:#f3dc8a;--gold-800:#5c4507;--gold-900:#3d2d04;
+  --cream-50:#fdfcfa;--cream-100:#f8f7f4;--cream-200:#f2efe9;--cream-300:#e8e3d8;--cream-400:#d9d1c2;
+  --cream-600:#a89880;--cream-700:#8a7a64;--cream-800:#6b5e4c;
+  --green:#3fa060;--green-bg:#eef7f0;--green-dark:#144826;
+  --red:#ef4444;--red-bg:#fef2f2;--red-dark:#b91c1c;
+  --dark-base:#241e15;--dark-deep:#181410;--dark-mid:#3d2d04;
+  --bg:var(--cream-100);--surface:#ffffff;
+  --border:var(--cream-300);--border-gold:rgba(212,175,53,0.25);
+  --text:#241e15;--text-2:#6b5e4c;--text-3:#a89880;
+  --shadow-sm:0 2px 8px rgba(107,81,42,0.08);
+  --shadow-md:0 4px 16px rgba(107,81,42,0.10);
+  --shadow-lg:0 8px 32px rgba(107,81,42,0.12);
+  --shadow-gold:0 4px 20px rgba(212,175,53,0.22);
+  --r:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-2xl:28px;
+  --sidebar:260px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Manrope',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;-webkit-font-smoothing:antialiased;}
+
+/* ── SIDEBAR ──────────────────────────────────────── */
+.sidebar{
+  width:var(--sidebar);background:var(--dark-base);
+  display:flex;flex-direction:column;height:100vh;
+  position:fixed;left:0;top:0;z-index:40;
+  border-right:1px solid rgba(212,175,53,0.12);
+  transition:width 0.25s ease;
+}
+.sidebar-logo{padding:24px 20px 20px;border-bottom:1px solid rgba(212,175,53,0.1);}
+.logo-mark{width:38px;height:38px;background:var(--gold);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.logo-mark svg{width:20px;height:20px;fill:var(--gold-900);}
+.logo-text{font-size:15px;font-weight:800;color:#fdf8e7;letter-spacing:-0.01em;}
+.logo-sub{font-size:9px;font-weight:700;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;}
+.sidebar-nav{flex:1;padding:16px 12px;display:flex;flex-direction:column;gap:2px;overflow-y:auto;}
+.nav-section{font-size:9px;font-weight:700;color:rgba(212,175,53,0.4);letter-spacing:0.1em;text-transform:uppercase;padding:12px 10px 6px;}
+.nav-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:var(--r-md);color:rgba(253,248,231,0.5);font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s ease;text-decoration:none;border:none;background:transparent;width:100%;}
+.nav-item:hover{background:rgba(212,175,53,0.08);color:rgba(253,248,231,0.85);}
+.nav-item.active{background:rgba(212,175,53,0.15);color:var(--gold);}
+.nav-item.active .nav-icon{color:var(--gold);}
+.nav-icon{width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;opacity:0.8;}
+.nav-badge{margin-left:auto;background:var(--gold);color:var(--gold-900);font-size:9px;font-weight:800;padding:2px 6px;border-radius:99px;}
+.sidebar-footer{padding:16px 12px;border-top:1px solid rgba(212,175,53,0.1);}
+.user-card{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--r-md);background:rgba(255,255,255,0.04);cursor:pointer;transition:background 0.15s;}
+.user-card:hover{background:rgba(255,255,255,0.07);}
+.user-av{width:36px;height:36px;border-radius:99px;background:rgba(212,175,53,0.2);border:1.5px solid rgba(212,175,53,0.4);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--gold);flex-shrink:0;}
+.user-name{font-size:12px;font-weight:700;color:#fdf8e7;}
+.user-role{font-size:10px;color:rgba(212,175,53,0.6);font-weight:600;}
+
+/* ── MAIN ──────────────────────────────────────────── */
+.main{margin-left:var(--sidebar);flex:1;display:flex;flex-direction:column;min-height:100vh;}
+
+/* ── TOPBAR ──────────────────────────────────────── */
+.topbar{height:64px;background:rgba(248,247,244,0.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:30;}
+.topbar-left{display:flex;align-items:center;gap:20px;}
+.page-title{font-size:18px;font-weight:800;letter-spacing:-0.01em;color:var(--text);}
+.search-wrap{position:relative;}
+.search-wrap input{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:8px 14px 8px 38px;font-size:13px;font-family:'Manrope',sans-serif;color:var(--text);width:280px;outline:none;transition:border-color 0.15s,box-shadow 0.15s;}
+.search-wrap input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,53,0.12);}
+.search-wrap input::placeholder{color:var(--text-3);}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-3);font-size:15px;}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.icon-btn{width:36px;height:36px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);color:var(--text-2);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;font-size:16px;transition:all 0.15s;}
+.icon-btn:hover{border-color:rgba(212,175,53,0.4);background:var(--gold-50);}
+.notif-dot{position:absolute;top:6px;right:6px;width:7px;height:7px;background:var(--gold);border-radius:99px;border:1.5px solid var(--surface);}
+.export-btn{display:flex;align-items:center;gap:6px;background:var(--dark-base);color:var(--gold-100);border:none;border-radius:var(--r-md);padding:8px 16px;font-size:13px;font-weight:700;font-family:'Manrope',sans-serif;cursor:pointer;transition:all 0.15s;}
+.export-btn:hover{background:var(--dark-mid);box-shadow:var(--shadow-gold);}
+
+/* ── CONTENT ──────────────────────────────────────── */
+.content{padding:28px;flex:1;}
+
+/* ── PAGE HEADER ─────────────────────────────────── */
+.page-header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:28px;}
+.page-heading{font-size:28px;font-weight:900;letter-spacing:-0.02em;color:var(--text);}
+.page-subheading{font-size:13px;color:var(--text-3);margin-top:3px;}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;}
+.filter-btn{display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:8px 14px;font-size:12px;font-weight:600;font-family:'Manrope',sans-serif;color:var(--text-2);cursor:pointer;transition:all 0.15s;}
+.filter-btn:hover{border-color:rgba(212,175,53,0.4);color:var(--gold-3);}
+.filter-btn .fi{font-size:13px;color:var(--gold);}
+
+/* ── SCORECARDS ────────────────────────────────────── */
+.scorecards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;}
+.scorecard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:22px 22px 18px;box-shadow:var(--shadow-sm);transition:all 0.2s ease;position:relative;overflow:hidden;}
+.scorecard:hover{box-shadow:var(--shadow-md);border-color:rgba(212,175,53,0.3);transform:translateY(-1px);}
+.scorecard::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r-xl) var(--r-xl) 0 0;}
+.scorecard.gold::after{background:linear-gradient(90deg,var(--gold),var(--gold-200));}
+.scorecard.green::after{background:linear-gradient(90deg,var(--green),#72be8a);}
+.scorecard.blue::after{background:linear-gradient(90deg,#378add,#85b7eb);}
+.scorecard.purple::after{background:linear-gradient(90deg,#7f77dd,#afa9ec);}
+.sc-label{font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;}
+.sc-value{font-size:32px;font-weight:900;color:var(--text);letter-spacing:-0.03em;line-height:1;}
+.sc-delta{font-size:11px;font-weight:700;margin-top:10px;display:flex;align-items:center;gap:4px;}
+.sc-delta.pos{color:var(--green);}
+.sc-delta.neg{color:var(--red);}
+.sc-delta.neutral{color:var(--text-3);}
+.sc-icon{position:absolute;top:18px;right:18px;width:36px;height:36px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:16px;}
+.sc-icon.gold{background:rgba(212,175,53,0.12);}
+.sc-icon.green{background:rgba(63,160,96,0.12);}
+.sc-icon.blue{background:rgba(55,138,221,0.12);}
+.sc-icon.purple{background:rgba(127,119,221,0.12);}
+
+/* ── MIDDLE CHARTS ROW ────────────────────────────── */
+.charts-row{display:grid;grid-template-columns:1fr 2fr;gap:16px;margin-bottom:24px;}
+.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:22px;box-shadow:var(--shadow-sm);}
+.chart-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.chart-title{font-size:15px;font-weight:700;color:var(--text);}
+.chart-more{width:30px;height:30px;border:1px solid var(--border);border-radius:var(--r);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-3);font-size:16px;transition:all 0.15s;}
+.chart-more:hover{border-color:rgba(212,175,53,0.4);color:var(--gold);}
+
+/* Revenue bars */
+.therapy-bars{display:flex;flex-direction:column;gap:14px;}
+.therapy-row{display:flex;flex-direction:column;gap:5px;}
+.therapy-meta{display:flex;justify-content:space-between;align-items:center;}
+.therapy-name{font-size:12px;font-weight:600;color:var(--text-2);}
+.therapy-pct{font-size:12px;font-weight:700;color:var(--gold);}
+.bar-track{width:100%;height:8px;background:var(--cream-200);border-radius:99px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:99px;transition:width 0.6s ease;}
+.bar-gold{background:linear-gradient(90deg,var(--gold),var(--gold-200));}
+.bar-gold-2{background:linear-gradient(90deg,var(--gold-2),var(--gold));}
+.bar-green{background:linear-gradient(90deg,var(--green),#72be8a);}
+.bar-cream{background:linear-gradient(90deg,var(--cream-400),var(--cream-300));}
+.bar-blue{background:linear-gradient(90deg,#378add,#85b7eb);}
+
+/* SVG Chart */
+.chart-legend{display:flex;gap:14px;flex-wrap:wrap;}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--text-3);}
+.legend-dot{width:8px;height:8px;border-radius:99px;}
+.svg-chart{width:100%;overflow:visible;}
+
+/* ── BOTTOM SECTION ────────────────────────────────── */
+.bottom-row{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:24px;}
+
+/* Therapist table */
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.section-title-text{font-size:16px;font-weight:700;color:var(--text);}
+.see-all{font-size:12px;font-weight:700;color:var(--gold);display:flex;align-items:center;gap:4px;cursor:pointer;text-decoration:none;}
+.therapist-table{width:100%;}
+.t-head{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 80px;gap:12px;padding:8px 12px;margin-bottom:4px;}
+.t-head-cell{font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;}
+.t-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 80px;gap:12px;padding:12px 12px;border-radius:var(--r-md);align-items:center;cursor:pointer;transition:background 0.15s;}
+.t-row:hover{background:var(--cream-100);}
+.t-cell{font-size:13px;font-weight:600;color:var(--text);}
+.t-cell.muted{color:var(--text-2);font-size:12px;}
+.therapist-info{display:flex;align-items:center;gap:10px;}
+.t-av{width:36px;height:36px;border-radius:99px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;border:2px solid var(--border);}
+.t-name{font-size:13px;font-weight:700;color:var(--text);}
+.t-spec{font-size:11px;color:var(--text-3);font-weight:500;}
+.badge{display:inline-flex;align-items:center;font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px;border:1px solid transparent;}
+.badge-green{background:var(--green-bg);color:var(--green-dark);border-color:rgba(63,160,96,0.25);}
+.badge-gold{background:rgba(212,175,53,0.1);color:var(--gold-800);border-color:var(--border-gold);}
+.badge-blue{background:#e6f1fb;color:#0c447c;border-color:rgba(55,138,221,0.25);}
+.mini-bar{width:60px;height:6px;background:var(--cream-200);border-radius:99px;overflow:hidden;}
+.mini-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--gold-200));}
+
+/* Recent appointments */
+.appt-list{display:flex;flex-direction:column;gap:8px;}
+.appt-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:var(--r-md);border:1px solid var(--border);background:var(--cream-50);cursor:pointer;transition:all 0.15s;}
+.appt-item:hover{border-color:rgba(212,175,53,0.3);background:var(--gold-50);}
+.appt-dot{width:10px;height:10px;border-radius:99px;flex-shrink:0;}
+.appt-info{flex:1;min-width:0;}
+.appt-name{font-size:12px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.appt-therapy{font-size:11px;color:var(--text-3);font-weight:500;}
+.appt-time{font-size:11px;font-weight:600;color:var(--text-2);flex-shrink:0;}
+
+/* ── AI INSIGHT STRIP ─────────────────────────────── */
+.ai-strip{background:linear-gradient(135deg,var(--dark-base) 0%,var(--dark-mid) 100%);border:1px solid rgba(212,175,53,0.2);border-radius:var(--r-xl);padding:20px 24px;display:flex;align-items:center;gap:16px;box-shadow:var(--shadow-gold);}
+.ai-icon{width:44px;height:44px;background:rgba(212,175,53,0.15);border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;border:1px solid rgba(212,175,53,0.25);}
+.ai-text{flex:1;}
+.ai-label{font-size:9px;font-weight:700;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px;}
+.ai-body{font-size:13px;color:rgba(253,248,231,0.85);line-height:1.5;}
+.ai-body strong{color:var(--gold-200);}
+.ai-actions{display:flex;gap:8px;flex-shrink:0;}
+.ai-btn{padding:8px 16px;border-radius:var(--r-md);font-size:12px;font-weight:700;font-family:'Manrope',sans-serif;cursor:pointer;border:none;transition:all 0.15s;}
+.ai-btn-primary{background:var(--gold);color:var(--gold-900);}
+.ai-btn-primary:hover{background:var(--gold-2);}
+.ai-btn-ghost{background:rgba(255,255,255,0.08);color:rgba(253,248,231,0.7);border:1px solid rgba(255,255,255,0.12);}
+.ai-btn-ghost:hover{background:rgba(255,255,255,0.12);}
+
+/* ── RESPONSIVE ────────────────────────────────────── */
+@media(max-width:1100px){
+  .scorecards{grid-template-columns:repeat(2,1fr);}
+  .charts-row{grid-template-columns:1fr;}
+  .bottom-row{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  :root{--sidebar:0px;}
+  .sidebar{transform:translateX(-260px);}
+  .sidebar.open{transform:translateX(0);width:260px;}
+  .main{margin-left:0;}
+  .scorecards{grid-template-columns:1fr 1fr;}
+  .topbar{padding:0 16px;}
+  .content{padding:16px;}
+  .search-wrap input{width:180px;}
+  .t-head,.t-row{grid-template-columns:2fr 1fr 1fr;}
+  .t-head-cell:nth-child(4),.t-head-cell:nth-child(5),
+  .t-cell:nth-child(4),.t-cell:nth-child(5){display:none;}
+}
+@media(max-width:480px){
+  .scorecards{grid-template-columns:1fr;}
+  .filter-row{display:none;}
+  .ai-strip{flex-direction:column;align-items:flex-start;}
+}
+
+/* ── MICRO ANIMATIONS ──────────────────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.scorecard{animation:fadeUp 0.4s ease both;}
+.scorecard:nth-child(1){animation-delay:0.05s;}
+.scorecard:nth-child(2){animation-delay:0.10s;}
+.scorecard:nth-child(3){animation-delay:0.15s;}
+.scorecard:nth-child(4){animation-delay:0.20s;}
+.chart-card{animation:fadeUp 0.4s ease 0.25s both;}
+</style>
+</head>
+<body>
+
+<!-- ── SIDEBAR ──────────────────────────────────────── -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 2C9 2 6.5 4.5 6.5 8c0 2.5 1.2 4.5 3 5.8L10 20h4l.5-6.2c1.8-1.3 3-3.3 3-5.8C17.5 4.5 15 2 12 2z"/></svg>
+      </div>
+      <div>
+        <div class="logo-text">Kyochi</div>
+        <div class="logo-sub">Admin Portal</div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section">Overview</div>
+    <button class="nav-item">
+      <span class="nav-icon">🏠</span>Dashboard
+    </button>
+    <button class="nav-item active">
+      <span class="nav-icon">📊</span>Analytics
+    </button>
+
+    <div class="nav-section">Clinical</div>
+    <button class="nav-item">
+      <span class="nav-icon">📅</span>Appointments
+      <span class="nav-badge">4</span>
+    </button>
+    <button class="nav-item">
+      <span class="nav-icon">🧾</span>Billing
+    </button>
+
+    <div class="nav-section">People</div>
+    <button class="nav-item">
+      <span class="nav-icon">👤</span>Patients
+    </button>
+    <button class="nav-item">
+      <span class="nav-icon">🧑‍⚕️</span>Therapists
+    </button>
+    <button class="nav-item">
+      <span class="nav-icon">🌿</span>Therapies
+    </button>
+
+    <div class="nav-section">Intelligence</div>
+    <button class="nav-item">
+      <span class="nav-icon">✦</span>AI Insights
+    </button>
+    <button class="nav-item">
+      <span class="nav-icon">📈</span>Reports
+    </button>
+
+    <div class="nav-section">System</div>
+    <button class="nav-item">
+      <span class="nav-icon">⚙️</span>Settings
+    </button>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="user-card">
+      <div class="user-av">AK</div>
+      <div>
+        <div class="user-name">Arun Kumar</div>
+        <div class="user-role">Outlet Manager</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ── MAIN ──────────────────────────────────────────── -->
+<div class="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="page-title">Business Intelligence</span>
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search analytics..."/>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="icon-btn">🔔<span class="notif-dot"></span></div>
+      <div class="icon-btn">🌙</div>
+      <button class="export-btn">⬇ Export Report</button>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div>
+        <div class="page-heading">Clinic Performance</div>
+        <div class="page-subheading">Karaikudi outlet · KO City Tower · Last updated 2 min ago</div>
+      </div>
+      <div class="filter-row">
+        <button class="filter-btn"><span class="fi">📅</span> Last 30 Days <span style="color:var(--text-3);">▾</span></button>
+        <button class="filter-btn"><span class="fi">🌿</span> All Therapies <span style="color:var(--text-3);">▾</span></button>
+        <button class="filter-btn"><span class="fi">🧑‍⚕️</span> All Therapists <span style="color:var(--text-3);">▾</span></button>
+      </div>
+    </div>
+
+    <!-- SCORECARDS -->
+    <div class="scorecards">
+      <div class="scorecard gold">
+        <div class="sc-icon gold">📈</div>
+        <div class="sc-label">Wellness Index</div>
+        <div class="sc-value">+18%</div>
+        <div class="sc-delta pos">▲ +2.4% vs last month</div>
+      </div>
+      <div class="scorecard green">
+        <div class="sc-icon green">🔄</div>
+        <div class="sc-label">Patient Retention</div>
+        <div class="sc-value">92%</div>
+        <div class="sc-delta pos">▲ Stable growth</div>
+      </div>
+      <div class="scorecard blue">
+        <div class="sc-icon blue">⭐</div>
+        <div class="sc-label">Avg Session Rating</div>
+        <div class="sc-value">4.9★</div>
+        <div class="sc-delta neutral">440 sessions rated</div>
+      </div>
+      <div class="scorecard purple">
+        <div class="sc-icon purple">₹</div>
+        <div class="sc-label">Monthly Revenue</div>
+        <div class="sc-value">₹1.42L</div>
+        <div class="sc-delta pos">▲ +12% vs target</div>
+      </div>
+    </div>
+
+    <!-- CHARTS ROW -->
+    <div class="charts-row">
+
+      <!-- Revenue by Therapy -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <div class="chart-title">Revenue by Therapy</div>
+          <div class="chart-more">⋯</div>
+        </div>
+        <div class="therapy-bars">
+          <div class="therapy-row">
+            <div class="therapy-meta"><span class="therapy-name">Relaxation</span><span class="therapy-pct">28%</span></div>
+            <div class="bar-track"><div class="bar-fill bar-gold" style="width:28%;"></div></div>
+          </div>
+          <div class="therapy-row">
+            <div class="therapy-meta"><span class="therapy-name">De-stress</span><span class="therapy-pct">22%</span></div>
+            <div class="bar-track"><div class="bar-fill bar-gold-2" style="width:22%;"></div></div>
+          </div>
+          <div class="therapy-row">
+            <div class="therapy-meta"><span class="therapy-name">Chronic Pain</span><span class="therapy-pct">18%</span></div>
+            <div class="bar-track"><div class="bar-fill bar-green" style="width:18%;"></div></div>
+          </div>
+          <div class="therapy-row">
+            <div class="therapy-meta"><span class="therapy-name">Femme Cycle</span><span class="therapy-pct">14%</span></div>
+            <div class="bar-track"><div class="bar-fill bar-blue" style="width:14%;"></div></div>
+          </div>
+          <div class="therapy-row">
+            <div class="therapy-meta"><span class="therapy-name">Soul Serenity</span><span class="therapy-pct">10%</span></div>
+            <div class="bar-track"><div class="bar-fill bar-cream" style="width:10%;"></div></div>
+          </div>
+          <div class="therapy-row">
+            <div class="therapy-meta"><span class="therapy-name">Detox + Others</span><span class="therapy-pct">8%</span></div>
+            <div class="bar-track"><div class="bar-fill bar-cream" style="width:8%;opacity:0.6;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Patient Retention Trend -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title">Patient Retention & Sessions Trend</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="chart-legend">
+              <div class="legend-item"><div class="legend-dot" style="background:var(--gold);"></div>Retention %</div>
+              <div class="legend-item"><div class="legend-dot" style="background:var(--green);"></div>Sessions</div>
+            </div>
+            <div class="chart-more">⋯</div>
+          </div>
+        </div>
+        <!-- SVG Line Chart -->
+        <svg class="svg-chart" viewBox="0 0 560 180" preserveAspectRatio="none" style="height:180px;">
+          <defs>
+            <linearGradient id="gold-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#d4af35" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#d4af35" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="green-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3fa060" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="#3fa060" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <!-- Grid lines -->
+          <line x1="0" y1="40" x2="560" y2="40" stroke="#e8e3d8" stroke-width="0.5"/>
+          <line x1="0" y1="80" x2="560" y2="80" stroke="#e8e3d8" stroke-width="0.5"/>
+          <line x1="0" y1="120" x2="560" y2="120" stroke="#e8e3d8" stroke-width="0.5"/>
+          <line x1="0" y1="160" x2="560" y2="160" stroke="#e8e3d8" stroke-width="0.5"/>
+          <!-- Y labels -->
+          <text x="4" y="38" font-size="9" fill="#a89880" font-family="Manrope">100%</text>
+          <text x="4" y="78" font-size="9" fill="#a89880" font-family="Manrope">75%</text>
+          <text x="4" y="118" font-size="9" fill="#a89880" font-family="Manrope">50%</text>
+          <!-- Gold area + line -->
+          <path d="M40,120 C80,105 120,95 160,85 C200,75 240,65 280,55 C320,45 360,42 400,38 C440,34 480,33 520,30 L520,160 L40,160 Z" fill="url(#gold-grad)"/>
+          <path d="M40,120 C80,105 120,95 160,85 C200,75 240,65 280,55 C320,45 360,42 400,38 C440,34 480,33 520,30" fill="none" stroke="#d4af35" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Green sessions line -->
+          <path d="M40,140 C80,132 120,125 160,118 C200,110 240,100 280,90 C320,80 360,72 400,68 C440,64 480,60 520,55" fill="none" stroke="#3fa060" stroke-width="2" stroke-linecap="round" stroke-dasharray="5 3"/>
+          <!-- Dots gold -->
+          <circle cx="160" cy="85" r="4" fill="#d4af35" stroke="white" stroke-width="2"/>
+          <circle cx="280" cy="55" r="4" fill="#d4af35" stroke="white" stroke-width="2"/>
+          <circle cx="400" cy="38" r="4" fill="#d4af35" stroke="white" stroke-width="2"/>
+          <circle cx="520" cy="30" r="5" fill="#d4af35" stroke="white" stroke-width="2"/>
+          <!-- Tooltip at last point -->
+          <rect x="490" y="10" width="62" height="22" rx="6" fill="#241e15"/>
+          <text x="521" y="25" font-size="10" fill="#d4af35" font-family="Manrope" font-weight="700" text-anchor="middle">92% ▲</text>
+          <!-- X labels -->
+          <text x="40" y="175" font-size="9" fill="#a89880" font-family="Manrope" text-anchor="middle">Wk 1</text>
+          <text x="160" y="175" font-size="9" fill="#a89880" font-family="Manrope" text-anchor="middle">Wk 2</text>
+          <text x="280" y="175" font-size="9" fill="#a89880" font-family="Manrope" text-anchor="middle">Wk 3</text>
+          <text x="400" y="175" font-size="9" fill="#a89880" font-family="Manrope" text-anchor="middle">Wk 4</text>
+          <text x="520" y="175" font-size="9" fill="#a89880" font-family="Manrope" text-anchor="middle">Wk 5</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- BOTTOM ROW -->
+    <div class="bottom-row">
+
+      <!-- Therapist Performance Table -->
+      <div class="chart-card">
+        <div class="section-header">
+          <div class="section-title-text">Therapist Performance</div>
+          <a class="see-all">View full team →</a>
+        </div>
+        <div class="therapist-table">
+          <div class="t-head">
+            <div class="t-head-cell">Therapist</div>
+            <div class="t-head-cell">Sessions</div>
+            <div class="t-head-cell">Satisfaction</div>
+            <div class="t-head-cell">Wellness Δ</div>
+            <div class="t-head-cell">Score</div>
+          </div>
+          <!-- Row 1 -->
+          <div class="t-row">
+            <div class="therapist-info">
+              <div class="t-av" style="background:rgba(212,175,53,0.15);color:var(--gold-800);border-color:rgba(212,175,53,0.35);">PM</div>
+              <div><div class="t-name">Priya Menon</div><div class="t-spec">Relaxation · Femme Cycle</div></div>
+            </div>
+            <div class="t-cell">124</div>
+            <div class="t-cell"><span class="badge badge-green">98%</span></div>
+            <div class="t-cell" style="color:var(--green);font-weight:700;">+21%</div>
+            <div class="t-cell"><div class="mini-bar"><div class="mini-bar-fill" style="width:98%;"></div></div></div>
+          </div>
+          <!-- Row 2 -->
+          <div class="t-row">
+            <div class="therapist-info">
+              <div class="t-av" style="background:#e6f1fb;color:#0c447c;border-color:rgba(55,138,221,0.3);">RK</div>
+              <div><div class="t-name">Rajan Kumar</div><div class="t-spec">Chronic Pain · De-stress</div></div>
+            </div>
+            <div class="t-cell">108</div>
+            <div class="t-cell"><span class="badge badge-green">96%</span></div>
+            <div class="t-cell" style="color:var(--green);font-weight:700;">+18%</div>
+            <div class="t-cell"><div class="mini-bar"><div class="mini-bar-fill" style="width:96%;"></div></div></div>
+          </div>
+          <!-- Row 3 -->
+          <div class="t-row">
+            <div class="therapist-info">
+              <div class="t-av" style="background:rgba(63,160,96,0.12);color:var(--green-dark);border-color:rgba(63,160,96,0.3);">AS</div>
+              <div><div class="t-name">Anitha Selvam</div><div class="t-spec">Soul Serenity · Detox</div></div>
+            </div>
+            <div class="t-cell">94</div>
+            <div class="t-cell"><span class="badge badge-gold">94%</span></div>
+            <div class="t-cell" style="color:var(--green);font-weight:700;">+15%</div>
+            <div class="t-cell"><div class="mini-bar"><div class="mini-bar-fill" style="width:94%;"></div></div></div>
+          </div>
+          <!-- Row 4 -->
+          <div class="t-row">
+            <div class="therapist-info">
+              <div class="t-av" style="background:var(--cream-200);color:var(--cream-800);border-color:var(--border);">MV</div>
+              <div><div class="t-name">Murugan Vel</div><div class="t-spec">Nasal · Vita Flex</div></div>
+            </div>
+            <div class="t-cell">87</div>
+            <div class="t-cell"><span class="badge badge-gold">91%</span></div>
+            <div class="t-cell" style="color:var(--green);font-weight:700;">+12%</div>
+            <div class="t-cell"><div class="mini-bar"><div class="mini-bar-fill" style="width:91%;"></div></div></div>
+          </div>
+          <!-- Row 5 -->
+          <div class="t-row">
+            <div class="therapist-info">
+              <div class="t-av" style="background:#fbeaf0;color:#72243e;border-color:rgba(212,83,126,0.25);">VN</div>
+              <div><div class="t-name">Vani Natarajan</div><div class="t-spec">Little Feet · Face Detox</div></div>
+            </div>
+            <div class="t-cell">72</div>
+            <div class="t-cell"><span class="badge badge-blue">97%</span></div>
+            <div class="t-cell" style="color:var(--green);font-weight:700;">+19%</div>
+            <div class="t-cell"><div class="mini-bar"><div class="mini-bar-fill" style="width:97%;"></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Today's Appointments -->
+      <div class="chart-card">
+        <div class="section-header">
+          <div class="section-title-text">Today's Appointments</div>
+          <a class="see-all">View all →</a>
+        </div>
+        <div class="appt-list">
+          <div class="appt-item">
+            <div class="appt-dot" style="background:var(--green);"></div>
+            <div class="appt-info">
+              <div class="appt-name">Kavitha Subramanian</div>
+              <div class="appt-therapy">Relaxation · Priya Menon</div>
+            </div>
+            <div class="appt-time">9:00 AM</div>
+          </div>
+          <div class="appt-item">
+            <div class="appt-dot" style="background:var(--gold);"></div>
+            <div class="appt-info">
+              <div class="appt-name">Senthil Murugan</div>
+              <div class="appt-therapy">Chronic Pain · Rajan Kumar</div>
+            </div>
+            <div class="appt-time">10:30 AM</div>
+          </div>
+          <div class="appt-item">
+            <div class="appt-dot" style="background:var(--gold);"></div>
+            <div class="appt-info">
+              <div class="appt-name">Deepa Rajan</div>
+              <div class="appt-therapy">Femme Cycle · Priya Menon</div>
+            </div>
+            <div class="appt-time">11:00 AM</div>
+          </div>
+          <div class="appt-item" style="border-color:rgba(239,68,68,0.2);background:var(--red-bg);">
+            <div class="appt-dot" style="background:var(--red);"></div>
+            <div class="appt-info">
+              <div class="appt-name">Arjun Krishnan</div>
+              <div class="appt-therapy">De-stress · Anitha Selvam</div>
+            </div>
+            <div class="appt-time" style="color:var(--red);">Pending ⚠</div>
+          </div>
+          <div class="appt-item">
+            <div class="appt-dot" style="background:var(--cream-400);"></div>
+            <div class="appt-info">
+              <div class="appt-name">Lakshmi Pillai</div>
+              <div class="appt-therapy">Soul Serenity · Anitha Selvam</div>
+            </div>
+            <div class="appt-time">2:30 PM</div>
+          </div>
+          <div class="appt-item">
+            <div class="appt-dot" style="background:var(--cream-400);"></div>
+            <div class="appt-info">
+              <div class="appt-name">Bala Sundaram</div>
+              <div class="appt-therapy">Nasal Reflex · Murugan Vel</div>
+            </div>
+            <div class="appt-time">4:00 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI INSIGHT STRIP -->
+    <div class="ai-strip">
+      <div class="ai-icon">✦</div>
+      <div class="ai-text">
+        <div class="ai-label">AI Insight — Powered by Claude</div>
+        <div class="ai-body">
+          <strong>Relaxation</strong> revenue is up <strong>+28%</strong> this month. Therapist <strong>Priya Menon</strong> shows the highest wellness improvement rate (<strong>+21%</strong>). 3 patients have missed their scheduled follow-up for <strong>Femme Cycle</strong> — re-engagement recommended.
+        </div>
+      </div>
+      <div class="ai-actions">
+        <button class="ai-btn ai-btn-primary">View full report</button>
+        <button class="ai-btn ai-btn-ghost">Dismiss</button>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<script>
+document.querySelectorAll('.nav-item').forEach(item=>{
+  item.addEventListener('click',function(){
+    document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+document.querySelectorAll('.k-tab, .tab').forEach(tab=>{
+  tab.addEventListener('click',function(){
+    const parent=this.closest('.k-tabs');
+    if(parent) parent.querySelectorAll('.k-tab').forEach(t=>t.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
