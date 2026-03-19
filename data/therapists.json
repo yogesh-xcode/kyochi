@@ -1,0 +1,18 @@
+[
+  {
+    "id": "thr_001",
+    "full_name": "Dr. Aris Menon",
+    "email": "aris@kyochi.example",
+    "specialty": "CBT",
+    "license_no": "TX-THER-101",
+    "status": "active"
+  },
+  {
+    "id": "thr_002",
+    "full_name": "Dr. Mira Kapoor",
+    "email": "mira@kyochi.example",
+    "specialty": "Stress Therapy",
+    "license_no": "TX-THER-102",
+    "status": "active"
+  }
+]

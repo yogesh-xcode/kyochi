@@ -1,3 +1,8 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 import { InitialsAvatar, MSO } from "@/components/kyochi/primitives";
 import type { NavSection } from "@/components/kyochi/types/index";
 
@@ -6,6 +11,15 @@ type SidebarProps = {
 };
 
 export function Sidebar({ navSections }: SidebarProps) {
+  const pathname = usePathname();
+
+  const isItemActive = (href: string) => {
+    if (href === "/dashboard") {
+      return pathname === "/" || pathname === "/dashboard";
+    }
+    return pathname === href;
+  };
+
   return (
     <aside className="w-72 bg-white border-r border-amber-500/10 flex flex-col fixed h-full z-20">
       <div className="p-6 flex items-center gap-3">
@@ -28,17 +42,19 @@ export function Sidebar({ navSections }: SidebarProps) {
             </p>
             <div className="space-y-1">
               {section.items.map((item) => (
-                <a
+                <Link
                   key={item.label}
-                  href="#"
+                  href={item.href}
                   className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-sm font-semibold ${
-                    item.active ? "bg-[#d4af35]/10 text-[#d4af35]" : "text-slate-600 hover:bg-[#f3f0e6]"
+                    isItemActive(item.href)
+                      ? "bg-[#d4af35]/10 text-[#d4af35]"
+                      : "text-slate-600 hover:bg-[#f3f0e6]"
                   }`}
                 >
                   <MSO>{item.icon}</MSO>
                   <span>{item.label}</span>
                   {item.pulse && <span className="ml-auto size-2 rounded-full bg-[#d4af35] animate-pulse" />}
-                </a>
+                </Link>
               ))}
             </div>
           </div>

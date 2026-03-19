@@ -113,24 +113,24 @@ export const navSections: NavSection[] = [
   {
     label: "Overview",
     items: [
-      { icon: "dashboard", label: "Dashboard", active: true },
-      { icon: "group", label: "Patients" },
-      { icon: "medical_services", label: "Therapists" },
-      { icon: "self_improvement", label: "Therapies" },
+      { icon: "dashboard", label: "Dashboard", href: "/dashboard" },
+      { icon: "group", label: "Patients", href: "/patients" },
+      { icon: "medical_services", label: "Therapists", href: "/therapists" },
+      { icon: "self_improvement", label: "Therapies", href: "/therapies" },
     ],
   },
   {
     label: "Clinical",
     items: [
-      { icon: "calendar_today", label: "Appointments" },
-      { icon: "payments", label: "Billing" },
+      { icon: "calendar_today", label: "Appointments", href: "/appointments" },
+      { icon: "payments", label: "Billing", href: "/billing" },
     ],
   },
   {
     label: "Intelligence",
     items: [
-      { icon: "psychology", label: "AI Insights", pulse: true },
-      { icon: "analytics", label: "Analytics" },
+      { icon: "psychology", label: "AI Insights", href: "/ai-insights", pulse: true },
+      { icon: "analytics", label: "Analytics", href: "/analytics" },
     ],
   },
 ];

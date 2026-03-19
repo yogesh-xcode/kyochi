@@ -1,0 +1,23 @@
+[
+  {
+    "id": "an_001",
+    "metric": "monthly_revenue",
+    "period": "2026-03",
+    "value": 42500,
+    "unit": "USD"
+  },
+  {
+    "id": "an_002",
+    "metric": "success_rate",
+    "period": "2026-03",
+    "value": 94.8,
+    "unit": "percent"
+  },
+  {
+    "id": "an_003",
+    "metric": "new_patients",
+    "period": "2026-03",
+    "value": 1284,
+    "unit": "count"
+  }
+]

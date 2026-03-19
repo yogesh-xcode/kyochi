@@ -13,6 +13,57 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 10:20:22 IST (+0530)
+
+- DateTime: `2026-03-19 10:20:22 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/types/index.ts`
+    - diff lines: `33-38`
+    - file: `src/components/kyochi/data.ts`
+    - diff lines: `114-136`
+    - file: `src/components/kyochi/Sidebar.tsx`
+    - diff lines: `1-56`
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `1-53`
+    - file: `src/components/kyochi/FeaturePlaceholder.tsx`
+    - diff lines: `1-19`
+    - file: `src/app/patients/page.tsx`
+    - diff lines: `1-10`
+    - file: `src/app/therapists/page.tsx`
+    - diff lines: `1-10`
+    - file: `src/app/therapies/page.tsx`
+    - diff lines: `1-10`
+    - file: `src/app/appointments/page.tsx`
+    - diff lines: `1-10`
+    - file: `src/app/billing/page.tsx`
+    - diff lines: `1-10`
+    - file: `src/app/ai-insights/page.tsx`
+    - diff lines: `1-10`
+    - file: `src/app/analytics/page.tsx`
+    - diff lines: `1-10`
+    - file: `data/patients.json`
+    - diff lines: `1-29`
+    - file: `data/therapists.json`
+    - diff lines: `1-18`
+    - file: `data/therapies.json`
+    - diff lines: `1-18`
+    - file: `data/appointments.json`
+    - diff lines: `1-29`
+    - file: `data/billing.json`
+    - diff lines: `1-20`
+    - file: `data/ai_insights.json`
+    - diff lines: `1-20`
+    - file: `data/analytics.json`
+    - diff lines: `1-23`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-61`
+- What changed:
+    - Wired sidebar links to real top-level routes and computed active state from pathname.
+    - Added top-level route pages for patients, therapists, therapies, appointments, billing, AI insights, and analytics.
+    - Added `data/` with table-ready flat JSON datasets and cross-reference ids for future Supabase migration.
+- Why changed:
+    - Requested real route wiring and a flat local dataset structure to serve as migration-ready seed data.
+
 ## 2026-03-19 09:54:32 IST (+0530)
 
 - DateTime: `2026-03-19 09:54:32 IST (+0530)`

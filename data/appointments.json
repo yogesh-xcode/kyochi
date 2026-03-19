@@ -1,0 +1,26 @@
+[
+  {
+    "id": "apt_001",
+    "patient_id": "pat_001",
+    "therapist_id": "thr_001",
+    "therapy_id": "thp_001",
+    "starts_at": "2026-03-19T09:00:00+05:30",
+    "status": "completed"
+  },
+  {
+    "id": "apt_002",
+    "patient_id": "pat_002",
+    "therapist_id": "thr_002",
+    "therapy_id": "thp_001",
+    "starts_at": "2026-03-19T10:30:00+05:30",
+    "status": "in_progress"
+  },
+  {
+    "id": "apt_003",
+    "patient_id": "pat_003",
+    "therapist_id": "thr_001",
+    "therapy_id": "thp_002",
+    "starts_at": "2026-03-19T11:45:00+05:30",
+    "status": "waiting"
+  }
+]

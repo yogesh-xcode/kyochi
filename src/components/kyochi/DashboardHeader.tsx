@@ -1,11 +1,57 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+
 import { MSO } from "@/components/kyochi/primitives";
 
+const pageMeta: Record<string, { title: string; subtitle: string }> = {
+  "/": {
+    title: "Admin Intelligence Dashboard",
+    subtitle: "Daily system health and operational summary.",
+  },
+  "/dashboard": {
+    title: "Admin Intelligence Dashboard",
+    subtitle: "Daily system health and operational summary.",
+  },
+  "/patients": {
+    title: "Patient Dashboard",
+    subtitle: "Track patient wellbeing, progress, and care details.",
+  },
+  "/therapists": {
+    title: "Therapist Directory",
+    subtitle: "Manage therapist profiles, availability, and assignment load.",
+  },
+  "/therapies": {
+    title: "Therapy Catalog",
+    subtitle: "Review therapy programs and session frameworks.",
+  },
+  "/appointments": {
+    title: "Appointment Details",
+    subtitle: "Monitor upcoming sessions and scheduling operations.",
+  },
+  "/billing": {
+    title: "Billing Overview",
+    subtitle: "Track invoices, payment status, and financial summaries.",
+  },
+  "/ai-insights": {
+    title: "Wellness Intelligence",
+    subtitle: "Explore AI-driven trends and recommendations.",
+  },
+  "/analytics": {
+    title: "Analytics",
+    subtitle: "Measure performance with operational and clinical metrics.",
+  },
+};
+
 export function DashboardHeader() {
+  const pathname = usePathname();
+  const meta = pageMeta[pathname] ?? pageMeta["/dashboard"];
+
   return (
     <header className="flex items-center justify-between">
       <div>
-        <h2 className="type-h1 text-slate-900 tracking-tight">Admin Intelligence Dashboard</h2>
-        <p className="type-body text-slate-500 mt-1">Daily system health and operational summary.</p>
+        <h2 className="type-h1 text-slate-900 tracking-tight">{meta.title}</h2>
+        <p className="type-body text-slate-500 mt-1">{meta.subtitle}</p>
       </div>
       <div className="flex items-center gap-4">
         <div className="relative">

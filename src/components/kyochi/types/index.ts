@@ -37,7 +37,7 @@ export type AlertItem = {
 export type NavItem = {
   icon: string;
   label: string;
-  active?: boolean;
+  href: string;
   pulse?: boolean;
 };
 

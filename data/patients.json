@@ -1,0 +1,29 @@
+[
+  {
+    "id": "pat_001",
+    "full_name": "Eleanor Shellstrop",
+    "email": "eleanor@kyochi.example",
+    "phone": "+1-555-0101",
+    "dob": "1992-02-14",
+    "wellness_score": 78,
+    "status": "active"
+  },
+  {
+    "id": "pat_002",
+    "full_name": "Tahani Al-Jamil",
+    "email": "tahani@kyochi.example",
+    "phone": "+1-555-0102",
+    "dob": "1988-08-20",
+    "wellness_score": 84,
+    "status": "active"
+  },
+  {
+    "id": "pat_003",
+    "full_name": "Chidi Anagonye",
+    "email": "chidi@kyochi.example",
+    "phone": "+1-555-0103",
+    "dob": "1990-11-03",
+    "wellness_score": 69,
+    "status": "active"
+  }
+]
