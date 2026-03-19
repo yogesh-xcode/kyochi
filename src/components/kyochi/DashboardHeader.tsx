@@ -51,6 +51,7 @@ type DashboardHeaderProps = {
 export function DashboardHeader({ onMenuToggle }: DashboardHeaderProps) {
   const pathname = usePathname();
   const meta = pageMeta[pathname] ?? pageMeta["/dashboard"];
+  const isDashboard = pathname === "/" || pathname === "/dashboard";
   const greeting = useMemo(() => {
     const hour = new Date().getHours();
     if (hour < 12) {
@@ -73,44 +74,44 @@ export function DashboardHeader({ onMenuToggle }: DashboardHeaderProps) {
   );
 
   return (
-    <header className="space-y-4">
-      <div className="rounded-2xl border border-[#d4af35]/20 bg-gradient-to-r from-[#f8f4e8] via-[#fdfcf7] to-[#f3ecd8] px-4 sm:px-6 py-4 shadow-sm">
-        <div className="flex items-center justify-between gap-4">
-          <div className="min-w-0">
-            <div className="flex items-center gap-2">
-              <button
-                onClick={onMenuToggle}
-                className="lg:hidden size-8 rounded-lg bg-white/90 text-slate-600 hover:text-[#d4af35] transition-colors inline-flex items-center justify-center"
-                aria-label="Toggle navigation menu"
-              >
-                <MSO className="text-[20px]">menu</MSO>
-              </button>
-              <p className="type-body font-extrabold text-slate-900">
-                {greeting}, <span className="text-[#d4af35]">Alex</span>
-              </p>
-            </div>
-            <p className="type-small text-slate-500 mt-1 truncate">Karaikudi Unit · {dateLabel}</p>
+    <header className="bg-white border border-slate-200/70 rounded-2xl px-4 md:px-6 py-3.5 shadow-sm">
+      <div className="flex items-center justify-between gap-4">
+        <div className="min-w-0">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onMenuToggle}
+              className="lg:hidden size-8 rounded-lg bg-[#f3f0e6] text-slate-600 hover:text-[#d4af35] transition-colors inline-flex items-center justify-center"
+              aria-label="Toggle navigation menu"
+            >
+              <MSO className="text-[20px]">menu</MSO>
+            </button>
+            <h2 className="text-[22px] leading-tight font-extrabold tracking-tight text-slate-900">
+              {isDashboard ? `${greeting}, Alex!` : meta.title}
+            </h2>
           </div>
-
-          <div className="flex items-center gap-2 sm:gap-3">
-            <button className="size-9 rounded-xl border border-[#d4af35]/20 bg-white/80 text-slate-500 hover:text-[#d4af35] hover:border-[#d4af35]/40 transition-colors inline-flex items-center justify-center">
-              <MSO className="text-[20px]">search</MSO>
-            </button>
-            <button className="relative size-9 rounded-xl border border-[#d4af35]/20 bg-white/80 text-slate-500 hover:text-[#d4af35] hover:border-[#d4af35]/40 transition-colors inline-flex items-center justify-center">
-              <MSO className="text-[20px]">notifications</MSO>
-              <span className="absolute top-2 right-2 size-1.5 bg-red-500 rounded-full" />
-            </button>
-            <button className="h-9 px-3 rounded-xl bg-[#d4af35] text-[#3d2d04] font-semibold text-sm hover:bg-[#e2be52] transition-colors inline-flex items-center gap-1.5">
-              <MSO className="text-[18px]">download</MSO>
-              <span className="hidden sm:inline">Export</span>
-            </button>
-          </div>
+          <p className="text-sm text-slate-500 mt-0.5 truncate">
+            {isDashboard ? "Here's what's happening with your clinic today" : meta.subtitle}
+          </p>
         </div>
-      </div>
 
-      <div>
-        <h2 className="type-h1 text-slate-900 tracking-tight">{meta.title}</h2>
-        <p className="type-body text-slate-500 mt-1">{meta.subtitle}</p>
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <div className="hidden md:inline-flex items-center gap-2 rounded-full border border-slate-200 bg-[#f8f7f6] px-3 py-2 text-sm text-slate-700">
+            <MSO className="text-[18px] text-slate-500">calendar_today</MSO>
+            <span className="font-semibold">{dateLabel}</span>
+          </div>
+          <button className="relative size-9 rounded-full border border-slate-200 bg-[#f8f7f6] text-slate-600 hover:text-[#d4af35] transition-colors inline-flex items-center justify-center">
+            <MSO className="text-[20px]">notifications</MSO>
+            <span className="absolute top-1 right-1 size-4 bg-[#ff6a6a] rounded-full text-[10px] text-white font-bold inline-flex items-center justify-center">
+              7
+            </span>
+          </button>
+          <button className="size-9 rounded-full bg-slate-900 text-white text-xs font-bold inline-flex items-center justify-center">
+            AK
+          </button>
+          <button className="size-9 rounded-full border border-slate-200 bg-[#f8f7f6] text-slate-500 hover:text-[#d4af35] transition-colors inline-flex items-center justify-center">
+            <MSO className="text-[20px]">expand_more</MSO>
+          </button>
+        </div>
       </div>
     </header>
   );

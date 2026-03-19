@@ -13,6 +13,24 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 12:32:44 IST (+0530)
+
+- DateTime: `2026-03-19 12:32:44 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `47-108`
+    - file: `src/components/kyochi/DashboardHeader.tsx.bkp.20260319-123219`
+    - diff lines: `1-108`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-30`
+- What changed:
+    - Restyled header to match the provided compact reference pattern.
+    - Updated dashboard header to show greeting + subtitle on the left and date/notification/profile controls on the right.
+    - Kept non-dashboard routes title/subtitle behavior intact with the same chrome.
+    - Created timestamped backup copy before editing because `.bkp` already existed.
+- Why changed:
+    - Requested header structure to follow the supplied design screenshot.
+
 ## 2026-03-19 12:28:45 IST (+0530)
 
 - DateTime: `2026-03-19 12:28:45 IST (+0530)`
