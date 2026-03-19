@@ -13,6 +13,20 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 10:57:23 IST (+0530)
+
+- DateTime: `2026-03-19 10:57:23 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/data.ts`
+    - diff lines: `1-210`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-27`
+- What changed:
+    - Replaced hardcoded dashboard constants with computed values derived from `data/*.json`.
+    - Wired KPI cards, appointments list, revenue bars, and alerts to local dataset records and cross-references.
+- Why changed:
+    - Requested dashboard to reflect the dataset in `data/` directly.
+
 ## 2026-03-19 10:46:41 IST (+0530)
 
 - DateTime: `2026-03-19 10:46:41 IST (+0530)`

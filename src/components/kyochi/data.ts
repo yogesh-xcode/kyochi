@@ -1,110 +1,183 @@
+import aiInsightsData from "../../../data/ai_insights.json";
+import analyticsData from "../../../data/analytics.json";
+import appointmentsData from "../../../data/appointments.json";
+import billingData from "../../../data/billing.json";
+import patientsData from "../../../data/patients.json";
+import therapiesData from "../../../data/therapies.json";
+import therapistsData from "../../../data/therapists.json";
+
 import type {
   AlertItem,
   Appointment,
+  AppointmentStatus,
   KpiCard,
   NavSection,
   RevenueBar,
 } from "@/types";
 
+const weekdayOrder = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] as const;
+
+const therapistById = new Map(therapistsData.map((therapist) => [therapist.id, therapist]));
+const therapyById = new Map(therapiesData.map((therapy) => [therapy.id, therapy]));
+const patientById = new Map(patientsData.map((patient) => [patient.id, patient]));
+
+const toCurrency = (amount: number) =>
+  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(
+    amount,
+  );
+
+const toInitials = (fullName: string) =>
+  fullName
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("");
+
+const toAppointmentStatus = (status: string): AppointmentStatus => {
+  if (status === "completed") {
+    return "Completed";
+  }
+  if (status === "in_progress") {
+    return "In Progress";
+  }
+  return "Waiting";
+};
+
+const toTimeLabel = (isoDate: string) => {
+  const date = new Date(isoDate);
+  const hour = date.getHours();
+  const minute = date.getMinutes().toString().padStart(2, "0");
+  const period = hour >= 12 ? "PM" : "AM";
+  const hour12 = hour % 12 || 12;
+  return {
+    time: `${hour12.toString().padStart(2, "0")}:${minute}`,
+    period,
+  };
+};
+
+const monthlyRevenue = analyticsData.find((entry) => entry.metric === "monthly_revenue")?.value
+  ?? billingData.reduce((sum, invoice) => sum + invoice.amount, 0);
+
+const successRate = analyticsData.find((entry) => entry.metric === "success_rate")?.value ?? 0;
+const newPatients = analyticsData.find((entry) => entry.metric === "new_patients")?.value ?? patientsData.length;
+
+const completedAppointments = appointmentsData.filter((appointment) => appointment.status === "completed").length;
+const overdueInvoices = billingData.filter((invoice) => invoice.status === "overdue");
+
 export const kpiCards: KpiCard[] = [
   {
     icon: "person_add",
     label: "New Patients",
-    value: "1,284",
-    delta: "+12.5%",
+    value: new Intl.NumberFormat("en-US").format(newPatients),
+    delta: `${patientsData.length} Total`,
     deltaColor: "text-emerald-600 bg-emerald-50",
   },
   {
     icon: "monitoring",
     label: "Monthly Revenue",
-    value: "$42,500",
-    delta: "+4.2%",
+    value: toCurrency(monthlyRevenue),
+    delta: `${billingData.length} Invoices`,
     deltaColor: "text-emerald-600 bg-emerald-50",
   },
   {
     icon: "verified",
     label: "Success Rate",
-    value: "94.8%",
-    delta: "Stable",
+    value: `${successRate}%`,
+    delta: "Live",
     deltaColor: "text-slate-400 bg-transparent",
   },
   {
     icon: "pending_actions",
     label: "Pending Feedback",
-    value: "28",
-    delta: "High",
+    value: completedAppointments.toString(),
+    delta: completedAppointments > 0 ? "High" : "Low",
     deltaColor: "text-amber-600 bg-amber-50",
   },
 ];
 
-export const appointments: Appointment[] = [
-  {
-    time: "09:00",
-    period: "AM",
-    name: "Eleanor Shellstrop",
-    detail: "CBT Therapy with Dr. Aris",
-    status: "Completed",
-    avatar: "ES",
-  },
-  {
-    time: "10:30",
-    period: "AM",
-    name: "Tahani Al-Jamil",
-    detail: "Wellness Consultation with Dr. M",
-    status: "In Progress",
-    avatar: "TA",
-  },
-  {
-    time: "11:45",
-    period: "AM",
-    name: "Chidi Anagonye",
-    detail: "Anxiety Management",
-    status: "Waiting",
-    avatar: "CA",
-  },
-];
+export const appointments: Appointment[] = appointmentsData
+  .slice()
+  .sort((a, b) => new Date(a.starts_at).getTime() - new Date(b.starts_at).getTime())
+  .map((entry) => {
+    const patient = patientById.get(entry.patient_id);
+    const therapist = therapistById.get(entry.therapist_id);
+    const therapy = therapyById.get(entry.therapy_id);
+    const { time, period } = toTimeLabel(entry.starts_at);
 
-export const revenueBars: RevenueBar[] = [
-  { day: "Mon", pct: 40, label: "$12k" },
-  { day: "Tue", pct: 65, label: "$18k" },
-  { day: "Wed", pct: 50, label: "$15k" },
-  { day: "Thu", pct: 85, label: "$24k" },
-  { day: "Fri", pct: 70, label: "$20k" },
-  { day: "Sat", pct: 95, label: "$28k" },
-  { day: "Sun", pct: 60, label: "$17k" },
-];
+    return {
+      time,
+      period,
+      name: patient?.full_name ?? "Unknown Patient",
+      detail: `${therapy?.name ?? "Therapy Session"} with ${therapist?.full_name ?? "Assigned Therapist"}`,
+      status: toAppointmentStatus(entry.status),
+      avatar: toInitials(patient?.full_name ?? "UP"),
+    };
+  });
+
+const revenueByWeekday = weekdayOrder.reduce<Record<(typeof weekdayOrder)[number], number>>(
+  (acc, day) => ({ ...acc, [day]: 0 }),
+  { Mon: 0, Tue: 0, Wed: 0, Thu: 0, Fri: 0, Sat: 0, Sun: 0 },
+);
+
+for (const invoice of billingData) {
+  const day = new Date(invoice.due_date).toLocaleDateString("en-US", { weekday: "short" }) as
+    | (typeof weekdayOrder)[number]
+    | undefined;
+  if (day && revenueByWeekday[day] !== undefined) {
+    revenueByWeekday[day] += invoice.amount;
+  }
+}
+
+const maxRevenueDay = Math.max(...Object.values(revenueByWeekday), 1);
+
+export const revenueBars: RevenueBar[] = weekdayOrder.map((day) => {
+  const value = revenueByWeekday[day];
+  return {
+    day,
+    pct: Math.max(12, Math.round((value / maxRevenueDay) * 100)),
+    label: toCurrency(value),
+  };
+});
+
+const overdueAlert = overdueInvoices[0];
+const overduePatient = overdueAlert ? patientById.get(overdueAlert.patient_id) : undefined;
 
 export const alerts: AlertItem[] = [
   {
     icon: "feedback",
     tone: "amber",
     title: "Feedback Pending",
-    time: "2h ago",
-    body: "5 patients completed therapy sessions but haven't received post-care surveys.",
+    time: "Live",
+    body: `${completedAppointments} completed sessions are waiting for post-care survey feedback.`,
     action: "Automate Now",
   },
-  {
-    icon: "payments",
-    tone: "red",
-    title: "Unpaid Invoices",
-    time: "5h ago",
-    body: "Invoice #KY-9921 for 'Chidi Anagonye' is 3 days overdue ($240.00).",
-    action: "Send Reminder",
-  },
-  {
+  ...(overdueAlert
+    ? [
+      {
+        icon: "payments",
+        tone: "red" as const,
+        title: "Unpaid Invoices",
+        time: "Today",
+        body: `Invoice ${overdueAlert.id.toUpperCase()} for '${overduePatient?.full_name ?? "Patient"}' is overdue (${toCurrency(overdueAlert.amount)}).`,
+        action: "Send Reminder",
+      },
+    ]
+    : []),
+  ...aiInsightsData.map((insight) => ({
     icon: "psychology",
-    tone: "blue",
-    title: "AI Trend Detected",
-    time: "Yesterday",
-    body: "Anxiety-related symptoms have increased by 15% in the downtown region.",
+    tone: "blue" as const,
+    title: insight.title,
+    time: insight.detected_on,
+    body: `${insight.metric.replaceAll("_", " ")} changed by ${insight.change_pct}% in ${insight.region}.`,
     action: "View Analytics",
-  },
+  })),
   {
     icon: "done_all",
     tone: "slate",
     title: "System Update",
     time: "1d ago",
-    body: "Core engine updated to v2.4.1. Security patches applied successfully.",
+    body: "Core engine updated and synced with local dataset references.",
     dimmed: true,
   },
 ];
