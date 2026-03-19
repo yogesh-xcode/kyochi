@@ -13,6 +13,22 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 12:55:29 IST (+0530)
+
+- DateTime: `2026-03-19 12:55:29 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `77`
+    - file: `src/components/kyochi/DashboardHeader.tsx.bkp.20260319-125453`
+    - diff lines: `1-113`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-29`
+- What changed:
+    - Changed dashboard header from boxed card style to a flat strip style with only a bottom divider.
+    - Removed card-like container treatment to match the target reference structure.
+- Why changed:
+    - Requested "like that, not like this" for the top dashboard header presentation.
+
 ## 2026-03-19 12:52:38 IST (+0530)
 
 - DateTime: `2026-03-19 12:52:38 IST (+0530)`
