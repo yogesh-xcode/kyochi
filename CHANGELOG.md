@@ -994,3 +994,19 @@ This file is maintained for every code change.
     - Preserved the existing visual style while removing the native button semantics violation.
 - Why changed:
     - Runtime console error reported that `nativeButton=true` expected a native `<button>` and flagged non-button rendering.
+
+## 2026-03-19 18:48:32 IST (+0530)
+
+- DateTime: `2026-03-19 18:48:32 IST (+0530)`
+- File changes:
+    - file: `DESIGN.md`
+    - diff lines: `1-196`
+    - file: `CHANGELOG.md`
+    - diff lines: `997-1010`
+    - file: `error.log`
+    - diff lines: `158-161`
+- What changed:
+    - Reworked `DESIGN.md` into a complete design contract with full theme/token inventory, font/loading contract, shell/layout rules, route map, dataset contract, component composition rules, and explicit asset registry from `public/` and `DesignArtifact/`.
+    - Added a ready-to-paste Stitch AI prompt aligned with current project tokens and design behavior.
+- Why changed:
+    - Requested that `DESIGN.md` fully define theme and assets for reliable Stitch AI handoff.

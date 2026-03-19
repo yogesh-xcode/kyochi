@@ -155,3 +155,7 @@ Verification: pnpm -s lint and pnpm -s build passed.
 Updated: 2026-03-19 18:45:38 IST (+0530)
 # Base UI Button semantics status: Fixed (replaced Link-rendered Base UI Button usage with semantic Link elements in appointment action controls)
 Verification: pnpm -s lint and pnpm -s build passed.
+
+Updated: 2026-03-19 18:48:32 IST (+0530)
+# DESIGN Contract status: Fixed (expanded DESIGN.md to include complete theme + token + asset definitions for Stitch AI handoff)
+Verification: documentation update validated against `src/app/globals.css`, `src/app/layout.tsx`, `public/`, and `DesignArtifact/`.
