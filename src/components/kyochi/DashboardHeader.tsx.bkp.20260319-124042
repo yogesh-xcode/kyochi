@@ -74,42 +74,42 @@ export function DashboardHeader({ onMenuToggle }: DashboardHeaderProps) {
   );
 
   return (
-    <header className="bg-white border border-slate-200/70 rounded-xl px-3.5 md:px-5 py-3 shadow-sm">
-      <div className="flex items-center justify-between gap-3.5">
+    <header className="bg-white border border-slate-200/70 rounded-2xl px-4 md:px-6 py-3.5 shadow-sm">
+      <div className="flex items-center justify-between gap-4">
         <div className="min-w-0">
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             <button
               onClick={onMenuToggle}
-              className="lg:hidden size-7 rounded-lg bg-[#f3f0e6] text-slate-600 hover:text-[#d4af35] transition-colors inline-flex items-center justify-center"
+              className="lg:hidden size-8 rounded-lg bg-[#f3f0e6] text-slate-600 hover:text-[#d4af35] transition-colors inline-flex items-center justify-center"
               aria-label="Toggle navigation menu"
             >
-              <MSO className="text-[18px]">menu</MSO>
+              <MSO className="text-[20px]">menu</MSO>
             </button>
-            <h2 className="text-[20px] leading-tight font-extrabold tracking-tight text-slate-900">
+            <h2 className="text-[22px] leading-tight font-extrabold tracking-tight text-slate-900">
               {isDashboard ? `${greeting}, Alex!` : meta.title}
             </h2>
           </div>
-          <p className="text-[13px] text-slate-500 mt-0.5 truncate">
+          <p className="text-sm text-slate-500 mt-0.5 truncate">
             {isDashboard ? "Here's what's happening with your clinic today" : meta.subtitle}
           </p>
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-          <div className="hidden md:inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-[#f8f7f6] px-2.5 py-1.5 text-[13px] text-slate-700">
-            <MSO className="text-[16px] text-slate-500">calendar_today</MSO>
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <div className="hidden md:inline-flex items-center gap-2 rounded-full border border-slate-200 bg-[#f8f7f6] px-3 py-2 text-sm text-slate-700">
+            <MSO className="text-[18px] text-slate-500">calendar_today</MSO>
             <span className="font-semibold">{dateLabel}</span>
           </div>
-          <button className="relative size-8 rounded-full border border-slate-200 bg-[#f8f7f6] text-slate-600 hover:text-[#d4af35] transition-colors inline-flex items-center justify-center">
-            <MSO className="text-[18px]">notifications</MSO>
-            <span className="absolute top-1 right-1 size-3.5 bg-[#ff6a6a] rounded-full text-[9px] text-white font-bold inline-flex items-center justify-center">
+          <button className="relative size-9 rounded-full border border-slate-200 bg-[#f8f7f6] text-slate-600 hover:text-[#d4af35] transition-colors inline-flex items-center justify-center">
+            <MSO className="text-[20px]">notifications</MSO>
+            <span className="absolute top-1 right-1 size-4 bg-[#ff6a6a] rounded-full text-[10px] text-white font-bold inline-flex items-center justify-center">
               7
             </span>
           </button>
-          <button className="size-8 rounded-full bg-slate-900 text-white text-[11px] font-bold inline-flex items-center justify-center">
+          <button className="size-9 rounded-full bg-slate-900 text-white text-xs font-bold inline-flex items-center justify-center">
             AK
           </button>
-          <button className="size-8 rounded-full border border-slate-200 bg-[#f8f7f6] text-slate-500 hover:text-[#d4af35] transition-colors inline-flex items-center justify-center">
-            <MSO className="text-[18px]">expand_more</MSO>
+          <button className="size-9 rounded-full border border-slate-200 bg-[#f8f7f6] text-slate-500 hover:text-[#d4af35] transition-colors inline-flex items-center justify-center">
+            <MSO className="text-[20px]">expand_more</MSO>
           </button>
         </div>
       </div>

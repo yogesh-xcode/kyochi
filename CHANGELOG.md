@@ -13,6 +13,41 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 12:47:12 IST (+0530)
+
+- DateTime: `2026-03-19 12:47:12 IST (+0530)`
+- File changes:
+    - file: `src/app/globals.css`
+    - diff lines: `258,355-367`
+    - file: `src/components/kyochi/AppShell.tsx`
+    - diff lines: `18,24`
+    - file: `src/components/kyochi/Sidebar.tsx`
+    - diff lines: `31-91`
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `77-112`
+    - file: `src/components/kyochi/KpiGrid.tsx`
+    - diff lines: `9-25`
+    - file: `src/components/kyochi/RevenueSnapshot.tsx`
+    - diff lines: `14-42`
+    - file: `src/components/kyochi/PatientInflow.tsx`
+    - diff lines: `22-40`
+    - file: `src/components/kyochi/RecentAppointmentsTable.tsx`
+    - diff lines: `12-45`
+    - file: `src/components/kyochi/AlertsPanel.tsx`
+    - diff lines: `10-38`
+    - file: `src/components/kyochi/InsightRecommendationCard.tsx`
+    - diff lines: `17-29`
+    - file: `src/components/kyochi/primitives.tsx`
+    - diff lines: `33,48`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-47`
+- What changed:
+    - Removed global scaling hacks (`zoom`, transform fallback wrapper, and app-scale class usage).
+    - Applied direct 10%-ish reductions file-by-file across shell and dashboard components (widths, paddings, gaps, text, icon, and card sizes).
+    - Kept layout structure and data wiring unchanged while making UI density visibly smaller.
+- Why changed:
+    - Requested explicit file-by-file size reduction instead of `html font-size` or `zoom`-based scaling.
+
 ## 2026-03-19 12:38:00 IST (+0530)
 
 - DateTime: `2026-03-19 12:38:00 IST (+0530)`

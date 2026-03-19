@@ -22,10 +22,10 @@ export function KyochiDashboard() {
   const [revenueRange, setRevenueRange] = useState<RevenueRange>("Weekly");
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       <KpiGrid cards={kpiCards} />
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <div className="xl:col-span-2">
           <RevenueSnapshot
             revenueBars={revenueBars}
@@ -42,11 +42,11 @@ export function KyochiDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <div className="xl:col-span-2">
           <RecentAppointmentsTable appointments={appointments.slice(0, 6)} />
         </div>
-        <div className="space-y-5">
+        <div className="space-y-6">
           <InsightRecommendationCard
             title={aiInsightBanner.title}
             body={aiInsightBanner.body}
