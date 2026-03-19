@@ -1,29 +1,10 @@
 [
-  {
-    "id": "pat_001",
-    "full_name": "Eleanor Shellstrop",
-    "email": "eleanor@kyochi.example",
-    "phone": "+1-555-0101",
-    "dob": "1992-02-14",
-    "wellness_score": 78,
-    "status": "active"
-  },
-  {
-    "id": "pat_002",
-    "full_name": "Tahani Al-Jamil",
-    "email": "tahani@kyochi.example",
-    "phone": "+1-555-0102",
-    "dob": "1988-08-20",
-    "wellness_score": 84,
-    "status": "active"
-  },
-  {
-    "id": "pat_003",
-    "full_name": "Chidi Anagonye",
-    "email": "chidi@kyochi.example",
-    "phone": "+1-555-0103",
-    "dob": "1990-11-03",
-    "wellness_score": 69,
-    "status": "active"
-  }
+  {"id":"pat_001","full_name":"Eleanor Shellstrop","email":"eleanor@kyochi.example","phone":"+1-555-0101","dob":"1992-02-14","wellness_score":78,"status":"active"},
+  {"id":"pat_002","full_name":"Tahani Al-Jamil","email":"tahani@kyochi.example","phone":"+1-555-0102","dob":"1988-08-20","wellness_score":84,"status":"active"},
+  {"id":"pat_003","full_name":"Chidi Anagonye","email":"chidi@kyochi.example","phone":"+1-555-0103","dob":"1990-11-03","wellness_score":69,"status":"active"},
+  {"id":"pat_004","full_name":"Janet Rivera","email":"janet@kyochi.example","phone":"+1-555-0104","dob":"1995-04-09","wellness_score":73,"status":"active"},
+  {"id":"pat_005","full_name":"Marcus Lin","email":"marcus@kyochi.example","phone":"+1-555-0105","dob":"1986-09-12","wellness_score":81,"status":"active"},
+  {"id":"pat_006","full_name":"Nora Patel","email":"nora@kyochi.example","phone":"+1-555-0106","dob":"1993-06-27","wellness_score":76,"status":"active"},
+  {"id":"pat_007","full_name":"Ibrahim Khan","email":"ibrahim@kyochi.example","phone":"+1-555-0107","dob":"1989-01-31","wellness_score":67,"status":"active"},
+  {"id":"pat_008","full_name":"Sofia Morales","email":"sofia@kyochi.example","phone":"+1-555-0108","dob":"1997-12-05","wellness_score":88,"status":"active"}
 ]

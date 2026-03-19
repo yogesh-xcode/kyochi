@@ -1,18 +1,6 @@
 [
-  {
-    "id": "thp_001",
-    "name": "CBT Core Program",
-    "category": "CBT",
-    "duration_min": 60,
-    "session_count": 8,
-    "status": "active"
-  },
-  {
-    "id": "thp_002",
-    "name": "Anxiety Regulation",
-    "category": "Anxiety",
-    "duration_min": 45,
-    "session_count": 6,
-    "status": "active"
-  }
+  {"id":"thp_001","name":"CBT Core Program","category":"CBT","duration_min":60,"session_count":8,"status":"active"},
+  {"id":"thp_002","name":"Anxiety Regulation","category":"Anxiety","duration_min":45,"session_count":6,"status":"active"},
+  {"id":"thp_003","name":"Mindfulness Recovery","category":"Mindfulness","duration_min":50,"session_count":10,"status":"active"},
+  {"id":"thp_004","name":"Sleep Restoration","category":"Sleep","duration_min":40,"session_count":5,"status":"active"}
 ]

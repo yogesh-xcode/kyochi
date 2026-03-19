@@ -1,20 +1,10 @@
 [
-  {
-    "id": "inv_001",
-    "patient_id": "pat_003",
-    "appointment_id": "apt_003",
-    "amount": 240,
-    "currency": "USD",
-    "due_date": "2026-03-22",
-    "status": "overdue"
-  },
-  {
-    "id": "inv_002",
-    "patient_id": "pat_002",
-    "appointment_id": "apt_002",
-    "amount": 180,
-    "currency": "USD",
-    "due_date": "2026-03-23",
-    "status": "pending"
-  }
+  {"id":"inv_001","patient_id":"pat_001","appointment_id":"apt_001","amount":240,"currency":"USD","due_date":"2026-02-20","status":"paid"},
+  {"id":"inv_002","patient_id":"pat_002","appointment_id":"apt_002","amount":260,"currency":"USD","due_date":"2026-02-22","status":"paid"},
+  {"id":"inv_003","patient_id":"pat_003","appointment_id":"apt_003","amount":220,"currency":"USD","due_date":"2026-02-24","status":"paid"},
+  {"id":"inv_004","patient_id":"pat_004","appointment_id":"apt_004","amount":280,"currency":"USD","due_date":"2026-02-27","status":"paid"},
+  {"id":"inv_005","patient_id":"pat_005","appointment_id":"apt_005","amount":210,"currency":"USD","due_date":"2026-03-02","status":"paid"},
+  {"id":"inv_006","patient_id":"pat_008","appointment_id":"apt_008","amount":300,"currency":"USD","due_date":"2026-03-07","status":"paid"},
+  {"id":"inv_007","patient_id":"pat_006","appointment_id":"apt_011","amount":240,"currency":"USD","due_date":"2026-03-16","status":"pending"},
+  {"id":"inv_008","patient_id":"pat_003","appointment_id":"apt_014","amount":250,"currency":"USD","due_date":"2026-03-18","status":"overdue"}
 ]

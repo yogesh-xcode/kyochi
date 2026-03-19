@@ -13,6 +13,33 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 11:28:36 IST (+0530)
+
+- DateTime: `2026-03-19 11:28:36 IST (+0530)`
+- File changes:
+    - file: `data/patients.json`
+    - diff lines: `1-11`
+    - file: `data/therapists.json`
+    - diff lines: `1-7`
+    - file: `data/therapies.json`
+    - diff lines: `1-7`
+    - file: `data/appointments.json`
+    - diff lines: `1-17`
+    - file: `data/billing.json`
+    - diff lines: `1-11`
+    - file: `data/ai_insights.json`
+    - diff lines: `1-6`
+    - file: `data/analytics.json`
+    - diff lines: `1-8`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-35`
+- What changed:
+    - Repopulated all `data/*.json` with a larger seed dataset (46 records total) and varied values.
+    - Spread timeline-based records across the last 30 days (`2026-02-18` to `2026-03-19`) for appointments, billing, and insights.
+    - Kept relational integrity between patient/therapist/therapy/appointment/billing references.
+- Why changed:
+    - Requested around 40 records with variety across the last 30-day timeline.
+
 ## 2026-03-19 11:19:59 IST (+0530)
 
 - DateTime: `2026-03-19 11:19:59 IST (+0530)`

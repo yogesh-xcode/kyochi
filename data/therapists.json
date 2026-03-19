@@ -1,18 +1,6 @@
 [
-  {
-    "id": "thr_001",
-    "full_name": "Dr. Aris Menon",
-    "email": "aris@kyochi.example",
-    "specialty": "CBT",
-    "license_no": "TX-THER-101",
-    "status": "active"
-  },
-  {
-    "id": "thr_002",
-    "full_name": "Dr. Mira Kapoor",
-    "email": "mira@kyochi.example",
-    "specialty": "Stress Therapy",
-    "license_no": "TX-THER-102",
-    "status": "active"
-  }
+  {"id":"thr_001","full_name":"Dr. Aris Menon","email":"aris@kyochi.example","specialty":"CBT","license_no":"TX-THER-101","status":"active"},
+  {"id":"thr_002","full_name":"Dr. Mira Kapoor","email":"mira@kyochi.example","specialty":"Stress Therapy","license_no":"TX-THER-102","status":"active"},
+  {"id":"thr_003","full_name":"Dr. Priya Menon","email":"priya@kyochi.example","specialty":"Mindfulness","license_no":"TX-THER-103","status":"active"},
+  {"id":"thr_004","full_name":"Dr. Samir Das","email":"samir@kyochi.example","specialty":"Trauma Therapy","license_no":"TX-THER-104","status":"active"}
 ]
