@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, Manrope } from "next/font/google";
 import { AppShell } from "@/components/kyochi/AppShell";
-import { navSections } from "@/components/kyochi/data";
+import { resolveRole, roleNavSections } from "@/components/kyochi/data";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -25,10 +25,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const role = resolveRole(process.env.NEXT_PUBLIC_KYOCHI_ROLE);
+
   return (
     <html lang="en">
       <body className={`${manrope.className} ${manrope.variable} ${dmSerif.variable} antialiased`}>
-        <AppShell navSections={navSections}>{children}</AppShell>
+        <AppShell role={role} navSections={roleNavSections[role]}>
+          {children}
+        </AppShell>
       </body>
     </html>
   );

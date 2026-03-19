@@ -7,15 +7,22 @@ import { Leaf, Settings, X } from "lucide-react";
 import { KIcon } from "@/components/kyochi/icons";
 import { InitialsAvatar } from "@/components/kyochi/primitives";
 import { Button } from "@/components/ui/button";
-import type { NavSection } from "@/types";
+import type { NavSection, UserRole } from "@/types";
 
 type SidebarProps = {
   navSections: NavSection[];
+  role: UserRole;
   mobileOpen?: boolean;
   onMobileClose?: () => void;
 };
 
-export function Sidebar({ navSections, mobileOpen = false, onMobileClose }: SidebarProps) {
+const roleLabels: Record<UserRole, string> = {
+  admin: "System Admin",
+  franchisee: "Franchise Manager",
+  therapist: "Therapist",
+};
+
+export function Sidebar({ navSections, role, mobileOpen = false, onMobileClose }: SidebarProps) {
   const pathname = usePathname();
 
   const isItemActive = (href: string) => {
@@ -93,7 +100,7 @@ export function Sidebar({ navSections, mobileOpen = false, onMobileClose }: Side
           <InitialsAvatar initials="AK" className="size-8 text-[12px]" />
           <div className="flex-1 min-w-0">
             <p className="text-[12px] font-bold k-text-strong truncate">Alex Kyochi</p>
-            <p className="text-[10px] k-text-body truncate">System Admin</p>
+            <p className="text-[10px] k-text-body truncate">{roleLabels[role]}</p>
           </div>
           <Button variant="ghost" size="icon-sm" className="k-text-subtle hover:text-[var(--k-color-brand)] transition-colors">
             <Settings className="size-4" />

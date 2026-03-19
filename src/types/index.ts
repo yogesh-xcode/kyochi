@@ -19,8 +19,7 @@ export type IconKey =
   | "auto_awesome";
 
 export type AlertTone = "amber" | "red" | "blue" | "slate";
-export type AppointmentStatus = "Completed" | "In Progress" | "Pending" | "Cancelled";
-export type KpiAccentTone = "positive" | "alert" | "neutral";
+export type AppointmentStatus = "Completed" | "In Progress" | "Waiting";
 
 export type KpiCard = {
   icon: IconKey;
@@ -28,7 +27,6 @@ export type KpiCard = {
   value: string;
   delta: string;
   deltaColor: string;
-  accentTone: KpiAccentTone;
 };
 
 export type Appointment = {
@@ -68,6 +66,8 @@ export type NavSection = {
   label: string;
   items: NavItem[];
 };
+
+export type UserRole = "admin" | "franchisee" | "therapist";
 
 export type RevenueRange = "Weekly" | "Monthly";
 

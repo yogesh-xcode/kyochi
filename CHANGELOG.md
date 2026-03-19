@@ -1315,3 +1315,40 @@ This file is maintained for every code change.
     - Kept semantic status badges intact while normalizing non-badge column typography.
 - Why changed:
     - Requested consistent text style across table columns.
+
+## 2026-03-20 00:36:53 IST (+0530)
+
+- DateTime: `2026-03-20 00:36:53 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/data.ts`
+    - diff lines: `245-344`
+    - file: `src/app/layout.tsx`
+    - diff lines: `4,30-35`
+    - file: `src/components/kyochi/AppShell.tsx`
+    - diff lines: `6-8,15,22`
+    - file: `src/components/kyochi/Sidebar.tsx`
+    - diff lines: `11-27,101`
+    - file: `src/types/index.ts`
+    - diff lines: `47`
+    - file: `src/app/my-appointments/page.tsx`
+    - diff lines: `1-10`
+    - file: `src/app/my-patients/page.tsx`
+    - diff lines: `1-10`
+    - file: `src/app/add-feedback/page.tsx`
+    - diff lines: `1-10`
+    - file: `src/app/my-ratings/page.tsx`
+    - diff lines: `1-10`
+    - file: `src/app/my-session-history/page.tsx`
+    - diff lines: `1-10`
+    - file: `CHANGELOG.md`
+    - diff lines: `1305-1338`
+    - file: `error.log`
+    - diff lines: `222-225`
+- What changed:
+    - Replaced static sidebar nav with role-based navigation sets for `admin`, `franchisee`, and `therapist`, using the exact section structure and labels requested.
+    - Added role resolver and env-driven role selection (`NEXT_PUBLIC_KYOCHI_ROLE`) in `layout.tsx`.
+    - Passed role through app shell to sidebar and updated profile subtitle by role.
+    - Added therapist route scaffolds: `/my-appointments`, `/my-patients`, `/add-feedback`, `/my-ratings`, `/my-session-history`.
+    - Updated intelligence label to `AI Strategy` where specified.
+- Why changed:
+    - Requested role-specific sidebar menus and navigation structure for Admin, Franchisee, and Therapist.

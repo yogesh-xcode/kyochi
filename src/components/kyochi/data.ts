@@ -1,9 +1,9 @@
-import aiInsightsData from "../../../data/ai_insights.json";
-import appointmentsData from "../../../data/appointments.json";
-import billingData from "../../../data/billing.json";
-import patientsData from "../../../data/patients.json";
-import therapiesData from "../../../data/therapies.json";
-import therapistsData from "../../../data/therapists.json";
+import aiInsightsData from "@/data/ai_insights.json";
+import appointmentsData from "@/data/appointments.json";
+import billingData from "@/data/billing.json";
+import patientsData from "@/data/patients.json";
+import therapiesData from "@/data/therapies.json";
+import therapistsData from "@/data/therapists.json";
 
 import type {
   AiInsightBannerData,
@@ -14,18 +14,27 @@ import type {
   NavSection,
   PatientInflowData,
   RevenueBar,
+  UserRole,
 } from "@/types";
 
 const weekdayOrder = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] as const;
 
-const therapistById = new Map(therapistsData.map((therapist) => [therapist.id, therapist]));
-const therapyById = new Map(therapiesData.map((therapy) => [therapy.id, therapy]));
-const patientById = new Map(patientsData.map((patient) => [patient.id, patient]));
+const therapistById = new Map(
+  therapistsData.map((therapist) => [therapist.id, therapist]),
+);
+const therapyById = new Map(
+  therapiesData.map((therapy) => [therapy.id, therapy]),
+);
+const patientById = new Map(
+  patientsData.map((patient) => [patient.id, patient]),
+);
 
 const toCurrency = (amount: number) =>
-  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(
-    amount,
-  );
+  new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(amount);
 
 const toInitials = (fullName: string) =>
   fullName
@@ -42,10 +51,7 @@ const toAppointmentStatus = (status: string): AppointmentStatus => {
   if (status === "in_progress") {
     return "In Progress";
   }
-  if (status === "cancelled") {
-    return "Cancelled";
-  }
-  return "Pending";
+  return "Waiting";
 };
 
 const toTimeLabel = (isoDate: string) => {
@@ -61,12 +67,20 @@ const toTimeLabel = (isoDate: string) => {
 };
 
 const newPatients = patientsData.length;
-const monthlyRevenue = billingData.reduce((sum, invoice) => sum + invoice.amount, 0);
+const monthlyRevenue = billingData.reduce(
+  (sum, invoice) => sum + invoice.amount,
+  0,
+);
 
-const completedAppointments = appointmentsData.filter((appointment) => appointment.status === "completed").length;
-const overdueInvoices = billingData.filter((invoice) => invoice.status === "overdue");
+const completedAppointments = appointmentsData.filter(
+  (appointment) => appointment.status === "completed",
+).length;
+const overdueInvoices = billingData.filter(
+  (invoice) => invoice.status === "overdue",
+);
 const totalAppointments = appointmentsData.length;
-const successRate = totalAppointments > 0 ? (completedAppointments / totalAppointments) * 100 : 0;
+const successRate =
+  totalAppointments > 0 ? (completedAppointments / totalAppointments) * 100 : 0;
 
 export const kpiCards: KpiCard[] = [
   {
@@ -75,7 +89,6 @@ export const kpiCards: KpiCard[] = [
     value: new Intl.NumberFormat("en-US").format(newPatients),
     delta: `${patientsData.length} Total`,
     deltaColor: "k-delta-positive",
-    accentTone: "positive",
   },
   {
     icon: "monitoring",
@@ -83,7 +96,6 @@ export const kpiCards: KpiCard[] = [
     value: toCurrency(monthlyRevenue),
     delta: `${billingData.length} Invoices`,
     deltaColor: "k-delta-positive",
-    accentTone: "positive",
   },
   {
     icon: "verified",
@@ -91,21 +103,21 @@ export const kpiCards: KpiCard[] = [
     value: `${successRate.toFixed(1)}%`,
     delta: "Live",
     deltaColor: "k-delta-neutral",
-    accentTone: "neutral",
   },
   {
     icon: "pending_actions",
     label: "Pending Feedback",
     value: completedAppointments.toString(),
     delta: completedAppointments > 0 ? "High" : "Low",
-    deltaColor: "k-delta-alert",
-    accentTone: "alert",
+    deltaColor: "k-delta-warning",
   },
 ];
 
 export const appointments: Appointment[] = appointmentsData
   .slice()
-  .sort((a, b) => new Date(a.starts_at).getTime() - new Date(b.starts_at).getTime())
+  .sort(
+    (a, b) => new Date(a.starts_at).getTime() - new Date(b.starts_at).getTime(),
+  )
   .map((entry) => {
     const patient = patientById.get(entry.patient_id);
     const therapist = therapistById.get(entry.therapist_id);
@@ -123,15 +135,22 @@ export const appointments: Appointment[] = appointmentsData
     };
   });
 
-const revenueByWeekday = weekdayOrder.reduce<Record<(typeof weekdayOrder)[number], number>>(
-  (acc, day) => ({ ...acc, [day]: 0 }),
-  { Mon: 0, Tue: 0, Wed: 0, Thu: 0, Fri: 0, Sat: 0, Sun: 0 },
-);
+const revenueByWeekday = weekdayOrder.reduce<
+  Record<(typeof weekdayOrder)[number], number>
+>((acc, day) => ({ ...acc, [day]: 0 }), {
+  Mon: 0,
+  Tue: 0,
+  Wed: 0,
+  Thu: 0,
+  Fri: 0,
+  Sat: 0,
+  Sun: 0,
+});
 
 for (const invoice of billingData) {
-  const day = new Date(invoice.due_date).toLocaleDateString("en-US", { weekday: "short" }) as
-    | (typeof weekdayOrder)[number]
-    | undefined;
+  const day = new Date(invoice.due_date).toLocaleDateString("en-US", {
+    weekday: "short",
+  }) as (typeof weekdayOrder)[number] | undefined;
   if (day && revenueByWeekday[day] !== undefined) {
     revenueByWeekday[day] += invoice.amount;
   }
@@ -162,11 +181,15 @@ const maxInflowCount = Math.max(...inflowCounts, 1);
 export const patientInflow: PatientInflowData = {
   todayCount: appointmentsData.length,
   labels: inflowLabels,
-  points: inflowCounts.map((count) => Math.max(8, Math.round((count / maxInflowCount) * 100))),
+  points: inflowCounts.map((count) =>
+    Math.max(8, Math.round((count / maxInflowCount) * 100)),
+  ),
 };
 
 const overdueAlert = overdueInvoices[0];
-const overduePatient = overdueAlert ? patientById.get(overdueAlert.patient_id) : undefined;
+const overduePatient = overdueAlert
+  ? patientById.get(overdueAlert.patient_id)
+  : undefined;
 
 export const alerts: AlertItem[] = [
   {
@@ -179,15 +202,15 @@ export const alerts: AlertItem[] = [
   },
   ...(overdueAlert
     ? [
-      {
-        icon: "payments" as const,
-        tone: "red" as const,
-        title: "Unpaid Invoices",
-        time: "Today",
-        body: `Invoice ${overdueAlert.id.toUpperCase()} for '${overduePatient?.full_name ?? "Patient"}' is overdue (${toCurrency(overdueAlert.amount)}).`,
-        action: "Send Reminder",
-      },
-    ]
+        {
+          icon: "payments" as const,
+          tone: "red" as const,
+          title: "Unpaid Invoices",
+          time: "Today",
+          body: `Invoice ${overdueAlert.id.toUpperCase()} for '${overduePatient?.full_name ?? "Patient"}' is overdue (${toCurrency(overdueAlert.amount)}).`,
+          action: "Send Reminder",
+        },
+      ]
     : []),
   ...aiInsightsData.map((insight) => ({
     icon: "psychology" as const,
@@ -202,12 +225,14 @@ export const alerts: AlertItem[] = [
     tone: "slate",
     title: "System Update",
     time: "1d ago",
-    body: "Core engine updated and synced with local dataset references.",
+    body: "Core engine updated an@ dataset references.",
     dimmed: true,
   },
 ];
 
-const recommendationInsight = aiInsightsData.find((insight) => insight.type === "recommendation");
+const recommendationInsight = aiInsightsData.find(
+  (insight) => insight.type === "recommendation",
+);
 
 export const aiInsightBanner: AiInsightBannerData = {
   title: recommendationInsight?.title ?? "Wellness Optimization",
@@ -218,28 +243,102 @@ export const aiInsightBanner: AiInsightBannerData = {
   secondaryAction: "View Full Analysis",
 };
 
-export const navSections: NavSection[] = [
+const adminNavSections: NavSection[] = [
   {
     label: "Overview",
+    items: [{ icon: "dashboard", label: "Dashboard", href: "/dashboard" }],
+  },
+  {
+    label: "Operations",
     items: [
-      { icon: "dashboard", label: "Dashboard", href: "/dashboard" },
+      { icon: "calendar_today", label: "Appointments", href: "/appointments" },
       { icon: "group", label: "Patients", href: "/patients" },
+      { icon: "payments", label: "Billing", href: "/billing" },
+    ],
+  },
+  {
+    label: "People & Services",
+    items: [
       { icon: "medical_services", label: "Therapists", href: "/therapists" },
       { icon: "self_improvement", label: "Therapies", href: "/therapies" },
     ],
   },
   {
-    label: "Clinical",
+    label: "Intelligence",
+    items: [
+      { icon: "psychology", label: "AI Strategy", href: "/ai-insights", pulse: true },
+      { icon: "analytics", label: "Analytics", href: "/analytics" },
+    ],
+  },
+  {
+    label: "Management",
+    items: [{ icon: "group", label: "Franchises", href: "/franchises" }],
+  },
+];
+
+const franchiseeNavSections: NavSection[] = [
+  {
+    label: "Overview",
+    items: [{ icon: "dashboard", label: "Dashboard", href: "/dashboard" }],
+  },
+  {
+    label: "Operations",
     items: [
       { icon: "calendar_today", label: "Appointments", href: "/appointments" },
+      { icon: "group", label: "Patients", href: "/patients" },
       { icon: "payments", label: "Billing", href: "/billing" },
+    ],
+  },
+  {
+    label: "People & Services",
+    items: [
+      { icon: "medical_services", label: "Therapists", href: "/therapists" },
+      { icon: "self_improvement", label: "Therapies", href: "/therapies" },
     ],
   },
   {
     label: "Intelligence",
     items: [
-      { icon: "psychology", label: "AI Insights", href: "/ai-insights", pulse: true },
+      { icon: "psychology", label: "AI Strategy", href: "/ai-insights", pulse: true },
       { icon: "analytics", label: "Analytics", href: "/analytics" },
     ],
   },
 ];
+
+const therapistNavSections: NavSection[] = [
+  {
+    label: "Overview",
+    items: [{ icon: "dashboard", label: "Dashboard", href: "/dashboard" }],
+  },
+  {
+    label: "My Work",
+    items: [
+      { icon: "calendar_today", label: "My Appointments", href: "/my-appointments" },
+      { icon: "group", label: "My Patients", href: "/my-patients" },
+    ],
+  },
+  {
+    label: "Actions",
+    items: [{ icon: "feedback", label: "Add Feedback", href: "/add-feedback" }],
+  },
+  {
+    label: "Performance",
+    items: [
+      { icon: "verified", label: "My Ratings", href: "/my-ratings" },
+      { icon: "monitoring", label: "My Session History", href: "/my-session-history" },
+    ],
+  },
+];
+
+export const roleNavSections: Record<UserRole, NavSection[]> = {
+  admin: adminNavSections,
+  franchisee: franchiseeNavSections,
+  therapist: therapistNavSections,
+};
+
+export const resolveRole = (roleInput?: string | null): UserRole => {
+  if (roleInput === "franchisee" || roleInput === "therapist") {
+    return roleInput;
+  }
+  return "admin";
+};

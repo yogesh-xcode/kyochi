@@ -4,20 +4,22 @@ import { useState } from "react";
 
 import { DashboardHeader } from "@/components/kyochi/DashboardHeader";
 import { Sidebar } from "@/components/kyochi/Sidebar";
-import type { NavSection } from "@/types";
+import type { NavSection, UserRole } from "@/types";
 
 type AppShellProps = {
   navSections: NavSection[];
+  role: UserRole;
   children: React.ReactNode;
 };
 
-export function AppShell({ navSections, children }: AppShellProps) {
+export function AppShell({ navSections, role, children }: AppShellProps) {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   return (
     <div className="k-shell-bg k-text-strong flex min-h-screen overflow-hidden">
       <Sidebar
         navSections={navSections}
+        role={role}
         mobileOpen={mobileSidebarOpen}
         onMobileClose={() => setMobileSidebarOpen(false)}
       />
