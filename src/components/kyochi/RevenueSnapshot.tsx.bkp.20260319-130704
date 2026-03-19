@@ -12,19 +12,19 @@ export function RevenueSnapshot({
   onRevenueRangeChange,
 }: RevenueSnapshotProps) {
   return (
-    <section className="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
-      <div className="flex items-center justify-between mb-4">
+    <section className="bg-white p-5 rounded-xl shadow-sm border border-slate-100">
+      <div className="flex items-center justify-between mb-5">
         <h4 className="font-bold text-slate-900">Revenue Snapshot</h4>
         <select
           value={revenueRange}
           onChange={(e) => onRevenueRangeChange(e.target.value as RevenueRange)}
-          className="text-[10px] border-none bg-[#f3f0e6] rounded-lg py-1 px-1.5 focus:ring-[#d4af35] outline-none cursor-pointer"
+          className="text-[11px] border-none bg-[#f3f0e6] rounded-lg py-1 px-2 focus:ring-[#d4af35] outline-none cursor-pointer"
         >
           <option>Weekly</option>
           <option>Monthly</option>
         </select>
       </div>
-      <div className="h-40 w-full flex items-end gap-1 px-1">
+      <div className="h-44 w-full flex items-end gap-1.5 px-1.5">
         {revenueBars.map((bar, i) => (
           <div
             key={bar.day}
@@ -37,7 +37,7 @@ export function RevenueSnapshot({
           />
         ))}
       </div>
-      <div className="flex justify-between mt-3 text-[8px] text-slate-400 font-bold uppercase">
+      <div className="flex justify-between mt-3.5 text-[9px] text-slate-400 font-bold uppercase">
         {revenueBars.map((bar) => (
           <span key={bar.day}>{bar.day}</span>
         ))}

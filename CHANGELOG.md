@@ -13,6 +13,41 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 13:11:20 IST (+0530)
+
+- DateTime: `2026-03-19 13:11:20 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/AppShell.tsx`
+    - diff lines: `24-26`
+    - file: `src/components/kyochi/Sidebar.tsx`
+    - diff lines: `31-95`
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `57-105`
+    - file: `src/components/kyochi/KyochiDashboard.tsx`
+    - diff lines: `23,26,42`
+    - file: `src/components/kyochi/KpiGrid.tsx`
+    - diff lines: `9-26`
+    - file: `src/components/kyochi/RevenueSnapshot.tsx`
+    - diff lines: `14-42`
+    - file: `src/components/kyochi/PatientInflow.tsx`
+    - diff lines: `22-40`
+    - file: `src/components/kyochi/RecentAppointmentsTable.tsx`
+    - diff lines: `11-45`
+    - file: `src/components/kyochi/InsightRecommendationCard.tsx`
+    - diff lines: `17-30`
+    - file: `src/components/kyochi/AlertsPanel.tsx`
+    - diff lines: `10-38`
+    - file: `src/components/kyochi/primitives.tsx`
+    - diff lines: `33,48`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-47`
+- What changed:
+    - Reduced overall dashboard and shell UI size by another ~10% through direct file-level adjustments.
+    - Tightened sidebar width/padding, topbar height/search/action sizing, card spacing, chart heights, table density, and badge/icon sizing.
+    - Kept functional behavior and data wiring unchanged.
+- Why changed:
+    - Requested an additional overall 10% size decrease.
+
 ## 2026-03-19 13:05:20 IST (+0530)
 
 - DateTime: `2026-03-19 13:05:20 IST (+0530)`

@@ -100,3 +100,7 @@ Verification: pnpm -s lint and pnpm -s build passed.
 Updated: 2026-03-19 13:05:20 IST (+0530)
 # Header Alignment status: Fixed (topbar/content padding split and row height normalized to 68px)
 Verification: pnpm -s lint and pnpm -s build passed.
+
+Updated: 2026-03-19 13:11:20 IST (+0530)
+# Global Size status: Fixed (applied file-level overall ~10% reduction across shell/dashboard components)
+Verification: pnpm -s lint and pnpm -s build passed.
