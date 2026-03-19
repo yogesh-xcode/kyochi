@@ -96,3 +96,7 @@ Verification: pnpm -s lint and pnpm -s build passed.
 Updated: 2026-03-19 13:03:13 IST (+0530)
 # Topbar Alignment status: Fixed (header now white like sidebar and aligned to logo row level)
 Verification: pnpm -s lint and pnpm -s build passed.
+
+Updated: 2026-03-19 13:05:20 IST (+0530)
+# Header Alignment status: Fixed (topbar/content padding split and row height normalized to 68px)
+Verification: pnpm -s lint and pnpm -s build passed.

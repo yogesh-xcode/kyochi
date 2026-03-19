@@ -13,6 +13,23 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 13:05:20 IST (+0530)
+
+- DateTime: `2026-03-19 13:05:20 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/AppShell.tsx`
+    - diff lines: `24-26`
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `60-61`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-27`
+- What changed:
+    - Reworked shell alignment by separating topbar row from content padding.
+    - Set topbar to fixed row height (`68px`) and full-width structure to align cleanly with the sidebar logo row.
+    - Removed prior negative-margin approach causing visual drift.
+- Why changed:
+    - Reported alignment issue in screenshot for top header/title positioning.
+
 ## 2026-03-19 13:03:13 IST (+0530)
 
 - DateTime: `2026-03-19 13:03:13 IST (+0530)`

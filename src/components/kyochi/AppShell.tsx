@@ -21,9 +21,9 @@ export function AppShell({ navSections, children }: AppShellProps) {
         mobileOpen={mobileSidebarOpen}
         onMobileClose={() => setMobileSidebarOpen(false)}
       />
-      <main className="lg:ml-64 flex-1 px-3.5 pb-3.5 pt-0 md:px-5 md:pb-5 md:pt-0 lg:px-7 lg:pb-7 lg:pt-0 space-y-5 bg-[#f8f7f6] min-h-screen">
+      <main className="lg:ml-64 flex-1 pb-3.5 pt-0 md:pb-5 lg:pb-7 bg-[#f8f7f6] min-h-screen">
         <DashboardHeader onMenuToggle={() => setMobileSidebarOpen((prev) => !prev)} />
-        {children}
+        <div className="px-3.5 md:px-5 lg:px-7 pt-5">{children}</div>
       </main>
     </div>
   );
