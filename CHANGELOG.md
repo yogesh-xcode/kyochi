@@ -13,6 +13,23 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 09:45:46 IST (+0530)
+
+- DateTime: `2026-03-19 09:45:46 IST (+0530)`
+- File changes:
+    - file: `src/app/layout.tsx`
+    - diff lines: `2,13-17,37`
+    - file: `src/app/globals.css`
+    - diff lines: `257,267-321`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-29`
+- What changed:
+    - Reintroduced DM Serif font variable in layout for display typography.
+    - Applied exact typography mapping for Manrope-based `H1/H2/H3/Body/Small/Label`.
+    - Added utility classes (`type-h1`, `type-h2`, `type-h3`, `type-body`, `type-small`, `type-label`) for explicit usage.
+- Why changed:
+    - Requested typography system: Display/DM Serif and specific Manrope weights/sizes for heading and text tiers.
+
 ## 2026-03-19 09:31:34 IST (+0530)
 
 - DateTime: `2026-03-19 09:31:34 IST (+0530)`
