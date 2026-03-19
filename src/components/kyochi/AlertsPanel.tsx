@@ -1,0 +1,43 @@
+import { AlertIcon, MSO } from "@/components/kyochi/primitives";
+import type { AlertItem } from "@/components/kyochi/types";
+
+type AlertsPanelProps = {
+  alerts: AlertItem[];
+};
+
+export function AlertsPanel({ alerts }: AlertsPanelProps) {
+  return (
+    <section className="bg-white rounded-xl shadow-sm overflow-hidden flex flex-col">
+      <div className="px-6 py-4 border-b border-slate-100 bg-[#d4af35]/5">
+        <h4 className="font-bold text-slate-900 flex items-center gap-2">
+          <MSO className="text-amber-600">report_problem</MSO>
+          Intelligence Alerts
+        </h4>
+      </div>
+      <div className="p-6 space-y-6">
+        {alerts.map((alert) => (
+          <div key={alert.title} className={`flex gap-4 ${alert.dimmed ? "opacity-60" : ""}`}>
+            <AlertIcon tone={alert.tone} icon={alert.icon} />
+            <div className="flex-1">
+              <div className="flex justify-between items-start mb-1">
+                <p className="text-sm font-bold text-slate-900">{alert.title}</p>
+                <span className="text-[10px] text-slate-400">{alert.time}</span>
+              </div>
+              <p className="text-xs text-slate-500 leading-relaxed mb-2">{alert.body}</p>
+              {alert.action && (
+                <button className="text-xs font-bold text-[#d4af35] hover:underline">
+                  {alert.action}
+                </button>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="mt-auto p-4 border-t border-slate-100">
+        <button className="w-full py-2.5 bg-[#d4af35]/10 text-[#d4af35] font-bold text-sm rounded-xl hover:bg-[#d4af35] hover:text-white transition-all">
+          Clear All Resolved
+        </button>
+      </div>
+    </section>
+  );
+}
