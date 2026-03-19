@@ -13,6 +13,23 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 08:49:42 IST (+0530)
+
+- DateTime: `2026-03-19 08:49:42 IST (+0530)`
+- File changes:
+    - file: `src/app/layout.tsx`
+    - diff lines: `3-5,31-44`
+    - file: `src/components/kyochi/KyochiDashboard.tsx`
+    - diff lines: `5,17-41`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-31`
+- What changed:
+    - Moved common dashboard chrome into the root layout: sidebar and top header now render from `layout.tsx`.
+    - Moved material symbols font link from page component into `layout.tsx`.
+    - Simplified `KyochiDashboard` to render only page-specific content sections.
+- Why changed:
+    - Requested to use `layout.tsx` for common elements shared across pages (header, sidebar, and related shell UI).
+
 ## 2026-03-19 08:44:19 IST (+0530)
 
 - DateTime: `2026-03-19 08:44:19 IST (+0530)`
