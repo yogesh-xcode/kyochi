@@ -48,7 +48,7 @@ export default function AppointmentsPage() {
         { label: "Waiting", value: waitingCount.toString(), delta: "Queue", helper: "Patients waiting for consultation" },
       ]}
       columns={["ID", "Patient", "Therapist", "Date & Time", "Status"]}
-      centeredBodyColumns={[4]}
+      centeredBodyColumns={[0, 4]}
       rows={appointmentsData.map((appointment) => ({
         id: appointment.id,
         cells: [

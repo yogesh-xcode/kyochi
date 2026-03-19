@@ -26,6 +26,7 @@ export default function FranchisesPage() {
         { label: "Top Region", value: regionCounts[0]?.[0] ?? "N/A", delta: `${regionCounts[0]?.[1] ?? 0} units`, helper: "Highest concentration today" },
       ]}
       columns={["ID", "Location", "City", "Region", "Phone"]}
+      centeredBodyColumns={[0, 4]}
       rows={franchisesData.map((franchise) => ({
         id: franchise.id,
         cells: [

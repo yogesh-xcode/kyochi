@@ -1198,3 +1198,29 @@ This file is maintained for every code change.
     - Remapped shadcn `Button` variants/sizes in `src/components/ui/button.tsx` to consume Kyochi button classes while preserving shadcn API usage.
 - Why changed:
     - Requested theme-guide button behavior but implemented through shadcn button primitives.
+
+## 2026-03-19 23:04:57 IST (+0530)
+
+- DateTime: `2026-03-19 23:04:57 IST (+0530)`
+- File changes:
+    - file: `src/app/patients/page.tsx`
+    - diff lines: `42`
+    - file: `src/app/therapists/page.tsx`
+    - diff lines: `36`
+    - file: `src/app/appointments/page.tsx`
+    - diff lines: `58`
+    - file: `src/app/franchises/page.tsx`
+    - diff lines: `33`
+    - file: `CHANGELOG.md`
+    - diff lines: `1201-1216`
+    - file: `error.log`
+    - diff lines: `194-197`
+- What changed:
+    - Expanded DataTable centered-body column mapping to include `ID` and `Phone` columns where present.
+    - Updated page-specific center alignment configs:
+      - patients: `ID`, `Phone`, `Wellness`
+      - therapists: `ID`
+      - appointments: `ID`, `Status`
+      - franchises: `ID`, `Phone`
+- Why changed:
+    - Requested center alignment for phone number and id in table body.

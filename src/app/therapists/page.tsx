@@ -28,6 +28,7 @@ export default function TherapistsPage() {
         { label: "Credentialed", value: therapistsData.length.toString(), delta: "Verified", helper: "Licensed profile count" },
       ]}
       columns={["ID", "Name", "Specialty", "Email", "License"]}
+      centeredBodyColumns={[0]}
       rows={therapistsData.map((therapist) => ({
         id: therapist.id,
         cells: [

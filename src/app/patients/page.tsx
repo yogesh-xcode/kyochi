@@ -32,7 +32,7 @@ export default function PatientsPage() {
         { label: "High Risk", value: highRiskCount.toString(), delta: "Needs review", helper: "Wellness score below 70" },
       ]} 
       columns={["ID", "Name", "Email", "Phone", "Wellness"]}
-      centeredBodyColumns={[4]}
+      centeredBodyColumns={[0, 3, 4]}
       rows={patientsData.map((patient) => ({
         id: patient.id,
         cells: [
