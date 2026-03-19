@@ -13,6 +13,19 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 11:19:59 IST (+0530)
+
+- DateTime: `2026-03-19 11:19:59 IST (+0530)`
+- File changes:
+    - file: `buisnesslogic.md`
+    - diff lines: `1-141`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-27`
+- What changed:
+    - Added a business logic reference doc in simple terms covering KPI formulas, chart logic, alerts, routing behavior, and data relationships.
+- Why changed:
+    - Requested a clear business-logic document for all dashboard calculations and rules.
+
 ## 2026-03-19 11:14:45 IST (+0530)
 
 - DateTime: `2026-03-19 11:14:45 IST (+0530)`
