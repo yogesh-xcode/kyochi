@@ -13,6 +13,23 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 11:37:48 IST (+0530)
+
+- DateTime: `2026-03-19 11:37:48 IST (+0530)`
+- File changes:
+    - file: `src/types/index.ts`
+    - diff lines: `14`
+    - file: `src/components/kyochi/data.ts`
+    - diff lines: `104`
+    - file: `src/components/kyochi/AppointmentsPanel.tsx`
+    - diff lines: `31`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-31`
+- What changed:
+    - Added stable `id` to dashboard appointment view-model and switched appointment list React key from patient name to appointment id.
+- Why changed:
+    - Console warning reported duplicate React keys for repeated patient names in appointment rows.
+
 ## 2026-03-19 11:28:36 IST (+0530)
 
 - DateTime: `2026-03-19 11:28:36 IST (+0530)`

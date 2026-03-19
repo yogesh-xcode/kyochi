@@ -106,6 +106,7 @@ export const appointments: Appointment[] = appointmentsData
     const { time, period } = toTimeLabel(entry.starts_at);
 
     return {
+      id: entry.id,
       time,
       period,
       name: patient?.full_name ?? "Unknown Patient",

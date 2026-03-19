@@ -26,7 +26,7 @@ export function AppointmentsPanel({ appointments }: AppointmentsPanelProps) {
       <div className="divide-y divide-slate-50">
         {appointments.map((appt) => (
           <div
-            key={appt.name}
+            key={appt.id}
             className="px-6 py-4 flex items-center gap-4 hover:bg-[#f3f0e6]/30 transition-colors"
           >
             <div className="text-center min-w-15">

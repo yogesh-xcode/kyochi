@@ -10,6 +10,7 @@ export type KpiCard = {
 };
 
 export type Appointment = {
+  id: string;
   time: string;
   period: string;
   name: string;
