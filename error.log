@@ -108,3 +108,7 @@ Verification: pnpm -s lint and pnpm -s build passed.
 Updated: 2026-03-19 13:21:07 IST (+0530)
 # Token Migration status: Fixed (dashboard components now consume semantic tokens from globals.css)
 Verification: pnpm -s lint and pnpm -s build passed.
+
+Updated: 2026-03-19 13:27:11 IST (+0530)
+# Theme Token Status: Fixed (replaced fragile arbitrary token classes; interactive token states now stable)
+Verification: pnpm -s lint and pnpm -s build passed.

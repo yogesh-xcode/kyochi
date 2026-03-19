@@ -191,6 +191,25 @@
     --k-cta:                 221 68% 52%;
     --k-cta-hover:           221 66% 46%;
     --k-avatar-bg:           220 14% 94%;
+
+    /* ── DASHBOARD COLOR TOKENS (HEX/RGBA SAFE) ── */
+    --k-color-shell-bg:         #f8f7f6;
+    --k-color-surface:          #ffffff;
+    --k-color-surface-muted:    #f3f0e6;
+    --k-color-border-soft:      #e5dfd1;
+    --k-color-text-strong:      #0f1b3d;
+    --k-color-text-body:        #516887;
+    --k-color-text-subtle:      #8d9bb2;
+    --k-color-brand:            #d4af35;
+    --k-color-brand-strong:     #b8941f;
+    --k-color-brand-soft:       #f9edbe;
+    --k-color-brand-border:     rgba(212, 175, 53, 0.25);
+    --k-color-brand-soft-tint:  rgba(249, 237, 190, 0.45);
+    --k-color-row-hover:        #f3f0e6;
+    --k-color-notify:           #ff6a6a;
+    --k-color-cta:              #2f66db;
+    --k-color-cta-hover:        #2a5ccd;
+    --k-color-avatar-bg:        #f1f1f1;
   }
 
   /* ── DARK MODE TOKENS ── */
@@ -247,6 +266,18 @@
     --k-text-strong:         36 20% 90%;
     --k-text-body:           36 16% 74%;
     --k-text-subtle:         36 12% 58%;
+
+    --k-color-shell-bg:         #1c1916;
+    --k-color-surface:          #24211e;
+    --k-color-surface-muted:    #2c2824;
+    --k-color-border-soft:      #3b352f;
+    --k-color-text-strong:      #ece6d8;
+    --k-color-text-body:        #c8bfa9;
+    --k-color-text-subtle:      #9c927d;
+    --k-color-brand-soft:       #3b3119;
+    --k-color-brand-soft-tint:  rgba(59, 49, 25, 0.45);
+    --k-color-row-hover:        #2c2824;
+    --k-color-avatar-bg:        #35312c;
   }
   * {
     @apply border-border outline-ring/50;
@@ -376,20 +407,27 @@
 
 /* ── LAYER: COMPONENT TOKENS ─────────────────────────────── */
 @layer components {
-  .k-shell-bg { background: hsl(var(--k-shell-bg)); }
-  .k-surface { background: hsl(var(--k-surface)); }
-  .k-surface-muted { background: hsl(var(--k-surface-muted)); }
-  .k-border-soft { border-color: hsl(var(--k-border-soft)); }
-  .k-text-strong { color: hsl(var(--k-text-strong)); }
-  .k-text-body { color: hsl(var(--k-text-body)); }
-  .k-text-subtle { color: hsl(var(--k-text-subtle)); }
-  .k-brand { color: hsl(var(--k-brand)); }
-  .k-brand-strong { color: hsl(var(--k-brand-strong)); }
-  .k-brand-soft-bg { background: hsl(var(--k-brand-soft)); }
-  .k-notify-bg { background: hsl(var(--k-notify)); }
-  .k-cta-bg { background: hsl(var(--k-cta)); }
-  .k-cta-bg:hover { background: hsl(var(--k-cta-hover)); }
-  .k-avatar-bg { background: hsl(var(--k-avatar-bg)); }
+  .k-shell-bg { background: var(--k-color-shell-bg); }
+  .k-surface { background: var(--k-color-surface); }
+  .k-surface-muted { background: var(--k-color-surface-muted); }
+  .k-border-soft { border-color: var(--k-color-border-soft); }
+  .k-text-strong { color: var(--k-color-text-strong); }
+  .k-text-body { color: var(--k-color-text-body); }
+  .k-text-subtle { color: var(--k-color-text-subtle); }
+  .k-brand { color: var(--k-color-brand); }
+  .k-brand-strong { color: var(--k-color-brand-strong); }
+  .k-brand-bg { background: var(--k-color-brand); }
+  .k-brand-soft-bg { background: var(--k-color-brand-soft); }
+  .k-brand-soft-tint-bg { background: var(--k-color-brand-soft-tint); }
+  .k-brand-border-soft { border-color: var(--k-color-brand-border); }
+  .k-row-hover:hover { background: var(--k-color-row-hover); }
+  .k-brand-bg-hover:hover { background: var(--k-color-brand); }
+  .k-brand-soft-bg-hover:hover { background: var(--k-color-brand-soft); }
+  .k-primary-foreground { color: hsl(var(--primary-foreground)); }
+  .k-notify-bg { background: var(--k-color-notify); }
+  .k-cta-bg { background: var(--k-color-cta); }
+  .k-cta-bg:hover { background: var(--k-color-cta-hover); }
+  .k-avatar-bg { background: var(--k-color-avatar-bg); }
 
   /* ── CARD ── */
   .k-card {

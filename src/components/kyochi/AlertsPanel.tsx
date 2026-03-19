@@ -8,7 +8,7 @@ type AlertsPanelProps = {
 export function AlertsPanel({ alerts }: AlertsPanelProps) {
   return (
     <section className="k-surface rounded-xl shadow-sm overflow-hidden flex flex-col">
-      <div className="px-4 py-3 border-b k-border-soft bg-[hsl(var(--k-brand-soft)/0.45)]">
+      <div className="px-4 py-3 border-b k-border-soft k-brand-soft-tint-bg">
         <h4 className="font-bold k-text-strong flex items-center gap-2">
           <MSO className="text-amber-600">report_problem</MSO>
           Intelligence Alerts
@@ -34,7 +34,7 @@ export function AlertsPanel({ alerts }: AlertsPanelProps) {
         ))}
       </div>
       <div className="mt-auto p-3 border-t k-border-soft">
-        <button className="w-full py-1.5 bg-[hsl(var(--k-brand-soft))] k-brand font-bold text-[12px] rounded-xl hover:bg-[hsl(var(--k-brand))] hover:text-white transition-all">
+        <button className="w-full py-1.5 k-brand-soft-bg k-brand font-bold text-[12px] rounded-xl k-brand-bg-hover hover:text-white transition-all">
           Clear All Resolved
         </button>
       </div>

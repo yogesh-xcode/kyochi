@@ -34,7 +34,7 @@ export function RecentAppointmentsTable({ appointments }: RecentAppointmentsTabl
           </thead>
           <tbody>
             {appointments.map((appt) => (
-              <tr key={appt.id} className="border-t k-border-soft hover:bg-[hsl(var(--k-brand-soft)/0.4)] transition-colors">
+              <tr key={appt.id} className="border-t k-border-soft k-row-hover transition-colors">
                 <td className="px-3.5 md:px-4 py-2 text-[12px] font-semibold k-text-body">
                   {appt.time} <span className="k-text-subtle text-[10px]">{appt.period}</span>
                 </td>

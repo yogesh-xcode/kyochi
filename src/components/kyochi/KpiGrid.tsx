@@ -11,10 +11,10 @@ export function KpiGrid({ cards }: KpiGridProps) {
       {cards.map((card) => (
         <div
           key={card.label}
-          className="p-4 k-surface rounded-xl shadow-sm border-b-4 border-[hsl(var(--k-brand)/0.2)]"
+          className="p-4 k-surface rounded-xl shadow-sm border-b-4 k-brand-border-soft"
         >
           <div className="flex items-center justify-between mb-3">
-            <div className="p-1.5 bg-[hsl(var(--k-brand-soft))] rounded-lg k-brand">
+            <div className="p-1.5 k-brand-soft-bg rounded-lg k-brand">
               <MSO>{card.icon}</MSO>
             </div>
             <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${card.deltaColor}`}>

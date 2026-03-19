@@ -13,6 +13,37 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 13:27:11 IST (+0530)
+
+- DateTime: `2026-03-19 13:27:11 IST (+0530)`
+- File changes:
+    - file: `src/app/globals.css`
+    - diff lines: `408-411`
+    - file: `src/components/kyochi/Sidebar.tsx`
+    - diff lines: `51,73,93`
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `63,92,101`
+    - file: `src/components/kyochi/RecentAppointmentsTable.tsx`
+    - diff lines: `37`
+    - file: `src/components/kyochi/InsightRecommendationCard.tsx`
+    - diff lines: `18,25,28`
+    - file: `src/components/kyochi/AlertsPanel.tsx`
+    - diff lines: `11,37`
+    - file: `src/components/kyochi/RevenueSnapshot.tsx`
+    - diff lines: `21`
+    - file: `src/components/kyochi/KpiGrid.tsx`
+    - diff lines: `14,17`
+    - file: `src/components/kyochi/primitives.tsx`
+    - diff lines: `20`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-45`
+- What changed:
+    - Fixed token application regressions by replacing fragile `hsl(var(...))` arbitrary classes with stable token utility classes.
+    - Added explicit token utility helpers for hover/background/border variants used by dashboard components.
+    - Updated remaining hover/focus patterns (`hover:k-*`) to explicit token-based color classes so interactive states render correctly.
+- Why changed:
+    - Reported off-theme rendering where tokenized styles were not consistently applying in UI.
+
 ## 2026-03-19 13:21:07 IST (+0530)
 
 - DateTime: `2026-03-19 13:21:07 IST (+0530)`

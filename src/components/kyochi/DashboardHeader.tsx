@@ -60,7 +60,7 @@ export function DashboardHeader({ onMenuToggle }: DashboardHeaderProps) {
           <div className="flex items-center gap-2">
             <button
               onClick={onMenuToggle}
-              className="lg:hidden size-7 rounded-lg k-surface-muted k-text-body hover:k-brand transition-colors inline-flex items-center justify-center"
+              className="lg:hidden size-7 rounded-lg k-surface-muted k-text-body hover:text-[var(--k-color-brand)] transition-colors inline-flex items-center justify-center"
               aria-label="Toggle navigation menu"
             >
               <MSO className="text-[18px]">menu</MSO>
@@ -73,7 +73,7 @@ export function DashboardHeader({ onMenuToggle }: DashboardHeaderProps) {
           <div className="relative w-full">
             <MSO className="absolute left-2.5 top-1/2 -translate-y-1/2 k-text-subtle text-[16px]">search</MSO>
             <input
-              className="w-full h-8 pl-8 pr-16 rounded-lg border k-border-soft k-surface text-[12px] k-text-body placeholder:k-text-subtle outline-none focus:border-[hsl(var(--k-brand)/0.5)]"
+              className="w-full h-8 pl-8 pr-16 rounded-lg border k-border-soft k-surface text-[12px] k-text-body placeholder:k-text-subtle outline-none focus:border-[var(--k-color-brand)]"
               placeholder="Search dashboard or type a command"
               type="text"
             />
@@ -89,7 +89,7 @@ export function DashboardHeader({ onMenuToggle }: DashboardHeaderProps) {
             Create Appointment
             <MSO className="text-[14px]">expand_more</MSO>
           </button>
-          <button className="relative size-7 rounded-full border k-border-soft k-surface k-text-body hover:k-brand transition-colors inline-flex items-center justify-center">
+          <button className="relative size-7 rounded-full border k-border-soft k-surface k-text-body hover:text-[var(--k-color-brand)] transition-colors inline-flex items-center justify-center">
             <MSO className="text-[16px]">notifications</MSO>
             <span className="absolute top-0.5 right-0.5 size-3 k-notify-bg rounded-full text-[8px] text-white font-bold inline-flex items-center justify-center">
               7
@@ -98,7 +98,7 @@ export function DashboardHeader({ onMenuToggle }: DashboardHeaderProps) {
           <button className="size-7 rounded-full k-avatar-bg k-text-body text-[10px] font-bold inline-flex items-center justify-center">
             AK
           </button>
-          <button className="size-7 rounded-full border k-border-soft k-surface k-text-subtle hover:k-brand transition-colors inline-flex items-center justify-center">
+          <button className="size-7 rounded-full border k-border-soft k-surface k-text-subtle hover:text-[var(--k-color-brand)] transition-colors inline-flex items-center justify-center">
             <MSO className="text-[16px]">expand_more</MSO>
           </button>
         </div>

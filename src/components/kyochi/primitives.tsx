@@ -17,7 +17,7 @@ type InitialsAvatarProps = {
 export function InitialsAvatar({ initials, className = "" }: InitialsAvatarProps) {
   return (
     <div
-      className={`rounded-full bg-[hsl(var(--k-brand-soft))] flex items-center justify-center font-bold k-brand-strong shrink-0 ${className}`}
+      className={`rounded-full k-brand-soft-bg flex items-center justify-center font-bold k-brand-strong shrink-0 ${className}`}
     >
       {initials}
     </div>

@@ -37,7 +37,7 @@ export function Sidebar({ navSections, mobileOpen = false, onMobileClose }: Side
         } lg:translate-x-0`}
       >
       <div className="p-3.5 flex items-center gap-2 border-b k-border-soft">
-        <div className="size-8 rounded-full bg-[hsl(var(--k-brand))] flex items-center justify-center text-white shadow-sm">
+        <div className="size-8 rounded-full k-brand-bg flex items-center justify-center text-white shadow-sm">
           <MSO>spa</MSO>
         </div>
         <div className="min-w-0">
@@ -48,7 +48,7 @@ export function Sidebar({ navSections, mobileOpen = false, onMobileClose }: Side
         </div>
         <button
           onClick={onMobileClose}
-          className="ml-auto lg:hidden size-7 rounded-lg k-text-body hover:k-surface-muted hover:k-brand transition-colors inline-flex items-center justify-center"
+          className="ml-auto lg:hidden size-7 rounded-lg k-text-body hover:bg-[var(--k-color-surface-muted)] hover:text-[var(--k-color-brand)] transition-colors inline-flex items-center justify-center"
           aria-label="Close sidebar"
         >
           <MSO className="text-[18px]">close</MSO>
@@ -69,13 +69,13 @@ export function Sidebar({ navSections, mobileOpen = false, onMobileClose }: Side
                   onClick={onMobileClose}
                   className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-all text-[12px] font-semibold ${
                     isItemActive(item.href)
-                      ? "bg-[hsl(var(--k-brand-soft))] k-brand-strong border border-[hsl(var(--k-brand)/0.25)]"
-                      : "k-text-body hover:k-surface-muted border border-transparent"
+                      ? "k-brand-soft-bg k-brand-strong border k-brand-border-soft"
+                      : "k-text-body hover:bg-[var(--k-color-surface-muted)] border border-transparent"
                   }`}
                 >
                   <MSO>{item.icon}</MSO>
                   <span>{item.label}</span>
-                  {item.pulse && <span className="ml-auto size-2 rounded-full bg-[hsl(var(--k-brand))] animate-pulse" />}
+                  {item.pulse && <span className="ml-auto size-2 rounded-full k-brand-bg animate-pulse" />}
                 </Link>
               ))}
             </div>
@@ -90,7 +90,7 @@ export function Sidebar({ navSections, mobileOpen = false, onMobileClose }: Side
             <p className="text-[12px] font-bold k-text-strong truncate">Alex Kyochi</p>
             <p className="text-[10px] k-text-body truncate">System Admin</p>
           </div>
-          <button className="k-text-subtle hover:k-brand transition-colors">
+          <button className="k-text-subtle hover:text-[var(--k-color-brand)] transition-colors">
             <MSO>settings</MSO>
           </button>
         </div>

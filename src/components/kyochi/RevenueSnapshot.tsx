@@ -18,7 +18,7 @@ export function RevenueSnapshot({
         <select
           value={revenueRange}
           onChange={(e) => onRevenueRangeChange(e.target.value as RevenueRange)}
-          className="text-[10px] border-none k-surface-muted rounded-lg py-1 px-1.5 focus:ring-[hsl(var(--k-brand))] outline-none cursor-pointer"
+          className="text-[10px] border-none k-surface-muted rounded-lg py-1 px-1.5 focus:ring-[var(--k-color-brand)] outline-none cursor-pointer"
         >
           <option>Weekly</option>
           <option>Monthly</option>
@@ -28,7 +28,7 @@ export function RevenueSnapshot({
         {revenueBars.map((bar, i) => (
           <div
             key={bar.day}
-            className="flex-1 rounded-t-lg bg-[hsl(var(--k-brand))] transition-all duration-500 cursor-pointer hover:brightness-110"
+            className="flex-1 rounded-t-lg k-brand-bg transition-all duration-500 cursor-pointer hover:brightness-110"
             style={{
               height: `${bar.pct}%`,
               opacity: 0.3 + (i / revenueBars.length) * 0.7,
