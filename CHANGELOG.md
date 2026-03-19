@@ -13,6 +13,23 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 13:01:23 IST (+0530)
+
+- DateTime: `2026-03-19 13:01:23 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `1,52-116`
+    - file: `src/components/kyochi/DashboardHeader.tsx.bkp.20260319-130008`
+    - diff lines: `1-112`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-29`
+- What changed:
+    - Refactored top header to match the new reference structure: left page title, centered search/command input, and right actions.
+    - Replaced dashboard greeting strip behavior with concise title-first topbar (`Dashboard`) on dashboard route.
+    - Added primary CTA button (`Create Appointment`) and retained notifications/avatar controls.
+- Why changed:
+    - Provided an additional design reference and requested alignment with that header/topbar pattern.
+
 ## 2026-03-19 12:58:36 IST (+0530)
 
 - DateTime: `2026-03-19 12:58:36 IST (+0530)`
