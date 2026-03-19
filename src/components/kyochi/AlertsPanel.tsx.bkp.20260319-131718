@@ -7,9 +7,9 @@ type AlertsPanelProps = {
 
 export function AlertsPanel({ alerts }: AlertsPanelProps) {
   return (
-    <section className="k-surface rounded-xl shadow-sm overflow-hidden flex flex-col">
-      <div className="px-4 py-3 border-b k-border-soft bg-[hsl(var(--k-brand-soft)/0.45)]">
-        <h4 className="font-bold k-text-strong flex items-center gap-2">
+    <section className="bg-white rounded-xl shadow-sm overflow-hidden flex flex-col">
+      <div className="px-4 py-3 border-b border-slate-100 bg-[#d4af35]/5">
+        <h4 className="font-bold text-slate-900 flex items-center gap-2">
           <MSO className="text-amber-600">report_problem</MSO>
           Intelligence Alerts
         </h4>
@@ -20,12 +20,12 @@ export function AlertsPanel({ alerts }: AlertsPanelProps) {
             <AlertIcon tone={alert.tone} icon={alert.icon} />
             <div className="flex-1">
               <div className="flex justify-between items-start mb-1">
-                <p className="text-[12px] font-bold k-text-strong">{alert.title}</p>
-                <span className="text-[8px] k-text-subtle">{alert.time}</span>
+                <p className="text-[12px] font-bold text-slate-900">{alert.title}</p>
+                <span className="text-[8px] text-slate-400">{alert.time}</span>
               </div>
-              <p className="text-[10px] k-text-body leading-relaxed mb-1">{alert.body}</p>
+              <p className="text-[10px] text-slate-500 leading-relaxed mb-1">{alert.body}</p>
               {alert.action && (
-                <button className="text-[10px] font-bold k-brand hover:underline">
+                <button className="text-[10px] font-bold text-[#d4af35] hover:underline">
                   {alert.action}
                 </button>
               )}
@@ -33,8 +33,8 @@ export function AlertsPanel({ alerts }: AlertsPanelProps) {
           </div>
         ))}
       </div>
-      <div className="mt-auto p-3 border-t k-border-soft">
-        <button className="w-full py-1.5 bg-[hsl(var(--k-brand-soft))] k-brand font-bold text-[12px] rounded-xl hover:bg-[hsl(var(--k-brand))] hover:text-white transition-all">
+      <div className="mt-auto p-3 border-t border-slate-100">
+        <button className="w-full py-1.5 bg-[#d4af35]/10 text-[#d4af35] font-bold text-[12px] rounded-xl hover:bg-[#d4af35] hover:text-white transition-all">
           Clear All Resolved
         </button>
       </div>

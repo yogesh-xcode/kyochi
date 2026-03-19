@@ -13,6 +13,41 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 13:21:07 IST (+0530)
+
+- DateTime: `2026-03-19 13:21:07 IST (+0530)`
+- File changes:
+    - file: `src/app/globals.css`
+    - diff lines: `188-204,234-240,354-369`
+    - file: `src/components/kyochi/AppShell.tsx`
+    - diff lines: `18,24`
+    - file: `src/components/kyochi/Sidebar.tsx`
+    - diff lines: `35-93`
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `57-103`
+    - file: `src/components/kyochi/KpiGrid.tsx`
+    - diff lines: `14-25`
+    - file: `src/components/kyochi/RevenueSnapshot.tsx`
+    - diff lines: `15-40`
+    - file: `src/components/kyochi/PatientInflow.tsx`
+    - diff lines: `23-38`
+    - file: `src/components/kyochi/RecentAppointmentsTable.tsx`
+    - diff lines: `12-42`
+    - file: `src/components/kyochi/InsightRecommendationCard.tsx`
+    - diff lines: `17-28`
+    - file: `src/components/kyochi/AlertsPanel.tsx`
+    - diff lines: `10-37`
+    - file: `src/components/kyochi/primitives.tsx`
+    - diff lines: `19`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-55`
+- What changed:
+    - Added dashboard semantic design tokens in `globals.css` and reusable token utility classes (`k-shell-bg`, `k-surface`, `k-text-*`, `k-brand*`, `k-cta-*`, etc.).
+    - Migrated active dashboard/shell components from hardcoded hex/slate utility colors to token-based color usage.
+    - Preserved existing layout/behavior while centralizing visual control through token variables.
+- Why changed:
+    - Requested updating `globals.css` to match current components and move to token-based styling.
+
 ## 2026-03-19 13:11:20 IST (+0530)
 
 - DateTime: `2026-03-19 13:11:20 IST (+0530)`

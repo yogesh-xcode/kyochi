@@ -175,22 +175,6 @@
     --sidebar-ring:          43 67% 52%;
     --sidebar-width:         260px;
     --sidebar-width-collapsed: 64px;
-
-    /* ── DASHBOARD SEMANTIC TOKENS ── */
-    --k-shell-bg:            36 22% 96%;
-    --k-surface:             0 0% 100%;
-    --k-surface-muted:       36 18% 95%;
-    --k-border-soft:         36 18% 88%;
-    --k-text-strong:         223 52% 13%;
-    --k-text-body:           215 31% 39%;
-    --k-text-subtle:         218 17% 64%;
-    --k-brand:               43 67% 52%;
-    --k-brand-strong:        43 71% 38%;
-    --k-brand-soft:          43 67% 92%;
-    --k-notify:              0 89% 69%;
-    --k-cta:                 221 68% 52%;
-    --k-cta-hover:           221 66% 46%;
-    --k-avatar-bg:           220 14% 94%;
   }
 
   /* ── DARK MODE TOKENS ── */
@@ -239,14 +223,6 @@
     --sidebar-accent:        43 30% 16%;
     --sidebar-accent-foreground: 43 67% 65%;
     --sidebar-border:        24 10% 18%;
-
-    --k-shell-bg:            24 10% 10%;
-    --k-surface:             24 10% 12%;
-    --k-surface-muted:       24 10% 16%;
-    --k-border-soft:         24 10% 20%;
-    --k-text-strong:         36 20% 90%;
-    --k-text-body:           36 16% 74%;
-    --k-text-subtle:         36 12% 58%;
   }
   * {
     @apply border-border outline-ring/50;
@@ -376,20 +352,6 @@
 
 /* ── LAYER: COMPONENT TOKENS ─────────────────────────────── */
 @layer components {
-  .k-shell-bg { background: hsl(var(--k-shell-bg)); }
-  .k-surface { background: hsl(var(--k-surface)); }
-  .k-surface-muted { background: hsl(var(--k-surface-muted)); }
-  .k-border-soft { border-color: hsl(var(--k-border-soft)); }
-  .k-text-strong { color: hsl(var(--k-text-strong)); }
-  .k-text-body { color: hsl(var(--k-text-body)); }
-  .k-text-subtle { color: hsl(var(--k-text-subtle)); }
-  .k-brand { color: hsl(var(--k-brand)); }
-  .k-brand-strong { color: hsl(var(--k-brand-strong)); }
-  .k-brand-soft-bg { background: hsl(var(--k-brand-soft)); }
-  .k-notify-bg { background: hsl(var(--k-notify)); }
-  .k-cta-bg { background: hsl(var(--k-cta)); }
-  .k-cta-bg:hover { background: hsl(var(--k-cta-hover)); }
-  .k-avatar-bg { background: hsl(var(--k-avatar-bg)); }
 
   /* ── CARD ── */
   .k-card {

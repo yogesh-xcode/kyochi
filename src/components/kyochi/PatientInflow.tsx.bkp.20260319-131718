@@ -20,14 +20,14 @@ export function PatientInflow({ labels, points, todayCount }: PatientInflowProps
   const areaPoints = `${linePoints} 100,50 0,50`;
 
   return (
-    <section className="k-surface p-4 rounded-xl shadow-sm border k-border-soft">
+    <section className="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
       <div className="flex items-center justify-between mb-4">
-        <h4 className="font-bold k-text-strong">Patient Inflow</h4>
-        <span className="text-[10px] k-brand font-bold">Today: +{todayCount}</span>
+        <h4 className="font-bold text-slate-900">Patient Inflow</h4>
+        <span className="text-[10px] text-[#d4af35] font-bold">Today: +{todayCount}</span>
       </div>
       <div className="relative h-40 w-full">
         <svg
-          className="w-full h-full k-brand"
+          className="w-full h-full text-[#d4af35]"
           viewBox="0 0 100 50"
           preserveAspectRatio="none"
         >
@@ -35,7 +35,7 @@ export function PatientInflow({ labels, points, todayCount }: PatientInflowProps
           <polygon points={areaPoints} fill="currentColor" fillOpacity="0.1" />
         </svg>
       </div>
-      <div className="flex justify-between mt-3 text-[8px] k-text-subtle font-bold uppercase">
+      <div className="flex justify-between mt-3 text-[8px] text-slate-400 font-bold uppercase">
         {labels.map((label) => (
           <span key={label}>{label}</span>
         ))}
