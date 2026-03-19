@@ -13,22 +13,58 @@ This file is maintained for every code change.
 
 ---
 
-## 2026-03-19 11:59:47 IST (+0530)
+## 2026-03-19 12:28:45 IST (+0530)
 
-- DateTime: `2026-03-19 11:59:47 IST (+0530)`
+- DateTime: `2026-03-19 12:28:45 IST (+0530)`
+- File changes:
+    - file: `src/app/layout.tsx.bkp`
+    - diff lines: `1-43`
+    - file: `src/components/kyochi/Sidebar.tsx.bkp`
+    - diff lines: `1-91`
+    - file: `src/components/kyochi/DashboardHeader.tsx.bkp`
+    - diff lines: `1-106`
+    - file: `src/components/kyochi/KyochiDashboard.tsx.bkp`
+    - diff lines: `1-56`
+- What changed:
+    - Created backup copies for all files touched in this redesign pass using `.bkp` suffix in-place.
+- Why changed:
+    - Requested mandatory backup preservation before redesign edits.
+
+## 2026-03-19 12:28:45 IST (+0530)
+
+- DateTime: `2026-03-19 12:28:45 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/AppShell.tsx`
+    - diff lines: `1-31`
+    - file: `src/app/layout.tsx`
+    - diff lines: `3-5,35-40`
+    - file: `src/components/kyochi/Sidebar.tsx`
+    - diff lines: `9-90`
+- What changed:
+    - Added responsive shared app shell with mobile off-canvas sidebar behavior.
+    - Updated root layout to render `AppShell` as shared chrome container.
+    - Refreshed sidebar spacing/active styling and added mobile overlay + close interactions.
+- Why changed:
+    - Requested shell redesign with route continuity and mobile drawer navigation.
+
+## 2026-03-19 12:28:45 IST (+0530)
+
+- DateTime: `2026-03-19 12:28:45 IST (+0530)`
 - File changes:
     - file: `src/components/kyochi/DashboardHeader.tsx`
-    - diff lines: `1-140`
-    - file: `CHANGELOG.md`
-    - diff lines: `16-29`
+    - diff lines: `1-130`
+    - file: `src/components/kyochi/KyochiDashboard.tsx`
+    - diff lines: `4-56`
+    - file: `src/components/kyochi/RecentAppointmentsTable.tsx`
+    - diff lines: `1-57`
+    - file: `src/components/kyochi/InsightRecommendationCard.tsx`
+    - diff lines: `1-36`
 - What changed:
-    - Reworked dashboard header to the requested `Hero Strip` style.
-    - Added time-based greeting (`morning/afternoon/evening`) and dynamic date context line.
-    - Added sticky collapse behavior (`72px` to `48px`) with compact title state on scroll.
-    - Updated right-side actions to icon buttons (search, notifications with dot, export).
-    - Kept page title/subtitle below the strip when not collapsed.
+    - Rebuilt header into a theme-consistent greeting/date/action strip with mobile menu trigger.
+    - Reordered dashboard to analytics-first composition (KPI row, analytics panels, appointments table, side insight/alerts).
+    - Added dedicated table component for recent appointments and a recommendation side card wired to insight data.
 - Why changed:
-    - Requested to retry and implement header based on `DesignArtifact/DesignIdeas/header1.ascii`.
+    - Requested redesign aligned to provided reference while keeping Kyochi theme and healthcare data model.
 
 ## 2026-03-19 11:42:55 IST (+0530)
 
