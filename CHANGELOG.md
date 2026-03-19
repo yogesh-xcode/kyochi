@@ -903,3 +903,16 @@ This file is maintained for every code change.
     - Updated "Create Appointment" button styling from blue CTA to Kyochi brand-gold token styling and aligned right action cluster spacing.
 - Why changed:
     - Requested to remove search bar and align primary header action with project theme.
+
+## 2026-03-19 14:41:34 IST (+0530)
+
+- DateTime: `2026-03-19 14:41:34 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/InsightRecommendationCard.tsx`
+    - diff lines: `25`
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `72`
+- What changed:
+    - Tuned primary gold action buttons to a deeper gold background with warm cream text for better text/background harmony while keeping Kyochi palette.
+- Why changed:
+    - Requested improved visual matching of text and background in theme-consistent primary actions.
