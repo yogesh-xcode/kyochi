@@ -1296,3 +1296,22 @@ This file is maintained for every code change.
     - Kept existing wrap behavior while preventing variable-height overflow from long fields (for example franchise addresses).
 - Why changed:
     - Requested strict fixed row height with exactly 1.5x hover height to prevent table layout issues.
+
+## 2026-03-20 00:24:03 IST (+0530)
+
+- DateTime: `2026-03-20 00:24:03 IST (+0530)`
+- File changes:
+    - file: `src/app/franchises/page.tsx`
+    - diff lines: `36-41`
+    - file: `src/app/billing/page.tsx`
+    - diff lines: `50-58`
+    - file: `CHANGELOG.md`
+    - diff lines: `1290-1303`
+    - file: `error.log`
+    - diff lines: `218-221`
+- What changed:
+    - Standardized franchise table body cells to plain text rendering (removed per-cell bold/small/link styling overrides).
+    - Standardized billing table text cells to plain body text (removed mixed bold/sub-label treatment in therapy and amount cells).
+    - Kept semantic status badges intact while normalizing non-badge column typography.
+- Why changed:
+    - Requested consistent text style across table columns.

@@ -34,13 +34,11 @@ export default function FranchisesPage() {
         id: franchise.id,
         cells: [
           franchise.id,
-          <span key={`${franchise.id}-name`} className="font-semibold">{franchise.name}</span>,
-          <span key={`${franchise.id}-address`} className="type-small k-text-body whitespace-normal">{franchise.address}</span>,
+          franchise.name,
+          franchise.address,
           franchise.city,
           franchise.region,
-          <a key={`${franchise.id}-phone`} href={`tel:${franchise.phone}`} className="text-[var(--k-color-cta)] hover:underline">
-            {franchise.phone}
-          </a>,
+          franchise.phone,
         ],
       }))}
     />

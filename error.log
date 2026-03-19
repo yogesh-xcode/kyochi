@@ -211,3 +211,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-19 23:28:05 IST (+0530)
 # DataTable Row Height Clamp status: Fixed (strict 56px row/cell height, 84px hover height, and cell content clamp to prevent overflow-driven row expansion)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-20 00:24:03 IST (+0530)
+# Table Typography Consistency status: Fixed (normalized body text rendering across columns for franchise and billing tables; removed per-cell style overrides)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.

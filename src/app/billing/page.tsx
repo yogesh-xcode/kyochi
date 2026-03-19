@@ -47,16 +47,9 @@ const billingRows: KyochiTableRow[] = billingData.map((invoice) => {
   return {
     id: invoice.id,
     cells: [
-      <div key={`${invoice.id}-therapy`} className="flex flex-col">
-        <span className="type-small font-bold k-text-strong">{therapy?.name ?? "Therapy Session"}</span>
-        <span className="type-label normal-case tracking-normal k-text-subtle text-[10px]">
-          {invoice.id.toUpperCase()} • {patient?.full_name ?? "Unknown Patient"}
-        </span>
-      </div>,
+      `${therapy?.name ?? "Therapy Session"} • ${patient?.full_name ?? "Unknown Patient"}`,
       `${therapy?.duration_min ?? 45} mins`,
-      <span key={`${invoice.id}-amount`} className="type-small font-bold k-text-strong">
-        {toCurrency(invoice.amount, invoice.currency)}
-      </span>,
+      toCurrency(invoice.amount, invoice.currency),
       <span
         key={`${invoice.id}-status`}
         className={`inline-flex rounded-full px-2.5 py-0.5 text-[10px] font-bold ${statusClassByInvoiceStatus[invoice.status] ?? "k-status-waiting"}`}
