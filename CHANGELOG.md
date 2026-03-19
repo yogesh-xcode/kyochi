@@ -13,6 +13,20 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 11:11:16 IST (+0530)
+
+- DateTime: `2026-03-19 11:11:16 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/data.ts`
+    - diff lines: `2,58-100`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-27`
+- What changed:
+    - Removed KPI dependency on `analytics.json` and switched KPI values to formula-based computation from core datasets.
+    - `New Patients` now uses patient count, `Monthly Revenue` uses billing sum, and `Success Rate` uses completed/total appointments.
+- Why changed:
+    - Requested KPI cards to use formulas instead of analytics seed values.
+
 ## 2026-03-19 11:08:46 IST (+0530)
 
 - DateTime: `2026-03-19 11:08:46 IST (+0530)`

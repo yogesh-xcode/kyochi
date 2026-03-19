@@ -1,5 +1,4 @@
 import aiInsightsData from "../../../data/ai_insights.json";
-import analyticsData from "../../../data/analytics.json";
 import appointmentsData from "../../../data/appointments.json";
 import billingData from "../../../data/billing.json";
 import patientsData from "../../../data/patients.json";
@@ -58,14 +57,13 @@ const toTimeLabel = (isoDate: string) => {
   };
 };
 
-const monthlyRevenue = analyticsData.find((entry) => entry.metric === "monthly_revenue")?.value
-  ?? billingData.reduce((sum, invoice) => sum + invoice.amount, 0);
-
-const successRate = analyticsData.find((entry) => entry.metric === "success_rate")?.value ?? 0;
-const newPatients = analyticsData.find((entry) => entry.metric === "new_patients")?.value ?? patientsData.length;
+const newPatients = patientsData.length;
+const monthlyRevenue = billingData.reduce((sum, invoice) => sum + invoice.amount, 0);
 
 const completedAppointments = appointmentsData.filter((appointment) => appointment.status === "completed").length;
 const overdueInvoices = billingData.filter((invoice) => invoice.status === "overdue");
+const totalAppointments = appointmentsData.length;
+const successRate = totalAppointments > 0 ? (completedAppointments / totalAppointments) * 100 : 0;
 
 export const kpiCards: KpiCard[] = [
   {
@@ -85,7 +83,7 @@ export const kpiCards: KpiCard[] = [
   {
     icon: "verified",
     label: "Success Rate",
-    value: `${successRate}%`,
+    value: `${successRate.toFixed(1)}%`,
     delta: "Live",
     deltaColor: "text-slate-400 bg-transparent",
   },
