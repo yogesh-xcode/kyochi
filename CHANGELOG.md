@@ -13,6 +13,20 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 09:27:45 IST (+0530)
+
+- DateTime: `2026-03-19 09:27:45 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/Sidebar.tsx`
+    - diff lines: `1,13-15,20-22`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-29`
+- What changed:
+    - Replaced the sidebar brand icon with `public/logo.svg` using `next/image`.
+    - Used the existing `spa` symbol as a secondary badge in the remaining header space.
+- Why changed:
+    - Requested to use `logo.svg` as the logo while keeping the current icon for the remaining space.
+
 ## 2026-03-19 08:51:05 IST (+0530)
 
 - DateTime: `2026-03-19 08:51:05 IST (+0530)`

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { InitialsAvatar, MSO } from "@/components/kyochi/primitives";
 import type { NavSection } from "@/components/kyochi/types";
 
@@ -9,12 +10,15 @@ export function Sidebar({ navSections }: SidebarProps) {
   return (
     <aside className="w-72 bg-white border-r border-amber-500/10 flex flex-col fixed h-full z-20">
       <div className="p-6 flex items-center gap-3">
-        <div className="size-10 rounded-full bg-[#d4af35] flex items-center justify-center text-white">
-          <MSO>spa</MSO>
+        <div className="size-10 rounded-full bg-white border border-amber-200/60 flex items-center justify-center overflow-hidden">
+          <Image src="/logo.svg" alt="Kyochi logo" width={40} height={40} className="size-8 object-contain" />
         </div>
         <div>
           <h1 className="text-slate-900 text-lg font-bold leading-none">Kyochi</h1>
           <p className="text-[#d4af35] text-xs font-semibold tracking-wider uppercase">Intelligence</p>
+        </div>
+        <div className="ml-auto size-8 rounded-full bg-[#d4af35] text-white flex items-center justify-center">
+          <MSO className="text-base">spa</MSO>
         </div>
       </div>
 
