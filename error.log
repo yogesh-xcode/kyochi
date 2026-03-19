@@ -92,3 +92,7 @@ Verification: pnpm -s lint and pnpm -s build passed.
 Updated: 2026-03-19 13:01:23 IST (+0530)
 # Header Ref Update status: Fixed (applied title + search command bar + right action cluster topbar pattern)
 Verification: pnpm -s lint and pnpm -s build passed.
+
+Updated: 2026-03-19 13:03:13 IST (+0530)
+# Topbar Alignment status: Fixed (header now white like sidebar and aligned to logo row level)
+Verification: pnpm -s lint and pnpm -s build passed.

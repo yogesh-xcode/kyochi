@@ -13,6 +13,26 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 13:03:13 IST (+0530)
+
+- DateTime: `2026-03-19 13:03:13 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/AppShell.tsx`
+    - diff lines: `24`
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `60`
+    - file: `src/components/kyochi/DashboardHeader.tsx.bkp.20260319-130212`
+    - diff lines: `1-116`
+    - file: `src/components/kyochi/AppShell.tsx.bkp.20260319-130212`
+    - diff lines: `1-28`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-31`
+- What changed:
+    - Aligned topbar vertically with sidebar logo row by removing top padding from the main shell.
+    - Set topbar to full-width white strip (same background as sidebar) across content area with matching divider.
+- Why changed:
+    - Requested same background color as sidebar and alignment at the same level as logo row.
+
 ## 2026-03-19 13:01:23 IST (+0530)
 
 - DateTime: `2026-03-19 13:01:23 IST (+0530)`
