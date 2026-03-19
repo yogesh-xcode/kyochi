@@ -916,3 +916,14 @@ This file is maintained for every code change.
     - Tuned primary gold action buttons to a deeper gold background with warm cream text for better text/background harmony while keeping Kyochi palette.
 - Why changed:
     - Requested improved visual matching of text and background in theme-consistent primary actions.
+
+## 2026-03-19 14:43:30 IST (+0530)
+
+- DateTime: \
+- File changes:
+    - file: \
+    - diff lines: \
+- What changed:
+    - Removed the dropdown/toggle icon from the  header button.
+- Why changed:
+    - Requested to remove the toggle from Create Appointment action.

@@ -72,7 +72,6 @@ export function DashboardHeader({ onMenuToggle }: DashboardHeaderProps) {
           <button className="hidden sm:inline-flex h-8 items-center gap-1.5 rounded-lg bg-[var(--kyochi-gold-500)] text-[var(--kyochi-cream-100)] px-3 type-small font-bold hover:bg-[var(--kyochi-gold-600)] transition-colors">
             <Plus className="size-3.5" />
             Create Appointment
-            <ChevronDown className="size-3.5" />
           </button>
           <button className="relative size-7 rounded-full border k-border-soft k-surface k-text-body hover:text-[var(--k-color-brand)] transition-colors inline-flex items-center justify-center">
             <Bell className="size-4" />

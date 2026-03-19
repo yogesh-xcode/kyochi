@@ -143,3 +143,7 @@ Verification: pnpm -s lint and pnpm -s build passed.
 Updated: 2026-03-19 14:41:34 IST (+0530)
 # Primary Action Contrast status: Fixed (deeper gold + warm cream text applied to key primary CTAs)
 Verification: pnpm -s lint and pnpm -s build passed.
+
+Updated: 2026-03-19 14:43:30 IST (+0530)
+# Create Appointment Toggle status: Fixed (removed trailing toggle icon from primary header action)
+Verification: pnpm -s lint and pnpm -s build passed.
