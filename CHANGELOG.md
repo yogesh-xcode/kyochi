@@ -13,6 +13,22 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 12:52:38 IST (+0530)
+
+- DateTime: `2026-03-19 12:52:38 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `77`
+    - file: `src/components/kyochi/DashboardHeader.tsx.bkp.20260319-125229`
+    - diff lines: `1-113`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-29`
+- What changed:
+    - Updated dashboard top header container to a non-rounded rectangular bar style to match the highlighted reference area.
+    - Preserved existing header content and actions while changing only the outer shape treatment.
+- Why changed:
+    - Requested dashboard top section to follow provided design and avoid rounded fit.
+
 ## 2026-03-19 12:49:06 IST (+0530)
 
 - DateTime: `2026-03-19 12:49:06 IST (+0530)`

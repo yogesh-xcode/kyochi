@@ -76,3 +76,7 @@ Verification: pnpm -s lint and pnpm -s build passed.
 Updated: 2026-03-19 12:49:06 IST (+0530)
 # Dashboard/AI Insights status: Fixed (appointments capped at 3; Intelligence Alerts moved to /ai-insights)
 Verification: pnpm -s lint and pnpm -s build passed.
+
+Updated: 2026-03-19 12:52:38 IST (+0530)
+# Header Shape status: Fixed (top dashboard header set to non-rounded rectangular container)
+Verification: pnpm -s lint and pnpm -s build passed.
