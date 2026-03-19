@@ -1,13 +1,15 @@
 "use client";
 "use no memo";
 
-import { useMemo } from "react";
-import { ChevronLeft, ChevronRight, Pencil, Trash2 } from "lucide-react";
+import { isValidElement, useMemo, useState } from "react";
+import { ArrowDown, ArrowUp, ArrowUpDown, ChevronLeft, ChevronRight, Pencil, Trash2 } from "lucide-react";
 import {
   type ColumnDef,
+  type SortingState,
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 
@@ -17,6 +19,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 export type KyochiTableRow = {
   id: string;
   cells: React.ReactNode[];
+  sortValues?: Array<string | number>;
   actions?: React.ReactNode;
 };
 
@@ -27,12 +30,30 @@ type KyochiDataTableProps = {
   centeredBodyColumns?: number[];
 };
 
+const nodeToText = (node: React.ReactNode): string => {
+  if (node === null || node === undefined || typeof node === "boolean") {
+    return "";
+  }
+  if (typeof node === "string" || typeof node === "number") {
+    return String(node);
+  }
+  if (Array.isArray(node)) {
+    return node.map(nodeToText).join(" ").trim();
+  }
+  if (isValidElement(node)) {
+    const props = node.props as { children?: React.ReactNode };
+    return nodeToText(props.children);
+  }
+  return "";
+};
+
 export function KyochiDataTable({
   columns,
   rows,
   minTableWidthClassName = "min-w-[920px]",
   centeredBodyColumns = [],
 }: KyochiDataTableProps) {
+  const [sorting, setSorting] = useState<SortingState>([]);
   const selectColumnWidth = 56;
   const actionsColumnWidth = 148;
   const dynamicColumnWidth = columns.length > 0 ? `calc((100% - ${selectColumnWidth + actionsColumnWidth}px) / ${columns.length})` : "auto";
@@ -41,6 +62,7 @@ export function KyochiDataTable({
     () => [
       {
         id: "select",
+        enableSorting: false,
         header: () => (
           <div className="w-12 text-center px-4 py-3">
             <input type="checkbox" aria-label="Select all rows" />
@@ -54,6 +76,8 @@ export function KyochiDataTable({
       },
       ...columns.map((column, index) => ({
         id: `column-${index}`,
+        accessorFn: (row: KyochiTableRow) =>
+          row.sortValues?.[index] ?? nodeToText(row.cells[index]),
         header: () => (
           <span className="inline-flex w-full justify-center text-center type-label uppercase tracking-wider k-text-subtle whitespace-normal break-words leading-tight">
             {column}
@@ -73,6 +97,7 @@ export function KyochiDataTable({
       })),
       {
         id: "actions",
+        enableSorting: false,
         header: () => (
           <span className="inline-flex w-full justify-center text-center type-label uppercase tracking-wider k-text-subtle">
             Actions
@@ -100,6 +125,10 @@ export function KyochiDataTable({
   const table = useReactTable({
     data: rows,
     columns: columnDefs,
+    state: {
+      sorting,
+    },
+    onSortingChange: setSorting,
     initialState: {
       pagination: {
         pageIndex: 0,
@@ -108,6 +137,7 @@ export function KyochiDataTable({
     },
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
   });
 
   const {
@@ -133,7 +163,26 @@ export function KyochiDataTable({
               <TableRow key={headerGroup.id} className="k-surface-muted hover:bg-transparent">
                 {headerGroup.headers.map((header) => (
                   <TableHead key={header.id} className="align-middle text-center">
-                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                    {header.isPlaceholder ? null : (
+                      <button
+                        type="button"
+                        onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
+                        className={`inline-flex w-full items-center justify-center gap-1 ${
+                          header.column.getCanSort() ? "cursor-pointer" : "cursor-default"
+                        }`}
+                      >
+                        {flexRender(header.column.columnDef.header, header.getContext())}
+                        {header.column.getCanSort() && header.column.getIsSorted() === "asc" && (
+                          <ArrowUp className="size-3.5 k-text-subtle" />
+                        )}
+                        {header.column.getCanSort() && header.column.getIsSorted() === "desc" && (
+                          <ArrowDown className="size-3.5 k-text-subtle" />
+                        )}
+                        {header.column.getCanSort() && !header.column.getIsSorted() && (
+                          <ArrowUpDown className="size-3.5 k-text-subtle" />
+                        )}
+                      </button>
+                    )}
                   </TableHead>
                 ))}
               </TableRow>

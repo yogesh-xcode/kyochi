@@ -1,17 +1,10 @@
 "use client";
 
 import patientsData from "@/data/patients.json";
-
 import { ManagementPageLayout } from "@/components/kyochi/ManagementPageLayout";
 import { InitialsAvatar } from "@/components/kyochi/primitives";
 import { tableViewConfigs } from "@/components/kyochi/tableConfigs";
-
-const avgWellness =
-  patientsData.length > 0
-    ? (patientsData.reduce((sum, patient) => sum + patient.wellness_score, 0) / patientsData.length).toFixed(1)
-    : "0";
-const highRiskCount = patientsData.filter((patient) => patient.wellness_score < 70).length;
-const activeCount = patientsData.filter((patient) => patient.status === "active").length;
+import { getActiveRole, getActiveTherapistId, getScopedPatientIdsForTherapist } from "@/lib/roleScope";
 
 const toInitials = (fullName: string) =>
   fullName
@@ -22,6 +15,19 @@ const toInitials = (fullName: string) =>
     .join("");
 
 export default function PatientsPage() {
+  const role = getActiveRole();
+  const therapistId = getActiveTherapistId();
+  const scopedPatientIds = getScopedPatientIdsForTherapist(therapistId);
+  const scopedPatients =
+    role === "therapist"
+      ? patientsData.filter((patient) => scopedPatientIds.has(patient.id))
+      : patientsData;
+  const avgWellness =
+    scopedPatients.length > 0
+      ? (scopedPatients.reduce((sum, patient) => sum + patient.wellness_score, 0) / scopedPatients.length).toFixed(1)
+      : "0";
+  const highRiskCount = scopedPatients.filter((patient) => patient.wellness_score < 70).length;
+  const activeCount = scopedPatients.filter((patient) => patient.status === "active").length;
   const tableConfig = tableViewConfigs.patients;
 
   return (
@@ -29,14 +35,19 @@ export default function PatientsPage() {
       title="Patient Records"
       searchPlaceholder="Search patients..."
       kpis={[
-        { label: "Total Patients", value: patientsData.length.toString(), delta: "Live", helper: "Registered patient profiles" },
+        { label: "Total Patients", value: scopedPatients.length.toString(), delta: "Live", helper: "Registered patient profiles" },
         { label: "Avg Wellness", value: avgWellness, delta: "Score", helper: "Average wellness index" },
-        { label: "Active Patients", value: activeCount.toString(), delta: `${Math.round((activeCount / patientsData.length) * 100)}%`, helper: "Currently active in system" },
+        {
+          label: "Active Patients",
+          value: activeCount.toString(),
+          delta: `${Math.round((activeCount / Math.max(scopedPatients.length, 1)) * 100)}%`,
+          helper: "Currently active in system",
+        },
         { label: "High Risk", value: highRiskCount.toString(), delta: "Needs review", helper: "Wellness score below 70" },
-      ]} 
+      ]}
       columns={tableConfig.columns}
       centeredBodyColumns={tableConfig.centeredBodyColumns}
-      rows={patientsData.map((patient) => ({
+      rows={scopedPatients.map((patient) => ({
         id: patient.id,
         cells: [
           patient.id,

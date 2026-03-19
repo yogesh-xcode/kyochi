@@ -313,20 +313,13 @@ const therapistNavSections: NavSection[] = [
   {
     label: "My Work",
     items: [
-      { icon: "calendar_today", label: "My Appointments", href: "/my-appointments" },
-      { icon: "group", label: "My Patients", href: "/my-patients" },
+      { icon: "calendar_today", label: "My Appointments", href: "/appointments" },
+      { icon: "group", label: "My Patients", href: "/patients" },
     ],
   },
   {
     label: "Actions",
     items: [{ icon: "feedback", label: "Add Feedback", href: "/add-feedback" }],
-  },
-  {
-    label: "Performance",
-    items: [
-      { icon: "verified", label: "My Ratings", href: "/my-ratings" },
-      { icon: "monitoring", label: "My Session History", href: "/my-session-history" },
-    ],
   },
 ];
 

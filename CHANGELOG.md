@@ -1352,3 +1352,42 @@ This file is maintained for every code change.
     - Updated intelligence label to `AI Strategy` where specified.
 - Why changed:
     - Requested role-specific sidebar menus and navigation structure for Admin, Franchisee, and Therapist.
+
+## 2026-03-20 00:48:19 IST (+0530)
+
+- DateTime: `2026-03-20 00:48:19 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/data.ts`
+    - diff lines: `303-321`
+    - file: `src/lib/roleScope.ts`
+    - diff lines: `1-34`
+    - file: `src/app/appointments/page.tsx`
+    - diff lines: `9,13-16,41-48,56,61`
+    - file: `src/app/patients/page.tsx`
+    - diff lines: `8,22-35,43,47-51,56`
+    - file: `src/app/add-feedback/page.tsx`
+    - diff lines: `1-86`
+    - file: `src/app/my-appointments/page.tsx`
+    - diff lines: `deleted`
+    - file: `src/app/my-patients/page.tsx`
+    - diff lines: `deleted`
+    - file: `src/app/my-ratings/page.tsx`
+    - diff lines: `deleted`
+    - file: `src/app/my-session-history/page.tsx`
+    - diff lines: `deleted`
+    - file: `src/components/kyochi/KyochiDataTable.tsx`
+    - diff lines: `4-16,21,28-59,125-140`
+    - file: `src/components/kyochi/ManagementPageLayout.tsx`
+    - diff lines: `3,76-116`
+    - file: `CHANGELOG.md`
+    - diff lines: `1340-1380`
+    - file: `error.log`
+    - diff lines: `226-229`
+- What changed:
+    - Removed therapist-only extra routes and switched therapist navigation to global pages (`/appointments`, `/patients`, `/add-feedback`) with role-based dataset filtering.
+    - Added shared role scoping helper for therapist-specific appointment/patient visibility.
+    - Implemented a fully data-backed `Add Feedback` page that respects role scope.
+    - Added sortable column headers for all data columns in shared DataTable and removed toolbar `Sort` button.
+    - Updated table toolbar layout: `Filter` moved next to search, export actions centered, and `Add` moved to the far-right as last action.
+- Why changed:
+    - Requested no extra role pages, role-filtered global pages, no `/my-ratings` and `/my-session-history`, plus per-column sorting and updated table toolbar arrangement.

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpDown, Download, Plus, Printer, SlidersHorizontal, Upload } from "lucide-react";
+import { Download, Plus, Printer, SlidersHorizontal, Upload } from "lucide-react";
 
 import { KyochiDataTable, type KyochiTableRow } from "@/components/kyochi/KyochiDataTable";
 import { KIcon } from "@/components/kyochi/icons";
@@ -71,24 +71,19 @@ export function ManagementPageLayout({
           <CardTitle className="type-h3 k-text-strong">{title}</CardTitle>
         </CardHeader>
         <CardContent className="p-5 space-y-4">
-          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-            <Input
-              className="h-11 max-w-md border k-border-soft bg-[var(--k-color-surface-muted)] rounded-lg focus-visible:border-[var(--k-color-brand)] focus-visible:ring-[var(--k-color-brand)]/25"
-              placeholder={searchPlaceholder}
-            />
+          <div className="grid grid-cols-1 gap-3 xl:grid-cols-[auto_1fr_auto] xl:items-center">
             <div className="flex flex-wrap items-center gap-2">
+              <Input
+                className="h-11 w-full max-w-md border k-border-soft bg-[var(--k-color-surface-muted)] rounded-lg focus-visible:border-[var(--k-color-brand)] focus-visible:ring-[var(--k-color-brand)]/25"
+                placeholder={searchPlaceholder}
+              />
               <Button variant="outline" className="h-11 px-3 border k-border-soft bg-[var(--k-color-surface)]">
                 <SlidersHorizontal className="size-4" />
                 Filters
               </Button>
-              <Button variant="outline" className="h-11 px-3 border k-border-soft bg-[var(--k-color-surface)]">
-                <ArrowUpDown className="size-4" />
-                Sort
-              </Button>
-              <Button className="h-11 px-3 k-brand-bg k-primary-foreground hover:opacity-95">
-                <Plus className="size-4" />
-                Add
-              </Button>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-2">
               <Button variant="outline" className="h-11 px-3 border k-border-soft bg-[var(--k-color-surface)]">
                 <Upload className="size-4" />
                 Upload
@@ -100,6 +95,13 @@ export function ManagementPageLayout({
               <Button variant="outline" className="h-11 px-3 border k-border-soft bg-[var(--k-color-surface)]">
                 <Printer className="size-4" />
                 Print
+              </Button>
+            </div>
+
+            <div className="flex items-center justify-start xl:justify-end">
+              <Button className="h-11 px-3 k-brand-bg k-primary-foreground hover:opacity-95">
+                <Plus className="size-4" />
+                Add
               </Button>
             </div>
           </div>
