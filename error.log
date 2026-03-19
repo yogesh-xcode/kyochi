@@ -167,3 +167,7 @@ Verification: pnpm -s lint and pnpm -s build passed.
 Updated: 2026-03-19 20:18:49 IST (+0530)
 # Completed Pill Text status: Fixed (`Completed` status now explicitly forces white text)
 Verification: pnpm -s lint and pnpm -s build passed.
+
+Updated: 2026-03-19 22:40:40 IST (+0530)
+# Billing Table Layout status: Fixed (`/billing` now uses reference-inspired table layout with Kyochi theme preserved)
+Verification: pnpm -s lint and pnpm -s build passed.

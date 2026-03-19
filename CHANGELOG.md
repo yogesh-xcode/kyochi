@@ -1057,3 +1057,20 @@ This file is maintained for every code change.
     - Forced `Completed` status pill text to explicit white using utility override (`!text-white`) to avoid style-layer conflicts.
 - Why changed:
     - Requested to make the Completed text white.
+
+## 2026-03-19 22:40:40 IST (+0530)
+
+- DateTime: `2026-03-19 22:40:40 IST (+0530)`
+- File changes:
+    - file: `src/app/billing/page.tsx`
+    - diff lines: `1-112`
+    - file: `CHANGELOG.md`
+    - diff lines: `1060-1072`
+    - file: `error.log`
+    - diff lines: `170-173`
+- What changed:
+    - Replaced the billing placeholder page with a real billing invoices table layout patterned after `DesignArtifact/DesignIdeas/billing-table-ui.html`.
+    - Applied only the table layout structure (column rhythm, row hierarchy, actions alignment) while keeping Kyochi theme tokens and styling (`k-*`, warm surface palette, brand button styles).
+    - Wired rows from local datasets (`billing.json`, `appointments.json`, `therapies.json`, `patients.json`) with status pills and contextual row metadata.
+- Why changed:
+    - Requested to use the billing table reference layout only, while preserving the existing project theme.
