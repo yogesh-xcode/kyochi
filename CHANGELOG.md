@@ -1136,3 +1136,29 @@ This file is maintained for every code change.
     - Added `@tanstack/react-table` dependency.
 - Why changed:
     - Requested to use shadcn DataTable for these table views.
+
+## 2026-03-19 22:57:54 IST (+0530)
+
+- DateTime: `2026-03-19 22:57:54 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/KyochiDataTable.tsx`
+    - diff lines: `22-31,47-75,91-138`
+    - file: `src/components/kyochi/ManagementPageLayout.tsx`
+    - diff lines: `25,34-35,110`
+    - file: `src/app/patients/page.tsx`
+    - diff lines: `41`
+    - file: `src/app/appointments/page.tsx`
+    - diff lines: `58`
+    - file: `src/app/billing/page.tsx`
+    - diff lines: `91`
+    - file: `CHANGELOG.md`
+    - diff lines: `1139-1156`
+    - file: `error.log`
+    - diff lines: `182-185`
+- What changed:
+    - Updated DataTable alignment system so all column headers are centered.
+    - Set body alignment default to left for text/string cells.
+    - Added per-page explicit centered-body column config for numeric/badge columns only.
+    - Applied centered-body mapping on key pages (patients wellness score, appointments status, billing price + status).
+- Why changed:
+    - Requested centered headers with body-left default and center alignment only for number/badge columns.

@@ -88,6 +88,7 @@ export default function BillingPage() {
             columns={["Therapy Name", "Duration", "Price", "Status"]}
             rows={billingRows}
             minTableWidthClassName="min-w-[760px]"
+            centeredBodyColumns={[2, 3]}
           />
         </CardContent>
       </Card>

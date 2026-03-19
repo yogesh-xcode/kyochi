@@ -23,6 +23,7 @@ type ManagementPageLayoutProps = {
   kpis: KpiItem[];
   columns: string[];
   rows: KyochiTableRow[];
+  centeredBodyColumns?: number[];
 };
 
 export function ManagementPageLayout({
@@ -31,6 +32,7 @@ export function ManagementPageLayout({
   kpis,
   columns,
   rows,
+  centeredBodyColumns = [],
 }: ManagementPageLayoutProps) {
   const kpiIcons: IconKey[] = ["group", "monitoring", "verified", "pending_actions"];
   const getDeltaTone = (delta: string) => {
@@ -102,7 +104,7 @@ export function ManagementPageLayout({
             </div>
           </div>
 
-          <KyochiDataTable columns={columns} rows={rows} />
+          <KyochiDataTable columns={columns} rows={rows} centeredBodyColumns={centeredBodyColumns} />
         </CardContent>
       </Card>
     </div>

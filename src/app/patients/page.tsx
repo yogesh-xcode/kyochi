@@ -30,8 +30,9 @@ export default function PatientsPage() {
         { label: "Avg Wellness", value: avgWellness, delta: "Score", helper: "Average wellness index" },
         { label: "Active Patients", value: activeCount.toString(), delta: `${Math.round((activeCount / patientsData.length) * 100)}%`, helper: "Currently active in system" },
         { label: "High Risk", value: highRiskCount.toString(), delta: "Needs review", helper: "Wellness score below 70" },
-      ]}
+      ]} 
       columns={["ID", "Name", "Email", "Phone", "Wellness"]}
+      centeredBodyColumns={[4]}
       rows={patientsData.map((patient) => ({
         id: patient.id,
         cells: [

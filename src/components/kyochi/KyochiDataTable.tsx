@@ -23,12 +23,14 @@ type KyochiDataTableProps = {
   columns: string[];
   rows: KyochiTableRow[];
   minTableWidthClassName?: string;
+  centeredBodyColumns?: number[];
 };
 
 export function KyochiDataTable({
   columns,
   rows,
   minTableWidthClassName = "min-w-[920px]",
+  centeredBodyColumns = [],
 }: KyochiDataTableProps) {
   const columnDefs = useMemo<ColumnDef<KyochiTableRow>[]>(
     () => [
@@ -47,16 +49,28 @@ export function KyochiDataTable({
       },
       ...columns.map((column, index) => ({
         id: `column-${index}`,
-        header: () => <span className="type-label uppercase tracking-wider k-text-subtle">{column}</span>,
+        header: () => (
+          <span className="inline-flex w-full justify-center text-center type-label uppercase tracking-wider k-text-subtle">
+            {column}
+          </span>
+        ),
         cell: ({ row }: { row: { original: KyochiTableRow } }) => (
-          <div className="type-body k-text-strong px-4 py-4 align-middle">{row.original.cells[index]}</div>
+          <div
+            className={`type-body k-text-strong px-4 py-4 align-middle ${centeredBodyColumns.includes(index) ? "text-center" : "text-left"}`}
+          >
+            {row.original.cells[index]}
+          </div>
         ),
       })),
       {
         id: "actions",
-        header: () => <span className="type-label uppercase tracking-wider k-text-subtle">Actions</span>,
+        header: () => (
+          <span className="inline-flex w-full justify-center text-center type-label uppercase tracking-wider k-text-subtle">
+            Actions
+          </span>
+        ),
         cell: ({ row }) => (
-          <div className="px-4 py-4 text-right">
+          <div className="px-4 py-4 text-left">
             {row.original.actions ?? (
               <div className="inline-flex items-center gap-3">
                 <button type="button" className="k-brand hover:underline">
@@ -71,7 +85,7 @@ export function KyochiDataTable({
         ),
       },
     ],
-    [columns],
+    [centeredBodyColumns, columns],
   );
 
   const table = useReactTable({
@@ -102,7 +116,7 @@ export function KyochiDataTable({
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id} className="k-surface-muted hover:bg-transparent">
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id} className="align-middle">
+                  <TableHead key={header.id} className="align-middle text-center">
                     {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                   </TableHead>
                 ))}

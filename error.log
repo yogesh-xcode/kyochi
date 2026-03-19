@@ -179,3 +179,7 @@ Verification: pnpm -s lint and pnpm -s build passed.
 Updated: 2026-03-19 22:50:58 IST (+0530)
 # shadcn DataTable migration status: Fixed (management and billing tables now use TanStack-powered shadcn-style DataTable)
 Verification: pnpm -s lint (passes with known TanStack React Compiler warning) and pnpm -s build passed.
+
+Updated: 2026-03-19 22:57:54 IST (+0530)
+# DataTable Alignment status: Fixed (headers centered globally; body left by default; numeric/badge columns centered via per-page indices)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
