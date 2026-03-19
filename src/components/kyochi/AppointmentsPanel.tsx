@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ArrowUpRight, CalendarClock } from "lucide-react";
 
 import { InitialsAvatar, StatusPill } from "@/components/kyochi/primitives";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { Appointment } from "@/types";
 
@@ -18,15 +17,13 @@ export function AppointmentsPanel({ appointments }: AppointmentsPanelProps) {
           <CalendarClock className="size-4 k-brand" />
           Today&apos;s Appointments
         </CardTitle>
-        <Button
-          variant="ghost"
-          size="icon"
-          render={<Link href="/appointments" />}
-          className="size-8 rounded-lg k-text-body hover:k-brand hover:bg-[var(--k-color-surface-muted)] transition-colors"
+        <Link
+          href="/appointments"
+          className="inline-flex size-8 items-center justify-center rounded-lg k-text-body hover:k-brand hover:bg-[var(--k-color-surface-muted)] transition-colors"
           aria-label="Open appointments page"
         >
           <ArrowUpRight className="size-4" />
-        </Button>
+        </Link>
       </CardHeader>
       <CardContent className="p-0">
       <div className="divide-y k-border-soft">

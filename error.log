@@ -151,3 +151,7 @@ Verification: pnpm -s lint and pnpm -s build passed.
 Updated: 2026-03-19 14:56:02 IST (+0530)
 # shadcn Migration status: Fixed (active dashboard shell/components now compose with shadcn primitives while preserving Kyochi theme tokens)
 Verification: pnpm -s lint and pnpm -s build passed.
+
+Updated: 2026-03-19 18:45:38 IST (+0530)
+# Base UI Button semantics status: Fixed (replaced Link-rendered Base UI Button usage with semantic Link elements in appointment action controls)
+Verification: pnpm -s lint and pnpm -s build passed.

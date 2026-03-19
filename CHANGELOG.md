@@ -960,3 +960,37 @@ This file is maintained for every code change.
     - Kept route behavior, data wiring, and interactive behavior unchanged while swapping the UI composition layer.
 - Why changed:
     - Requested to switch to shadcn-driven components without losing current UI feel.
+
+## 2026-03-19 18:33:22 IST (+0530)
+
+- DateTime: `2026-03-19 18:33:22 IST (+0530)`
+- File changes:
+    - file: `DESIGN.md`
+    - diff lines: `1-141`
+    - file: `CHANGELOG.md`
+    - diff lines: `963-977`
+    - file: `error.log`
+    - diff lines: `154-157`
+- What changed:
+    - Added a new `DESIGN.md` handoff document tailored for Stitch AI with Kyochi theme constraints, token usage rules, typography, layout, route map, and acceptance checklist.
+    - Logged the documentation update status in `error.log`.
+- Why changed:
+    - Requested to create a reusable design brief file that can be shared directly with Stitch AI.
+
+## 2026-03-19 18:45:38 IST (+0530)
+
+- DateTime: `2026-03-19 18:45:38 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/RecentAppointmentsTable.tsx`
+    - diff lines: `20-25`
+    - file: `src/components/kyochi/AppointmentsPanel.tsx`
+    - diff lines: `20-26`
+    - file: `error.log`
+    - diff lines: `154-157`
+    - file: `CHANGELOG.md`
+    - diff lines: `979-997`
+- What changed:
+    - Replaced Base UI Button `render={<Link .../>}` usage with semantic `Link` elements in appointment schedule actions.
+    - Preserved the existing visual style while removing the native button semantics violation.
+- Why changed:
+    - Runtime console error reported that `nativeButton=true` expected a native `<button>` and flagged non-button rendering.

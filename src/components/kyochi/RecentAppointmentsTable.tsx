@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { StatusPill } from "@/components/kyochi/primitives";
-import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { Appointment } from "@/types";
@@ -18,14 +17,12 @@ export function RecentAppointmentsTable({ appointments }: RecentAppointmentsTabl
           <CardTitle className="type-h3 text-[18px] k-text-strong">Recent Appointments</CardTitle>
           <CardDescription className="type-small k-text-body mt-1">Latest schedule activity from the last 30 days.</CardDescription>
         </div>
-        <Button
-          variant="ghost"
-          size="sm"
-          render={<Link href="/appointments" />}
-          className="type-small font-bold k-brand hover:underline whitespace-nowrap bg-transparent hover:bg-transparent p-0 h-auto"
+        <Link
+          href="/appointments"
+          className="type-small font-bold k-brand hover:underline whitespace-nowrap"
         >
           Open Full Schedule
-        </Button>
+        </Link>
       </CardHeader>
       <CardContent className="p-0">
         <Table className="min-w-[560px]">
