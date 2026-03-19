@@ -4,6 +4,7 @@ import patientsData from "@/data/patients.json";
 
 import { ManagementPageLayout } from "@/components/kyochi/ManagementPageLayout";
 import { InitialsAvatar } from "@/components/kyochi/primitives";
+import { tableViewConfigs } from "@/components/kyochi/tableConfigs";
 
 const avgWellness =
   patientsData.length > 0
@@ -21,6 +22,8 @@ const toInitials = (fullName: string) =>
     .join("");
 
 export default function PatientsPage() {
+  const tableConfig = tableViewConfigs.patients;
+
   return (
     <ManagementPageLayout
       title="Patient Records"
@@ -31,8 +34,8 @@ export default function PatientsPage() {
         { label: "Active Patients", value: activeCount.toString(), delta: `${Math.round((activeCount / patientsData.length) * 100)}%`, helper: "Currently active in system" },
         { label: "High Risk", value: highRiskCount.toString(), delta: "Needs review", helper: "Wellness score below 70" },
       ]} 
-      columns={["ID", "Name", "Email", "Phone", "Wellness"]}
-      centeredBodyColumns={[0, 3, 4]}
+      columns={tableConfig.columns}
+      centeredBodyColumns={tableConfig.centeredBodyColumns}
       rows={patientsData.map((patient) => ({
         id: patient.id,
         cells: [

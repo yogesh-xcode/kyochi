@@ -4,6 +4,7 @@ import therapistsData from "@/data/therapists.json";
 
 import { ManagementPageLayout } from "@/components/kyochi/ManagementPageLayout";
 import { InitialsAvatar } from "@/components/kyochi/primitives";
+import { tableViewConfigs } from "@/components/kyochi/tableConfigs";
 
 const specialtyCount = new Set(therapistsData.map((therapist) => therapist.specialty)).size;
 const activeCount = therapistsData.filter((therapist) => therapist.status === "active").length;
@@ -17,6 +18,8 @@ const toInitials = (fullName: string) =>
     .join("");
 
 export default function TherapistsPage() {
+  const tableConfig = tableViewConfigs.therapists;
+
   return (
     <ManagementPageLayout
       title="Therapist Management"
@@ -27,8 +30,8 @@ export default function TherapistsPage() {
         { label: "Specialties", value: specialtyCount.toString(), delta: "Coverage", helper: "Distinct therapy specializations" },
         { label: "Credentialed", value: therapistsData.length.toString(), delta: "Verified", helper: "Licensed profile count" },
       ]}
-      columns={["ID", "Name", "Specialty", "Email", "License"]}
-      centeredBodyColumns={[0]}
+      columns={tableConfig.columns}
+      centeredBodyColumns={tableConfig.centeredBodyColumns}
       rows={therapistsData.map((therapist) => ({
         id: therapist.id,
         cells: [

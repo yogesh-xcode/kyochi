@@ -1260,3 +1260,22 @@ This file is maintained for every code change.
     - Kept wrap behavior with fixed layout while constraining cell content via overflow handling for consistency.
 - Why changed:
     - Requested row size to remain fixed and grow to 1.5x specifically on hover.
+
+## 2026-03-19 23:24:06 IST (+0530)
+
+- DateTime: `2026-03-19 23:24:06 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/tableConfigs.ts`
+    - diff lines: `1-41`
+    - file: `src/app/billing/page.tsx`
+    - diff lines: `11,85,95,98`
+    - file: `CHANGELOG.md`
+    - diff lines: `1259-1274`
+    - file: `error.log`
+    - diff lines: `210-213`
+- What changed:
+    - Added a centralized `tableViewConfigs` registry covering each management table with per-view `columns`, `centeredBodyColumns`, `includedDataFields`, and `excludedDataFields`.
+    - Updated billing page table wiring to consume shared config (`tableViewConfigs.billing`) instead of hardcoded column/alignment arrays.
+    - Ensured `franchises` config keeps `city` and `region` body columns centered via index mapping.
+- Why changed:
+    - Requested a single config that defines column alignment and include/exclude data scope per table, and to center city/region body cells.

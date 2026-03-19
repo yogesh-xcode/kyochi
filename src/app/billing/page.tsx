@@ -8,6 +8,7 @@ import patientsData from "@/data/patients.json";
 import therapiesData from "@/data/therapies.json";
 
 import { KyochiDataTable, type KyochiTableRow } from "@/components/kyochi/KyochiDataTable";
+import { tableViewConfigs } from "@/components/kyochi/tableConfigs";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -81,6 +82,8 @@ const billingRows: KyochiTableRow[] = billingData.map((invoice) => {
 });
 
 export default function BillingPage() {
+  const tableConfig = tableViewConfigs.billing;
+
   return (
     <div className="space-y-4">
       <Card className="k-surface rounded-xl border k-border-soft shadow-sm py-0 ring-0 gap-0">
@@ -89,10 +92,10 @@ export default function BillingPage() {
         </CardHeader>
         <CardContent className="p-5">
           <KyochiDataTable
-            columns={["Therapy Name", "Duration", "Price", "Status"]}
+            columns={tableConfig.columns}
             rows={billingRows}
             minTableWidthClassName="min-w-[760px]"
-            centeredBodyColumns={[2, 3]}
+            centeredBodyColumns={tableConfig.centeredBodyColumns}
           />
         </CardContent>
       </Card>

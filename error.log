@@ -203,3 +203,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-19 23:12:41 IST (+0530)
 # DataTable Fixed Hover Height status: Fixed (row height now strictly 56px and expands to 84px on hover)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-19 23:24:06 IST (+0530)
+# Table Column Config status: Fixed (added centralized per-table config for centered body columns and included/excluded data fields; billing now wired to shared config; franchises city/region centered)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.

@@ -6,6 +6,7 @@ import therapistsData from "@/data/therapists.json";
 
 import { ManagementPageLayout } from "@/components/kyochi/ManagementPageLayout";
 import { StatusPill } from "@/components/kyochi/primitives";
+import { tableViewConfigs } from "@/components/kyochi/tableConfigs";
 
 const patientById = new Map(patientsData.map((patient) => [patient.id, patient]));
 const therapistById = new Map(therapistsData.map((therapist) => [therapist.id, therapist]));
@@ -37,6 +38,8 @@ const toDateTimeLabel = (isoDate: string) => {
 };
 
 export default function AppointmentsPage() {
+  const tableConfig = tableViewConfigs.appointments;
+
   return (
     <ManagementPageLayout
       title="Appointment Schedule"
@@ -47,8 +50,8 @@ export default function AppointmentsPage() {
         { label: "In Progress", value: inProgressCount.toString(), delta: "Active", helper: "Sessions currently ongoing" },
         { label: "Waiting", value: waitingCount.toString(), delta: "Queue", helper: "Patients waiting for consultation" },
       ]}
-      columns={["ID", "Patient", "Therapist", "Date & Time", "Status"]}
-      centeredBodyColumns={[0, 4]}
+      columns={tableConfig.columns}
+      centeredBodyColumns={tableConfig.centeredBodyColumns}
       rows={appointmentsData.map((appointment) => ({
         id: appointment.id,
         cells: [
