@@ -7,11 +7,13 @@ import therapiesData from "../../../data/therapies.json";
 import therapistsData from "../../../data/therapists.json";
 
 import type {
+  AiInsightBannerData,
   AlertItem,
   Appointment,
   AppointmentStatus,
   KpiCard,
   NavSection,
+  PatientInflowData,
   RevenueBar,
 } from "@/types";
 
@@ -140,6 +142,23 @@ export const revenueBars: RevenueBar[] = weekdayOrder.map((day) => {
   };
 });
 
+const inflowLabels = ["08:00", "12:00", "16:00", "20:00"];
+const inflowHourBuckets = [8, 12, 16, 20];
+const inflowCounts = inflowHourBuckets.map((bucketHour, index) => {
+  const nextHour = inflowHourBuckets[index + 1] ?? 24;
+  return appointmentsData.filter((entry) => {
+    const hour = new Date(entry.starts_at).getHours();
+    return hour >= bucketHour && hour < nextHour;
+  }).length;
+});
+const maxInflowCount = Math.max(...inflowCounts, 1);
+
+export const patientInflow: PatientInflowData = {
+  todayCount: appointmentsData.length,
+  labels: inflowLabels,
+  points: inflowCounts.map((count) => Math.max(8, Math.round((count / maxInflowCount) * 100))),
+};
+
 const overdueAlert = overdueInvoices[0];
 const overduePatient = overdueAlert ? patientById.get(overdueAlert.patient_id) : undefined;
 
@@ -181,6 +200,17 @@ export const alerts: AlertItem[] = [
     dimmed: true,
   },
 ];
+
+const recommendationInsight = aiInsightsData.find((insight) => insight.type === "recommendation");
+
+export const aiInsightBanner: AiInsightBannerData = {
+  title: recommendationInsight?.title ?? "Wellness Optimization",
+  body: recommendationInsight
+    ? `${recommendationInsight.metric.replaceAll("_", " ")} changed by ${recommendationInsight.change_pct}% in ${recommendationInsight.region}. Prioritize allocation around this signal to improve outcomes.`
+    : "Review latest AI insights to optimize therapist allocation and reduce wait times.",
+  primaryAction: "Apply Recommendation",
+  secondaryAction: "View Full Analysis",
+};
 
 export const navSections: NavSection[] = [
   {

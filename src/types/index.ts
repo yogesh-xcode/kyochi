@@ -47,3 +47,16 @@ export type NavSection = {
 };
 
 export type RevenueRange = "Weekly" | "Monthly";
+
+export type PatientInflowData = {
+  todayCount: number;
+  labels: string[];
+  points: number[];
+};
+
+export type AiInsightBannerData = {
+  title: string;
+  body: string;
+  primaryAction: string;
+  secondaryAction: string;
+};

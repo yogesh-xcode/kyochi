@@ -2,7 +2,14 @@
 
 import { useState } from "react";
 
-import { alerts, appointments, kpiCards, revenueBars } from "@/components/kyochi/data";
+import {
+  aiInsightBanner,
+  alerts,
+  appointments,
+  kpiCards,
+  patientInflow,
+  revenueBars,
+} from "@/components/kyochi/data";
 import { AiInsightBanner } from "@/components/kyochi/AiInsightBanner";
 import { AlertsPanel } from "@/components/kyochi/AlertsPanel";
 import { AppointmentsPanel } from "@/components/kyochi/AppointmentsPanel";
@@ -28,7 +35,11 @@ export function KyochiDashboard() {
               revenueRange={revenueRange}
               onRevenueRangeChange={setRevenueRange}
             />
-            <PatientInflow />
+            <PatientInflow
+              labels={patientInflow.labels}
+              points={patientInflow.points}
+              todayCount={patientInflow.todayCount}
+            />
           </div>
         </div>
 
@@ -37,7 +48,12 @@ export function KyochiDashboard() {
         </div>
       </div>
 
-      <AiInsightBanner />
+      <AiInsightBanner
+        title={aiInsightBanner.title}
+        body={aiInsightBanner.body}
+        primaryAction={aiInsightBanner.primaryAction}
+        secondaryAction={aiInsightBanner.secondaryAction}
+      />
     </>
   );
 }

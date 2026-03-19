@@ -13,6 +13,29 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 11:08:46 IST (+0530)
+
+- DateTime: `2026-03-19 11:08:46 IST (+0530)`
+- File changes:
+    - file: `src/types/index.ts`
+    - diff lines: `51-63`
+    - file: `src/components/kyochi/data.ts`
+    - diff lines: `9-234`
+    - file: `src/components/kyochi/PatientInflow.tsx`
+    - diff lines: `1-43`
+    - file: `src/components/kyochi/AiInsightBanner.tsx`
+    - diff lines: `3-32`
+    - file: `src/components/kyochi/KyochiDashboard.tsx`
+    - diff lines: `5-51`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-33`
+- What changed:
+    - Wired Patient Inflow chart to dataset-derived time-bucket points and today-count.
+    - Wired bottom AI Insight banner title/body/actions from `ai_insights` recommendation data.
+    - Added typed contracts for these two dashboard data blocks and passed them through dashboard composition.
+- Why changed:
+    - Requested dashboard to reflect dataset values fully, including previously static sections.
+
 ## 2026-03-19 10:57:23 IST (+0530)
 
 - DateTime: `2026-03-19 10:57:23 IST (+0530)`

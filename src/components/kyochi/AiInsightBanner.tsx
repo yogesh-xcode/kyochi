@@ -1,6 +1,13 @@
 import { MSO } from "@/components/kyochi/primitives";
 
-export function AiInsightBanner() {
+type AiInsightBannerProps = {
+  title: string;
+  body: string;
+  primaryAction: string;
+  secondaryAction: string;
+};
+
+export function AiInsightBanner({ title, body, primaryAction, secondaryAction }: AiInsightBannerProps) {
   return (
     <section className="bg-linear-to-r from-[#201d12] to-slate-800 rounded-xl p-8 text-white relative overflow-hidden">
       <div className="relative z-10 max-w-2xl">
@@ -10,18 +17,14 @@ export function AiInsightBanner() {
             Kyochi AI Insight
           </span>
         </div>
-        <h3 className="text-2xl font-bold mb-3">Resource Allocation Optimization</h3>
-        <p className="text-slate-300 text-sm leading-relaxed mb-6">
-          Based on last month&apos;s performance, Kyochi AI suggests increasing therapist
-          availability on Thursday afternoons between 2 PM and 5 PM. This could reduce wait times
-          by up to 22%.
-        </p>
+        <h3 className="text-2xl font-bold mb-3">{title}</h3>
+        <p className="text-slate-300 text-sm leading-relaxed mb-6">{body}</p>
         <div className="flex gap-4">
           <button className="px-6 py-2.5 bg-[#d4af35] text-[#201d12] font-bold text-sm rounded-lg hover:brightness-110 transition-all">
-            Apply Recommendation
+            {primaryAction}
           </button>
           <button className="px-6 py-2.5 bg-white/10 text-white font-bold text-sm rounded-lg hover:bg-white/20 transition-all">
-            View Full Analysis
+            {secondaryAction}
           </button>
         </div>
       </div>
