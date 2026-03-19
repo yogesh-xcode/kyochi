@@ -872,3 +872,22 @@ This file is maintained for every code change.
     - Replaced remaining placeholder card hardcoded slate/white styling with Kyochi token classes for consistent surface/border/text rhythm.
 - Why changed:
     - Requested to execute the audit recommendations and improve UI rhythm consistency.
+
+## 2026-03-19 14:32:44 IST (+0530)
+
+- DateTime: `2026-03-19 14:32:44 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/AppointmentsPanel.tsx`
+    - diff lines: `13-16,21,27,31,34-35,39-40`
+    - file: `src/components/kyochi/AiInsightBanner.tsx`
+    - diff lines: `12,15-16,20-21,23,26,31-32`
+    - file: `src/app/globals.css`
+    - diff lines: `458-478`
+    - file: `audit/design-audit-2026-03-19.md`
+    - diff lines: `117-129`
+- What changed:
+    - Applied design rhythm Pass 2 token-purity updates by replacing remaining hardcoded colors in `AppointmentsPanel` and `AiInsightBanner`.
+    - Added reusable `k-ai-banner-*` utility classes in globals for consistent dark insight card theming.
+    - Updated audit report with remediation progress and revised adherence estimate.
+- Why changed:
+    - Requested to continue from audit and fix rhythm/theme consistency gaps.

@@ -114,3 +114,16 @@ Scope: Active app shell + active dashboard/route components (excluding `.bkp`, `
 - Compared guide definitions (palette, typography, spacing/radius, component catalog) with active implementation files.
 - Excluded backup files (`*.bkp*`, `*.old*`) from compliance scoring.
 - Checked route wiring, data binding, and active component usage.
+
+## Remediation Progress Update (2026-03-19 14:32 IST)
+- Completed Pass 1:
+  - Typography tier normalization on active dashboard surfaces (`type-h3`, `type-small`, `type-label`).
+  - Tokenized placeholder route card styling.
+- Completed Pass 2:
+  - Token-purity conversion for `AppointmentsPanel` (removed hardcoded slate/hex classes).
+  - Token-purity conversion for `AiInsightBanner` with reusable banner token utility classes in globals.
+- Current estimated adherence after remediation passes: **84%**.
+- Remaining highest-impact gaps:
+  - Expand token-purity pass to any remaining non-token utility usage in active UI edge cases.
+  - Broader primitive adoption (`k-btn`, `k-badge`, `k-chip`) in all route pages and future feature screens.
+  - Dedicated accessibility pass (keyboard/ARIA/contrast).

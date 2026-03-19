@@ -455,6 +455,27 @@
   .k-tone-blue { background: var(--k-color-alert-blue-bg); color: var(--k-color-alert-blue-fg); }
   .k-tone-slate { background: var(--k-color-alert-slate-bg); color: var(--k-color-alert-slate-fg); }
 
+  .k-ai-banner-bg {
+    background: linear-gradient(135deg, var(--kyochi-gold-900) 0%, var(--kyochi-gold-800) 65%, var(--kyochi-gold-700) 100%);
+  }
+  .k-ai-banner-text { color: var(--kyochi-cream-100); }
+  .k-ai-banner-muted { color: color-mix(in srgb, var(--kyochi-cream-100) 68%, transparent); }
+  .k-ai-banner-chip { color: color-mix(in srgb, var(--kyochi-gold-200) 86%, transparent); }
+  .k-ai-banner-secondary {
+    background: color-mix(in srgb, white 12%, transparent);
+    color: var(--kyochi-cream-100);
+    border: 1px solid color-mix(in srgb, white 18%, transparent);
+  }
+  .k-ai-banner-secondary:hover {
+    background: color-mix(in srgb, white 20%, transparent);
+  }
+  .k-ai-banner-orb-1 {
+    background: color-mix(in srgb, var(--kyochi-gold-400) 22%, transparent);
+  }
+  .k-ai-banner-orb-2 {
+    background: color-mix(in srgb, var(--kyochi-gold-300) 16%, transparent);
+  }
+
   /* ── CARD ── */
   .k-card {
     background: hsl(var(--card));

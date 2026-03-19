@@ -130,3 +130,8 @@ Verification: Documentation audit only (no runtime code changes in this batch).
 Updated: 2026-03-19 14:27:29 IST (+0530)
 # Design Rhythm status: In progress (pass 1 applied: typography tier normalization + tokenized placeholders)
 Verification: pnpm -s lint and pnpm -s build passed.
+
+Updated: 2026-03-19 14:32:44 IST (+0530)
+# Design Rhythm status: In progress (pass 2 applied: token-purity conversion for AppointmentsPanel + AiInsightBanner)
+# Audit status: Updated (remediation progress reflected in audit/design-audit-2026-03-19.md)
+Verification: pnpm -s lint and pnpm -s build passed.
