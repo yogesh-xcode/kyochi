@@ -1,20 +1,69 @@
-# Changelog
+# Project Changelog
 
-All notable changes to this project are documented in this file.
+This file is maintained for every code change.
 
-## 2026-03-19
+## Entry Format
 
-### Added
-- New route `/dashboard` via `src/app/dashboard/page.tsx`.
-- Modular dashboard component system under `src/components/kyochi`:
-  - `KyochiDashboard`, `Sidebar`, `DashboardHeader`, `KpiGrid`, `AppointmentsPanel`
-  - `RevenueSnapshot`, `PatientInflow`, `AlertsPanel`, `AiInsightBanner`
-  - Shared `primitives.tsx`, `types.ts`, `data.ts`, and `index.ts` exports.
+- DateTime: `YYYY-MM-DD HH:MM:SS TZ`
+- File changes:
+    - `file: <path>`
+    - `diff lines: <line>` or `<start-end>`
+- What changed: concise summary
+- Why changed: reason/request
 
-### Changed
-- `src/components/KyochiDashboard.tsx` now re-exports the modular implementation from `src/components/kyochi/KyochiDashboard`.
+---
 
-### Validation
-- Type check passes: `pnpm -s tsc --noEmit`
-- Lint passes with warnings: `pnpm -s lint`
-- Production build passes: `pnpm -s build`
+## 2026-03-19 08:44:19 IST (+0530)
+
+- DateTime: `2026-03-19 08:44:19 IST (+0530)`
+- File changes:
+    - file: `CHANGELOG.md`
+    - diff lines: `1-69`
+- What changed:
+    - Replaced prior changelog style with the required project changelog schema.
+    - Added structured entries with explicit timestamp, file list, diff line ranges, change summary, and reason.
+- Why changed:
+    - Requested to follow the provided changelog format example.
+
+## 2026-03-19 08:33:33 IST (+0530)
+
+- DateTime: `2026-03-19 08:33:33 IST (+0530)`
+- File changes:
+    - file: `CHANGELOG.md`
+    - diff lines: `1-20`
+    - file: `src/app/dashboard/page.tsx`
+    - diff lines: `1-5`
+    - file: `src/components/KyochiDashboard.tsx`
+    - diff lines: `1`
+    - file: `src/components/kyochi/AiInsightBanner.tsx`
+    - diff lines: `1-32`
+    - file: `src/components/kyochi/AlertsPanel.tsx`
+    - diff lines: `1-43`
+    - file: `src/components/kyochi/AppointmentsPanel.tsx`
+    - diff lines: `1-44`
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `1-26`
+    - file: `src/components/kyochi/KpiGrid.tsx`
+    - diff lines: `1-30`
+    - file: `src/components/kyochi/KyochiDashboard.tsx`
+    - diff lines: `1-66`
+    - file: `src/components/kyochi/PatientInflow.tsx`
+    - diff lines: `1-35`
+    - file: `src/components/kyochi/RevenueSnapshot.tsx`
+    - diff lines: `1-47`
+    - file: `src/components/kyochi/Sidebar.tsx`
+    - diff lines: `1-66`
+    - file: `src/components/kyochi/data.ts`
+    - diff lines: `1-140`
+    - file: `src/components/kyochi/index.ts`
+    - diff lines: `1-25`
+    - file: `src/components/kyochi/primitives.tsx`
+    - diff lines: `1-58`
+    - file: `src/components/kyochi/types.ts`
+    - diff lines: `1-49`
+- What changed:
+    - Split the monolithic dashboard into section-level components under `src/components/kyochi`.
+    - Added shared primitives/types/data modules.
+    - Added route page at `/dashboard` and kept root page behavior unchanged by preserving `src/components/KyochiDashboard.tsx` import compatibility.
+- Why changed:
+    - Requested to convert dashboard into reusable `components/kyochi` modules and use it in `dashboard/page.tsx`.
