@@ -819,3 +819,16 @@ This file is maintained for every code change.
     - Removed Material Symbols dependency and conflicting duplicate root theme block that was overriding Kyochi tokens.
 - Why changed:
     - Requested chart/table/insight alignment fixes and full Lucide icon usage with consistent theme behavior.
+
+## 2026-03-19 14:17:49 IST (+0530)
+
+- DateTime: `2026-03-19 14:17:49 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/Sidebar.tsx`
+    - diff lines: `36`
+    - file: `CHANGELOG.md`
+    - diff lines: `+`
+- What changed:
+    - Locked sidebar brand row to fixed `62px` height with non-shrinking behavior so it aligns exactly with the header strip baseline.
+- Why changed:
+    - Requested tiny alignment fix between header and sidebar top rows.

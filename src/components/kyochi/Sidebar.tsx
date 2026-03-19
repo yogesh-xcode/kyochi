@@ -38,7 +38,7 @@ export function Sidebar({ navSections, mobileOpen = false, onMobileClose }: Side
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0`}
       >
-      <div className="p-3.5 flex items-center gap-2 border-b k-border-soft">
+      <div className="h-[62px] px-3.5 shrink-0 flex items-center gap-2 border-b k-border-soft">
         <div className="size-8 rounded-full k-brand-bg flex items-center justify-center text-white shadow-sm">
           <Leaf className="size-4" />
         </div>
