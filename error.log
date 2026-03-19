@@ -223,3 +223,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-20 00:48:19 IST (+0530)
 # Role-scoped Global Pages + Table Sort UX status: Fixed (therapist now uses global pages with data-level filtering; removed /my-ratings and /my-session-history routes; all table columns are sortable; toolbar reordered with Filter near Search, centered export actions, and Add as last action)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-20 00:52:49 IST (+0530)
+# Fixed Header status: Fixed (header now pinned like sidebar with desktop left offset and content top offset applied across pages)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.

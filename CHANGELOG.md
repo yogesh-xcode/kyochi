@@ -1391,3 +1391,22 @@ This file is maintained for every code change.
     - Updated table toolbar layout: `Filter` moved next to search, export actions centered, and `Add` moved to the far-right as last action.
 - Why changed:
     - Requested no extra role pages, role-filtered global pages, no `/my-ratings` and `/my-session-history`, plus per-column sorting and updated table toolbar arrangement.
+
+## 2026-03-20 00:52:49 IST (+0530)
+
+- DateTime: `2026-03-20 00:52:49 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `58`
+    - file: `src/components/kyochi/AppShell.tsx`
+    - diff lines: `28`
+    - file: `CHANGELOG.md`
+    - diff lines: `1382-1393`
+    - file: `error.log`
+    - diff lines: `230-233`
+- What changed:
+    - Made the shared dashboard header fixed to viewport top.
+    - Added sidebar-aware left offset at desktop (`lg:left-60`) so fixed header aligns with the main canvas.
+    - Added top spacing to page content container so all pages render below the fixed header.
+- Why changed:
+    - Requested header to stay fixed like the sidebar.

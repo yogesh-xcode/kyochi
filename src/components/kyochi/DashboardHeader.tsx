@@ -55,7 +55,7 @@ export function DashboardHeader({ onMenuToggle }: DashboardHeaderProps) {
   const headerTitle = isDashboard ? "Dashboard" : meta.title;
 
   return (
-    <header className="k-surface border-b k-border-soft h-[62px] px-3 md:px-4 lg:px-6 flex items-center">
+    <header className="fixed top-0 left-0 right-0 lg:left-60 z-20 k-surface border-b k-border-soft h-[62px] px-3 md:px-4 lg:px-6 flex items-center">
       <div className="w-full flex items-center justify-between gap-4">
         <div className="min-w-0 shrink-0">
           <div className="flex items-center gap-2">
