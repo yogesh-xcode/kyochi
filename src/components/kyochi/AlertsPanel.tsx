@@ -11,7 +11,7 @@ export function AlertsPanel({ alerts }: AlertsPanelProps) {
   return (
     <section className="k-surface rounded-xl shadow-sm overflow-hidden flex flex-col">
       <div className="px-4 py-3 border-b k-border-soft k-brand-soft-tint-bg">
-        <h4 className="font-bold k-text-strong flex items-center gap-2">
+        <h4 className="type-h3 text-[18px] k-text-strong flex items-center gap-2">
           <TriangleAlert className="size-4 k-brand-strong" />
           Intelligence Alerts
         </h4>
@@ -22,12 +22,12 @@ export function AlertsPanel({ alerts }: AlertsPanelProps) {
             <AlertIcon tone={alert.tone} icon={alert.icon} />
             <div className="flex-1">
               <div className="flex justify-between items-start mb-1">
-                <p className="text-[12px] font-bold k-text-strong">{alert.title}</p>
-                <span className="text-[8px] k-text-subtle">{alert.time}</span>
+                <p className="type-small font-bold k-text-strong">{alert.title}</p>
+                <span className="type-label normal-case tracking-normal text-[8px] k-text-subtle">{alert.time}</span>
               </div>
-              <p className="text-[10px] k-text-body leading-relaxed mb-1">{alert.body}</p>
+              <p className="type-small text-[12px] k-text-body leading-relaxed mb-1">{alert.body}</p>
               {alert.action && (
-                <button className="text-[10px] font-bold k-brand hover:underline">
+                <button className="type-small font-bold k-brand hover:underline">
                   {alert.action}
                 </button>
               )}
@@ -36,7 +36,7 @@ export function AlertsPanel({ alerts }: AlertsPanelProps) {
         ))}
       </div>
       <div className="mt-auto p-3 border-t k-border-soft">
-        <button className="w-full py-1.5 k-brand-soft-bg k-brand font-bold text-[12px] rounded-xl k-brand-bg-hover hover:text-white transition-all">
+        <button className="w-full py-1.5 k-brand-soft-bg k-brand type-small font-bold rounded-xl k-brand-bg-hover hover:text-white transition-all">
           Clear All Resolved
         </button>
       </div>

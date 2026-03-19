@@ -126,3 +126,7 @@ Verification: pnpm -s lint and pnpm -s build passed.
 Updated: 2026-03-19 14:21:57 IST (+0530)
 # Design Audit status: Completed (full comparison against DesignArtifact/kyochi-theme-guide.html saved in audit/design-audit-2026-03-19.md)
 Verification: Documentation audit only (no runtime code changes in this batch).
+
+Updated: 2026-03-19 14:27:29 IST (+0530)
+# Design Rhythm status: In progress (pass 1 applied: typography tier normalization + tokenized placeholders)
+Verification: pnpm -s lint and pnpm -s build passed.

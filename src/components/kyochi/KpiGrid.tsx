@@ -17,12 +17,12 @@ export function KpiGrid({ cards }: KpiGridProps) {
             <div className="p-1.5 k-brand-soft-bg rounded-lg k-brand">
               <KIcon name={card.icon} className="size-4" />
             </div>
-            <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${card.deltaColor}`}>
+            <span className={`type-label normal-case tracking-normal px-2 py-0.5 rounded-full ${card.deltaColor}`}>
               {card.delta}
             </span>
           </div>
-          <p className="k-text-body text-[12px] font-medium">{card.label}</p>
-          <h3 className="text-[20px] font-bold k-text-strong mt-1">{card.value}</h3>
+          <p className="type-small k-text-body">{card.label}</p>
+          <h3 className="type-h3 k-text-strong mt-1">{card.value}</h3>
         </div>
       ))}
     </div>

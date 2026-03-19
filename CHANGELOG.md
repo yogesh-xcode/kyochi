@@ -846,3 +846,29 @@ This file is maintained for every code change.
     - Included quantified adherence score, section-wise matrix, followed vs pending lists, route snapshot, and prioritized remediation plan.
 - Why changed:
     - Requested complete cross-check report and explicit list of how much is followed vs not followed.
+
+## 2026-03-19 14:27:29 IST (+0530)
+
+- DateTime: `2026-03-19 14:27:29 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `67,75,79,86`
+    - file: `src/components/kyochi/KpiGrid.tsx`
+    - diff lines: `20,24-25`
+    - file: `src/components/kyochi/RevenueSnapshot.tsx`
+    - diff lines: `17,21,40`
+    - file: `src/components/kyochi/PatientInflow.tsx`
+    - diff lines: `25-26,39`
+    - file: `src/components/kyochi/RecentAppointmentsTable.tsx`
+    - diff lines: `15-16,20,29-32,38-39,41-42`
+    - file: `src/components/kyochi/InsightRecommendationCard.tsx`
+    - diff lines: `18,22-23,25,28`
+    - file: `src/components/kyochi/AlertsPanel.tsx`
+    - diff lines: `14,25-26,28,30,39`
+    - file: `src/components/kyochi/FeaturePlaceholder.tsx`
+    - diff lines: `8-12`
+- What changed:
+    - Applied first "design rhythm" pass by normalizing typography tiers (`type-h3`, `type-small`, `type-label`) across active dashboard cards, tables, insights, alerts, and header controls.
+    - Replaced remaining placeholder card hardcoded slate/white styling with Kyochi token classes for consistent surface/border/text rhythm.
+- Why changed:
+    - Requested to execute the audit recommendations and improve UI rhythm consistency.

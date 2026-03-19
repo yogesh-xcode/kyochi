@@ -22,8 +22,8 @@ export function PatientInflow({ labels, points, todayCount }: PatientInflowProps
   return (
     <section className="k-surface p-4 rounded-xl shadow-sm border k-border-soft">
       <div className="flex items-center justify-between mb-4">
-        <h4 className="font-bold k-text-strong">Patient Inflow</h4>
-        <span className="text-[10px] k-brand font-bold">Today: +{todayCount}</span>
+        <h4 className="type-h3 text-[18px] k-text-strong">Patient Inflow</h4>
+        <span className="type-small k-brand font-bold">Today: +{todayCount}</span>
       </div>
       <div className="relative h-40 w-full">
         <svg
@@ -36,7 +36,7 @@ export function PatientInflow({ labels, points, todayCount }: PatientInflowProps
         </svg>
       </div>
       <div
-        className="mt-3 text-[8px] k-text-subtle font-bold uppercase grid gap-1 px-1"
+        className="mt-3 type-label text-[8px] tracking-wide k-text-subtle grid gap-1 px-1"
         style={{ gridTemplateColumns: `repeat(${labels.length}, minmax(0, 1fr))` }}
       >
         {labels.map((label) => (

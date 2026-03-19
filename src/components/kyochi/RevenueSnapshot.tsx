@@ -14,11 +14,11 @@ export function RevenueSnapshot({
   return (
     <section className="k-surface p-4 rounded-xl shadow-sm border k-border-soft">
       <div className="flex items-center justify-between mb-4">
-        <h4 className="font-bold k-text-strong">Revenue Snapshot</h4>
+        <h4 className="type-h3 text-[18px] k-text-strong">Revenue Snapshot</h4>
         <select
           value={revenueRange}
           onChange={(e) => onRevenueRangeChange(e.target.value as RevenueRange)}
-          className="text-[10px] border-none k-surface-muted rounded-lg py-1 px-1.5 focus:ring-[var(--k-color-brand)] outline-none cursor-pointer"
+          className="type-small border-none k-surface-muted rounded-lg py-1 px-1.5 focus:ring-[var(--k-color-brand)] outline-none cursor-pointer"
         >
           <option>Weekly</option>
           <option>Monthly</option>
@@ -37,7 +37,7 @@ export function RevenueSnapshot({
           />
         ))}
       </div>
-      <div className="mt-3 grid grid-cols-7 gap-1 px-1 text-[8px] k-text-subtle font-bold uppercase">
+      <div className="mt-3 grid grid-cols-7 gap-1 px-1 type-label text-[8px] tracking-wide k-text-subtle">
         {revenueBars.map((bar) => (
           <span key={bar.day} className="text-center">
             {bar.day}

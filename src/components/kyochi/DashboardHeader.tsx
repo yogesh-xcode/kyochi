@@ -64,7 +64,7 @@ export function DashboardHeader({ onMenuToggle }: DashboardHeaderProps) {
             >
               <Menu className="size-4" />
             </button>
-            <h2 className="text-[18px] leading-tight font-extrabold tracking-tight k-text-strong">{headerTitle}</h2>
+            <h2 className="type-h3 text-[18px] md:text-[20px] leading-none k-text-strong">{headerTitle}</h2>
           </div>
         </div>
 
@@ -72,18 +72,18 @@ export function DashboardHeader({ onMenuToggle }: DashboardHeaderProps) {
           <div className="relative w-full">
             <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 k-text-subtle size-4" />
             <input
-              className="w-full h-8 pl-8 pr-16 rounded-lg border k-border-soft k-surface text-[12px] k-text-body placeholder:k-text-subtle outline-none focus:border-[var(--k-color-brand)]"
+              className="w-full h-8 pl-8 pr-16 rounded-lg border k-border-soft k-surface type-small k-text-body placeholder:k-text-subtle outline-none focus:border-[var(--k-color-brand)]"
               placeholder="Search dashboard or type a command"
               type="text"
             />
-            <span className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md border k-border-soft k-surface-muted px-1.5 py-0.5 text-[10px] font-semibold k-text-subtle">
+            <span className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md border k-border-soft k-surface-muted px-1.5 py-0.5 type-label normal-case tracking-normal text-[10px] k-text-subtle">
               Ctrl + K
             </span>
           </div>
         </div>
 
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-          <button className="hidden sm:inline-flex h-8 items-center gap-1.5 rounded-lg k-cta-bg px-3 text-white text-[12px] font-semibold transition-colors">
+          <button className="hidden sm:inline-flex h-8 items-center gap-1.5 rounded-lg k-cta-bg px-3 text-white type-small font-bold transition-colors">
             <Plus className="size-3.5" />
             Create Appointment
             <ChevronDown className="size-3.5" />
