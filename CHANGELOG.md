@@ -13,19 +13,18 @@ This file is maintained for every code change.
 
 ---
 
-## 2026-03-19 09:27:45 IST (+0530)
+## 2026-03-19 09:31:34 IST (+0530)
 
-- DateTime: `2026-03-19 09:27:45 IST (+0530)`
+- DateTime: `2026-03-19 09:31:34 IST (+0530)`
 - File changes:
-    - file: `src/components/kyochi/Sidebar.tsx`
-    - diff lines: `1,13-15,20-22`
+    - file: `src/app/globals.css`
+    - diff lines: `748`
     - file: `CHANGELOG.md`
-    - diff lines: `16-29`
+    - diff lines: `16-27`
 - What changed:
-    - Replaced the sidebar brand icon with `public/logo.svg` using `next/image`.
-    - Used the existing `spa` symbol as a secondary badge in the remaining header space.
+    - Fixed `@theme inline` font token mapping by replacing self-reference with a concrete Manrope chain.
 - Why changed:
-    - Requested to use `logo.svg` as the logo while keeping the current icon for the remaining space.
+    - Font was not applying in UI due to `--font-sans: var(--font-sans)` recursive token resolution.
 
 ## 2026-03-19 08:51:05 IST (+0530)
 
