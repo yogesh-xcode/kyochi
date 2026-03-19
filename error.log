@@ -187,3 +187,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-19 23:00:41 IST (+0530)
 # DataTable Width/Wrap/Hover status: Fixed (fixed-width columns + wrapped cells + 1.5x max hover row height implemented)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-19 23:03:06 IST (+0530)
+# shadcn Button Theme Mapping status: Fixed (shadcn Button now uses Kyochi theme-guide button classes)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.

@@ -1179,3 +1179,22 @@ This file is maintained for every code change.
     - Applied controlled row hover expansion: row content min-height increases from `56px` to `84px` (~1.5x) on hover.
 - Why changed:
     - Requested stronger visual alignment consistency across all columns and hover expansion to improve scan/readability.
+
+## 2026-03-19 23:03:06 IST (+0530)
+
+- DateTime: `2026-03-19 23:03:06 IST (+0530)`
+- File changes:
+    - file: `src/app/globals.css`
+    - diff lines: `208-211,296-299,496-551`
+    - file: `src/components/ui/button.tsx`
+    - diff lines: `7-40`
+    - file: `CHANGELOG.md`
+    - diff lines: `1182-1196`
+    - file: `error.log`
+    - diff lines: `190-193`
+- What changed:
+    - Updated global Kyochi button utility classes (`.k-btn*`) to match the provided theme-guide specification (base, primary, secondary, ghost, dark, sm, lg, icon).
+    - Added token aliases (`--gold`, `--text`, `--text-2`, `--surface`) in light/dark roots to support theme-guide button semantics.
+    - Remapped shadcn `Button` variants/sizes in `src/components/ui/button.tsx` to consume Kyochi button classes while preserving shadcn API usage.
+- Why changed:
+    - Requested theme-guide button behavior but implemented through shadcn button primitives.
