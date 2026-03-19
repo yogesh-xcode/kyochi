@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Bell, ChevronDown, Menu, Plus, Search } from "lucide-react";
+import { Bell, ChevronDown, Menu, Plus } from "lucide-react";
 
 const pageMeta: Record<string, { title: string; subtitle: string }> = {
   "/": {
@@ -68,22 +68,8 @@ export function DashboardHeader({ onMenuToggle }: DashboardHeaderProps) {
           </div>
         </div>
 
-        <div className="hidden md:flex flex-1 max-w-[500px]">
-          <div className="relative w-full">
-            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 k-text-subtle size-4" />
-            <input
-              className="w-full h-8 pl-8 pr-16 rounded-lg border k-border-soft k-surface type-small k-text-body placeholder:k-text-subtle outline-none focus:border-[var(--k-color-brand)]"
-              placeholder="Search dashboard or type a command"
-              type="text"
-            />
-            <span className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md border k-border-soft k-surface-muted px-1.5 py-0.5 type-label normal-case tracking-normal text-[10px] k-text-subtle">
-              Ctrl + K
-            </span>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-          <button className="hidden sm:inline-flex h-8 items-center gap-1.5 rounded-lg k-cta-bg px-3 text-white type-small font-bold transition-colors">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 ml-auto">
+          <button className="hidden sm:inline-flex h-8 items-center gap-1.5 rounded-lg k-brand-bg k-primary-foreground px-3 type-small font-bold k-brand-bg-hover transition-colors">
             <Plus className="size-3.5" />
             Create Appointment
             <ChevronDown className="size-3.5" />

@@ -135,3 +135,7 @@ Updated: 2026-03-19 14:32:44 IST (+0530)
 # Design Rhythm status: In progress (pass 2 applied: token-purity conversion for AppointmentsPanel + AiInsightBanner)
 # Audit status: Updated (remediation progress reflected in audit/design-audit-2026-03-19.md)
 Verification: pnpm -s lint and pnpm -s build passed.
+
+Updated: 2026-03-19 14:39:12 IST (+0530)
+# Header Action/Search status: Fixed (search removed; Create Appointment button theme-aligned to Kyochi brand)
+Verification: pnpm -s lint and pnpm -s build passed.

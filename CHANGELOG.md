@@ -891,3 +891,15 @@ This file is maintained for every code change.
     - Updated audit report with remediation progress and revised adherence estimate.
 - Why changed:
     - Requested to continue from audit and fix rhythm/theme consistency gaps.
+
+## 2026-03-19 14:39:12 IST (+0530)
+
+- DateTime: `2026-03-19 14:39:12 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `4,71-84,87`
+- What changed:
+    - Removed header search input/shortcut block.
+    - Updated "Create Appointment" button styling from blue CTA to Kyochi brand-gold token styling and aligned right action cluster spacing.
+- Why changed:
+    - Requested to remove search bar and align primary header action with project theme.
