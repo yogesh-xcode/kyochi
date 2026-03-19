@@ -13,6 +13,22 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 12:34:27 IST (+0530)
+
+- DateTime: `2026-03-19 12:34:27 IST (+0530)`
+- File changes:
+    - file: `src/app/globals.css`
+    - diff lines: `248`
+    - file: `src/app/globals.css.bkp`
+    - diff lines: `1-1034`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-29`
+- What changed:
+    - Applied a global 10% UI downscale by setting root `html` font-size to `90%`.
+    - Created a backup of global stylesheet before modification.
+- Why changed:
+    - Requested to decrease the size of everything by approximately 10%.
+
 ## 2026-03-19 12:32:44 IST (+0530)
 
 - DateTime: `2026-03-19 12:32:44 IST (+0530)`

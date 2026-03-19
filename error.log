@@ -60,3 +60,7 @@ Verification: pnpm -s lint and pnpm -s build passed.
 Updated: 2026-03-19 12:32:44 IST (+0530)
 # Header Alignment status: Fixed (updated to compact screenshot-style header pattern)
 Verification: pnpm -s lint and pnpm -s build passed.
+
+Updated: 2026-03-19 12:34:27 IST (+0530)
+# Global Scale status: Fixed (set root html font-size to 90% for ~10% UI reduction)
+Verification: pnpm -s lint and pnpm -s build passed.
