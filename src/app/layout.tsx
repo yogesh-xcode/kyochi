@@ -35,7 +35,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={`${manrope.variable} ${dmSerif.variable} antialiased`}>
+      <body className={`${manrope.className} ${manrope.variable} ${dmSerif.variable} antialiased`}>
         <div className="flex min-h-screen overflow-hidden bg-[#f8f7f6] text-slate-900">
           <Sidebar navSections={navSections} />
           <main className="ml-72 flex-1 p-8 space-y-8 bg-[#f8f7f6] min-h-screen">

@@ -4,8 +4,8 @@ export function DashboardHeader() {
   return (
     <header className="flex items-center justify-between">
       <div>
-        <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Admin Intelligence Dashboard</h2>
-        <p className="text-slate-500 mt-1">Daily system health and operational summary.</p>
+        <h2 className="type-h1 text-slate-900 tracking-tight">Admin Intelligence Dashboard</h2>
+        <p className="type-body text-slate-500 mt-1">Daily system health and operational summary.</p>
       </div>
       <div className="flex items-center gap-4">
         <div className="relative">

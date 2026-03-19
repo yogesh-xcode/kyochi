@@ -13,6 +13,25 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 09:50:51 IST (+0530)
+
+- DateTime: `2026-03-19 09:50:51 IST (+0530)`
+- File changes:
+    - file: `src/app/layout.tsx`
+    - diff lines: `37`
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `6-8`
+    - file: `src/components/kyochi/Sidebar.tsx`
+    - diff lines: `17-20`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-31`
+- What changed:
+    - Forced Manrope application at root using `manrope.className` in body class.
+    - Bound dashboard hero text to explicit typography scale classes (`type-h1`, `type-body`).
+    - Applied DM Serif display style to sidebar brand subtitle and updated text to `Wellness Intelligence`.
+- Why changed:
+    - Font appearance still looked incorrect; requested typography needed stronger explicit application in visible UI areas.
+
 ## 2026-03-19 09:45:46 IST (+0530)
 
 - DateTime: `2026-03-19 09:45:46 IST (+0530)`
