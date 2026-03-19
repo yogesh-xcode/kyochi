@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { InitialsAvatar, MSO, StatusPill } from "@/components/kyochi/primitives";
 import type { Appointment } from "@/types";
 
@@ -13,12 +15,13 @@ export function AppointmentsPanel({ appointments }: AppointmentsPanelProps) {
           <MSO className="text-[#d4af35]">event_upcoming</MSO>
           Today&apos;s Appointments
         </h4>
-        <div className="flex items-center gap-2">
-          <span className="size-2 bg-emerald-500 rounded-full animate-pulse" />
-          <span className="text-xs font-semibold text-slate-500 uppercase tracking-tighter">
-            Live Status
-          </span>
-        </div>
+        <Link
+          href="/appointments"
+          className="inline-flex items-center justify-center size-8 rounded-lg text-slate-500 hover:text-[#d4af35] hover:bg-[#f3f0e6] transition-colors"
+          aria-label="Open appointments page"
+        >
+          <MSO className="text-lg">north_east</MSO>
+        </Link>
       </div>
       <div className="divide-y divide-slate-50">
         {appointments.map((appt) => (

@@ -13,6 +13,20 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 11:14:45 IST (+0530)
+
+- DateTime: `2026-03-19 11:14:45 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/AppointmentsPanel.tsx`
+    - diff lines: `1,15-26`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-27`
+- What changed:
+    - Replaced the appointments panel `Live Status` indicator with a top-right navigation arrow.
+    - Wired the arrow action to open `/appointments`.
+- Why changed:
+    - Requested replacing live status with a directional arrow action that navigates to the appointments page.
+
 ## 2026-03-19 11:11:16 IST (+0530)
 
 - DateTime: `2026-03-19 11:11:16 IST (+0530)`
