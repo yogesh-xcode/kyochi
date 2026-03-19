@@ -159,3 +159,7 @@ Verification: pnpm -s lint and pnpm -s build passed.
 Updated: 2026-03-19 18:48:32 IST (+0530)
 # DESIGN Contract status: Fixed (expanded DESIGN.md to include complete theme + token + asset definitions for Stitch AI handoff)
 Verification: documentation update validated against `src/app/globals.css`, `src/app/layout.tsx`, `public/`, and `DesignArtifact/`.
+
+Updated: 2026-03-19 20:08:43 IST (+0530)
+# Semantic Color Refactor status: Fixed (status pills, KPI accents, Pending Feedback urgency, inflow trend color, and AI insight blue intelligence accent updated; brand gold kept for identity surfaces)
+Verification: pnpm -s lint and pnpm -s build passed.

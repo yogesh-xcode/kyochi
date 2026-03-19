@@ -42,7 +42,10 @@ const toAppointmentStatus = (status: string): AppointmentStatus => {
   if (status === "in_progress") {
     return "In Progress";
   }
-  return "Waiting";
+  if (status === "cancelled") {
+    return "Cancelled";
+  }
+  return "Pending";
 };
 
 const toTimeLabel = (isoDate: string) => {
@@ -72,6 +75,7 @@ export const kpiCards: KpiCard[] = [
     value: new Intl.NumberFormat("en-US").format(newPatients),
     delta: `${patientsData.length} Total`,
     deltaColor: "k-delta-positive",
+    accentTone: "positive",
   },
   {
     icon: "monitoring",
@@ -79,6 +83,7 @@ export const kpiCards: KpiCard[] = [
     value: toCurrency(monthlyRevenue),
     delta: `${billingData.length} Invoices`,
     deltaColor: "k-delta-positive",
+    accentTone: "positive",
   },
   {
     icon: "verified",
@@ -86,13 +91,15 @@ export const kpiCards: KpiCard[] = [
     value: `${successRate.toFixed(1)}%`,
     delta: "Live",
     deltaColor: "k-delta-neutral",
+    accentTone: "neutral",
   },
   {
     icon: "pending_actions",
     label: "Pending Feedback",
     value: completedAppointments.toString(),
     delta: completedAppointments > 0 ? "High" : "Low",
-    deltaColor: "k-delta-warning",
+    deltaColor: "k-delta-alert",
+    accentTone: "alert",
   },
 ];
 

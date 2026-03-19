@@ -1010,3 +1010,35 @@ This file is maintained for every code change.
     - Added a ready-to-paste Stitch AI prompt aligned with current project tokens and design behavior.
 - Why changed:
     - Requested that `DESIGN.md` fully define theme and assets for reliable Stitch AI handoff.
+
+## 2026-03-19 20:08:43 IST (+0530)
+
+- DateTime: `2026-03-19 20:08:43 IST (+0530)`
+- File changes:
+    - file: `src/types/index.ts`
+    - diff lines: `22-31`
+    - file: `src/components/kyochi/data.ts`
+    - diff lines: `38-49,71-103`
+    - file: `src/components/kyochi/KpiGrid.tsx`
+    - diff lines: `11-23`
+    - file: `src/components/kyochi/primitives.tsx`
+    - diff lines: `24-29`
+    - file: `src/components/kyochi/PatientInflow.tsx`
+    - diff lines: `13-15,35-37`
+    - file: `src/components/kyochi/InsightRecommendationCard.tsx`
+    - diff lines: `21-25`
+    - file: `src/app/globals.css`
+    - diff lines: `445-454`
+    - file: `CHANGELOG.md`
+    - diff lines: `1013-1040`
+    - file: `error.log`
+    - diff lines: `162-165`
+- What changed:
+    - Refactored status pill semantics to explicit healthcare SaaS colors: Completed green, Cancelled red, Pending amber, In Progress blue (white text).
+    - Added KPI semantic border accents (left border): positive=green, alert=red, neutral=gold.
+    - Changed `Pending Feedback` KPI urgency badge from gold warning to red/orange urgency style.
+    - Updated Patient Inflow chart to trend-based color logic (downtrend red line + light red fill, uptrend green).
+    - Restyled Clinical Insight card with soft blue intelligence accent (`#eff6ff` tone, blue icon, blue border).
+    - Kept brand gold usage unchanged for sidebar active state, primary buttons, logo, and warm background system.
+- Why changed:
+    - Requested shift from monochrome brand-color usage to professional semantic information colors while preserving Kyochi brand identity.

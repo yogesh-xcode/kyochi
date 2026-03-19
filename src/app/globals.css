@@ -442,13 +442,16 @@
   .k-avatar-bg { background: var(--k-color-avatar-bg); }
   .k-overlay { background: var(--k-color-overlay); }
 
-  .k-delta-positive { background: var(--k-color-status-positive-bg); color: var(--k-color-status-positive-fg); }
+  .k-delta-positive { background: #dcfce7; color: #15803d; }
   .k-delta-neutral { background: transparent; color: var(--k-color-text-subtle); }
-  .k-delta-warning { background: var(--k-color-status-progress-bg); color: var(--k-color-status-progress-fg); }
+  .k-delta-warning { background: #fffbeb; color: #b45309; }
+  .k-delta-alert { background: #fff7ed; color: #c2410c; }
 
-  .k-status-completed { background: var(--k-color-status-positive-bg); color: var(--k-color-status-positive-fg); }
-  .k-status-progress { background: var(--k-color-status-progress-bg); color: var(--k-color-status-progress-fg); }
-  .k-status-waiting { background: var(--k-color-status-waiting-bg); color: var(--k-color-status-waiting-fg); }
+  .k-status-completed { background: #22c55e; color: #ffffff; }
+  .k-status-cancelled { background: #ef4444; color: #ffffff; }
+  .k-status-pending { background: #f59e0b; color: #ffffff; }
+  .k-status-progress { background: #3b82f6; color: #ffffff; }
+  .k-status-waiting { background: #f59e0b; color: #ffffff; }
 
   .k-tone-amber { background: var(--k-color-alert-amber-bg); color: var(--k-color-alert-amber-fg); }
   .k-tone-red { background: var(--k-color-alert-red-bg); color: var(--k-color-alert-red-fg); }

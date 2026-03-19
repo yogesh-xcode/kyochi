@@ -10,6 +10,9 @@ export function PatientInflow({ labels, points, todayCount }: PatientInflowProps
   const safePoints = points.length > 0 ? points : [10, 10, 10, 10];
   const maxValue = Math.max(...safePoints, 1);
   const stepX = safePoints.length > 1 ? 96 / (safePoints.length - 1) : 96;
+  const isTrendingDown = safePoints[safePoints.length - 1] < safePoints[0];
+  const trendLineColor = isTrendingDown ? "#ef4444" : "#22c55e";
+  const trendFillColor = isTrendingDown ? "#fee2e2" : "#dcfce7";
 
   const linePoints = safePoints
     .map((point, index) => {
@@ -29,13 +32,9 @@ export function PatientInflow({ labels, points, todayCount }: PatientInflowProps
       </CardHeader>
       <CardContent className="px-4 pb-4 pt-0">
       <div className="relative h-40 w-full">
-        <svg
-          className="w-full h-full k-brand"
-          viewBox="0 0 100 50"
-          preserveAspectRatio="none"
-        >
-          <polyline points={linePoints} fill="none" stroke="currentColor" strokeWidth="2" />
-          <polygon points={areaPoints} fill="currentColor" fillOpacity="0.1" />
+        <svg className="w-full h-full" viewBox="0 0 100 50" preserveAspectRatio="none">
+          <polyline points={linePoints} fill="none" stroke={trendLineColor} strokeWidth="2" />
+          <polygon points={areaPoints} fill={trendFillColor} fillOpacity="0.6" />
         </svg>
       </div>
       <div
