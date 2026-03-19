@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap");
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 @import "tailwindcss";
 
 /* ============================================================
@@ -5,12 +8,6 @@
    globals.css — Design Token System (shadcn/ui compatible)
    Version: 1.0 | Theme: Warm Gold + Wellness Neutral
    ============================================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap');
-
-@import "tw-animate-css";
-
-@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -121,8 +118,8 @@
     --shadow-gold-lg: 0 8px 40px rgba(212,175,53,0.35);
 
     /* ── TYPOGRAPHY ── */
-    --font-display: 'DM Serif Display', Georgia, serif;
-    --font-sans:    'Manrope', system-ui, sans-serif;
+    --font-display: var(--font-dm-serif), Georgia, serif;
+    --font-sans:    var(--font-manrope), system-ui, sans-serif;
     --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
 
     --text-xs:   0.75rem;   /* 12px */

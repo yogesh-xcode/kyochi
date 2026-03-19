@@ -13,6 +13,23 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 08:51:05 IST (+0530)
+
+- DateTime: `2026-03-19 08:51:05 IST (+0530)`
+- File changes:
+    - file: `src/app/layout.tsx`
+    - diff lines: `30-36`
+    - file: `src/app/globals.css`
+    - diff lines: `1`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-29`
+- What changed:
+    - Removed inline font `<link>` injection from root layout.
+    - Moved Material Symbols font loading into global stylesheet import.
+    - Kept shared layout shell (sidebar + header) in `layout.tsx` and retained Next font usage there.
+- Why changed:
+    - Requested layout-driven common structure with proper font handling based on project needs.
+
 ## 2026-03-19 08:49:42 IST (+0530)
 
 - DateTime: `2026-03-19 08:49:42 IST (+0530)`
