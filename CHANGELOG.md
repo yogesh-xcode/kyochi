@@ -13,6 +13,23 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 11:59:47 IST (+0530)
+
+- DateTime: `2026-03-19 11:59:47 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `1-140`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-29`
+- What changed:
+    - Reworked dashboard header to the requested `Hero Strip` style.
+    - Added time-based greeting (`morning/afternoon/evening`) and dynamic date context line.
+    - Added sticky collapse behavior (`72px` to `48px`) with compact title state on scroll.
+    - Updated right-side actions to icon buttons (search, notifications with dot, export).
+    - Kept page title/subtitle below the strip when not collapsed.
+- Why changed:
+    - Requested to retry and implement header based on `DesignArtifact/DesignIdeas/header1.ascii`.
+
 ## 2026-03-19 11:42:55 IST (+0530)
 
 - DateTime: `2026-03-19 11:42:55 IST (+0530)`

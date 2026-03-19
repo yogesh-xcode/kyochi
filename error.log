@@ -1,0 +1,54 @@
+## ----- Instruction -----
+1. resolve error accordingly and update the status
+status: Fixed
+## ----- Instruction -----
+
+#1 Error 
+Type: Build Error
+
+## Error Message
+Parsing CSS source code failed
+
+## Build Output
+./src/app/globals.css:2095:8
+Parsing CSS source code failed
+  2093 |   }
+  2094 | }
+> 2095 | @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap');
+       |        ^
+  2096 | @property --tw-animation-delay {
+  2097 |   syntax: "*";
+  2098 |   inherits: false;
+
+@import rules must precede all rules aside from @charset and @layer statements
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+Next.js version: 16.1.7 (Turbopack)
+
+status: Fixed
+
+Updated: 2026-03-19 09:03:29 IST (+0530)
+Verification: pnpm -s build passed.2
+
+#2 Error 
+Type: UI/Logical Err
+Ref @Err/image.
+
+Desc: See the Sidebar layout and content 
+
+
+Updated: 2026-03-19 09:12:20 IST (+0530)
+#1 Build Error status: Fixed (last verified build success)
+#2 UI/Logical Err status: In progress (sidebar layout/content issue pending implementation)
+
+Updated: 2026-03-19 09:14:01 IST (+0530)
+#2 UI/Logical Err status: Fixed (Material Symbols loaded via layout head link + fallback class style)
+Verification: pnpm -s lint and pnpm -s build passed.
+
+Updated: 2026-03-19 11:59:47 IST (+0530)
+# Header Spec status: Fixed (Hero Strip header from DesignArtifact applied in DashboardHeader)
+Verification: pnpm -s lint and pnpm -s build passed.
