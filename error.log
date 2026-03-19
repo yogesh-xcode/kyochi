@@ -84,3 +84,7 @@ Verification: pnpm -s lint and pnpm -s build passed.
 Updated: 2026-03-19 12:55:29 IST (+0530)
 # Header Strip status: Fixed (replaced boxed header with flat top strip + divider)
 Verification: pnpm -s lint and pnpm -s build passed.
+
+Updated: 2026-03-19 12:58:36 IST (+0530)
+# Header Strip status: Fixed (dashboard header now single-line strip with no subtitle overflow)
+Verification: pnpm -s lint and pnpm -s build passed.

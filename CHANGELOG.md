@@ -13,6 +13,22 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 12:58:36 IST (+0530)
+
+- DateTime: `2026-03-19 12:58:36 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `77-93`
+    - file: `src/components/kyochi/DashboardHeader.tsx.bkp.20260319-125820`
+    - diff lines: `1-113`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-29`
+- What changed:
+    - Converted dashboard header to a strict single-row strip layout (greeting + right actions) without subtitle line.
+    - Kept non-dashboard pages capable of showing subtitle while dashboard stays flat and aligned to target style.
+- Why changed:
+    - Reported mismatch where the highlighted top strip should match reference and not include the clipped secondary line.
+
 ## 2026-03-19 12:55:29 IST (+0530)
 
 - DateTime: `2026-03-19 12:55:29 IST (+0530)`
