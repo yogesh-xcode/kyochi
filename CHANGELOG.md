@@ -1074,3 +1074,30 @@ This file is maintained for every code change.
     - Wired rows from local datasets (`billing.json`, `appointments.json`, `therapies.json`, `patients.json`) with status pills and contextual row metadata.
 - Why changed:
     - Requested to use the billing table reference layout only, while preserving the existing project theme.
+
+## 2026-03-19 22:43:29 IST (+0530)
+
+- DateTime: `2026-03-19 22:43:29 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/ManagementPageLayout.tsx`
+    - diff lines: `17-24,65-168`
+    - file: `src/app/patients/page.tsx`
+    - diff lines: `25`
+    - file: `src/app/therapists/page.tsx`
+    - diff lines: `21`
+    - file: `src/app/appointments/page.tsx`
+    - diff lines: `41`
+    - file: `src/app/franchises/page.tsx`
+    - diff lines: `19`
+    - file: `src/app/billing/page.tsx`
+    - diff lines: `56-58`
+    - file: `CHANGELOG.md`
+    - diff lines: `1077-1095`
+    - file: `error.log`
+    - diff lines: `174-177`
+- What changed:
+    - Refined shared management tables to match the requested layout style (compact uppercase headers, balanced row spacing, right-aligned actions, and footer pagination strip with "Showing 1-4 of N").
+    - Removed subtitle/description lines from table cards/pages, including the patients text "Wellness profiles, contact details, and engagement status."
+    - Removed billing table description line so table pages remain title-first and cleaner.
+- Why changed:
+    - Requested to apply the new table layout style and remove descriptive subtitle lines from every table screen.

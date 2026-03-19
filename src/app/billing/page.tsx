@@ -55,7 +55,6 @@ export default function BillingPage() {
       <Card className="k-surface rounded-xl border k-border-soft shadow-sm py-0 ring-0 gap-0">
         <CardHeader className="px-5 py-4 border-b k-border-soft">
           <CardTitle className="type-h3 text-[18px] k-text-strong">Billing & Invoices</CardTitle>
-          <p className="type-small k-text-body">Centralized management for therapy invoices and payment follow-ups.</p>
         </CardHeader>
         <CardContent className="p-0">
           <div className="overflow-hidden rounded-b-xl">
