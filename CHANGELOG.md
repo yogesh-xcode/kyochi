@@ -13,6 +13,19 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 11:42:55 IST (+0530)
+
+- DateTime: `2026-03-19 11:42:55 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/KyochiDashboard.tsx`
+    - diff lines: `30`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-27`
+- What changed:
+    - Limited dashboard appointment panel to show a maximum of 3 records.
+- Why changed:
+    - Requested max appointments visible on dashboard to be 3.
+
 ## 2026-03-19 11:37:48 IST (+0530)
 
 - DateTime: `2026-03-19 11:37:48 IST (+0530)`

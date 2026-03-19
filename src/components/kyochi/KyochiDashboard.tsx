@@ -27,7 +27,7 @@ export function KyochiDashboard() {
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
         <div className="xl:col-span-2 space-y-8">
-          <AppointmentsPanel appointments={appointments} />
+          <AppointmentsPanel appointments={appointments.slice(0, 3)} />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <RevenueSnapshot
