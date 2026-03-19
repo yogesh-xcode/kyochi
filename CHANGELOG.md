@@ -13,6 +13,28 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 12:38:00 IST (+0530)
+
+- DateTime: `2026-03-19 12:38:00 IST (+0530)`
+- File changes:
+    - file: `src/app/globals.css`
+    - diff lines: `248,356-367`
+    - file: `src/app/globals.css.bkp.20260319-123644`
+    - diff lines: `1-1035`
+    - file: `src/components/kyochi/AppShell.tsx`
+    - diff lines: `17`
+    - file: `src/components/kyochi/AppShell.tsx.bkp.20260319-123644`
+    - diff lines: `1-33`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-33`
+- What changed:
+    - Replaced ineffective root font-size approach with true app-wide scale using `zoom: 0.9`.
+    - Added fallback transform scaling for environments without `zoom` support.
+    - Added `kyochi-ui-scale` wrapper class in app shell for fallback behavior.
+    - Created timestamped backups for modified files before edit.
+- Why changed:
+    - Reported that prior 10% reduction did not visibly shrink all UI elements.
+
 ## 2026-03-19 12:34:27 IST (+0530)
 
 - DateTime: `2026-03-19 12:34:27 IST (+0530)`

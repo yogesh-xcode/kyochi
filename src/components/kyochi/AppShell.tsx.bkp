@@ -15,7 +15,7 @@ export function AppShell({ navSections, children }: AppShellProps) {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   return (
-    <div className="kyochi-ui-scale flex min-h-screen overflow-hidden bg-[#f8f7f6] text-slate-900">
+    <div className="flex min-h-screen overflow-hidden bg-[#f8f7f6] text-slate-900">
       <Sidebar
         navSections={navSections}
         mobileOpen={mobileSidebarOpen}

@@ -64,3 +64,7 @@ Verification: pnpm -s lint and pnpm -s build passed.
 Updated: 2026-03-19 12:34:27 IST (+0530)
 # Global Scale status: Fixed (set root html font-size to 90% for ~10% UI reduction)
 Verification: pnpm -s lint and pnpm -s build passed.
+
+Updated: 2026-03-19 12:38:00 IST (+0530)
+# Global Scale status: Fixed (switched to app-wide 0.9 zoom + transform fallback)
+Verification: pnpm -s lint and pnpm -s build passed.
