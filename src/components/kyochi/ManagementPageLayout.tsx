@@ -1,10 +1,12 @@
-import { ArrowUpDown, ChevronLeft, ChevronRight, Download, Plus, Printer, SlidersHorizontal, Upload } from "lucide-react";
+"use client";
 
+import { ArrowUpDown, Download, Plus, Printer, SlidersHorizontal, Upload } from "lucide-react";
+
+import { KyochiDataTable, type KyochiTableRow } from "@/components/kyochi/KyochiDataTable";
 import { KIcon } from "@/components/kyochi/icons";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { IconKey } from "@/types";
 
 type KpiItem = {
@@ -20,7 +22,7 @@ type ManagementPageLayoutProps = {
   searchPlaceholder: string;
   kpis: KpiItem[];
   columns: string[];
-  rows: { id: string; cells: React.ReactNode[] }[];
+  rows: KyochiTableRow[];
 };
 
 export function ManagementPageLayout({
@@ -100,71 +102,7 @@ export function ManagementPageLayout({
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-xl border k-border-soft k-surface">
-            <Table className="min-w-[920px]">
-              <TableHeader>
-                <TableRow className="k-surface-muted hover:bg-transparent">
-                  <TableHead className="w-12 text-center px-4 py-3">
-                    <input type="checkbox" aria-label="Select all rows" />
-                  </TableHead>
-                  {columns.map((column) => (
-                    <TableHead key={column} className="px-4 py-3 type-label uppercase tracking-wider k-text-subtle">
-                      {column}
-                    </TableHead>
-                  ))}
-                  <TableHead className="px-4 py-3 type-label uppercase tracking-wider k-text-subtle text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {rows.map((row) => (
-                  <TableRow key={row.id} className="k-row-hover transition-colors">
-                    <TableCell className="text-center px-4 py-4">
-                      <input type="checkbox" aria-label={`Select ${row.id}`} />
-                    </TableCell>
-                    {row.cells.map((cell, index) => (
-                      <TableCell key={`${row.id}-${index}`} className="type-body k-text-strong px-4 py-4 align-middle">
-                        {cell}
-                      </TableCell>
-                    ))}
-                    <TableCell className="px-4 py-4 text-right">
-                      <div className="inline-flex items-center gap-3">
-                        <button type="button" className="k-brand hover:underline">
-                          Edit
-                        </button>
-                        <button type="button" className="k-text-body hover:underline">
-                          Delete
-                        </button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-
-          <div className="flex flex-col gap-2 border-t k-border-soft pt-3 md:flex-row md:items-center md:justify-between">
-            <p className="type-small k-text-body">
-              Showing <span className="font-bold k-text-strong">1 - {Math.min(rows.length, 4)}</span> of{" "}
-              <span className="font-bold k-text-strong">{rows.length}</span> records
-            </p>
-            <div className="flex items-center gap-2">
-              <button type="button" className="inline-flex size-8 items-center justify-center rounded-lg border k-border-soft k-text-subtle">
-                <ChevronLeft className="size-4" />
-              </button>
-              <span className="inline-flex size-8 items-center justify-center rounded-lg k-brand-bg k-primary-foreground type-small font-bold">
-                1
-              </span>
-              <span className="inline-flex size-8 items-center justify-center rounded-lg border k-border-soft k-text-strong type-small font-bold">
-                2
-              </span>
-              <span className="inline-flex size-8 items-center justify-center rounded-lg border k-border-soft k-text-strong type-small font-bold">
-                3
-              </span>
-              <button type="button" className="inline-flex size-8 items-center justify-center rounded-lg border k-border-soft k-text-subtle">
-                <ChevronRight className="size-4" />
-              </button>
-            </div>
-          </div>
+          <KyochiDataTable columns={columns} rows={rows} />
         </CardContent>
       </Card>
     </div>

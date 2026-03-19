@@ -175,3 +175,7 @@ Verification: pnpm -s lint and pnpm -s build passed.
 Updated: 2026-03-19 22:43:29 IST (+0530)
 # Table Layout Refresh status: Fixed (shared table layout adjusted to reference style; table descriptions removed across table pages)
 Verification: pnpm -s lint and pnpm -s build passed.
+
+Updated: 2026-03-19 22:50:58 IST (+0530)
+# shadcn DataTable migration status: Fixed (management and billing tables now use TanStack-powered shadcn-style DataTable)
+Verification: pnpm -s lint (passes with known TanStack React Compiler warning) and pnpm -s build passed.

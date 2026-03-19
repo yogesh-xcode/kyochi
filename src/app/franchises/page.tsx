@@ -1,4 +1,6 @@
-import franchisesData from "../../../data/franchises.json";
+"use client";
+
+import franchisesData from "@/data/franchises.json";
 
 import { ManagementPageLayout } from "@/components/kyochi/ManagementPageLayout";
 

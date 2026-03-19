@@ -1,6 +1,8 @@
-import appointmentsData from "../../../data/appointments.json";
-import patientsData from "../../../data/patients.json";
-import therapistsData from "../../../data/therapists.json";
+"use client";
+
+import appointmentsData from "@/data/appointments.json";
+import patientsData from "@/data/patients.json";
+import therapistsData from "@/data/therapists.json";
 
 import { ManagementPageLayout } from "@/components/kyochi/ManagementPageLayout";
 import { StatusPill } from "@/components/kyochi/primitives";

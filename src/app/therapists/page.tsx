@@ -1,4 +1,6 @@
-import therapistsData from "../../../data/therapists.json";
+"use client";
+
+import therapistsData from "@/data/therapists.json";
 
 import { ManagementPageLayout } from "@/components/kyochi/ManagementPageLayout";
 import { InitialsAvatar } from "@/components/kyochi/primitives";

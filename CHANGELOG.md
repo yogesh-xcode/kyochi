@@ -1101,3 +1101,38 @@ This file is maintained for every code change.
     - Removed billing table description line so table pages remain title-first and cleaner.
 - Why changed:
     - Requested to apply the new table layout style and remove descriptive subtitle lines from every table screen.
+
+## 2026-03-19 22:50:58 IST (+0530)
+
+- DateTime: `2026-03-19 22:50:58 IST (+0530)`
+- File changes:
+    - file: `package.json`
+    - diff lines: `dependencies`
+    - file: `pnpm-lock.yaml`
+    - diff lines: `dependency graph updated`
+    - file: `src/components/kyochi/KyochiDataTable.tsx`
+    - diff lines: `1-190`
+    - file: `src/components/kyochi/ManagementPageLayout.tsx`
+    - diff lines: `1-120`
+    - file: `src/app/patients/page.tsx`
+    - diff lines: `1`
+    - file: `src/app/therapists/page.tsx`
+    - diff lines: `1`
+    - file: `src/app/appointments/page.tsx`
+    - diff lines: `1`
+    - file: `src/app/franchises/page.tsx`
+    - diff lines: `1`
+    - file: `src/app/billing/page.tsx`
+    - diff lines: `1-100`
+    - file: `CHANGELOG.md`
+    - diff lines: `1104-1129`
+    - file: `error.log`
+    - diff lines: `178-181`
+- What changed:
+    - Introduced a real shadcn-style DataTable implementation powered by TanStack (`KyochiDataTable`) with core row model + pagination model.
+    - Refactored `ManagementPageLayout` tables to use the new DataTable component instead of static table rendering.
+    - Migrated `/billing` table to the same DataTable system.
+    - Marked table pages as client components to support interactive DataTable behavior.
+    - Added `@tanstack/react-table` dependency.
+- Why changed:
+    - Requested to use shadcn DataTable for these table views.

@@ -1,3 +1,5 @@
+"use client";
+
 import patientsData from "@/data/patients.json";
 
 import { ManagementPageLayout } from "@/components/kyochi/ManagementPageLayout";
