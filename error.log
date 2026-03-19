@@ -207,3 +207,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-19 23:24:06 IST (+0530)
 # Table Column Config status: Fixed (added centralized per-table config for centered body columns and included/excluded data fields; billing now wired to shared config; franchises city/region centered)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-19 23:28:05 IST (+0530)
+# DataTable Row Height Clamp status: Fixed (strict 56px row/cell height, 84px hover height, and cell content clamp to prevent overflow-driven row expansion)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.

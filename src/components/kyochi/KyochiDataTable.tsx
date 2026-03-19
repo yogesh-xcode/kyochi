@@ -61,11 +61,13 @@ export function KyochiDataTable({
         ),
         cell: ({ row }: { row: { original: KyochiTableRow } }) => (
           <div
-            className={`h-full overflow-hidden type-body k-text-strong px-4 py-3 whitespace-normal break-words leading-snug ${
+            className={`h-full overflow-hidden px-4 py-3 ${
               centeredBodyColumns.includes(index) ? "text-center" : "text-left"
             }`}
           >
-            {row.original.cells[index]}
+            <div className="type-body k-text-strong whitespace-normal break-words leading-snug [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] group-hover:[-webkit-line-clamp:3] overflow-hidden">
+              {row.original.cells[index]}
+            </div>
           </div>
         ),
       })),
@@ -140,9 +142,17 @@ export function KyochiDataTable({
           <TableBody>
             {table.getRowModel().rows.length > 0 ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} className="group h-[56px] hover:h-[84px] k-row-hover transition-[height,background-color] duration-200">
+                <TableRow
+                  key={row.id}
+                  className="group h-[56px] max-h-[56px] hover:h-[84px] hover:max-h-[84px] k-row-hover transition-[height,background-color] duration-200"
+                >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="p-0 align-middle h-full">{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                    <TableCell
+                      key={cell.id}
+                      className="p-0 align-middle h-[56px] max-h-[56px] overflow-hidden group-hover:h-[84px] group-hover:max-h-[84px] transition-[height] duration-200"
+                    >
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </TableCell>
                   ))}
                 </TableRow>
               ))

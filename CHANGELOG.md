@@ -1279,3 +1279,20 @@ This file is maintained for every code change.
     - Ensured `franchises` config keeps `city` and `region` body columns centered via index mapping.
 - Why changed:
     - Requested a single config that defines column alignment and include/exclude data scope per table, and to center city/region body cells.
+
+## 2026-03-19 23:28:05 IST (+0530)
+
+- DateTime: `2026-03-19 23:28:05 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/KyochiDataTable.tsx`
+    - diff lines: `63-71,145-153`
+    - file: `CHANGELOG.md`
+    - diff lines: `1276-1288`
+    - file: `error.log`
+    - diff lines: `214-217`
+- What changed:
+    - Enforced strict row and cell height behavior in the shared DataTable (`56px` default, `84px` on hover).
+    - Added content clamping inside data cells (`2` lines default, `3` lines on hover) so multiline text cannot force uncontrolled row expansion.
+    - Kept existing wrap behavior while preventing variable-height overflow from long fields (for example franchise addresses).
+- Why changed:
+    - Requested strict fixed row height with exactly 1.5x hover height to prevent table layout issues.
