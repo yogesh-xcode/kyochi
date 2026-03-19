@@ -13,6 +13,28 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 12:49:06 IST (+0530)
+
+- DateTime: `2026-03-19 12:49:06 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/KyochiDashboard.tsx`
+    - diff lines: `7,13,45-55`
+    - file: `src/app/ai-insights/page.tsx`
+    - diff lines: `1-14`
+    - file: `src/components/kyochi/KyochiDashboard.tsx.bkp.20260319-124825`
+    - diff lines: `1-60`
+    - file: `src/app/ai-insights/page.tsx.bkp`
+    - diff lines: `1-9`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-33`
+- What changed:
+    - Reduced dashboard recent appointments table to maximum 3 rows.
+    - Removed Intelligence Alerts panel from dashboard.
+    - Moved Intelligence Alerts rendering to `/ai-insights` page below the existing AI placeholder section.
+    - Created backups for modified files before editing.
+- Why changed:
+    - Requested max three appointments on dashboard and relocation of Intelligence Alerts to AI Insights page.
+
 ## 2026-03-19 12:47:12 IST (+0530)
 
 - DateTime: `2026-03-19 12:47:12 IST (+0530)`

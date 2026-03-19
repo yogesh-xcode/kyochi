@@ -72,3 +72,7 @@ Verification: pnpm -s lint and pnpm -s build passed.
 Updated: 2026-03-19 12:47:12 IST (+0530)
 # Global Scale status: Fixed (removed zoom/html scaling; applied file-by-file ~10% UI size reduction)
 Verification: pnpm -s lint and pnpm -s build passed.
+
+Updated: 2026-03-19 12:49:06 IST (+0530)
+# Dashboard/AI Insights status: Fixed (appointments capped at 3; Intelligence Alerts moved to /ai-insights)
+Verification: pnpm -s lint and pnpm -s build passed.
