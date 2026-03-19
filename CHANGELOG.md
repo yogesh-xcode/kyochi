@@ -832,3 +832,17 @@ This file is maintained for every code change.
     - Locked sidebar brand row to fixed `62px` height with non-shrinking behavior so it aligns exactly with the header strip baseline.
 - Why changed:
     - Requested tiny alignment fix between header and sidebar top rows.
+
+## 2026-03-19 14:21:57 IST (+0530)
+
+- DateTime: `2026-03-19 14:21:57 IST (+0530)`
+- File changes:
+    - file: `audit/design-audit-2026-03-19.md`
+    - diff lines: `1-118`
+    - file: `CHANGELOG.md`
+    - diff lines: `+`
+- What changed:
+    - Added comprehensive design compliance audit comparing implemented project UI with `DesignArtifact/kyochi-theme-guide.html`.
+    - Included quantified adherence score, section-wise matrix, followed vs pending lists, route snapshot, and prioritized remediation plan.
+- Why changed:
+    - Requested complete cross-check report and explicit list of how much is followed vs not followed.
