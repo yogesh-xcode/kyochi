@@ -71,28 +71,28 @@ export const kpiCards: KpiCard[] = [
     label: "New Patients",
     value: new Intl.NumberFormat("en-US").format(newPatients),
     delta: `${patientsData.length} Total`,
-    deltaColor: "text-emerald-600 bg-emerald-50",
+    deltaColor: "k-delta-positive",
   },
   {
     icon: "monitoring",
     label: "Monthly Revenue",
     value: toCurrency(monthlyRevenue),
     delta: `${billingData.length} Invoices`,
-    deltaColor: "text-emerald-600 bg-emerald-50",
+    deltaColor: "k-delta-positive",
   },
   {
     icon: "verified",
     label: "Success Rate",
     value: `${successRate.toFixed(1)}%`,
     delta: "Live",
-    deltaColor: "text-slate-400 bg-transparent",
+    deltaColor: "k-delta-neutral",
   },
   {
     icon: "pending_actions",
     label: "Pending Feedback",
     value: completedAppointments.toString(),
     delta: completedAppointments > 0 ? "High" : "Low",
-    deltaColor: "text-amber-600 bg-amber-50",
+    deltaColor: "k-delta-warning",
   },
 ];
 
@@ -173,7 +173,7 @@ export const alerts: AlertItem[] = [
   ...(overdueAlert
     ? [
       {
-        icon: "payments",
+        icon: "payments" as const,
         tone: "red" as const,
         title: "Unpaid Invoices",
         time: "Today",
@@ -183,7 +183,7 @@ export const alerts: AlertItem[] = [
     ]
     : []),
   ...aiInsightsData.map((insight) => ({
-    icon: "psychology",
+    icon: "psychology" as const,
     tone: "blue" as const,
     title: insight.title,
     time: insight.detected_on,

@@ -23,7 +23,7 @@ export function KyochiDashboard() {
     <div className="space-y-4">
       <KpiGrid cards={kpiCards} />
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 items-stretch">
         <div className="xl:col-span-2">
           <RevenueSnapshot
             revenueBars={revenueBars}
@@ -40,7 +40,7 @@ export function KyochiDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 items-stretch">
         <div className="xl:col-span-2">
           <RecentAppointmentsTable appointments={appointments.slice(0, 3)} />
         </div>

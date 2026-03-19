@@ -1,8 +1,28 @@
+export type IconKey =
+  | "dashboard"
+  | "group"
+  | "medical_services"
+  | "self_improvement"
+  | "calendar_today"
+  | "payments"
+  | "psychology"
+  | "analytics"
+  | "person_add"
+  | "monitoring"
+  | "verified"
+  | "pending_actions"
+  | "feedback"
+  | "done_all"
+  | "event_upcoming"
+  | "north_east"
+  | "report_problem"
+  | "auto_awesome";
+
 export type AlertTone = "amber" | "red" | "blue" | "slate";
 export type AppointmentStatus = "Completed" | "In Progress" | "Waiting";
 
 export type KpiCard = {
-  icon: string;
+  icon: IconKey;
   label: string;
   value: string;
   delta: string;
@@ -26,7 +46,7 @@ export type RevenueBar = {
 };
 
 export type AlertItem = {
-  icon: string;
+  icon: IconKey;
   tone: AlertTone;
   title: string;
   time: string;
@@ -36,7 +56,7 @@ export type AlertItem = {
 };
 
 export type NavItem = {
-  icon: string;
+  icon: IconKey;
   label: string;
   href: string;
   pulse?: boolean;

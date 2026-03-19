@@ -1,4 +1,6 @@
-import { AlertIcon, MSO } from "@/components/kyochi/primitives";
+import { TriangleAlert } from "lucide-react";
+
+import { AlertIcon } from "@/components/kyochi/primitives";
 import type { AlertItem } from "@/types";
 
 type AlertsPanelProps = {
@@ -10,7 +12,7 @@ export function AlertsPanel({ alerts }: AlertsPanelProps) {
     <section className="k-surface rounded-xl shadow-sm overflow-hidden flex flex-col">
       <div className="px-4 py-3 border-b k-border-soft k-brand-soft-tint-bg">
         <h4 className="font-bold k-text-strong flex items-center gap-2">
-          <MSO className="text-amber-600">report_problem</MSO>
+          <TriangleAlert className="size-4 k-brand-strong" />
           Intelligence Alerts
         </h4>
       </div>

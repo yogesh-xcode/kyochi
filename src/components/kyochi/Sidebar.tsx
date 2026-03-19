@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Leaf, Settings, X } from "lucide-react";
 
-import { InitialsAvatar, MSO } from "@/components/kyochi/primitives";
+import { KIcon } from "@/components/kyochi/icons";
+import { InitialsAvatar } from "@/components/kyochi/primitives";
 import type { NavSection } from "@/types";
 
 type SidebarProps = {
@@ -25,7 +27,7 @@ export function Sidebar({ navSections, mobileOpen = false, onMobileClose }: Side
   return (
     <>
       <div
-        className={`fixed inset-0 bg-slate-900/30 z-30 lg:hidden transition-opacity ${
+        className={`fixed inset-0 k-overlay z-30 lg:hidden transition-opacity ${
           mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         onClick={onMobileClose}
@@ -38,7 +40,7 @@ export function Sidebar({ navSections, mobileOpen = false, onMobileClose }: Side
       >
       <div className="p-3.5 flex items-center gap-2 border-b k-border-soft">
         <div className="size-8 rounded-full k-brand-bg flex items-center justify-center text-white shadow-sm">
-          <MSO>spa</MSO>
+          <Leaf className="size-4" />
         </div>
         <div className="min-w-0">
           <h1 className="text-[1rem] font-bold k-text-strong leading-none">Kyochi</h1>
@@ -51,7 +53,7 @@ export function Sidebar({ navSections, mobileOpen = false, onMobileClose }: Side
           className="ml-auto lg:hidden size-7 rounded-lg k-text-body hover:bg-[var(--k-color-surface-muted)] hover:text-[var(--k-color-brand)] transition-colors inline-flex items-center justify-center"
           aria-label="Close sidebar"
         >
-          <MSO className="text-[18px]">close</MSO>
+          <X className="size-4" />
         </button>
       </div>
 
@@ -73,7 +75,7 @@ export function Sidebar({ navSections, mobileOpen = false, onMobileClose }: Side
                       : "k-text-body hover:bg-[var(--k-color-surface-muted)] border border-transparent"
                   }`}
                 >
-                  <MSO>{item.icon}</MSO>
+                  <KIcon name={item.icon} className="size-4" />
                   <span>{item.label}</span>
                   {item.pulse && <span className="ml-auto size-2 rounded-full k-brand-bg animate-pulse" />}
                 </Link>
@@ -91,7 +93,7 @@ export function Sidebar({ navSections, mobileOpen = false, onMobileClose }: Side
             <p className="text-[10px] k-text-body truncate">System Admin</p>
           </div>
           <button className="k-text-subtle hover:text-[var(--k-color-brand)] transition-colors">
-            <MSO>settings</MSO>
+            <Settings className="size-4" />
           </button>
         </div>
       </div>

@@ -1,8 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-
-import { MSO } from "@/components/kyochi/primitives";
+import { Bell, ChevronDown, Menu, Plus, Search } from "lucide-react";
 
 const pageMeta: Record<string, { title: string; subtitle: string }> = {
   "/": {
@@ -63,7 +62,7 @@ export function DashboardHeader({ onMenuToggle }: DashboardHeaderProps) {
               className="lg:hidden size-7 rounded-lg k-surface-muted k-text-body hover:text-[var(--k-color-brand)] transition-colors inline-flex items-center justify-center"
               aria-label="Toggle navigation menu"
             >
-              <MSO className="text-[18px]">menu</MSO>
+              <Menu className="size-4" />
             </button>
             <h2 className="text-[18px] leading-tight font-extrabold tracking-tight k-text-strong">{headerTitle}</h2>
           </div>
@@ -71,7 +70,7 @@ export function DashboardHeader({ onMenuToggle }: DashboardHeaderProps) {
 
         <div className="hidden md:flex flex-1 max-w-[500px]">
           <div className="relative w-full">
-            <MSO className="absolute left-2.5 top-1/2 -translate-y-1/2 k-text-subtle text-[16px]">search</MSO>
+            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 k-text-subtle size-4" />
             <input
               className="w-full h-8 pl-8 pr-16 rounded-lg border k-border-soft k-surface text-[12px] k-text-body placeholder:k-text-subtle outline-none focus:border-[var(--k-color-brand)]"
               placeholder="Search dashboard or type a command"
@@ -85,12 +84,12 @@ export function DashboardHeader({ onMenuToggle }: DashboardHeaderProps) {
 
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           <button className="hidden sm:inline-flex h-8 items-center gap-1.5 rounded-lg k-cta-bg px-3 text-white text-[12px] font-semibold transition-colors">
-            <MSO className="text-[14px]">add</MSO>
+            <Plus className="size-3.5" />
             Create Appointment
-            <MSO className="text-[14px]">expand_more</MSO>
+            <ChevronDown className="size-3.5" />
           </button>
           <button className="relative size-7 rounded-full border k-border-soft k-surface k-text-body hover:text-[var(--k-color-brand)] transition-colors inline-flex items-center justify-center">
-            <MSO className="text-[16px]">notifications</MSO>
+            <Bell className="size-4" />
             <span className="absolute top-0.5 right-0.5 size-3 k-notify-bg rounded-full text-[8px] text-white font-bold inline-flex items-center justify-center">
               7
             </span>
@@ -99,7 +98,7 @@ export function DashboardHeader({ onMenuToggle }: DashboardHeaderProps) {
             AK
           </button>
           <button className="size-7 rounded-full border k-border-soft k-surface k-text-subtle hover:text-[var(--k-color-brand)] transition-colors inline-flex items-center justify-center">
-            <MSO className="text-[16px]">expand_more</MSO>
+            <ChevronDown className="size-4" />
           </button>
         </div>
       </div>

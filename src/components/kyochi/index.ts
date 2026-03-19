@@ -10,7 +10,8 @@ export { PatientInflow } from "@/components/kyochi/PatientInflow";
 export { AlertsPanel } from "@/components/kyochi/AlertsPanel";
 export { AiInsightBanner } from "@/components/kyochi/AiInsightBanner";
 
-export { MSO, InitialsAvatar, StatusPill, AlertIcon } from "@/components/kyochi/primitives";
+export { KIcon } from "@/components/kyochi/icons";
+export { InitialsAvatar, StatusPill, AlertIcon } from "@/components/kyochi/primitives";
 
 export type {
   AlertTone,

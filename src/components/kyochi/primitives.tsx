@@ -1,13 +1,5 @@
-import type { AlertTone, AppointmentStatus } from "@/types";
-
-type MSOProps = {
-  children: string;
-  className?: string;
-};
-
-export function MSO({ children, className = "" }: MSOProps) {
-  return <span className={`material-symbols-outlined ${className}`}>{children}</span>;
-}
+import { KIcon } from "@/components/kyochi/icons";
+import type { AlertTone, AppointmentStatus, IconKey } from "@/types";
 
 type InitialsAvatarProps = {
   initials: string;
@@ -30,9 +22,9 @@ type StatusPillProps = {
 
 export function StatusPill({ status }: StatusPillProps) {
   const styles: Record<AppointmentStatus, string> = {
-    Completed: "bg-emerald-100 text-emerald-700",
-    "In Progress": "bg-amber-100 text-amber-700 animate-pulse",
-    Waiting: "bg-slate-100 text-slate-500",
+    Completed: "k-status-completed",
+    "In Progress": "k-status-progress animate-pulse",
+    Waiting: "k-status-waiting",
   };
 
   return <span className={`px-2 py-0.5 text-[10px] font-bold rounded-full ${styles[status]}`}>{status}</span>;
@@ -40,20 +32,20 @@ export function StatusPill({ status }: StatusPillProps) {
 
 type AlertIconProps = {
   tone: AlertTone;
-  icon: string;
+  icon: IconKey;
 };
 
 export function AlertIcon({ tone, icon }: AlertIconProps) {
   const styles: Record<AlertTone, string> = {
-    amber: "bg-amber-50 text-amber-600",
-    red: "bg-red-50 text-red-600",
-    blue: "bg-blue-50 text-blue-600",
-    slate: "bg-slate-100 text-slate-600",
+    amber: "k-tone-amber",
+    red: "k-tone-red",
+    blue: "k-tone-blue",
+    slate: "k-tone-slate",
   };
 
   return (
     <div className={`size-8 rounded-lg flex items-center justify-center shrink-0 ${styles[tone]}`}>
-      <MSO>{icon}</MSO>
+      <KIcon name={icon} className="size-4" />
     </div>
   );
 }

@@ -112,3 +112,9 @@ Verification: pnpm -s lint and pnpm -s build passed.
 Updated: 2026-03-19 13:27:11 IST (+0530)
 # Theme Token Status: Fixed (replaced fragile arbitrary token classes; interactive token states now stable)
 Verification: pnpm -s lint and pnpm -s build passed.
+
+Updated: 2026-03-19 14:14:27 IST (+0530)
+# Chart/Table/Insight Alignment status: Fixed (axis label clipping resolved; chart plot inset and label grid centering applied; insight card row stretch aligned)
+# Icon Migration status: Fixed (active Kyochi dashboard UI switched to Lucide icons)
+# Theme Token Override status: Fixed (removed duplicate root/dark override block from globals.css)
+Verification: pnpm -s lint and pnpm -s build passed.

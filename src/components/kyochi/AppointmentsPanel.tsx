@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { ArrowUpRight, CalendarClock } from "lucide-react";
 
-import { InitialsAvatar, MSO, StatusPill } from "@/components/kyochi/primitives";
+import { InitialsAvatar, StatusPill } from "@/components/kyochi/primitives";
 import type { Appointment } from "@/types";
 
 type AppointmentsPanelProps = {
@@ -12,7 +13,7 @@ export function AppointmentsPanel({ appointments }: AppointmentsPanelProps) {
     <section className="bg-white rounded-xl shadow-sm overflow-hidden">
       <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
         <h4 className="font-bold text-slate-900 flex items-center gap-2">
-          <MSO className="text-[#d4af35]">event_upcoming</MSO>
+          <CalendarClock className="size-4 text-[#d4af35]" />
           Today&apos;s Appointments
         </h4>
         <Link
@@ -20,7 +21,7 @@ export function AppointmentsPanel({ appointments }: AppointmentsPanelProps) {
           className="inline-flex items-center justify-center size-8 rounded-lg text-slate-500 hover:text-[#d4af35] hover:bg-[#f3f0e6] transition-colors"
           aria-label="Open appointments page"
         >
-          <MSO className="text-lg">north_east</MSO>
+          <ArrowUpRight className="size-4" />
         </Link>
       </div>
       <div className="divide-y divide-slate-50">

@@ -1,4 +1,4 @@
-import { MSO } from "@/components/kyochi/primitives";
+import { Sparkles } from "lucide-react";
 
 type AiInsightBannerProps = {
   title: string;
@@ -12,7 +12,7 @@ export function AiInsightBanner({ title, body, primaryAction, secondaryAction }:
     <section className="bg-linear-to-r from-[#201d12] to-slate-800 rounded-xl p-8 text-white relative overflow-hidden">
       <div className="relative z-10 max-w-2xl">
         <div className="flex items-center gap-2 mb-4">
-          <MSO className="text-[#d4af35]">auto_awesome</MSO>
+          <Sparkles className="size-4 text-[#d4af35]" />
           <span className="text-xs font-bold tracking-widest uppercase text-[#d4af35]/80">
             Kyochi AI Insight
           </span>

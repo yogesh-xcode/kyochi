@@ -37,9 +37,11 @@ export function RevenueSnapshot({
           />
         ))}
       </div>
-      <div className="flex justify-between mt-3 text-[8px] k-text-subtle font-bold uppercase">
+      <div className="mt-3 grid grid-cols-7 gap-1 px-1 text-[8px] k-text-subtle font-bold uppercase">
         {revenueBars.map((bar) => (
-          <span key={bar.day}>{bar.day}</span>
+          <span key={bar.day} className="text-center">
+            {bar.day}
+          </span>
         ))}
       </div>
     </section>

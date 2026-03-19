@@ -773,3 +773,49 @@ This file is maintained for every code change.
     - Added route page at `/dashboard` and kept root page behavior unchanged by preserving `src/components/KyochiDashboard.tsx` import compatibility.
 - Why changed:
     - Requested to convert dashboard into reusable `components/kyochi` modules and use it in `dashboard/page.tsx`.
+
+## 2026-03-19 14:14:27 IST (+0530)
+
+- DateTime: `2026-03-19 14:14:27 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/RevenueSnapshot.tsx`
+    - diff lines: `36-42`
+    - file: `src/components/kyochi/PatientInflow.tsx`
+    - diff lines: `9,13,17,35-43`
+    - file: `src/components/kyochi/KyochiDashboard.tsx`
+    - diff lines: `25,41`
+    - file: `src/components/kyochi/InsightRecommendationCard.tsx`
+    - diff lines: `1,17,26`
+    - file: `src/components/kyochi/icons.tsx`
+    - diff lines: `1-52`
+    - file: `src/components/kyochi/Sidebar.tsx`
+    - diff lines: `4-8,29,42,55,77,95`
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `4,65,73,87,89,92,101`
+    - file: `src/components/kyochi/KpiGrid.tsx`
+    - diff lines: `2,18`
+    - file: `src/components/kyochi/AlertsPanel.tsx`
+    - diff lines: `1-4,15`
+    - file: `src/components/kyochi/AppointmentsPanel.tsx`
+    - diff lines: `2,4,16,24`
+    - file: `src/components/kyochi/AiInsightBanner.tsx`
+    - diff lines: `1,15`
+    - file: `src/components/kyochi/primitives.tsx`
+    - diff lines: `1-10,37,50-56`
+    - file: `src/components/kyochi/index.ts`
+    - diff lines: `13`
+    - file: `src/components/kyochi/data.ts`
+    - diff lines: `176,186`
+    - file: `src/types/index.ts`
+    - diff lines: `1-20,24,48,58`
+    - file: `src/app/globals.css`
+    - diff lines: `1,10-31,188-209,273-294,440-456,825-899,834`
+    - file: `src/app/layout.tsx`
+    - diff lines: `30-36`
+- What changed:
+    - Fixed chart axis clipping by changing bottom labels to centered grids and adding safe left/right plot insets.
+    - Aligned lower dashboard section by making insights card stretch and anchor actions consistently.
+    - Migrated active Kyochi dashboard icon usage to Lucide components (sidebar, header, KPI, insights, alerts, appointments, banner).
+    - Removed Material Symbols dependency and conflicting duplicate root theme block that was overriding Kyochi tokens.
+- Why changed:
+    - Requested chart/table/insight alignment fixes and full Lucide icon usage with consistent theme behavior.

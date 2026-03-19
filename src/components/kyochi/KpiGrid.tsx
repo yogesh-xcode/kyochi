@@ -1,5 +1,5 @@
 import type { KpiCard } from "@/types";
-import { MSO } from "@/components/kyochi/primitives";
+import { KIcon } from "@/components/kyochi/icons";
 
 type KpiGridProps = {
   cards: KpiCard[];
@@ -15,7 +15,7 @@ export function KpiGrid({ cards }: KpiGridProps) {
         >
           <div className="flex items-center justify-between mb-3">
             <div className="p-1.5 k-brand-soft-bg rounded-lg k-brand">
-              <MSO>{card.icon}</MSO>
+              <KIcon name={card.icon} className="size-4" />
             </div>
             <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${card.deltaColor}`}>
               {card.delta}
