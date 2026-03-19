@@ -1042,3 +1042,18 @@ This file is maintained for every code change.
     - Kept brand gold usage unchanged for sidebar active state, primary buttons, logo, and warm background system.
 - Why changed:
     - Requested shift from monochrome brand-color usage to professional semantic information colors while preserving Kyochi brand identity.
+
+## 2026-03-19 20:18:49 IST (+0530)
+
+- DateTime: `2026-03-19 20:18:49 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/primitives.tsx`
+    - diff lines: `25`
+    - file: `CHANGELOG.md`
+    - diff lines: `1045-1055`
+    - file: `error.log`
+    - diff lines: `166-169`
+- What changed:
+    - Forced `Completed` status pill text to explicit white using utility override (`!text-white`) to avoid style-layer conflicts.
+- Why changed:
+    - Requested to make the Completed text white.

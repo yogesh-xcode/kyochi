@@ -22,10 +22,9 @@ type StatusPillProps = {
 
 export function StatusPill({ status }: StatusPillProps) {
   const styles: Record<AppointmentStatus, string> = {
-    Completed: "k-status-completed",
-    "In Progress": "k-status-progress",
-    Pending: "k-status-pending",
-    Cancelled: "k-status-cancelled",
+    Completed: "k-status-completed !text-white",
+    "In Progress": "k-status-progress animate-pulse",
+    Waiting: "k-status-waiting",
   };
 
   return (
