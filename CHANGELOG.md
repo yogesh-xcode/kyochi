@@ -1162,3 +1162,20 @@ This file is maintained for every code change.
     - Applied centered-body mapping on key pages (patients wellness score, appointments status, billing price + status).
 - Why changed:
     - Requested centered headers with body-left default and center alignment only for number/badge columns.
+
+## 2026-03-19 23:00:41 IST (+0530)
+
+- DateTime: `2026-03-19 23:00:41 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/KyochiDataTable.tsx`
+    - diff lines: `33-84,118-146`
+    - file: `CHANGELOG.md`
+    - diff lines: `1165-1176`
+    - file: `error.log`
+    - diff lines: `186-189`
+- What changed:
+    - Enforced fixed-width table layout via `table-fixed` + `colgroup` (stable select/actions widths and evenly distributed data columns).
+    - Enabled proper text wrapping in both headers and body cells (`whitespace-normal` + `break-words`) for consistent multi-line behavior.
+    - Applied controlled row hover expansion: row content min-height increases from `56px` to `84px` (~1.5x) on hover.
+- Why changed:
+    - Requested stronger visual alignment consistency across all columns and hover expansion to improve scan/readability.

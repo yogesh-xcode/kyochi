@@ -183,3 +183,7 @@ Verification: pnpm -s lint (passes with known TanStack React Compiler warning) a
 Updated: 2026-03-19 22:57:54 IST (+0530)
 # DataTable Alignment status: Fixed (headers centered globally; body left by default; numeric/badge columns centered via per-page indices)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-19 23:00:41 IST (+0530)
+# DataTable Width/Wrap/Hover status: Fixed (fixed-width columns + wrapped cells + 1.5x max hover row height implemented)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.

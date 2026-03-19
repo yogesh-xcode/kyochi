@@ -32,6 +32,11 @@ export function KyochiDataTable({
   minTableWidthClassName = "min-w-[920px]",
   centeredBodyColumns = [],
 }: KyochiDataTableProps) {
+  const baseRowHeight = 56;
+  const selectColumnWidth = 56;
+  const actionsColumnWidth = 148;
+  const dynamicColumnWidth = columns.length > 0 ? `calc((100% - ${selectColumnWidth + actionsColumnWidth}px) / ${columns.length})` : "auto";
+
   const columnDefs = useMemo<ColumnDef<KyochiTableRow>[]>(
     () => [
       {
@@ -50,13 +55,16 @@ export function KyochiDataTable({
       ...columns.map((column, index) => ({
         id: `column-${index}`,
         header: () => (
-          <span className="inline-flex w-full justify-center text-center type-label uppercase tracking-wider k-text-subtle">
+          <span className="inline-flex w-full justify-center text-center type-label uppercase tracking-wider k-text-subtle whitespace-normal break-words leading-tight">
             {column}
           </span>
         ),
         cell: ({ row }: { row: { original: KyochiTableRow } }) => (
           <div
-            className={`type-body k-text-strong px-4 py-4 align-middle ${centeredBodyColumns.includes(index) ? "text-center" : "text-left"}`}
+            className={`type-body k-text-strong px-4 py-3 whitespace-normal break-words leading-snug transition-[min-height] duration-200 ${
+              centeredBodyColumns.includes(index) ? "text-center" : "text-left"
+            }`}
+            style={{ minHeight: baseRowHeight }}
           >
             {row.original.cells[index]}
           </div>
@@ -70,7 +78,10 @@ export function KyochiDataTable({
           </span>
         ),
         cell: ({ row }) => (
-          <div className="px-4 py-4 text-left">
+          <div
+            className="px-4 py-3 text-left whitespace-normal break-words transition-[min-height] duration-200"
+            style={{ minHeight: baseRowHeight }}
+          >
             {row.original.actions ?? (
               <div className="inline-flex items-center gap-3">
                 <button type="button" className="k-brand hover:underline">
@@ -111,7 +122,14 @@ export function KyochiDataTable({
   return (
     <div className="space-y-3">
       <div className="overflow-hidden rounded-xl border k-border-soft k-surface">
-        <Table className={minTableWidthClassName}>
+        <Table className={`${minTableWidthClassName} table-fixed`}>
+          <colgroup>
+            <col style={{ width: `${selectColumnWidth}px` }} />
+            {columns.map((column, index) => (
+              <col key={`col-${column}-${index}`} style={{ width: dynamicColumnWidth }} />
+            ))}
+            <col style={{ width: `${actionsColumnWidth}px` }} />
+          </colgroup>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id} className="k-surface-muted hover:bg-transparent">
@@ -126,10 +144,12 @@ export function KyochiDataTable({
           <TableBody>
             {table.getRowModel().rows.length > 0 ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} className="k-row-hover transition-colors">
+                <TableRow key={row.id} className="group k-row-hover transition-colors">
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id} className="p-0 align-middle">
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      <div className="group-hover:[&>div]:min-h-[84px]">
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </div>
                     </TableCell>
                   ))}
                 </TableRow>
