@@ -927,3 +927,36 @@ This file is maintained for every code change.
     - Removed the dropdown/toggle icon from the `Create Appointment` header button.
 - Why changed:
     - Requested to remove the toggle from Create Appointment action.
+
+## 2026-03-19 14:56:02 IST (+0530)
+
+- DateTime: `2026-03-19 14:56:02 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/primitives.tsx`
+    - diff lines: `1-2,13-16,30-37`
+    - file: `src/components/kyochi/KpiGrid.tsx`
+    - diff lines: `3-4,14-30`
+    - file: `src/components/kyochi/RevenueSnapshot.tsx`
+    - diff lines: `2,16-49`
+    - file: `src/components/kyochi/PatientInflow.tsx`
+    - diff lines: `1-2,25-51`
+    - file: `src/components/kyochi/RecentAppointmentsTable.tsx`
+    - diff lines: `4-53`
+    - file: `src/components/kyochi/InsightRecommendationCard.tsx`
+    - diff lines: `3-38`
+    - file: `src/components/kyochi/AlertsPanel.tsx`
+    - diff lines: `4-43`
+    - file: `src/components/kyochi/FeaturePlaceholder.tsx`
+    - diff lines: `1-20`
+    - file: `src/components/kyochi/AppointmentsPanel.tsx`
+    - diff lines: `5-51`
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `6,62-91`
+    - file: `src/components/kyochi/Sidebar.tsx`
+    - diff lines: `9,52-60,98-100`
+- What changed:
+    - Migrated active Kyochi dashboard UI to shadcn-driven composition using `Card`, `Button`, `Badge`, `Table`, and `Avatar` primitives.
+    - Preserved existing Kyochi look-and-feel by retaining semantic token classes (`k-*`, `type-*`) on top of shadcn primitives.
+    - Kept route behavior, data wiring, and interactive behavior unchanged while swapping the UI composition layer.
+- Why changed:
+    - Requested to switch to shadcn-driven components without losing current UI feel.

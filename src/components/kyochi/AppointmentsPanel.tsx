@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ArrowUpRight, CalendarClock } from "lucide-react";
 
 import { InitialsAvatar, StatusPill } from "@/components/kyochi/primitives";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { Appointment } from "@/types";
 
 type AppointmentsPanelProps = {
@@ -10,20 +12,23 @@ type AppointmentsPanelProps = {
 
 export function AppointmentsPanel({ appointments }: AppointmentsPanelProps) {
   return (
-    <section className="k-surface rounded-xl shadow-sm border k-border-soft overflow-hidden">
-      <div className="px-6 py-4 border-b k-border-soft flex items-center justify-between">
-        <h4 className="type-h3 text-[18px] k-text-strong flex items-center gap-2">
+    <Card className="k-surface rounded-xl shadow-sm border k-border-soft overflow-hidden py-0 ring-0 gap-0">
+      <CardHeader className="px-6 py-4 border-b k-border-soft flex flex-row items-center justify-between">
+        <CardTitle className="type-h3 text-[18px] k-text-strong flex items-center gap-2">
           <CalendarClock className="size-4 k-brand" />
           Today&apos;s Appointments
-        </h4>
-        <Link
-          href="/appointments"
-          className="inline-flex items-center justify-center size-8 rounded-lg k-text-body hover:k-brand hover:bg-[var(--k-color-surface-muted)] transition-colors"
+        </CardTitle>
+        <Button
+          variant="ghost"
+          size="icon"
+          render={<Link href="/appointments" />}
+          className="size-8 rounded-lg k-text-body hover:k-brand hover:bg-[var(--k-color-surface-muted)] transition-colors"
           aria-label="Open appointments page"
         >
           <ArrowUpRight className="size-4" />
-        </Link>
-      </div>
+        </Button>
+      </CardHeader>
+      <CardContent className="p-0">
       <div className="divide-y k-border-soft">
         {appointments.map((appt) => (
           <div
@@ -43,6 +48,7 @@ export function AppointmentsPanel({ appointments }: AppointmentsPanelProps) {
           </div>
         ))}
       </div>
-    </section>
+      </CardContent>
+    </Card>
   );
 }

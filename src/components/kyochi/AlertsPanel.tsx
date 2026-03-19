@@ -1,6 +1,8 @@
 import { TriangleAlert } from "lucide-react";
 
 import { AlertIcon } from "@/components/kyochi/primitives";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import type { AlertItem } from "@/types";
 
 type AlertsPanelProps = {
@@ -9,14 +11,14 @@ type AlertsPanelProps = {
 
 export function AlertsPanel({ alerts }: AlertsPanelProps) {
   return (
-    <section className="k-surface rounded-xl shadow-sm overflow-hidden flex flex-col">
-      <div className="px-4 py-3 border-b k-border-soft k-brand-soft-tint-bg">
-        <h4 className="type-h3 text-[18px] k-text-strong flex items-center gap-2">
+    <Card className="k-surface rounded-xl shadow-sm overflow-hidden flex flex-col py-0 ring-0 gap-0">
+      <CardHeader className="px-4 py-3 border-b k-border-soft k-brand-soft-tint-bg">
+        <CardTitle className="type-h3 text-[18px] k-text-strong flex items-center gap-2">
           <TriangleAlert className="size-4 k-brand-strong" />
           Intelligence Alerts
-        </h4>
-      </div>
-      <div className="p-4 space-y-4">
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="p-4 space-y-4">
         {alerts.map((alert) => (
           <div key={alert.title} className={`flex gap-3 ${alert.dimmed ? "opacity-60" : ""}`}>
             <AlertIcon tone={alert.tone} icon={alert.icon} />
@@ -27,19 +29,19 @@ export function AlertsPanel({ alerts }: AlertsPanelProps) {
               </div>
               <p className="type-small text-[12px] k-text-body leading-relaxed mb-1">{alert.body}</p>
               {alert.action && (
-                <button className="type-small font-bold k-brand hover:underline">
+                <Button variant="ghost" className="type-small font-bold k-brand hover:underline bg-transparent hover:bg-transparent p-0 h-auto">
                   {alert.action}
-                </button>
+                </Button>
               )}
             </div>
           </div>
         ))}
-      </div>
-      <div className="mt-auto p-3 border-t k-border-soft">
-        <button className="w-full py-1.5 k-brand-soft-bg k-brand type-small font-bold rounded-xl k-brand-bg-hover hover:text-white transition-all">
+      </CardContent>
+      <CardFooter className="mt-auto p-3 border-t k-border-soft bg-transparent">
+        <Button className="w-full py-1.5 k-brand-soft-bg k-brand type-small font-bold rounded-xl k-brand-bg-hover hover:text-white transition-all h-auto">
           Clear All Resolved
-        </button>
-      </div>
-    </section>
+        </Button>
+      </CardFooter>
+    </Card>
   );
 }

@@ -147,3 +147,7 @@ Verification: pnpm -s lint and pnpm -s build passed.
 Updated: 2026-03-19 14:43:30 IST (+0530)
 # Create Appointment Toggle status: Fixed (removed trailing toggle icon from primary header action)
 Verification: pnpm -s lint and pnpm -s build passed.
+
+Updated: 2026-03-19 14:56:02 IST (+0530)
+# shadcn Migration status: Fixed (active dashboard shell/components now compose with shadcn primitives while preserving Kyochi theme tokens)
+Verification: pnpm -s lint and pnpm -s build passed.

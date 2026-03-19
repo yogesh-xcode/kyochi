@@ -1,3 +1,5 @@
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 type PatientInflowProps = {
   labels: string[];
   points: number[];
@@ -20,11 +22,12 @@ export function PatientInflow({ labels, points, todayCount }: PatientInflowProps
   const areaPoints = `${linePoints} 98,50 2,50`;
 
   return (
-    <section className="k-surface p-4 rounded-xl shadow-sm border k-border-soft">
-      <div className="flex items-center justify-between mb-4">
-        <h4 className="type-h3 text-[18px] k-text-strong">Patient Inflow</h4>
+    <Card className="k-surface rounded-xl shadow-sm border k-border-soft py-0 ring-0 gap-0">
+      <CardHeader className="px-4 py-4 border-b-0 flex flex-row items-center justify-between">
+        <CardTitle className="type-h3 text-[18px] k-text-strong">Patient Inflow</CardTitle>
         <span className="type-small k-brand font-bold">Today: +{todayCount}</span>
-      </div>
+      </CardHeader>
+      <CardContent className="px-4 pb-4 pt-0">
       <div className="relative h-40 w-full">
         <svg
           className="w-full h-full k-brand"
@@ -45,6 +48,7 @@ export function PatientInflow({ labels, points, todayCount }: PatientInflowProps
           </span>
         ))}
       </div>
-    </section>
+      </CardContent>
+    </Card>
   );
 }

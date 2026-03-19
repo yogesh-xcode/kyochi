@@ -1,3 +1,5 @@
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { KIcon } from "@/components/kyochi/icons";
 import type { AlertTone, AppointmentStatus, IconKey } from "@/types";
 
@@ -8,11 +10,9 @@ type InitialsAvatarProps = {
 
 export function InitialsAvatar({ initials, className = "" }: InitialsAvatarProps) {
   return (
-    <div
-      className={`rounded-full k-brand-soft-bg flex items-center justify-center font-bold k-brand-strong shrink-0 ${className}`}
-    >
-      {initials}
-    </div>
+    <Avatar className={`k-brand-soft-bg after:border-transparent ${className}`}>
+      <AvatarFallback className="k-brand-soft-bg font-bold k-brand-strong">{initials}</AvatarFallback>
+    </Avatar>
   );
 }
 
@@ -27,7 +27,14 @@ export function StatusPill({ status }: StatusPillProps) {
     Waiting: "k-status-waiting",
   };
 
-  return <span className={`px-2 py-0.5 text-[10px] font-bold rounded-full ${styles[status]}`}>{status}</span>;
+  return (
+    <Badge
+      variant="outline"
+      className={`h-auto border-transparent px-2 py-0.5 text-[10px] font-bold rounded-full ${styles[status]}`}
+    >
+      {status}
+    </Badge>
+  );
 }
 
 type AlertIconProps = {

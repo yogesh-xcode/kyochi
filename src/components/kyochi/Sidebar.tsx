@@ -6,6 +6,7 @@ import { Leaf, Settings, X } from "lucide-react";
 
 import { KIcon } from "@/components/kyochi/icons";
 import { InitialsAvatar } from "@/components/kyochi/primitives";
+import { Button } from "@/components/ui/button";
 import type { NavSection } from "@/types";
 
 type SidebarProps = {
@@ -48,13 +49,15 @@ export function Sidebar({ navSections, mobileOpen = false, onMobileClose }: Side
             Wellness Intelligence
           </p>
         </div>
-        <button
+        <Button
+          variant="ghost"
+          size="icon-sm"
           onClick={onMobileClose}
-          className="ml-auto lg:hidden size-7 rounded-lg k-text-body hover:bg-[var(--k-color-surface-muted)] hover:text-[var(--k-color-brand)] transition-colors inline-flex items-center justify-center"
+          className="ml-auto lg:hidden rounded-lg k-text-body hover:bg-[var(--k-color-surface-muted)] hover:text-[var(--k-color-brand)] transition-colors"
           aria-label="Close sidebar"
         >
           <X className="size-4" />
-        </button>
+        </Button>
       </div>
 
       <nav className="flex-1 px-2 py-3 space-y-5 overflow-y-auto">
@@ -92,9 +95,9 @@ export function Sidebar({ navSections, mobileOpen = false, onMobileClose }: Side
             <p className="text-[12px] font-bold k-text-strong truncate">Alex Kyochi</p>
             <p className="text-[10px] k-text-body truncate">System Admin</p>
           </div>
-          <button className="k-text-subtle hover:text-[var(--k-color-brand)] transition-colors">
+          <Button variant="ghost" size="icon-sm" className="k-text-subtle hover:text-[var(--k-color-brand)] transition-colors">
             <Settings className="size-4" />
-          </button>
+          </Button>
         </div>
       </div>
       </aside>

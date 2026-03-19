@@ -1,6 +1,9 @@
 import Link from "next/link";
 
 import { StatusPill } from "@/components/kyochi/primitives";
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { Appointment } from "@/types";
 
 type RecentAppointmentsTableProps = {
@@ -9,45 +12,47 @@ type RecentAppointmentsTableProps = {
 
 export function RecentAppointmentsTable({ appointments }: RecentAppointmentsTableProps) {
   return (
-    <section className="k-surface rounded-xl shadow-sm border k-border-soft overflow-hidden">
-      <div className="px-3.5 md:px-4 py-3 border-b k-border-soft flex items-center justify-between gap-2.5">
+    <Card className="k-surface rounded-xl shadow-sm border k-border-soft overflow-hidden py-0 ring-0 gap-0">
+      <CardHeader className="px-3.5 md:px-4 py-3 border-b k-border-soft flex flex-row items-center justify-between gap-2.5">
         <div>
-          <h4 className="type-h3 text-[18px] k-text-strong">Recent Appointments</h4>
-          <p className="type-small k-text-body mt-1">Latest schedule activity from the last 30 days.</p>
+          <CardTitle className="type-h3 text-[18px] k-text-strong">Recent Appointments</CardTitle>
+          <CardDescription className="type-small k-text-body mt-1">Latest schedule activity from the last 30 days.</CardDescription>
         </div>
-        <Link
-          href="/appointments"
-          className="type-small font-bold k-brand hover:underline whitespace-nowrap"
+        <Button
+          variant="ghost"
+          size="sm"
+          render={<Link href="/appointments" />}
+          className="type-small font-bold k-brand hover:underline whitespace-nowrap bg-transparent hover:bg-transparent p-0 h-auto"
         >
           Open Full Schedule
-        </Link>
-      </div>
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[560px]">
-          <thead>
-            <tr className="text-left k-surface-muted">
-              <th className="px-3.5 md:px-4 py-2 type-label text-[9px] k-text-subtle">Time</th>
-              <th className="px-3.5 md:px-4 py-2 type-label text-[9px] k-text-subtle">Patient</th>
-              <th className="px-3.5 md:px-4 py-2 type-label text-[9px] k-text-subtle">Session</th>
-              <th className="px-3.5 md:px-4 py-2 type-label text-[9px] k-text-subtle">Status</th>
-            </tr>
-          </thead>
-          <tbody>
+        </Button>
+      </CardHeader>
+      <CardContent className="p-0">
+        <Table className="min-w-[560px]">
+          <TableHeader>
+            <TableRow className="text-left k-surface-muted border-b-0 hover:bg-transparent">
+              <TableHead className="px-3.5 md:px-4 py-2 type-label text-[9px] k-text-subtle h-auto">Time</TableHead>
+              <TableHead className="px-3.5 md:px-4 py-2 type-label text-[9px] k-text-subtle h-auto">Patient</TableHead>
+              <TableHead className="px-3.5 md:px-4 py-2 type-label text-[9px] k-text-subtle h-auto">Session</TableHead>
+              <TableHead className="px-3.5 md:px-4 py-2 type-label text-[9px] k-text-subtle h-auto">Status</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {appointments.map((appt) => (
-              <tr key={appt.id} className="border-t k-border-soft k-row-hover transition-colors">
-                <td className="px-3.5 md:px-4 py-2 type-small font-semibold k-text-body">
+              <TableRow key={appt.id} className="border-t k-border-soft k-row-hover transition-colors hover:bg-transparent">
+                <TableCell className="px-3.5 md:px-4 py-2 type-small font-semibold k-text-body">
                   {appt.time} <span className="type-label normal-case tracking-normal k-text-subtle text-[10px]">{appt.period}</span>
-                </td>
-                <td className="px-3.5 md:px-4 py-2 type-small font-semibold k-text-strong">{appt.name}</td>
-                <td className="px-3.5 md:px-4 py-2 type-small k-text-body">{appt.detail}</td>
-                <td className="px-3.5 md:px-4 py-2">
+                </TableCell>
+                <TableCell className="px-3.5 md:px-4 py-2 type-small font-semibold k-text-strong">{appt.name}</TableCell>
+                <TableCell className="px-3.5 md:px-4 py-2 type-small k-text-body">{appt.detail}</TableCell>
+                <TableCell className="px-3.5 md:px-4 py-2">
                   <StatusPill status={appt.status} />
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
-      </div>
-    </section>
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
   );
 }
