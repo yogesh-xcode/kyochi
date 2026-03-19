@@ -1410,3 +1410,18 @@ This file is maintained for every code change.
     - Added top spacing to page content container so all pages render below the fixed header.
 - Why changed:
     - Requested header to stay fixed like the sidebar.
+
+## 2026-03-20 00:54:27 IST (+0530)
+
+- DateTime: `2026-03-20 00:54:27 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/AppShell.tsx`
+    - diff lines: `28`
+    - file: `CHANGELOG.md`
+    - diff lines: `1395-1404`
+    - file: `error.log`
+    - diff lines: `234-237`
+- What changed:
+    - Adjusted main content top offset to exactly `62px` to match the fixed header row height.
+- Why changed:
+    - Requested header/content alignment to be on the same title row baseline.

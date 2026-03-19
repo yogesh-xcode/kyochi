@@ -227,3 +227,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-20 00:52:49 IST (+0530)
 # Fixed Header status: Fixed (header now pinned like sidebar with desktop left offset and content top offset applied across pages)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-20 00:54:27 IST (+0530)
+# Header Row Alignment status: Fixed (content top offset now exactly equals fixed header row height: 62px)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
