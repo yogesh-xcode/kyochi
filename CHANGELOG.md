@@ -1224,3 +1224,22 @@ This file is maintained for every code change.
       - franchises: `ID`, `Phone`
 - Why changed:
     - Requested center alignment for phone number and id in table body.
+
+## 2026-03-19 23:09:35 IST (+0530)
+
+- DateTime: `2026-03-19 23:09:35 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/KyochiDataTable.tsx`
+    - diff lines: `4,12,62-76`
+    - file: `src/app/billing/page.tsx`
+    - diff lines: `3,68-82`
+    - file: `CHANGELOG.md`
+    - diff lines: `1227-1239`
+    - file: `error.log`
+    - diff lines: `198-201`
+- What changed:
+    - Center-aligned `Actions` column body cells in shared DataTable.
+    - Replaced default action text buttons (`Edit`, `Delete`) with icon-only shadcn buttons (Pencil, Trash).
+    - Replaced billing table custom action text buttons with icon-only shadcn buttons (Eye, Bell).
+- Why changed:
+    - Requested actions column alignment and icon-based actions instead of text labels.

@@ -195,3 +195,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-19 23:04:57 IST (+0530)
 # DataTable ID/Phone Alignment status: Fixed (ID and phone body cells now centered where applicable)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-19 23:09:35 IST (+0530)
+# Actions Column/Icon Buttons status: Fixed (actions centered and text actions replaced with icon buttons)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.

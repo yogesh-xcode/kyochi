@@ -1,4 +1,7 @@
 "use client";
+
+import { Bell, Eye } from "lucide-react";
+
 import appointmentsData from "@/data/appointments.json";
 import billingData from "@/data/billing.json";
 import patientsData from "@/data/patients.json";
@@ -61,15 +64,16 @@ const billingRows: KyochiTableRow[] = billingData.map((invoice) => {
       </span>,
     ],
     actions: (
-      <div className="inline-flex items-center gap-2">
-        <Button variant="ghost" className="h-auto px-2 py-1 type-small font-bold k-brand hover:underline bg-transparent hover:bg-transparent">
-          View
+      <div className="inline-flex items-center gap-1.5">
+        <Button variant="ghost" size="icon-sm" aria-label={`View ${invoice.id.toUpperCase()}`}>
+          <Eye className="size-3.5" />
         </Button>
         <Button
           variant="ghost"
-          className="h-auto px-2 py-1 type-small font-bold k-text-body hover:underline bg-transparent hover:bg-transparent"
+          size="icon-sm"
+          aria-label={status === "Overdue" ? `Send reminder for ${invoice.id.toUpperCase()}` : `Details for ${invoice.id.toUpperCase()}`}
         >
-          {status === "Overdue" ? "Send Reminder" : "Details"}
+          <Bell className="size-3.5" />
         </Button>
       </div>
     ),

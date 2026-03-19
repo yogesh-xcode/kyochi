@@ -2,7 +2,7 @@
 "use no memo";
 
 import { useMemo } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pencil, Trash2 } from "lucide-react";
 import {
   type ColumnDef,
   flexRender,
@@ -11,6 +11,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
+import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 export type KyochiTableRow = {
@@ -78,18 +79,15 @@ export function KyochiDataTable({
           </span>
         ),
         cell: ({ row }) => (
-          <div
-            className="px-4 py-3 text-left whitespace-normal break-words transition-[min-height] duration-200"
-            style={{ minHeight: baseRowHeight }}
-          >
+          <div className="px-4 py-3 text-center whitespace-normal break-words transition-[min-height] duration-200" style={{ minHeight: baseRowHeight }}>
             {row.original.actions ?? (
-              <div className="inline-flex items-center gap-3">
-                <button type="button" className="k-brand hover:underline">
-                  Edit
-                </button>
-                <button type="button" className="k-text-body hover:underline">
-                  Delete
-                </button>
+              <div className="inline-flex items-center gap-1.5">
+                <Button type="button" variant="ghost" size="icon-sm" aria-label={`Edit ${row.original.id}`}>
+                  <Pencil className="size-3.5" />
+                </Button>
+                <Button type="button" variant="ghost" size="icon-sm" aria-label={`Delete ${row.original.id}`}>
+                  <Trash2 className="size-3.5" />
+                </Button>
               </div>
             )}
           </div>
