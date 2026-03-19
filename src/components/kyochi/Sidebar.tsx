@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { InitialsAvatar, MSO } from "@/components/kyochi/primitives";
-import type { NavSection } from "@/components/kyochi/types/index";
+import type { NavSection } from "@/types";
 
 type SidebarProps = {
   navSections: NavSection[];

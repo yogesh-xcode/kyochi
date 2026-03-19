@@ -13,6 +13,40 @@ This file is maintained for every code change.
 
 ---
 
+## 2026-03-19 10:46:41 IST (+0530)
+
+- DateTime: `2026-03-19 10:46:41 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/types/index.ts`
+    - diff lines: `1-49` (moved to root)
+    - file: `src/types/index.ts`
+    - diff lines: `1-49`
+    - file: `src/components/kyochi/data.ts`
+    - diff lines: `7`
+    - file: `src/components/kyochi/primitives.tsx`
+    - diff lines: `1`
+    - file: `src/components/kyochi/Sidebar.tsx`
+    - diff lines: `7`
+    - file: `src/components/kyochi/KpiGrid.tsx`
+    - diff lines: `1`
+    - file: `src/components/kyochi/AlertsPanel.tsx`
+    - diff lines: `2`
+    - file: `src/components/kyochi/AppointmentsPanel.tsx`
+    - diff lines: `2`
+    - file: `src/components/kyochi/RevenueSnapshot.tsx`
+    - diff lines: `1`
+    - file: `src/components/kyochi/KyochiDashboard.tsx`
+    - diff lines: `12`
+    - file: `src/components/kyochi/index.ts`
+    - diff lines: `25`
+    - file: `CHANGELOG.md`
+    - diff lines: `16-47`
+- What changed:
+    - Moved Kyochi shared type module from `src/components/kyochi/types` to root `src/types`.
+    - Rewired all kyochi imports to consume `@/types`.
+- Why changed:
+    - Requested type definitions to live in the root-level types location.
+
 ## 2026-03-19 10:20:22 IST (+0530)
 
 - DateTime: `2026-03-19 10:20:22 IST (+0530)`

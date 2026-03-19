@@ -1,4 +1,4 @@
-import type { KpiCard } from "@/components/kyochi/types/index";
+import type { KpiCard } from "@/types";
 import { MSO } from "@/components/kyochi/primitives";
 
 type KpiGridProps = {

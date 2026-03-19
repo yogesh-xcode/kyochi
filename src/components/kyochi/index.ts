@@ -22,4 +22,4 @@ export type {
   NavSection,
   RevenueBar,
   RevenueRange,
-} from "@/components/kyochi/types/index";
+} from "@/types";

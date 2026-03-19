@@ -1,5 +1,5 @@
 import { AlertIcon, MSO } from "@/components/kyochi/primitives";
-import type { AlertItem } from "@/components/kyochi/types/index";
+import type { AlertItem } from "@/types";
 
 type AlertsPanelProps = {
   alerts: AlertItem[];
