@@ -1,5 +1,5 @@
 import { InitialsAvatar, MSO, StatusPill } from "@/components/kyochi/primitives";
-import type { Appointment } from "@/components/kyochi/types";
+import type { Appointment } from "@/components/kyochi/types/index";
 
 type AppointmentsPanelProps = {
   appointments: Appointment[];

@@ -9,7 +9,7 @@ import { AppointmentsPanel } from "@/components/kyochi/AppointmentsPanel";
 import { KpiGrid } from "@/components/kyochi/KpiGrid";
 import { PatientInflow } from "@/components/kyochi/PatientInflow";
 import { RevenueSnapshot } from "@/components/kyochi/RevenueSnapshot";
-import type { RevenueRange } from "@/components/kyochi/types";
+import type { RevenueRange } from "@/components/kyochi/types/index";
 
 export function KyochiDashboard() {
   const [revenueRange, setRevenueRange] = useState<RevenueRange>("Weekly");

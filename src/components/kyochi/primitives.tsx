@@ -1,4 +1,4 @@
-import type { AlertTone, AppointmentStatus } from "@/components/kyochi/types";
+import type { AlertTone, AppointmentStatus } from "@/components/kyochi/types/index";
 
 type MSOProps = {
   children: string;

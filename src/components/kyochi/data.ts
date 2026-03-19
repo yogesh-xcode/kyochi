@@ -4,7 +4,7 @@ import type {
   KpiCard,
   NavSection,
   RevenueBar,
-} from "@/components/kyochi/types";
+} from "@/components/kyochi/types/index";
 
 export const kpiCards: KpiCard[] = [
   {

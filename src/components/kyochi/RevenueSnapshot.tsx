@@ -1,4 +1,4 @@
-import type { RevenueBar, RevenueRange } from "@/components/kyochi/types";
+import type { RevenueBar, RevenueRange } from "@/components/kyochi/types/index";
 
 type RevenueSnapshotProps = {
   revenueBars: RevenueBar[];

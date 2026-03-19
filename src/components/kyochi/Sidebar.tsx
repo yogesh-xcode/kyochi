@@ -1,5 +1,5 @@
 import { InitialsAvatar, MSO } from "@/components/kyochi/primitives";
-import type { NavSection } from "@/components/kyochi/types";
+import type { NavSection } from "@/components/kyochi/types/index";
 
 type SidebarProps = {
   navSections: NavSection[];
