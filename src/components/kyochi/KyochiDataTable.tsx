@@ -33,7 +33,6 @@ export function KyochiDataTable({
   minTableWidthClassName = "min-w-[920px]",
   centeredBodyColumns = [],
 }: KyochiDataTableProps) {
-  const baseRowHeight = 56;
   const selectColumnWidth = 56;
   const actionsColumnWidth = 148;
   const dynamicColumnWidth = columns.length > 0 ? `calc((100% - ${selectColumnWidth + actionsColumnWidth}px) / ${columns.length})` : "auto";
@@ -48,7 +47,7 @@ export function KyochiDataTable({
           </div>
         ),
         cell: ({ row }) => (
-          <div className="text-center px-4 py-4">
+          <div className="h-full text-center px-4 py-3 overflow-hidden">
             <input type="checkbox" aria-label={`Select ${row.original.id}`} />
           </div>
         ),
@@ -62,10 +61,9 @@ export function KyochiDataTable({
         ),
         cell: ({ row }: { row: { original: KyochiTableRow } }) => (
           <div
-            className={`type-body k-text-strong px-4 py-3 whitespace-normal break-words leading-snug transition-[min-height] duration-200 ${
+            className={`h-full overflow-hidden type-body k-text-strong px-4 py-3 whitespace-normal break-words leading-snug ${
               centeredBodyColumns.includes(index) ? "text-center" : "text-left"
             }`}
-            style={{ minHeight: baseRowHeight }}
           >
             {row.original.cells[index]}
           </div>
@@ -79,7 +77,7 @@ export function KyochiDataTable({
           </span>
         ),
         cell: ({ row }) => (
-          <div className="px-4 py-3 text-center whitespace-normal break-words transition-[min-height] duration-200" style={{ minHeight: baseRowHeight }}>
+          <div className="h-full overflow-hidden px-4 py-3 text-center whitespace-normal break-words">
             {row.original.actions ?? (
               <div className="inline-flex items-center gap-1.5">
                 <Button type="button" variant="ghost" size="icon-sm" aria-label={`Edit ${row.original.id}`}>
@@ -142,13 +140,9 @@ export function KyochiDataTable({
           <TableBody>
             {table.getRowModel().rows.length > 0 ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} className="group k-row-hover transition-colors">
+                <TableRow key={row.id} className="group h-[56px] hover:h-[84px] k-row-hover transition-[height,background-color] duration-200">
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="p-0 align-middle">
-                      <div className="group-hover:[&>div]:min-h-[84px]">
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </div>
-                    </TableCell>
+                    <TableCell key={cell.id} className="p-0 align-middle h-full">{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                   ))}
                 </TableRow>
               ))

@@ -1243,3 +1243,20 @@ This file is maintained for every code change.
     - Replaced billing table custom action text buttons with icon-only shadcn buttons (Eye, Bell).
 - Why changed:
     - Requested actions column alignment and icon-based actions instead of text labels.
+
+## 2026-03-19 23:12:41 IST (+0530)
+
+- DateTime: `2026-03-19 23:12:41 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/KyochiDataTable.tsx`
+    - diff lines: `33-80,124-132`
+    - file: `CHANGELOG.md`
+    - diff lines: `1246-1257`
+    - file: `error.log`
+    - diff lines: `202-205`
+- What changed:
+    - Switched row sizing behavior from min-height expansion to strict fixed-height row control.
+    - Implemented exact hover scaling rule at row level: `56px` default → `84px` on hover (1.5x).
+    - Kept wrap behavior with fixed layout while constraining cell content via overflow handling for consistency.
+- Why changed:
+    - Requested row size to remain fixed and grow to 1.5x specifically on hover.
