@@ -1800,3 +1800,19 @@ This file is maintained for every code change.
     - Removed component-level button color overrides and migrated active UI buttons to shared variants/sizes with only layout-related class overrides.
 - Why changed:
     - Requested project-wide adoption of the unified button system with `globals.css` as the single design truth.
+
+## 2026-03-20 09:31:19 IST (+0530)
+
+- DateTime: `2026-03-20 09:31:19 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/ManagementPageLayout.tsx`
+    - diff lines: `82-113`
+    - file: `CHANGELOG.md`
+    - diff lines: `end`
+    - file: `error.log`
+    - diff lines: `end`
+- What changed:
+    - Reordered the shared management toolbar into two functional groups: discovery (`search`, `filters`, `export`, `print`) and creation (`upload`, `add`).
+    - Updated toolbar layout to use left/right grouped alignment while preserving responsive wrapping.
+- Why changed:
+    - Requested toolbar reordering into discovery and creation.

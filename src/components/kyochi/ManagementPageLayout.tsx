@@ -79,40 +79,42 @@ export function ManagementPageLayout({
 
       <div className="space-y-4">
         <div className="p-0">
-          <div className="flex flex-wrap items-center gap-2">
-            <div className="relative flex-1 min-w-[220px] max-w-md">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-3.5 k-brand" />
-              <Input
-                className="h-9 w-full pl-8 pr-3 border k-border-soft bg-(--k-color-surface) rounded-md text-[13px] focus-visible:border-(--k-color-brand) focus-visible:ring-(--k-color-brand)/20"
-                placeholder={searchPlaceholder}
-              />
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex flex-1 flex-wrap items-center gap-2 min-w-[280px]">
+              <div className="relative flex-1 min-w-[220px] max-w-md">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-3.5 k-brand" />
+                <Input
+                  className="h-9 w-full pl-8 pr-3 border k-border-soft bg-(--k-color-surface) rounded-md text-[13px] focus-visible:border-(--k-color-brand) focus-visible:ring-(--k-color-brand)/20"
+                  placeholder={searchPlaceholder}
+                />
+              </div>
+
+              <Button variant="outline" className="h-9 px-3 rounded-md text-[13px]">
+                <SlidersHorizontal className="size-4" />
+                Filters
+              </Button>
+
+              <Button variant="outline" className="h-9 px-3 rounded-md text-[13px]">
+                <Download className="size-4" />
+                Export
+              </Button>
+              <Button variant="outline" className="h-9 px-3 rounded-md text-[13px]">
+                <Printer className="size-4" />
+                Print
+              </Button>
             </div>
 
-            <Button variant="outline" className="h-9 px-3 rounded-md text-[13px]">
-              <SlidersHorizontal className="size-4" />
-              Filters
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button variant="outline" className="h-9 px-3 rounded-md text-[13px]">
+                <Upload className="size-4" />
+                Upload
+              </Button>
 
-            <Button variant="outline" className="h-9 px-3 rounded-md text-[13px]">
-              <Upload className="size-4" />
-              Upload
-            </Button>
-
-            <div className="h-5 w-px bg-[var(--k-color-border-soft)] mx-0.5" />
-
-            <Button variant="outline" className="h-9 px-3 rounded-md text-[13px]">
-              <Download className="size-4" />
-              Export
-            </Button>
-            <Button variant="outline" className="h-9 px-3 rounded-md text-[13px]">
-              <Printer className="size-4" />
-              Print
-            </Button>
-
-            <Button className="h-9 px-3.5 rounded-md text-[13px]">
-              <Plus className="size-4" />
-              Add
-            </Button>
+              <Button className="h-9 px-3.5 rounded-md text-[13px]">
+                <Plus className="size-4" />
+                Add
+              </Button>
+            </div>
           </div>
         </div>
         <div className="p-0">
