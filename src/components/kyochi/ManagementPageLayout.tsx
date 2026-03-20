@@ -72,7 +72,7 @@ export function ManagementPageLayout({
             <CardTitle className="type-h3 k-text-strong">{title}</CardTitle>
             <div className="flex flex-wrap items-center gap-2 xl:justify-end">
               <Input
-                className="h-11 w-full sm:w-[300px] border k-border-soft bg-(--k-color-surface-muted) rounded-lg focus-visible:border-(--k-color-brand) focus-visible:ring-(--k-color-brand)/25"
+                className="h-11 w-full sm:w-75 border k-border-soft bg-(--k-color-surface-muted) rounded-lg focus-visible:border-(--k-color-brand) focus-visible:ring-(--k-color-brand)/25"
                 placeholder={searchPlaceholder}
               />
               <Button variant="outline" className="h-11 px-3 border k-border-soft bg-(--k-color-surface)">
@@ -99,7 +99,12 @@ export function ManagementPageLayout({
           </div>
         </CardHeader>
         <CardContent className="p-5 space-y-4">
-          <KyochiDataTable columns={columns} rows={rows} centeredBodyColumns={centeredBodyColumns} />
+          <KyochiDataTable
+            columns={columns}
+            rows={rows}
+            centeredBodyColumns={centeredBodyColumns}
+            tone="soft"
+          />
         </CardContent>
       </Card>
     </div>

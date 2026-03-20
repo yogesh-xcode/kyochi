@@ -1506,3 +1506,18 @@ This file is maintained for every code change.
     - Updated appointments table centered-body mapping to include `Date` and `Time` columns.
 - Why changed:
     - Requested date and time values to be centered in appointments table.
+
+## 2026-03-20 07:41:14 IST (+0530)
+
+- DateTime: `2026-03-20 07:41:14 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/ManagementPageLayout.tsx`
+    - diff lines: `111-116`
+    - file: `CHANGELOG.md`
+    - diff lines: `1467-1476`
+    - file: `error.log`
+    - diff lines: `258-261`
+- What changed:
+    - Applied shared `tone="soft"` table styling in management layout so all management tables inherit the same billing-style table theme.
+- Why changed:
+    - Requested all tables to follow the billing table theme.

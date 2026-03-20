@@ -251,3 +251,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-20 06:52:23 IST (+0530)
 # Appointments Date/Time Alignment status: Fixed (Date and Time body columns now centered)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-20 07:41:14 IST (+0530)
+# Global Table Theme status: Fixed (billing-style soft table theme now applied across all management tables)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
