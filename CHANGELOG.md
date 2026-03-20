@@ -1842,3 +1842,21 @@ This file is maintained for every code change.
     - Kept only structural/layout classes on buttons so final appearance consistently comes from the shared global button system.
 - Why changed:
     - Reported that multiple buttons still did not match the global pattern.
+
+## 2026-03-20 09:38:56 IST (+0530)
+
+- DateTime: `2026-03-20 09:38:56 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/KyochiDataTable.tsx`
+    - diff lines: `115-119`
+    - file: `src/app/billing/page.tsx`
+    - diff lines: `77`
+    - file: `CHANGELOG.md`
+    - diff lines: `end`
+    - file: `error.log`
+    - diff lines: `end`
+- What changed:
+    - Standardized row action buttons to compact outline icon controls (`icon-xs`) for consistent table action styling.
+    - Updated billing row action overflow button to use the same outline icon action style.
+- Why changed:
+    - Requested fixing row actions to follow the shared button pattern.

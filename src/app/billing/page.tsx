@@ -74,7 +74,7 @@ const billingRows: KyochiTableRow[] = billingData.map((invoice) => {
             <Button type="button" variant="link" size="xs" className="h-auto px-0 text-[11px]">
               Generate Receipt
             </Button>
-            <Button type="button" variant="ghost" size="icon-xs">
+            <Button type="button" variant="outline" size="icon-xs">
               <EllipsisVertical className="size-3.5" />
             </Button>
           </>

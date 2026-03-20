@@ -112,11 +112,11 @@ export function KyochiDataTable({
         cell: ({ row }) => (
           <div className="flex h-full w-full items-center justify-center overflow-hidden px-4 text-center whitespace-normal break-words">
             {row.original.actions ?? (
-              <div className="inline-flex items-center gap-1.5">
-                <Button type="button" variant="ghost" size="icon-sm" aria-label={`Edit ${row.original.id}`}>
+              <div className="inline-flex items-center gap-1">
+                <Button type="button" variant="outline" size="icon-xs" aria-label={`Edit ${row.original.id}`}>
                   <Pencil className="size-3.5" />
                 </Button>
-                <Button type="button" variant="ghost" size="icon-sm" aria-label={`Delete ${row.original.id}`}>
+                <Button type="button" variant="outline" size="icon-xs" aria-label={`Delete ${row.original.id}`}>
                   <Trash2 className="size-3.5" />
                 </Button>
               </div>
