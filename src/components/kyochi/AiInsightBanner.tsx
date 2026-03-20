@@ -20,7 +20,7 @@ export function AiInsightBanner({ title, body, primaryAction, secondaryAction }:
         <h3 className="type-h2 k-ai-banner-text mb-3">{title}</h3>
         <p className="type-body text-[15px] leading-relaxed k-ai-banner-muted mb-6">{body}</p>
         <div className="flex gap-4">
-          <button className="px-6 py-2.5 rounded-lg k-brand-bg k-primary-foreground type-small font-bold k-brand-bg-hover transition-colors">
+          <button className="px-6 py-2.5 rounded-lg bg-white text-[#111827] type-small font-bold hover:bg-[#f5f7fb] transition-colors">
             {primaryAction}
           </button>
           <button className="px-6 py-2.5 rounded-lg k-ai-banner-secondary type-small font-bold transition-colors">

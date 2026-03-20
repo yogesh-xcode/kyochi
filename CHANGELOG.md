@@ -1521,3 +1521,32 @@ This file is maintained for every code change.
     - Applied shared `tone="soft"` table styling in management layout so all management tables inherit the same billing-style table theme.
 - Why changed:
     - Requested all tables to follow the billing table theme.
+
+## 2026-03-20 07:45:33 IST (+0530)
+
+- DateTime: `2026-03-20 07:45:33 IST (+0530)`
+- File changes:
+    - file: `src/app/globals.css`
+    - diff lines: `496-527`
+    - file: `src/components/kyochi/KyochiDataTable.tsx`
+    - diff lines: `252`
+    - file: `src/components/kyochi/AlertsPanel.tsx`
+    - diff lines: `41`
+    - file: `src/components/kyochi/AiInsightBanner.tsx`
+    - diff lines: `23`
+    - file: `src/components/kyochi/ManagementPageLayout.tsx`
+    - diff lines: `53-56,94-99`
+    - file: `src/components/kyochi/KpiGrid.tsx`
+    - diff lines: `16-20`
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `76`
+    - file: `CHANGELOG.md`
+    - diff lines: `1478-1496`
+    - file: `error.log`
+    - diff lines: `262-265`
+- What changed:
+    - Rebalanced UI color dominance from gold-heavy to neutral-first by making default primary buttons ink/dark and reducing gold hover-border emphasis on cards.
+    - Shifted key actions toward neutral/CTA blue treatments and reduced gold-filled controls in header, management tables, alerts footer, AI banner CTA, and pagination active state.
+    - Neutralized KPI card accents (borders/icon chips) in dashboard and management views while preserving selective gold accents in brand areas (logo, active nav, focused highlights).
+- Why changed:
+    - Requested better balance between gold, white, and black so gold remains an accent instead of the dominant UI color.

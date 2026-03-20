@@ -255,3 +255,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-20 07:41:14 IST (+0530)
 # Global Table Theme status: Fixed (billing-style soft table theme now applied across all management tables)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-20 07:45:33 IST (+0530)
+# Color Balance status: Fixed (gold reduced to accent role; primary controls shifted to neutral/CTA; card/KPI/table emphasis rebalanced toward white + ink)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.

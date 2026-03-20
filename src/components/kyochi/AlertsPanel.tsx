@@ -38,7 +38,7 @@ export function AlertsPanel({ alerts }: AlertsPanelProps) {
         ))}
       </CardContent>
       <CardFooter className="mt-auto p-3 border-t k-border-soft bg-transparent">
-        <Button className="w-full py-1.5 k-brand-soft-bg k-brand type-small font-bold rounded-xl k-brand-bg-hover hover:text-white transition-all h-auto">
+        <Button variant="outline" className="w-full py-1.5 type-small font-bold rounded-xl h-auto border k-border-soft k-surface-muted k-text-body hover:bg-(--k-color-surface) hover:text-(--k-color-text-strong)">
           Clear All Resolved
         </Button>
       </CardFooter>
