@@ -1639,3 +1639,21 @@ This file is maintained for every code change.
     - Cleaned unused `title` destructuring to satisfy lint.
 - Why changed:
     - Requested to remove title and keep the toolbar-only row style like the shared reference.
+
+## 2026-03-20 08:43:24 IST (+0530)
+
+- DateTime: `2026-03-20 08:43:24 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/KpiGrid.tsx`
+    - diff lines: `15-30`
+    - file: `src/components/kyochi/ManagementPageLayout.tsx`
+    - diff lines: `35-76`
+    - file: `CHANGELOG.md`
+    - diff lines: `1558-1569`
+    - file: `error.log`
+    - diff lines: `282-285`
+- What changed:
+    - Restyled dashboard and management KPI cards to match `kpi-card.html` structure: left gold accent border, compact icon tile, compact status pill, uppercase label, larger primary value, and tighter metadata rhythm.
+    - Added KPI delta text-tone mapping for inline value-support text in management cards while preserving existing semantic behavior.
+- Why changed:
+    - Requested KPI cards to follow the provided reference design.

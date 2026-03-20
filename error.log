@@ -275,3 +275,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-20 08:38:39 IST (+0530)
 # Table Header Title Removal status: Fixed (management tables now render toolbar-only header row without section title)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-20 08:43:24 IST (+0530)
+# KPI Card Reference Styling status: Fixed (dashboard + management KPI cards updated to kpi-card reference structure and rhythm)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.

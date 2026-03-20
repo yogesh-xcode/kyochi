@@ -34,7 +34,7 @@ export function ManagementPageLayout({
   centeredBodyColumns = [],
 }: ManagementPageLayoutProps) {
   const kpiIcons: IconKey[] = ["group", "monitoring", "verified", "pending_actions"];
-  const getDeltaTone = (delta: string) => {
+  const getDeltaBadgeTone = (delta: string) => {
     const normalized = delta.toLowerCase();
     if (normalized.includes("review") || normalized.includes("risk") || normalized.includes("queue") || normalized.includes("needs")) {
       return "delta-neg";
@@ -44,23 +44,36 @@ export function ManagementPageLayout({
     }
     return "k-text-subtle";
   };
+  const getDeltaTextTone = (delta: string) => {
+    const normalized = delta.toLowerCase();
+    if (normalized.includes("review") || normalized.includes("risk") || normalized.includes("queue") || normalized.includes("needs")) {
+      return "text-[#c44c1a]";
+    }
+    if (normalized.includes("live") || normalized.includes("verified") || normalized.includes("%") || normalized.includes("leader")) {
+      return "text-[#3b6d11]";
+    }
+    return "k-text-subtle";
+  };
 
   return (
     <div className="space-y-5">
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
         {kpis.map((kpi, index) => (
-          <div key={kpi.label} className="k-card k-metric border k-border-soft">
-            <div className="flex items-center justify-between mb-3">
-              <div className="p-1.5 rounded-md k-brand-soft-bg k-brand">
+          <div key={kpi.label} className="k-card border k-border-soft border-l-[3px] border-l-[var(--kyochi-gold-500)] px-5 py-4">
+            <div className="flex items-center justify-between mb-2.5">
+              <div className="size-9 rounded-lg k-brand-soft-bg k-brand flex items-center justify-center">
                 <KIcon name={kpiIcons[index % kpiIcons.length]} className="size-4" />
               </div>
-              <span className={`inline-flex rounded-full border border-transparent px-2 py-0.5 type-small ${getDeltaTone(kpi.delta)}`}>
+              <span className={`inline-flex rounded-full border border-transparent px-2 py-0.5 text-[10px] font-semibold ${getDeltaBadgeTone(kpi.delta)}`}>
                 {kpi.delta}
               </span>
             </div>
-            <p className="k-metric-label">{kpi.label}</p>
-            <p className="k-metric-value">{kpi.value}</p>
-            <p className="k-metric-delta k-text-body">{kpi.helper}</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.07em] k-text-subtle mb-0.5">{kpi.label}</p>
+            <div className="flex items-baseline gap-2">
+              <p className="text-[30px] leading-[1.1] font-semibold k-text-strong">{kpi.value}</p>
+              <span className={`text-[12px] font-semibold ${getDeltaTextTone(kpi.delta)}`}>{kpi.delta}</span>
+            </div>
+            <p className="text-[12px] mt-1.5 k-text-body">{kpi.helper}</p>
           </div>
         ))}
       </div>

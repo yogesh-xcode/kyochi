@@ -13,19 +13,19 @@ export function KpiGrid({ cards }: KpiGridProps) {
       {cards.map((card) => (
         <Card
           key={card.label}
-          className="k-surface rounded-xl shadow-sm border k-border-soft py-0 ring-0"
+          className="k-surface rounded-xl shadow-sm border k-border-soft border-l-[3px] border-l-[var(--kyochi-gold-500)] py-0 ring-0"
         >
-          <CardContent className="p-4">
-          <div className="flex items-center justify-between mb-3">
-            <div className="p-1.5 k-brand-soft-bg rounded-md k-brand">
-              <KIcon name={card.icon} className="size-4" />
+          <CardContent className="px-5 py-4">
+          <div className="flex items-center justify-between mb-2.5">
+            <div className="size-9 k-brand-soft-bg rounded-lg flex items-center justify-center k-brand">
+              <KIcon name={card.icon} className="size-4.5" />
             </div>
-            <Badge variant="outline" className={`h-auto border-transparent type-label normal-case tracking-normal px-2 py-0.5 rounded-full ${card.deltaColor}`}>
+            <Badge variant="outline" className={`h-auto border-transparent px-2 py-0.5 rounded-full text-[10px] font-semibold tracking-normal normal-case ${card.deltaColor}`}>
               {card.delta}
             </Badge>
           </div>
-          <p className="type-small k-text-body">{card.label}</p>
-          <h3 className="type-h3 k-text-strong mt-1">{card.value}</h3>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.07em] k-text-subtle">{card.label}</p>
+          <h3 className="text-[30px] leading-[1.1] font-semibold k-text-strong mt-1">{card.value}</h3>
           </CardContent>
         </Card>
       ))}
