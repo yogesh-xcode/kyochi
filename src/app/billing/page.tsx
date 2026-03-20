@@ -71,10 +71,10 @@ const billingRows: KyochiTableRow[] = billingData.map((invoice) => {
       <div className="inline-flex items-center gap-2">
         {invoice.status === "paid" ? (
           <>
-            <Button type="button" variant="ghost" size="xs" className="h-auto px-0 text-[11px] font-semibold text-[#c79c00] hover:underline">
+            <Button type="button" variant="link" size="xs" className="h-auto px-0 text-[11px]">
               Generate Receipt
             </Button>
-            <Button type="button" variant="ghost" size="icon-xs" className="text-[#94a3b8] hover:bg-[#f3f6fa]">
+            <Button type="button" variant="ghost" size="icon-xs">
               <EllipsisVertical className="size-3.5" />
             </Button>
           </>
@@ -82,17 +82,17 @@ const billingRows: KyochiTableRow[] = billingData.map((invoice) => {
           <>
             <Button
               type="button"
-              variant="secondary"
+              variant="default"
               size="xs"
-              className="rounded-full border-[#f0d98e] bg-[#f6edcf] text-[#c79c00] hover:bg-[#f2e3b0]"
+              className="rounded-full"
             >
               Accept Payment
             </Button>
             <Button
               type="button"
-              variant="ghost"
+              variant="outline"
               size="xs"
-              className="rounded-full border border-[#dbe4ef] bg-[#f0f4f8] text-[#64748b] hover:bg-[#e8edf3]"
+              className="rounded-full"
             >
               Close Appointment
             </Button>

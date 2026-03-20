@@ -63,7 +63,7 @@ export function DashboardHeader({ onMenuToggle }: DashboardHeaderProps) {
               variant="ghost"
               size="icon-sm"
               onClick={onMenuToggle}
-              className="lg:hidden rounded-lg k-surface-muted k-text-body hover:text-[var(--k-color-brand)] transition-colors"
+              className="lg:hidden rounded-lg"
               aria-label="Toggle navigation menu"
             >
               <Menu className="size-4" />
@@ -73,20 +73,20 @@ export function DashboardHeader({ onMenuToggle }: DashboardHeaderProps) {
         </div>
 
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 ml-auto">
-          <Button className="hidden sm:inline-flex h-8 items-center gap-1.5 rounded-lg bg-[var(--kyochi-gold-400)] text-[var(--kyochi-gold-900)] px-3 type-small font-bold hover:bg-[var(--kyochi-gold-500)] transition-colors">
+          <Button size="xs" className="hidden sm:inline-flex h-8 rounded-lg px-3">
             <Plus className="size-3.5" />
             Create Appointment
           </Button>
-          <Button variant="outline" size="icon-sm" className="relative rounded-full border k-border-soft k-surface k-text-body hover:text-[var(--k-color-brand)] transition-colors">
+          <Button variant="outline" size="icon-sm" className="relative rounded-full">
             <Bell className="size-4" />
             <span className="absolute top-0.5 right-0.5 size-3 k-notify-bg rounded-full text-[8px] text-white font-bold inline-flex items-center justify-center">
               7
             </span>
           </Button>
-          <Button variant="ghost" size="icon-sm" className="rounded-full k-avatar-bg k-text-body text-[10px] font-bold">
+          <Button variant="dark" size="icon-sm" className="rounded-full text-[10px] font-bold">
             AK
           </Button>
-          <Button variant="outline" size="icon-sm" className="rounded-full border k-border-soft k-surface k-text-subtle hover:text-[var(--k-color-brand)] transition-colors">
+          <Button variant="outline" size="icon-sm" className="rounded-full">
             <ChevronDown className="size-4" />
           </Button>
         </div>

@@ -27,10 +27,10 @@ export function InsightRecommendationCard({
       <h4 className="type-h3 text-[18px] k-text-strong mb-2">{title}</h4>
       <p className="type-body text-[14px] leading-relaxed k-text-body mb-3.5">{body}</p>
       <div className="flex flex-col sm:flex-row xl:flex-col gap-1.5 mt-auto">
-        <Button className="w-full sm:w-auto xl:w-full px-3 py-1.5 rounded-xl bg-[var(--kyochi-gold-500)] text-[var(--kyochi-cream-100)] type-small font-bold hover:bg-[var(--kyochi-gold-600)] transition-colors h-auto">
+        <Button className="w-full sm:w-auto xl:w-full rounded-xl">
           {primaryAction}
         </Button>
-        <Button variant="ghost" className="w-full sm:w-auto xl:w-full px-3 py-1.5 rounded-xl k-surface-muted k-text-body type-small font-bold k-brand-soft-bg-hover transition-colors h-auto border border-transparent">
+        <Button variant="outline" className="w-full sm:w-auto xl:w-full rounded-xl">
           {secondaryAction}
         </Button>
       </div>

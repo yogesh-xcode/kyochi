@@ -14,7 +14,7 @@ const buttonVariants = cva(
         outline: "k-btn-secondary",
         secondary: "k-btn-secondary",
         ghost: "k-btn-ghost",
-        destructive: "bg-[#c0392b] text-white border border-transparent hover:bg-[#a93226]",
+        destructive: "k-btn-destructive",
         link: "border-0 bg-transparent px-0 py-0 text-[var(--k-color-brand)] underline-offset-4 hover:underline",
         dark: "k-btn-dark",
       },

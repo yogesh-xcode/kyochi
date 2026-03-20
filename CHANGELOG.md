@@ -1767,3 +1767,36 @@ This file is maintained for every code change.
     - Replaced remaining raw `<button>` usage with shared `Button` component in data table, AI banner, and billing actions.
 - Why changed:
     - Requested using the button system from `kyochi_button_system.html` across the project.
+
+## 2026-03-20 09:26:11 IST (+0530)
+
+- DateTime: `2026-03-20 09:26:11 IST (+0530)`
+- File changes:
+    - file: `src/app/globals.css`
+    - diff lines: `521,538-540,546-548,553-563,587-589`
+    - file: `src/components/ui/button.tsx`
+    - diff lines: `17`
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `66,76,80,86,89`
+    - file: `src/components/kyochi/Sidebar.tsx`
+    - diff lines: `63,105`
+    - file: `src/components/kyochi/ManagementPageLayout.tsx`
+    - diff lines: `91,96,103,107,112`
+    - file: `src/components/kyochi/InsightRecommendationCard.tsx`
+    - diff lines: `30,33`
+    - file: `src/components/kyochi/AlertsPanel.tsx`
+    - diff lines: `32,41`
+    - file: `src/components/kyochi/AiInsightBanner.tsx`
+    - diff lines: `27`
+    - file: `src/app/billing/page.tsx`
+    - diff lines: `74,77,85,87,93,95`
+    - file: `CHANGELOG.md`
+    - diff lines: `end`
+    - file: `error.log`
+    - diff lines: `end`
+- What changed:
+    - Promoted `globals.css` as the authoritative button design source by expanding shared button states (`secondary/ghost/dark/destructive/icon` hover behavior and typography rhythm).
+    - Mapped `destructive` variant in shared `Button` to global class token (`k-btn-destructive`).
+    - Removed component-level button color overrides and migrated active UI buttons to shared variants/sizes with only layout-related class overrides.
+- Why changed:
+    - Requested project-wide adoption of the unified button system with `globals.css` as the single design truth.

@@ -60,7 +60,7 @@ export function Sidebar({ navSections, role, mobileOpen = false, onMobileClose }
           variant="ghost"
           size="icon-sm"
           onClick={onMobileClose}
-          className="ml-auto lg:hidden rounded-lg k-text-body hover:bg-[var(--k-color-surface-muted)] hover:text-[var(--k-color-brand)] transition-colors"
+          className="ml-auto lg:hidden rounded-lg"
           aria-label="Close sidebar"
         >
           <X className="size-4" />
@@ -102,7 +102,7 @@ export function Sidebar({ navSections, role, mobileOpen = false, onMobileClose }
             <p className="text-[12px] font-bold k-text-strong truncate">Alex Kyochi</p>
             <p className="text-[10px] k-text-body truncate">{roleLabels[role]}</p>
           </div>
-          <Button variant="ghost" size="icon-sm" className="k-text-subtle hover:text-[var(--k-color-brand)] transition-colors">
+          <Button variant="ghost" size="icon-sm">
             <Settings className="size-4" />
           </Button>
         </div>

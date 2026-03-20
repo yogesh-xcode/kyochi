@@ -24,7 +24,7 @@ export function AiInsightBanner({ title, body, primaryAction, secondaryAction }:
           <Button variant="secondary" className="h-10 px-6">
             {primaryAction}
           </Button>
-          <Button variant="ghost" className="h-10 px-6 k-ai-banner-secondary text-white border border-white/30 hover:bg-white/15">
+          <Button variant="outline" className="h-10 px-6">
             {secondaryAction}
           </Button>
         </div>

@@ -518,6 +518,8 @@
     border: none;
     transition: all 0.15s ease;
     white-space: nowrap;
+    letter-spacing: 0.2px;
+    line-height: 1;
   }
   .k-btn-primary {
     background: var(--kyochi-gold-500);
@@ -533,14 +535,31 @@
     color: var(--kyochi-gold-600);
     border: 1px solid var(--kyochi-gold-500);
   }
+  .k-btn-secondary:hover {
+    background: color-mix(in srgb, var(--kyochi-gold-500) 10%, transparent);
+  }
   .k-btn-ghost {
     background: transparent;
     color: var(--kyochi-gold-600);
     border: 1px solid transparent;
   }
+  .k-btn-ghost:hover {
+    background: color-mix(in srgb, var(--kyochi-gold-500) 10%, transparent);
+  }
   .k-btn-dark {
     background: #241e15;
     color: var(--kyochi-gold-200);
+  }
+  .k-btn-dark:hover {
+    background: #1b1610;
+  }
+  .k-btn-destructive {
+    background: #c0392b;
+    color: #fff;
+    border: 1px solid transparent;
+  }
+  .k-btn-destructive:hover {
+    background: #a93226;
   }
   .k-btn-sm {
     font-size: 11px;
@@ -564,6 +583,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+  }
+  .k-btn-icon:hover {
+    background: color-mix(in srgb, var(--kyochi-gold-500) 10%, transparent);
   }
 
   /* ── BADGE ── */

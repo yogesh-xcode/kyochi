@@ -29,7 +29,7 @@ export function AlertsPanel({ alerts }: AlertsPanelProps) {
               </div>
               <p className="type-small text-[12px] k-text-body leading-relaxed mb-1">{alert.body}</p>
               {alert.action && (
-                <Button variant="ghost" className="type-small font-bold k-brand hover:underline bg-transparent hover:bg-transparent p-0 h-auto">
+                <Button variant="link" className="type-small font-bold h-auto">
                   {alert.action}
                 </Button>
               )}
@@ -38,7 +38,7 @@ export function AlertsPanel({ alerts }: AlertsPanelProps) {
         ))}
       </CardContent>
       <CardFooter className="mt-auto p-3 border-t k-border-soft bg-transparent">
-        <Button variant="outline" className="w-full py-1.5 type-small font-bold rounded-xl h-auto border k-border-soft k-surface-muted k-text-body hover:bg-(--k-color-surface) hover:text-(--k-color-text-strong)">
+        <Button variant="outline" className="w-full rounded-xl">
           Clear All Resolved
         </Button>
       </CardFooter>

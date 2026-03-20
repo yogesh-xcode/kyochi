@@ -303,3 +303,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-20 09:08:33 IST (+0530)
 # Global Button System status: Fixed (reference button system applied to shared tokens and remaining raw buttons migrated to shared Button component)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-20 09:26:11 IST (+0530)
+# Global Button Truth Source status: Fixed (button visuals now derive from globals.css system classes across active app screens; component overrides reduced to layout-only)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.

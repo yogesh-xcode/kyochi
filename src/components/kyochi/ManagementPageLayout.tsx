@@ -88,28 +88,28 @@ export function ManagementPageLayout({
               />
             </div>
 
-            <Button variant="outline" className="h-9 px-3 rounded-md border k-border-soft bg-(--k-color-surface) text-[13px] font-semibold">
+            <Button variant="outline" className="h-9 px-3 rounded-md text-[13px]">
               <SlidersHorizontal className="size-4" />
               Filters
             </Button>
 
-            <Button variant="outline" className="h-9 px-3 rounded-md border k-border-soft bg-(--k-color-surface) text-[13px] font-semibold">
+            <Button variant="outline" className="h-9 px-3 rounded-md text-[13px]">
               <Upload className="size-4" />
               Upload
             </Button>
 
             <div className="h-5 w-px bg-[var(--k-color-border-soft)] mx-0.5" />
 
-            <Button variant="outline" className="h-9 px-3 rounded-md border k-border-soft bg-(--k-color-surface) text-[13px] font-semibold k-text-body">
+            <Button variant="outline" className="h-9 px-3 rounded-md text-[13px]">
               <Download className="size-4" />
               Export
             </Button>
-            <Button variant="outline" className="h-9 px-3 rounded-md border k-border-soft bg-(--k-color-surface) text-[13px] font-semibold k-text-body">
+            <Button variant="outline" className="h-9 px-3 rounded-md text-[13px]">
               <Printer className="size-4" />
               Print
             </Button>
 
-            <Button className="h-9 px-3.5 rounded-md bg-[var(--kyochi-gold-500)] text-white hover:bg-[var(--kyochi-gold-600)] text-[13px] font-semibold">
+            <Button className="h-9 px-3.5 rounded-md text-[13px]">
               <Plus className="size-4" />
               Add
             </Button>
