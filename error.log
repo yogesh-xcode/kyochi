@@ -311,3 +311,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-20 09:31:19 IST (+0530)
 # Toolbar Grouping status: Fixed (shared management toolbar reordered into discovery and creation groups)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-20 09:36:30 IST (+0530)
+# Button Pattern Consistency status: Fixed (removed remaining local visual overrides so active buttons follow shared global pattern)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.

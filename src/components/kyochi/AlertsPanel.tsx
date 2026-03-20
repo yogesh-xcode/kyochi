@@ -38,7 +38,7 @@ export function AlertsPanel({ alerts }: AlertsPanelProps) {
         ))}
       </CardContent>
       <CardFooter className="mt-auto p-3 border-t k-border-soft bg-transparent">
-        <Button variant="outline" className="w-full rounded-xl">
+        <Button variant="outline" className="w-full">
           Clear All Resolved
         </Button>
       </CardFooter>

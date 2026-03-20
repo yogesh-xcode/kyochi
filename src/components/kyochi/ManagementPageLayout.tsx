@@ -89,28 +89,28 @@ export function ManagementPageLayout({
                 />
               </div>
 
-              <Button variant="outline" className="h-9 px-3 rounded-md text-[13px]">
+              <Button variant="outline" className="h-9 px-3 text-[13px]">
                 <SlidersHorizontal className="size-4" />
                 Filters
               </Button>
 
-              <Button variant="outline" className="h-9 px-3 rounded-md text-[13px]">
+              <Button variant="outline" className="h-9 px-3 text-[13px]">
                 <Download className="size-4" />
                 Export
               </Button>
-              <Button variant="outline" className="h-9 px-3 rounded-md text-[13px]">
+              <Button variant="outline" className="h-9 px-3 text-[13px]">
                 <Printer className="size-4" />
                 Print
               </Button>
             </div>
 
             <div className="flex items-center gap-2">
-              <Button variant="outline" className="h-9 px-3 rounded-md text-[13px]">
+              <Button variant="outline" className="h-9 px-3 text-[13px]">
                 <Upload className="size-4" />
                 Upload
               </Button>
 
-              <Button className="h-9 px-3.5 rounded-md text-[13px]">
+              <Button className="h-9 px-3.5 text-[13px]">
                 <Plus className="size-4" />
                 Add
               </Button>

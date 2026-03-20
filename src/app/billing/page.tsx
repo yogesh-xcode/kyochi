@@ -84,7 +84,6 @@ const billingRows: KyochiTableRow[] = billingData.map((invoice) => {
               type="button"
               variant="default"
               size="xs"
-              className="rounded-full"
             >
               Accept Payment
             </Button>
@@ -92,7 +91,6 @@ const billingRows: KyochiTableRow[] = billingData.map((invoice) => {
               type="button"
               variant="outline"
               size="xs"
-              className="rounded-full"
             >
               Close Appointment
             </Button>

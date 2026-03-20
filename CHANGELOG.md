@@ -1816,3 +1816,29 @@ This file is maintained for every code change.
     - Updated toolbar layout to use left/right grouped alignment while preserving responsive wrapping.
 - Why changed:
     - Requested toolbar reordering into discovery and creation.
+
+## 2026-03-20 09:36:30 IST (+0530)
+
+- DateTime: `2026-03-20 09:36:30 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `66,76,80,86,89`
+    - file: `src/components/kyochi/ManagementPageLayout.tsx`
+    - diff lines: `92,97,101,108,113`
+    - file: `src/components/kyochi/Sidebar.tsx`
+    - diff lines: `63`
+    - file: `src/components/kyochi/InsightRecommendationCard.tsx`
+    - diff lines: `30,33`
+    - file: `src/components/kyochi/AlertsPanel.tsx`
+    - diff lines: `41`
+    - file: `src/app/billing/page.tsx`
+    - diff lines: `86,93`
+    - file: `CHANGELOG.md`
+    - diff lines: `end`
+    - file: `error.log`
+    - diff lines: `end`
+- What changed:
+    - Removed remaining button shape/style overrides (`rounded-full`, `rounded-xl`, extra radius styles) from active UI screens.
+    - Kept only structural/layout classes on buttons so final appearance consistently comes from the shared global button system.
+- Why changed:
+    - Reported that multiple buttons still did not match the global pattern.

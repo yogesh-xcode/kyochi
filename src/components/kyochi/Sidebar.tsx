@@ -60,7 +60,7 @@ export function Sidebar({ navSections, role, mobileOpen = false, onMobileClose }
           variant="ghost"
           size="icon-sm"
           onClick={onMobileClose}
-          className="ml-auto lg:hidden rounded-lg"
+          className="ml-auto lg:hidden"
           aria-label="Close sidebar"
         >
           <X className="size-4" />
