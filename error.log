@@ -263,3 +263,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-20 07:50:53 IST (+0530)
 # Theme Guide Balance status: Fixed (restored guide-accurate gold primary accents and button behavior while keeping neutral surfaces)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-20 08:30:23 IST (+0530)
+# Global Gold Theme status: Fixed (app-wide token palette shifted to warm gold ambiance and shell-level atmospheric gold backdrop applied)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.

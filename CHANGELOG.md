@@ -1577,3 +1577,20 @@ This file is maintained for every code change.
     - Kept surface/background neutrality while returning to theme-guide accent hierarchy.
 - Why changed:
     - Requested balancing to match the theme set from `DesignArtifact/kyochi-theme-guide.html`.
+
+## 2026-03-20 08:30:23 IST (+0530)
+
+- DateTime: `2026-03-20 08:30:23 IST (+0530)`
+- File changes:
+    - file: `src/app/globals.css`
+    - diff lines: `65-88,166-206,434-440`
+    - file: `CHANGELOG.md`
+    - diff lines: `1516-1525`
+    - file: `error.log`
+    - diff lines: `270-273`
+- What changed:
+    - Applied global gold-theme rebalance through root semantic tokens: warmer shell/surface/muted/border/text values to create consistent gold-tinted ambiance across all pages.
+    - Updated dashboard semantic hex tokens to gold-forward values for shell, cards, borders, text, and row-hover states.
+    - Added subtle multi-layer gold atmospheric background treatment to `.k-shell-bg` so theme reads throughout the full application.
+- Why changed:
+    - Requested application-wide gold theme treatment similar to provided reference mood.
