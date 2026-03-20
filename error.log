@@ -295,3 +295,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-20 09:00:13 IST (+0530)
 # Table Zebra Theme status: Fixed (soft tables now follow appointments reference tone with odd/even row differentiation)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-20 09:02:49 IST (+0530)
+# Table/Toolbar Box Removal status: Fixed (outer boxed wrappers removed from management toolbar and soft tables)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.

@@ -5,7 +5,6 @@ import { Download, Plus, Printer, Search, SlidersHorizontal, Upload } from "luci
 import { KyochiDataTable, type KyochiTableRow } from "@/components/kyochi/KyochiDataTable";
 import { KIcon } from "@/components/kyochi/icons";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import type { IconKey } from "@/types";
 
@@ -78,8 +77,8 @@ export function ManagementPageLayout({
         ))}
       </div>
 
-      <Card className="k-surface rounded-2xl border k-border-soft shadow-sm py-0 ring-0 gap-0 overflow-hidden">
-        <CardHeader className="p-4 border-b k-border-soft">
+      <div className="space-y-4">
+        <div className="p-0">
           <div className="flex flex-wrap items-center gap-2">
             <div className="relative flex-1 min-w-[220px] max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-3.5 k-brand" />
@@ -115,16 +114,16 @@ export function ManagementPageLayout({
               Add
             </Button>
           </div>
-        </CardHeader>
-        <CardContent className="p-5 space-y-4">
+        </div>
+        <div className="p-0">
           <KyochiDataTable
             columns={columns}
             rows={rows}
             centeredBodyColumns={centeredBodyColumns}
             tone="soft"
           />
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

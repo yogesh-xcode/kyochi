@@ -1724,3 +1724,21 @@ This file is maintained for every code change.
     - Added explicit odd/even zebra striping for table body rows with gentle hover state on top.
 - Why changed:
     - Requested applying the appointments table reference style and differentiating even/odd rows.
+
+## 2026-03-20 09:02:49 IST (+0530)
+
+- DateTime: `2026-03-20 09:02:49 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/ManagementPageLayout.tsx`
+    - diff lines: `7,80-81,117-118,125-126`
+    - file: `src/components/kyochi/KyochiDataTable.tsx`
+    - diff lines: `158`
+    - file: `CHANGELOG.md`
+    - diff lines: `end`
+    - file: `error.log`
+    - diff lines: `end`
+- What changed:
+    - Removed boxed container styling around management toolbar and table area.
+    - Removed outer table wrapper border/rounded box in soft table mode.
+- Why changed:
+    - Requested removing the box around table and toolbar.

@@ -155,7 +155,7 @@ export function KyochiDataTable({
 
   return (
     <div className="space-y-3">
-      <div className={`overflow-hidden border k-border-soft ${tone === "soft" ? "rounded-2xl bg-white" : "rounded-xl k-surface"}`}>
+      <div className={`${tone === "soft" ? "bg-transparent" : "rounded-xl k-surface"}`}>
         <Table className={`${minTableWidthClassName} table-fixed`}>
           <colgroup>
             {showSelection && <col style={{ width: `${selectColumnWidth}px` }} />}
