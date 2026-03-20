@@ -1708,3 +1708,19 @@ This file is maintained for every code change.
     - Reduced table body text size for shared data tables and recent appointments rows to a smaller, denser scale (`12px` with tightened line-height).
 - Why changed:
     - Requested decreasing table column body text size.
+
+## 2026-03-20 09:00:13 IST (+0530)
+
+- DateTime: `2026-03-20 09:00:13 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/KyochiDataTable.tsx`
+    - diff lines: `171,206-208`
+    - file: `CHANGELOG.md`
+    - diff lines: `end`
+    - file: `error.log`
+    - diff lines: `end`
+- What changed:
+    - Updated soft table theme to align with `kyochi_appointments_table.html` aesthetics (warm muted header tone and refined row treatment).
+    - Added explicit odd/even zebra striping for table body rows with gentle hover state on top.
+- Why changed:
+    - Requested applying the appointments table reference style and differentiating even/odd rows.

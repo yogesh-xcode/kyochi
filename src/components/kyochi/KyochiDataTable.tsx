@@ -168,7 +168,7 @@ export function KyochiDataTable({
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow
                 key={headerGroup.id}
-                className={`${tone === "soft" ? "bg-[#f3f6fa] border-b border-[#e7edf5]" : "k-surface-muted"} hover:bg-transparent`}
+                className={`${tone === "soft" ? "bg-[#f5f2e8] border-b border-[var(--k-color-border-soft)]" : "k-surface-muted"} hover:bg-transparent`}
               >
                 {headerGroup.headers.map((header) => (
                   <TableHead key={header.id} className="align-middle text-center h-12">
@@ -203,7 +203,9 @@ export function KyochiDataTable({
                 <TableRow
                   key={row.id}
                   className={`group h-[42px] max-h-[42px] align-middle hover:h-[63px] hover:max-h-[63px] ${
-                    tone === "soft" ? "border-b border-[#edf1f6] hover:bg-[#fbfcfe]" : "k-row-hover"
+                    tone === "soft"
+                      ? `${row.index % 2 === 0 ? "bg-white" : "bg-[#fbf8ef]"} border-b border-[var(--k-color-border-soft)] hover:bg-[#f7f2df]`
+                      : "k-row-hover"
                   } transition-[height,background-color] duration-200`}
                 >
                   {row.getVisibleCells().map((cell) => (
