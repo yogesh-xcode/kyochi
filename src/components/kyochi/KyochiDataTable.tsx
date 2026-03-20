@@ -28,6 +28,8 @@ type KyochiDataTableProps = {
   rows: KyochiTableRow[];
   minTableWidthClassName?: string;
   centeredBodyColumns?: number[];
+  showSelection?: boolean;
+  tone?: "default" | "soft";
 };
 
 const nodeToText = (node: React.ReactNode): string => {
@@ -52,28 +54,32 @@ export function KyochiDataTable({
   rows,
   minTableWidthClassName = "min-w-[920px]",
   centeredBodyColumns = [],
+  showSelection = true,
+  tone = "default",
 }: KyochiDataTableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
-  const selectColumnWidth = 56;
+  const selectColumnWidth = showSelection ? 56 : 0;
   const actionsColumnWidth = 148;
   const dynamicColumnWidth = columns.length > 0 ? `calc((100% - ${selectColumnWidth + actionsColumnWidth}px) / ${columns.length})` : "auto";
 
   const columnDefs = useMemo<ColumnDef<KyochiTableRow>[]>(
     () => [
-      {
-        id: "select",
-        enableSorting: false,
-        header: () => (
-          <div className="w-12 text-center px-4 py-3">
-            <input type="checkbox" aria-label="Select all rows" />
-          </div>
-        ),
-        cell: ({ row }) => (
-          <div className="h-full text-center px-4 py-3 overflow-hidden">
-            <input type="checkbox" aria-label={`Select ${row.original.id}`} />
-          </div>
-        ),
-      },
+      ...(showSelection
+        ? [{
+            id: "select",
+            enableSorting: false,
+            header: () => (
+              <div className="w-12 text-center px-4 py-3">
+                <input type="checkbox" aria-label="Select all rows" />
+              </div>
+            ),
+            cell: ({ row }: { row: { original: KyochiTableRow } }) => (
+              <div className="h-full text-center px-4 py-3 overflow-hidden">
+                <input type="checkbox" aria-label={`Select ${row.original.id}`} />
+              </div>
+            ),
+          } satisfies ColumnDef<KyochiTableRow>]
+        : []),
       ...columns.map((column, index) => ({
         id: `column-${index}`,
         accessorFn: (row: KyochiTableRow) =>
@@ -119,7 +125,7 @@ export function KyochiDataTable({
         ),
       },
     ],
-    [centeredBodyColumns, columns],
+    [centeredBodyColumns, columns, showSelection],
   );
 
   const table = useReactTable({
@@ -149,10 +155,10 @@ export function KyochiDataTable({
 
   return (
     <div className="space-y-3">
-      <div className="overflow-hidden rounded-xl border k-border-soft k-surface">
+      <div className={`overflow-hidden border k-border-soft ${tone === "soft" ? "rounded-2xl bg-white" : "rounded-xl k-surface"}`}>
         <Table className={`${minTableWidthClassName} table-fixed`}>
           <colgroup>
-            <col style={{ width: `${selectColumnWidth}px` }} />
+            {showSelection && <col style={{ width: `${selectColumnWidth}px` }} />}
             {columns.map((column, index) => (
               <col key={`col-${column}-${index}`} style={{ width: dynamicColumnWidth }} />
             ))}
@@ -160,9 +166,12 @@ export function KyochiDataTable({
           </colgroup>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="k-surface-muted hover:bg-transparent">
+              <TableRow
+                key={headerGroup.id}
+                className={`${tone === "soft" ? "bg-[#f3f6fa] border-b border-[#e7edf5]" : "k-surface-muted"} hover:bg-transparent`}
+              >
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id} className="align-middle text-center">
+                  <TableHead key={header.id} className="align-middle text-center h-12">
                     {header.isPlaceholder ? null : (
                       <button
                         type="button"
@@ -193,7 +202,9 @@ export function KyochiDataTable({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  className="group h-[56px] max-h-[56px] hover:h-[84px] hover:max-h-[84px] k-row-hover transition-[height,background-color] duration-200"
+                  className={`group h-[56px] max-h-[56px] hover:h-[84px] hover:max-h-[84px] ${
+                    tone === "soft" ? "border-b border-[#edf1f6] hover:bg-[#fbfcfe]" : "k-row-hover"
+                  } transition-[height,background-color] duration-200`}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
@@ -207,7 +218,7 @@ export function KyochiDataTable({
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length + 2} className="h-24 text-center type-small k-text-body">
+                <TableCell colSpan={columns.length + (showSelection ? 2 : 1)} className="h-24 text-center type-small k-text-body">
                   No results.
                 </TableCell>
               </TableRow>

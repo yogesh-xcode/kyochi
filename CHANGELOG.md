@@ -1472,3 +1472,22 @@ This file is maintained for every code change.
     - Removed the separate toolbar row below the title.
 - Why changed:
     - Requested search and action buttons to be on the title row.
+
+## 2026-03-20 06:46:53 IST (+0530)
+
+- DateTime: `2026-03-20 06:46:53 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/KyochiDataTable.tsx`
+    - diff lines: `24-31,49-69,162-181,194`
+    - file: `src/app/billing/page.tsx`
+    - diff lines: `3,12,22-26,48-104,119-120`
+    - file: `CHANGELOG.md`
+    - diff lines: `1442-1454`
+    - file: `error.log`
+    - diff lines: `250-253`
+- What changed:
+    - Added DataTable theming controls (`tone`, `showSelection`) and implemented a softer table surface option with muted header/row styling.
+    - Applied reference-style billing table treatment: stacked therapy cell, soft semantic status pills with dot indicators, and contextual action controls (`Generate Receipt` / `Accept Payment`, `Close Appointment`).
+    - Hid selection checkbox column for billing table and enabled soft table tone.
+- Why changed:
+    - Requested table theme to match the provided billing reference style while preserving project theme.

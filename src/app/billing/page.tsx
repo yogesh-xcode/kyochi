@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, Eye } from "lucide-react";
+import { Circle, EllipsisVertical } from "lucide-react";
 
 import appointmentsData from "@/data/appointments.json";
 import billingData from "@/data/billing.json";
@@ -9,7 +9,6 @@ import therapiesData from "@/data/therapies.json";
 
 import { KyochiDataTable, type KyochiTableRow } from "@/components/kyochi/KyochiDataTable";
 import { tableViewConfigs } from "@/components/kyochi/tableConfigs";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const patientById = new Map(patientsData.map((patient) => [patient.id, patient]));
@@ -20,9 +19,9 @@ const toCurrency = (amount: number, currency: string) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency, maximumFractionDigits: 0 }).format(amount);
 
 const statusClassByInvoiceStatus: Record<string, string> = {
-  paid: "bg-[#22c55e] text-white",
-  pending: "bg-[#f59e0b] text-white",
-  overdue: "bg-[#ef4444] text-white",
+  paid: "bg-[#dcfce7] text-[#16a34a]",
+  pending: "bg-[#fee2e2] text-[#ef4444]",
+  overdue: "bg-[#fee2e2] text-[#ef4444]",
 };
 
 const formatInvoiceStatus = (status: string) => {
@@ -46,29 +45,54 @@ const billingRows: KyochiTableRow[] = billingData.map((invoice) => {
 
   return {
     id: invoice.id,
+    sortValues: [
+      therapy?.name ?? "Therapy Session",
+      therapy?.duration_min ?? 45,
+      invoice.amount,
+      status,
+    ],
     cells: [
-      `${therapy?.name ?? "Therapy Session"} • ${patient?.full_name ?? "Unknown Patient"}`,
+      <div key={`${invoice.id}-therapy`} className="flex flex-col gap-0.5">
+        <span className="font-semibold text-[#1e293b]">{therapy?.name ?? "Therapy Session"}</span>
+        <span className="text-[11px] text-[#94a3b8]">ID: #{invoice.id.toUpperCase()} • {patient?.full_name ?? "Unknown Patient"}</span>
+      </div>,
       `${therapy?.duration_min ?? 45} mins`,
       toCurrency(invoice.amount, invoice.currency),
       <span
         key={`${invoice.id}-status`}
-        className={`inline-flex rounded-full px-2.5 py-0.5 text-[10px] font-bold ${statusClassByInvoiceStatus[invoice.status] ?? "k-status-waiting"}`}
+        className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${statusClassByInvoiceStatus[invoice.status] ?? "k-status-waiting"}`}
       >
+        <Circle className="size-2 fill-current stroke-none" />
         {status}
       </span>,
     ],
     actions: (
-      <div className="inline-flex items-center gap-1.5">
-        <Button variant="ghost" size="icon-sm" aria-label={`View ${invoice.id.toUpperCase()}`}>
-          <Eye className="size-3.5" />
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon-sm"
-          aria-label={status === "Overdue" ? `Send reminder for ${invoice.id.toUpperCase()}` : `Details for ${invoice.id.toUpperCase()}`}
-        >
-          <Bell className="size-3.5" />
-        </Button>
+      <div className="inline-flex items-center gap-2">
+        {invoice.status === "paid" ? (
+          <>
+            <button type="button" className="text-[11px] font-semibold text-[#c79c00] hover:underline">
+              Generate Receipt
+            </button>
+            <button type="button" className="inline-flex size-7 items-center justify-center rounded-md text-[#94a3b8] hover:bg-[#f3f6fa]">
+              <EllipsisVertical className="size-3.5" />
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              type="button"
+              className="rounded-full bg-[#f6edcf] px-2.5 py-1 text-[10px] font-semibold text-[#c79c00] hover:bg-[#f2e3b0]"
+            >
+              Accept Payment
+            </button>
+            <button
+              type="button"
+              className="rounded-full bg-[#f0f4f8] px-2.5 py-1 text-[10px] font-semibold text-[#64748b] hover:bg-[#e8edf3]"
+            >
+              Close Appointment
+            </button>
+          </>
+        )}
       </div>
     ),
   };
@@ -89,6 +113,8 @@ export default function BillingPage() {
             rows={billingRows}
             minTableWidthClassName="min-w-[760px]"
             centeredBodyColumns={tableConfig.centeredBodyColumns}
+            showSelection={false}
+            tone="soft"
           />
         </CardContent>
       </Card>
