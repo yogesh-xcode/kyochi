@@ -231,3 +231,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-20 00:54:27 IST (+0530)
 # Header Row Alignment status: Fixed (content top offset now exactly equals fixed header row height: 62px)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-20 06:39:02 IST (+0530)
+# KPI Top Spacing status: Fixed (reintroduced inner content top spacing while retaining fixed-header offset)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.

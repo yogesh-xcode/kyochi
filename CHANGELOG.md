@@ -1425,3 +1425,18 @@ This file is maintained for every code change.
     - Adjusted main content top offset to exactly `62px` to match the fixed header row height.
 - Why changed:
     - Requested header/content alignment to be on the same title row baseline.
+
+## 2026-03-20 06:39:02 IST (+0530)
+
+- DateTime: `2026-03-20 06:39:02 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/AppShell.tsx`
+    - diff lines: `28-30`
+    - file: `CHANGELOG.md`
+    - diff lines: `1406-1416`
+    - file: `error.log`
+    - diff lines: `238-241`
+- What changed:
+    - Restored top breathing space above page content/KPI sections by adding inner top padding while preserving the fixed 62px header offset.
+- Why changed:
+    - Reported missing space above KPI cards after header row alignment update.
