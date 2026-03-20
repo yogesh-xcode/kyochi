@@ -1622,3 +1622,20 @@ This file is maintained for every code change.
     - Added compact legend treatment in revenue chart header for a cleaner dashboard-analytics look.
 - Why changed:
     - Requested trying the provided reference style across the application while keeping Kyochi branding.
+
+## 2026-03-20 08:38:39 IST (+0530)
+
+- DateTime: `2026-03-20 08:38:39 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/ManagementPageLayout.tsx`
+    - diff lines: `30-32,70-101`
+    - file: `CHANGELOG.md`
+    - diff lines: `1546-1556`
+    - file: `error.log`
+    - diff lines: `278-281`
+- What changed:
+    - Removed section title rendering from management table headers.
+    - Kept only search and action controls in the header row, matching the provided layout direction.
+    - Cleaned unused `title` destructuring to satisfy lint.
+- Why changed:
+    - Requested to remove title and keep the toolbar-only row style like the shared reference.
