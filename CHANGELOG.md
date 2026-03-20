@@ -1456,3 +1456,19 @@ This file is maintained for every code change.
     - Kept `Filters` on the same row next to the search input (no drop to next line on desktop).
 - Why changed:
     - Reported extra gap and misalignment in toolbar row.
+
+## 2026-03-20 06:43:45 IST (+0530)
+
+- DateTime: `2026-03-20 06:43:45 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/ManagementPageLayout.tsx`
+    - diff lines: `70-109`
+    - file: `CHANGELOG.md`
+    - diff lines: `1430-1440`
+    - file: `error.log`
+    - diff lines: `246-249`
+- What changed:
+    - Moved search input and all table action buttons into the same row as the section title inside the card header.
+    - Removed the separate toolbar row below the title.
+- Why changed:
+    - Requested search and action buttons to be on the title row.

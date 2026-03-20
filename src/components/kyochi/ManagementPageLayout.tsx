@@ -67,23 +67,18 @@ export function ManagementPageLayout({
       </div>
 
       <Card className="k-surface rounded-2xl border k-border-soft shadow-sm py-0 ring-0 gap-0 overflow-hidden">
-        <CardHeader className="p-5 pb-3 border-b k-border-soft">
-          <CardTitle className="type-h3 k-text-strong">{title}</CardTitle>
-        </CardHeader>
-        <CardContent className="px-5 pb-5 pt-3 space-y-4">
-          <div className="grid grid-cols-1 gap-2 xl:grid-cols-[auto_1fr_auto] xl:items-center">
-            <div className="flex items-center gap-2 min-w-0">
+        <CardHeader className="p-5 border-b k-border-soft">
+          <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+            <CardTitle className="type-h3 k-text-strong">{title}</CardTitle>
+            <div className="flex flex-wrap items-center gap-2 xl:justify-end">
               <Input
-                className="h-11 w-full sm:w-[340px] border k-border-soft bg-(--k-color-surface-muted) rounded-lg focus-visible:border-(--k-color-brand) focus-visible:ring-(--k-color-brand)/25"
+                className="h-11 w-full sm:w-[300px] border k-border-soft bg-(--k-color-surface-muted) rounded-lg focus-visible:border-(--k-color-brand) focus-visible:ring-(--k-color-brand)/25"
                 placeholder={searchPlaceholder}
               />
               <Button variant="outline" className="h-11 px-3 border k-border-soft bg-(--k-color-surface)">
                 <SlidersHorizontal className="size-4" />
                 Filters
               </Button>
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center gap-2">
               <Button variant="outline" className="h-11 px-3 border k-border-soft bg-(--k-color-surface)">
                 <Upload className="size-4" />
                 Upload
@@ -96,16 +91,14 @@ export function ManagementPageLayout({
                 <Printer className="size-4" />
                 Print
               </Button>
-            </div>
-
-            <div className="flex items-center justify-start xl:justify-end">
               <Button className="h-11 px-3 k-brand-bg k-primary-foreground hover:opacity-95">
                 <Plus className="size-4" />
                 Add
               </Button>
             </div>
           </div>
-
+        </CardHeader>
+        <CardContent className="p-5 space-y-4">
           <KyochiDataTable columns={columns} rows={rows} centeredBodyColumns={centeredBodyColumns} />
         </CardContent>
       </Card>

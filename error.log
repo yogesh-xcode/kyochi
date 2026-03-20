@@ -239,3 +239,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-20 06:42:00 IST (+0530)
 # Table Toolbar Alignment status: Fixed (reduced top gap; search and filters aligned in one row on desktop)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-20 06:43:45 IST (+0530)
+# Title Row Controls status: Fixed (search + filter + upload/export/print + add moved into section title row; separate toolbar row removed)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
