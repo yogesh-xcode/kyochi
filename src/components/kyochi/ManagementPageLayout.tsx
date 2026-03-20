@@ -50,9 +50,9 @@ export function ManagementPageLayout({
     <div className="space-y-5">
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
         {kpis.map((kpi, index) => (
-          <div key={kpi.label} className="k-card k-metric border-b-4 k-border-soft">
+          <div key={kpi.label} className="k-card k-metric border-b-4 k-brand-border-soft">
             <div className="flex items-center justify-between mb-3">
-              <div className="p-1.5 rounded-lg k-surface-muted k-text-body">
+              <div className="p-1.5 rounded-lg k-brand-soft-bg k-brand">
                 <KIcon name={kpiIcons[index % kpiIcons.length]} className="size-4" />
               </div>
               <span className={`inline-flex rounded-full border border-transparent px-2 py-0.5 type-small ${getDeltaTone(kpi.delta)}`}>
@@ -83,7 +83,7 @@ export function ManagementPageLayout({
                 <Upload className="size-4" />
                 Upload
               </Button>
-              <Button variant="outline" className="h-11 px-3 border k-border-soft bg-(--k-color-surface)">
+              <Button className="h-11 px-3 k-brand-bg k-primary-foreground hover:opacity-95">
                 <Download className="size-4" />
                 Export
               </Button>
@@ -91,7 +91,7 @@ export function ManagementPageLayout({
                 <Printer className="size-4" />
                 Print
               </Button>
-              <Button className="h-11 px-3 k-cta-bg text-white hover:bg-(--k-color-cta-hover)">
+              <Button className="h-11 px-3 k-brand-bg k-primary-foreground hover:opacity-95">
                 <Plus className="size-4" />
                 Add
               </Button>

@@ -495,7 +495,7 @@
   }
   .k-card:hover {
     box-shadow: var(--shadow-md);
-    border-color: color-mix(in srgb, var(--k-color-text-subtle) 28%, transparent);
+    border-color: rgba(212, 175, 53, 0.3);
   }
   .k-card-gold {
     border-color: rgba(212, 175, 53, 0.35);
@@ -519,12 +519,12 @@
     white-space: nowrap;
   }
   .k-btn-primary {
-    background: #111827;
-    color: #ffffff;
-    box-shadow: var(--shadow-sm);
+    background: var(--gold);
+    color: #3d2d04;
+    box-shadow: var(--shadow-gold);
   }
   .k-btn-primary:hover {
-    background: #0b1228;
+    background: var(--kyochi-gold-500);
     transform: translateY(-1px);
   }
   .k-btn-secondary {

@@ -249,7 +249,7 @@ export function KyochiDataTable({
                 type="button"
                 className={`inline-flex size-8 items-center justify-center rounded-lg type-small font-bold ${
                   active
-                    ? "bg-[#111827] text-white"
+                    ? "k-brand-bg k-primary-foreground"
                     : "border k-border-soft k-text-strong"
                 }`}
                 onClick={() => table.setPageIndex(index)}

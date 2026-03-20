@@ -1550,3 +1550,30 @@ This file is maintained for every code change.
     - Neutralized KPI card accents (borders/icon chips) in dashboard and management views while preserving selective gold accents in brand areas (logo, active nav, focused highlights).
 - Why changed:
     - Requested better balance between gold, white, and black so gold remains an accent instead of the dominant UI color.
+
+## 2026-03-20 07:50:53 IST (+0530)
+
+- DateTime: `2026-03-20 07:50:53 IST (+0530)`
+- File changes:
+    - file: `src/app/globals.css`
+    - diff lines: `496-527`
+    - file: `src/components/kyochi/ManagementPageLayout.tsx`
+    - diff lines: `53-56,86-99`
+    - file: `src/components/kyochi/KpiGrid.tsx`
+    - diff lines: `16-20`
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `76`
+    - file: `src/components/kyochi/InsightRecommendationCard.tsx`
+    - diff lines: `21,30`
+    - file: `src/components/kyochi/KyochiDataTable.tsx`
+    - diff lines: `252`
+    - file: `CHANGELOG.md`
+    - diff lines: `1498-1514`
+    - file: `error.log`
+    - diff lines: `266-269`
+- What changed:
+    - Re-aligned primary button and card-hover behavior with `kyochi-theme-guide.html` (gold primary CTA, guide-style gold hover emphasis).
+    - Restored guide-consistent gold accent usage in header CTA, KPI accents, recommendation card chip/primary CTA, and active table pagination.
+    - Kept surface/background neutrality while returning to theme-guide accent hierarchy.
+- Why changed:
+    - Requested balancing to match the theme set from `DesignArtifact/kyochi-theme-guide.html`.
