@@ -510,32 +510,33 @@
     gap: 6px;
     font-family: var(--font-sans);
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 500;
     border-radius: var(--radius-md);
-    padding: 8px 18px;
+    padding: 0 18px;
+    height: 40px;
     cursor: pointer;
     border: none;
     transition: all 0.15s ease;
     white-space: nowrap;
   }
   .k-btn-primary {
-    background: var(--gold);
-    color: #3d2d04;
-    box-shadow: var(--shadow-gold);
+    background: var(--kyochi-gold-500);
+    color: #ffffff;
+    border: 1px solid transparent;
   }
   .k-btn-primary:hover {
-    background: var(--kyochi-gold-500);
+    background: var(--kyochi-gold-600);
     transform: translateY(-1px);
   }
   .k-btn-secondary {
-    background: var(--kyochi-cream-200);
-    color: var(--text);
-    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--kyochi-gold-600);
+    border: 1px solid var(--kyochi-gold-500);
   }
   .k-btn-ghost {
     background: transparent;
-    color: var(--text-2);
-    border: 1px solid var(--border);
+    color: var(--kyochi-gold-600);
+    border: 1px solid transparent;
   }
   .k-btn-dark {
     background: #241e15;
@@ -543,7 +544,8 @@
   }
   .k-btn-sm {
     font-size: 11px;
-    padding: 5px 12px;
+    padding: 0 14px;
+    height: 30px;
     border-radius: 6px;
   }
   .k-btn-lg {
@@ -552,13 +554,13 @@
     border-radius: var(--radius-lg);
   }
   .k-btn-icon {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     padding: 0;
     border-radius: var(--radius-md);
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--text-2);
+    border: 1px solid var(--kyochi-gold-500);
+    background: transparent;
+    color: var(--kyochi-gold-600);
     display: inline-flex;
     align-items: center;
     justify-content: center;

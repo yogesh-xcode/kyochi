@@ -1742,3 +1742,28 @@ This file is maintained for every code change.
     - Removed outer table wrapper border/rounded box in soft table mode.
 - Why changed:
     - Requested removing the box around table and toolbar.
+
+## 2026-03-20 09:08:33 IST (+0530)
+
+- DateTime: `2026-03-20 09:08:33 IST (+0530)`
+- File changes:
+    - file: `src/app/globals.css`
+    - diff lines: `513,515,522-523,527-528,531-532,537-538,546-547,555-557,559-561`
+    - file: `src/components/ui/button.tsx`
+    - diff lines: `17`
+    - file: `src/components/kyochi/KyochiDataTable.tsx`
+    - diff lines: `176-181,193,238-274`
+    - file: `src/components/kyochi/AiInsightBanner.tsx`
+    - diff lines: `2,24-29`
+    - file: `src/app/billing/page.tsx`
+    - diff lines: `12,74-98`
+    - file: `CHANGELOG.md`
+    - diff lines: `end`
+    - file: `error.log`
+    - diff lines: `end`
+- What changed:
+    - Standardized shared button tokens to match `kyochi_button_system.html` (primary/secondary/ghost/icon sizing and colors).
+    - Updated destructive variant styling in shared `Button` component to match the reference destructive tone.
+    - Replaced remaining raw `<button>` usage with shared `Button` component in data table, AI banner, and billing actions.
+- Why changed:
+    - Requested using the button system from `kyochi_button_system.html` across the project.

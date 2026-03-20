@@ -9,6 +9,7 @@ import therapiesData from "@/data/therapies.json";
 
 import { KyochiDataTable, type KyochiTableRow } from "@/components/kyochi/KyochiDataTable";
 import { tableViewConfigs } from "@/components/kyochi/tableConfigs";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const patientById = new Map(patientsData.map((patient) => [patient.id, patient]));
@@ -70,27 +71,31 @@ const billingRows: KyochiTableRow[] = billingData.map((invoice) => {
       <div className="inline-flex items-center gap-2">
         {invoice.status === "paid" ? (
           <>
-            <button type="button" className="text-[11px] font-semibold text-[#c79c00] hover:underline">
+            <Button type="button" variant="ghost" size="xs" className="h-auto px-0 text-[11px] font-semibold text-[#c79c00] hover:underline">
               Generate Receipt
-            </button>
-            <button type="button" className="inline-flex size-7 items-center justify-center rounded-md text-[#94a3b8] hover:bg-[#f3f6fa]">
+            </Button>
+            <Button type="button" variant="ghost" size="icon-xs" className="text-[#94a3b8] hover:bg-[#f3f6fa]">
               <EllipsisVertical className="size-3.5" />
-            </button>
+            </Button>
           </>
         ) : (
           <>
-            <button
+            <Button
               type="button"
-              className="rounded-full bg-[#f6edcf] px-2.5 py-1 text-[10px] font-semibold text-[#c79c00] hover:bg-[#f2e3b0]"
+              variant="secondary"
+              size="xs"
+              className="rounded-full border-[#f0d98e] bg-[#f6edcf] text-[#c79c00] hover:bg-[#f2e3b0]"
             >
               Accept Payment
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
-              className="rounded-full bg-[#f0f4f8] px-2.5 py-1 text-[10px] font-semibold text-[#64748b] hover:bg-[#e8edf3]"
+              variant="ghost"
+              size="xs"
+              className="rounded-full border border-[#dbe4ef] bg-[#f0f4f8] text-[#64748b] hover:bg-[#e8edf3]"
             >
               Close Appointment
-            </button>
+            </Button>
           </>
         )}
       </div>

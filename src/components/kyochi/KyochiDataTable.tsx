@@ -173,10 +173,12 @@ export function KyochiDataTable({
                 {headerGroup.headers.map((header) => (
                   <TableHead key={header.id} className="align-middle text-center h-12">
                     {header.isPlaceholder ? null : (
-                      <button
+                      <Button
                         type="button"
+                        variant="ghost"
+                        size="xs"
                         onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
-                        className={`inline-flex w-full items-center justify-center gap-1 ${
+                        className={`inline-flex h-auto w-full items-center justify-center gap-1 border-0 bg-transparent px-0 py-0 hover:bg-transparent ${
                           header.column.getCanSort() ? "cursor-pointer" : "cursor-default"
                         }`}
                       >
@@ -190,7 +192,7 @@ export function KyochiDataTable({
                         {header.column.getCanSort() && !header.column.getIsSorted() && (
                           <ArrowUpDown className="size-3.5 k-text-subtle" />
                         )}
-                      </button>
+                      </Button>
                     )}
                   </TableHead>
                 ))}
@@ -235,39 +237,41 @@ export function KyochiDataTable({
           <span className="font-bold k-text-strong">{totalRows}</span> records
         </p>
         <div className="flex items-center gap-2">
-          <button
+          <Button
             type="button"
-            className="inline-flex size-8 items-center justify-center rounded-lg border k-border-soft k-text-subtle disabled:opacity-40"
+            variant="outline"
+            size="icon-xs"
+            className="disabled:opacity-40"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
             <ChevronLeft className="size-4" />
-          </button>
+          </Button>
           {Array.from({ length: Math.min(table.getPageCount(), 3) }, (_, index) => {
             const active = index === pageIndex;
             return (
-              <button
+              <Button
                 key={`page-${index + 1}`}
                 type="button"
-                className={`inline-flex size-8 items-center justify-center rounded-lg type-small font-bold ${
-                  active
-                    ? "k-brand-bg k-primary-foreground"
-                    : "border k-border-soft k-text-strong"
-                }`}
+                variant={active ? "default" : "outline"}
+                size="icon-xs"
+                className={`type-small font-bold ${active ? "" : "k-text-strong"}`}
                 onClick={() => table.setPageIndex(index)}
               >
                 {index + 1}
-              </button>
+              </Button>
             );
           })}
-          <button
+          <Button
             type="button"
-            className="inline-flex size-8 items-center justify-center rounded-lg border k-border-soft k-text-subtle disabled:opacity-40"
+            variant="outline"
+            size="icon-xs"
+            className="disabled:opacity-40"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
             <ChevronRight className="size-4" />
-          </button>
+          </Button>
         </div>
       </div>
     </div>
