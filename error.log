@@ -323,3 +323,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-20 09:42:12 IST (+0530)
 # Button Standardization status: Fixed (shared shadcn Button now implements kyochi_button_system standard variants and size scale)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-20 09:45:39 IST (+0530)
+# Destructive Actions status: Fixed (destructive actions now use destructive-outline variant consistently)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.

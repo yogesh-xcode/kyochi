@@ -1879,3 +1879,23 @@ This file is maintained for every code change.
     - Extended shared `Button` API with `tertiary`, `destructive-outline`, and normalized size mapping (`default=40`, `sm/md=36`, `xs=30`).
 - Why changed:
     - Requested making the Kyochi button system reference the standard for the shared shadcn button component.
+
+## 2026-03-20 09:45:39 IST (+0530)
+
+- DateTime: `2026-03-20 09:45:39 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/KyochiDataTable.tsx`
+    - diff lines: `119`
+    - file: `src/components/kyochi/AlertsPanel.tsx`
+    - diff lines: `41`
+    - file: `src/app/billing/page.tsx`
+    - diff lines: `92`
+    - file: `CHANGELOG.md`
+    - diff lines: `end`
+    - file: `error.log`
+    - diff lines: `end`
+- What changed:
+    - Marked destructive actions with `destructive-outline` button variant for consistent semantic signaling.
+    - Updated delete row action, clear-all-resolved action, and close-appointment action to destructive styling.
+- Why changed:
+    - Requested applying destructive styling to identified destructive actions.

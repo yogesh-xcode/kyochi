@@ -89,7 +89,7 @@ const billingRows: KyochiTableRow[] = billingData.map((invoice) => {
             </Button>
             <Button
               type="button"
-              variant="outline"
+              variant="destructive-outline"
               size="xs"
             >
               Close Appointment

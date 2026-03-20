@@ -116,7 +116,7 @@ export function KyochiDataTable({
                 <Button type="button" variant="outline" size="icon-xs" aria-label={`Edit ${row.original.id}`}>
                   <Pencil className="size-3.5" />
                 </Button>
-                <Button type="button" variant="outline" size="icon-xs" aria-label={`Delete ${row.original.id}`}>
+                <Button type="button" variant="destructive-outline" size="icon-xs" aria-label={`Delete ${row.original.id}`}>
                   <Trash2 className="size-3.5" />
                 </Button>
               </div>
