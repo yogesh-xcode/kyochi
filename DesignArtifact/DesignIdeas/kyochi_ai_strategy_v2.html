@@ -1,0 +1,285 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.root{background:var(--color-background-tertiary);padding:1.25rem;border-radius:var(--border-radius-lg);font-family:var(--font-sans)}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
+.top-left p:first-child{font-size:16px;font-weight:500;color:var(--color-text-primary)}
+.top-left p:last-child{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.ai-pill{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:500;color:#854f0b;background:#fdf6e3;border:0.5px solid #b8960c;padding:5px 12px;border-radius:20px}
+.dot-pulse{width:7px;height:7px;border-radius:50%;background:#b8960c}
+
+.verdict-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-top:3px solid #b8960c;border-radius:0 0 var(--border-radius-lg) var(--border-radius-lg);padding:18px 20px;margin-bottom:1.5rem}
+.verdict-eyebrow{font-size:9px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#b8960c;margin-bottom:6px}
+.verdict-text{font-size:14px;font-weight:500;color:var(--color-text-primary);line-height:1.6;margin-bottom:14px}
+.verdict-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn-g{display:inline-flex;align-items:center;gap:5px;background:#b8960c;border:none;border-radius:var(--border-radius-md);padding:0 14px;height:32px;font-size:11px;font-weight:500;color:#fff;cursor:pointer}
+.btn-o{display:inline-flex;align-items:center;gap:5px;background:transparent;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:0 14px;height:32px;font-size:11px;color:var(--color-text-primary);cursor:pointer}
+
+.section-lbl{font-size:9px;font-weight:500;letter-spacing:0.9px;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:10px}
+
+.signal-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:1.5rem}
+.sig{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:13px 14px;cursor:pointer;transition:border-color 0.15s}
+.sig:hover{border-color:#b8960c}
+.sig-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.sig-ico{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center}
+.sev{font-size:9px;font-weight:500;padding:2px 7px;border-radius:20px}
+.s-crit{background:#fcebeb;color:#a32d2d}
+.s-warn{background:#faeeda;color:#854f0b}
+.s-opp{background:#eaf3de;color:#3b6d11}
+.sig-val{font-size:20px;font-weight:500;color:var(--color-text-primary);line-height:1;margin-bottom:3px}
+.sig-name{font-size:11px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px}
+.sig-note{font-size:10px;color:var(--color-text-secondary);line-height:1.4}
+
+.recs{display:flex;flex-direction:column;gap:8px;margin-bottom:1.5rem}
+.rec{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.rec-header{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer}
+.rec-num{width:24px;height:24px;border-radius:50%;background:#fdf6e3;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:#b8960c;flex-shrink:0}
+.rec-htitle{flex:1;font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.rec-tag{font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.rec-body{padding:0 16px 14px 52px;border-top:0.5px solid var(--color-border-tertiary)}
+.rec-why{font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin:10px 0 10px}
+.rec-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.impact{font-size:10px;font-weight:500;color:#3b6d11;background:#eaf3de;padding:3px 10px;border-radius:20px}
+.deep-btn{font-size:11px;font-weight:500;color:#b8960c;background:none;border:none;cursor:pointer;padding:0}
+
+.two-col{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-bottom:1.5rem}
+.panel{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px}
+.fr-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.fr-row:last-child{border-bottom:none}
+.fr-dot{width:8px;height:8px;border-radius:50%;background:#b8960c;flex-shrink:0}
+.fr-name{font-size:12px;font-weight:500;color:var(--color-text-primary);flex:1}
+.fr-cnt{font-size:11px;color:var(--color-text-secondary)}
+.fr-bar-bg{width:60px;height:4px;background:var(--color-background-secondary);border-radius:2px}
+.fr-bar-fill{height:4px;border-radius:2px;background:#b8960c}
+
+.therapy-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.therapy-row:last-child{border-bottom:none}
+.th-name{font-size:11px;color:var(--color-text-primary);flex:1}
+.th-bar-bg{width:80px;height:5px;background:var(--color-background-secondary);border-radius:3px}
+.th-bar-fill{height:5px;border-radius:3px}
+.th-cnt{font-size:11px;font-weight:500;color:var(--color-text-secondary);min-width:20px;text-align:right}
+
+.ask-wrap{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:16px}
+.ask-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px}
+.ask-sub{font-size:11px;color:var(--color-text-secondary);margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:11px;color:#b8960c;border:0.5px solid #b8960c;border-radius:20px;padding:5px 12px;cursor:pointer;background:transparent}
+.chip:hover{background:#fdf6e3}
+
+.open{display:block}
+.closed{display:none}
+</style>
+
+<div class="root">
+
+  <div class="topbar">
+    <div class="top-left">
+      <p>AI Strategy</p>
+      <p>Kyochi Wellness Intelligence · March 2026</p>
+    </div>
+    <div class="ai-pill">
+      <div class="dot-pulse"></div>
+      Live · 54 appointments · 48 patients · 25 franchises
+    </div>
+  </div>
+
+  <div class="verdict-card">
+    <p class="verdict-eyebrow">AI verdict — today</p>
+    <p class="verdict-text">Kyochi is growing fast but leaking in three places: <span style="color:#a32d2d;font-weight:500">₹3,200 in uncollected invoices</span>, <span style="color:#854f0b;font-weight:500">7 patients stalling before rebooking</span>, and <span style="color:#854f0b;font-weight:500">36 completed sessions with zero feedback collected</span>. Fix these three this week and you protect both cash flow and your 4.9★ rating — the single most powerful acquisition asset you have.</p>
+    <div class="verdict-actions">
+      <button class="btn-g" onclick="sendPrompt('Draft personalised WhatsApp payment reminders for all 12 overdue Kyochi invoices by patient name and amount owed')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.73 19.73 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+        Send payment reminders
+      </button>
+      <button class="btn-o" onclick="sendPrompt('Design a post-session WhatsApp feedback and Google review automation flow for Kyochi')">Design feedback flow</button>
+      <button class="btn-o" onclick="sendPrompt('Create a re-engagement script for the 7 Kyochi patients currently stuck in waiting status')">Re-engage waiting patients</button>
+    </div>
+  </div>
+
+  <p class="section-lbl">Business signals — click any to deep dive</p>
+  <div class="signal-strip">
+
+    <div class="sig" onclick="sendPrompt('Break down all 12 overdue Kyochi invoices — who owes what, how old each is, and the best recovery approach for each patient')">
+      <div class="sig-head">
+        <div class="sig-ico" style="background:#fcebeb">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a32d2d" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <span class="sev s-crit">Critical</span>
+      </div>
+      <div class="sig-val">₹3,200</div>
+      <p class="sig-name">Uncollected revenue</p>
+      <p class="sig-note">12 overdue invoices. 22% of all revenue raised is sitting unpaid.</p>
+    </div>
+
+    <div class="sig" onclick="sendPrompt('Which Kyochi patients are at churn risk right now and what personalised message would bring each one back?')">
+      <div class="sig-head">
+        <div class="sig-ico" style="background:#faeeda">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#854f0b" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+        </div>
+        <span class="sev s-warn">Retention</span>
+      </div>
+      <div class="sig-val">7</div>
+      <p class="sig-name">Patients dropping off</p>
+      <p class="sig-note">Stalled in "waiting" with no next booking. Each is ₹800–1,500 LTV at risk.</p>
+    </div>
+
+    <div class="sig" onclick="sendPrompt('36 Kyochi patients completed sessions but left no feedback. Design the fastest way to collect Google reviews from all of them now.')">
+      <div class="sig-head">
+        <div class="sig-ico" style="background:#fcebeb">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#a32d2d" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <span class="sev s-crit">Reputation</span>
+      </div>
+      <div class="sig-val">36</div>
+      <p class="sig-name">Missing feedback</p>
+      <p class="sig-note">Sessions completed with no review collected. 4.9★ rating is stalling.</p>
+    </div>
+
+    <div class="sig" onclick="sendPrompt('Eleanor Shellstrop and Tahani Al-Jamil are Kyochi repeat patients. Design a loyalty membership bundle specifically for them and patients like them.')">
+      <div class="sig-head">
+        <div class="sig-ico" style="background:#eaf3de">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3b6d11" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <span class="sev s-opp">LTV</span>
+      </div>
+      <div class="sig-val">2</div>
+      <p class="sig-name">Repeat patients found</p>
+      <p class="sig-note">No loyalty programme exists. Repeat patients have 3× higher lifetime value.</p>
+    </div>
+
+    <div class="sig" onclick="sendPrompt('Relaxation and De-Stress Reflexology dominate Kyochi bookings. Create a targeted campaign to grow Sole Serenity and Chronic Pain therapy bookings by 30%.')">
+      <div class="sig-head">
+        <div class="sig-ico" style="background:#eaf3de">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3b6d11" stroke-width="2" stroke-linecap="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+        </div>
+        <span class="sev s-opp">Revenue</span>
+      </div>
+      <div class="sig-val">50%</div>
+      <p class="sig-name">Bookings concentrated</p>
+      <p class="sig-note">2 of 10 therapies drive half of all sessions. 8 are underutilised.</p>
+    </div>
+
+    <div class="sig" onclick="sendPrompt('Kyochi has 25 franchise locations with no unified reporting. Design the minimum viable franchise intelligence system they need to build now.')">
+      <div class="sig-head">
+        <div class="sig-ico" style="background:#faeeda">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#854f0b" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <span class="sev s-warn">Scale</span>
+      </div>
+      <div class="sig-val">25</div>
+      <p class="sig-name">Franchises, zero data</p>
+      <p class="sig-note">No cross-location visibility. Biggest strategic blind spot in the business.</p>
+    </div>
+
+  </div>
+
+  <p class="section-lbl">Strategic recommendations — next 30 days</p>
+  <div class="recs">
+
+    <div class="rec" id="r1">
+      <div class="rec-header" onclick="toggleRec('r1')">
+        <div class="rec-num">1</div>
+        <p class="rec-htitle">Automate post-session feedback via WhatsApp</p>
+        <span class="rec-tag" style="background:#eaf3de;color:#3b6d11">+20–30 reviews/month</span>
+        <svg id="r1-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div id="r1-body" class="rec-body closed">
+        <p class="rec-why">Your 4.9★ rating is your #1 acquisition asset — and it's stalling. 36 completed sessions generated zero reviews this cycle. A single WhatsApp message 2 hours post-session ("How was your Kyochi experience? Tap here to leave a Google review →") takes 30 minutes to set up and could double monthly review volume. Therapists don't need to do anything — it fires automatically.</p>
+        <div class="rec-foot">
+          <span class="impact">₹0 cost · highest acquisition ROI available</span>
+          <button class="deep-btn" onclick="sendPrompt('Write the exact WhatsApp automation sequence for Kyochi post-session feedback, including the Google review link prompt and follow-up message if no response in 24 hours')">Build this now ↗</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="rec" id="r2">
+      <div class="rec-header" onclick="toggleRec('r2')">
+        <div class="rec-num">2</div>
+        <p class="rec-htitle">Launch a 5-session prepaid membership bundle</p>
+        <span class="rec-tag" style="background:#eaf3de;color:#3b6d11">3× LTV uplift</span>
+        <svg id="r2-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div id="r2-body" class="rec-body closed">
+        <p class="rec-why">Eleanor and Tahani are already returning — with no incentive to do so. A prepaid bundle (5 sessions + 1 free, valid 60 days) creates upfront cash, reduces no-shows, and builds the therapy habit your own service descriptions describe. Reflexology works best as a recurring practice. Your pricing already makes this viable. No other reflexology chain in Tamil Nadu offers structured memberships yet — this is a differentiator.</p>
+        <div class="rec-foot">
+          <span class="impact">Upfront cash + guaranteed retention</span>
+          <button class="deep-btn" onclick="sendPrompt('Design the full Kyochi 5-session membership bundle: pricing, session validity, how to present it to patients at checkout, and the WhatsApp message to announce it')">Design the bundle ↗</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="rec" id="r3">
+      <div class="rec-header" onclick="toggleRec('r3')">
+        <div class="rec-num">3</div>
+        <p class="rec-htitle">Close one corporate wellness deal in Chennai this month</p>
+        <span class="rec-tag" style="background:#fdf6e3;color:#854f0b">New B2B revenue stream</span>
+        <svg id="r3-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div id="r3-body" class="rec-body closed">
+        <p class="rec-why">GCC expansion in Chennai is bringing thousands of stressed IT professionals — exactly Kyochi's target patient. HR teams at tech companies are actively seeking employee wellness benefits. A single corporate tie-up (monthly on-site chair reflexology or subsidised clinic visits) gives recurring B2B revenue that doesn't depend on walk-ins or social media algorithms. Kyochi's inclusive employer story makes this pitch unusually compelling to CSR-conscious HR heads.</p>
+        <div class="rec-foot">
+          <span class="impact">₹20,000–50,000/month per corporate client</span>
+          <button class="deep-btn" onclick="sendPrompt('Write a 5-slide corporate wellness pitch deck for Kyochi targeting IT companies in Chennai — include the service format, pricing tiers, and the inclusive employer angle')">Write the pitch ↗</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="rec" id="r4">
+      <div class="rec-header" onclick="toggleRec('r4')">
+        <div class="rec-num">4</div>
+        <p class="rec-htitle">Build franchise reporting before adding new locations</p>
+        <span class="rec-tag" style="background:#faeeda;color:#854f0b">Foundation for scale</span>
+        <svg id="r4-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div id="r4-body" class="rec-body closed">
+        <p class="rec-why">25 locations across 11 cities with no unified view of which franchises are performing, which therapies sell best by city, or where churn is highest. Scaling to Bengaluru or Hyderabad without this is building on a blind foundation. A monthly one-page report from each franchise owner — sessions, revenue, therapist utilisation, top complaint — gives HQ the data needed to intervene early and replicate what's working.</p>
+        <div class="rec-foot">
+          <span class="impact">Protects brand quality at scale</span>
+          <button class="deep-btn" onclick="sendPrompt('Design the monthly franchise reporting template for Kyochi — KPIs each owner submits to HQ, format, and how to collect it with minimum friction')">Design the template ↗</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="two-col">
+    <div class="panel">
+      <p class="section-lbl" style="margin-bottom:10px">Franchise footprint</p>
+      <div class="fr-row"><div class="fr-dot"></div><span class="fr-name">Chennai</span><span class="fr-cnt">11 locations</span><div class="fr-bar-bg"><div class="fr-bar-fill" style="width:60px"></div></div></div>
+      <div class="fr-row"><div class="fr-dot" style="background:#ba7517"></div><span class="fr-name">Coimbatore</span><span class="fr-cnt">4 locations</span><div class="fr-bar-bg"><div class="fr-bar-fill" style="width:22px"></div></div></div>
+      <div class="fr-row"><div class="fr-dot" style="background:#639922"></div><span class="fr-name">Madurai · Trichy · Salem</span><span class="fr-cnt">1 each</span><div class="fr-bar-bg"><div class="fr-bar-fill" style="width:6px;background:#639922"></div></div></div>
+      <div class="fr-row"><div class="fr-dot" style="background:#b4b2a9"></div><span class="fr-name">6 other cities</span><span class="fr-cnt">1 each</span><div class="fr-bar-bg"><div class="fr-bar-fill" style="width:6px;background:#b4b2a9"></div></div></div>
+    </div>
+    <div class="panel">
+      <p class="section-lbl" style="margin-bottom:10px">Therapy demand</p>
+      <div class="therapy-row"><span class="th-name">Relaxation Reflex.</span><div class="th-bar-bg"><div class="th-bar-fill" style="width:80px;background:#b8960c"></div></div><span class="th-cnt">16</span></div>
+      <div class="therapy-row"><span class="th-name">De-Stress Reflex.</span><div class="th-bar-bg"><div class="th-bar-fill" style="width:70px;background:#ba7517"></div></div><span class="th-cnt">14</span></div>
+      <div class="therapy-row"><span class="th-name">Chronic Pain</span><div class="th-bar-bg"><div class="th-bar-fill" style="width:70px;background:#ba7517"></div></div><span class="th-cnt">14</span></div>
+      <div class="therapy-row"><span class="th-name">Sole Serenity</span><div class="th-bar-bg"><div class="th-bar-fill" style="width:50px;background:#d3d1c7"></div></div><span class="th-cnt">10</span></div>
+    </div>
+  </div>
+
+  <div class="ask-wrap" style="margin-top:10px">
+    <p class="ask-title">Ask anything about Kyochi</p>
+    <p class="ask-sub">Tap a prompt or ask your own question below</p>
+    <div class="chips">
+      <span class="chip" onclick="sendPrompt('Write a 90-day growth plan for Kyochi based on current data — appointments, billing, patients and franchise footprint')">90-day growth plan</span>
+      <span class="chip" onclick="sendPrompt('Which Kyochi therapy should be promoted most heavily on Instagram Reels right now and why?')">Best therapy to promote?</span>
+      <span class="chip" onclick="sendPrompt('What does Kyochi need to do to successfully expand to Bengaluru in the next 6 months?')">Bengaluru expansion</span>
+      <span class="chip" onclick="sendPrompt('Design a referral programme for Kyochi — how should patients be rewarded for bringing friends?')">Referral programme</span>
+      <span class="chip" onclick="sendPrompt('What is the ideal pricing strategy for Kyochi session bundles across different city tiers — Chennai vs Tier 2 cities?')">Pricing by city tier</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggleRec(id){
+  const body=document.getElementById(id+'-body');
+  const arrow=document.getElementById(id+'-arrow');
+  const isOpen=body.classList.contains('open');
+  body.classList.toggle('open',!isOpen);
+  body.classList.toggle('closed',isOpen);
+  arrow.style.transform=isOpen?'':'rotate(180deg)';
+}
+</script>

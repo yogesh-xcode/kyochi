@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { DashboardHeader } from "@/components/kyochi/DashboardHeader";
+import { KyochiAiBot } from "@/components/kyochi/KyochiAiBot";
 import { Sidebar } from "@/components/kyochi/Sidebar";
 import type { NavSection, UserRole } from "@/types";
 
@@ -25,9 +26,10 @@ export function AppShell({ navSections, role, children }: AppShellProps) {
       />
       <main className="lg:ml-60 flex-1 pb-3 pt-0 md:pb-4 lg:pb-6 k-shell-bg min-h-screen">
         <DashboardHeader onMenuToggle={() => setMobileSidebarOpen((prev) => !prev)} />
-        <div className="px-3 md:px-4 lg:px-6 pt-[62px]">
+        <div className="px-3 md:px-4 lg:px-6 pt-15.5">
           <div className="pt-3 md:pt-4">{children}</div>
         </div>
+        <KyochiAiBot />
       </main>
     </div>
   );

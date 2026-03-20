@@ -17,6 +17,9 @@ const chennaiCoverage = `${Math.round((chennaiCount / franchisesData.length) * 1
 
 export default function FranchisesPage() {
   const tableConfig = tableViewConfigs.franchises;
+  const locationOptions = franchisesData.map((franchise) => franchise.name);
+  const cityOptions = Array.from(new Set(franchisesData.map((franchise) => franchise.city)));
+  const regionOptions = Array.from(new Set(franchisesData.map((franchise) => franchise.region)));
 
   return (
     <ManagementPageLayout
@@ -30,6 +33,22 @@ export default function FranchisesPage() {
       ]}
       columns={tableConfig.columns}
       centeredBodyColumns={tableConfig.centeredBodyColumns}
+      formFieldConfigs={{
+        Location: {
+          type: "typeahead",
+          options: locationOptions,
+          placeholder: "Type location...",
+          debounceMs: 250,
+        },
+        City: {
+          type: "select",
+          options: cityOptions,
+        },
+        Region: {
+          type: "select",
+          options: regionOptions,
+        },
+      }}
       rows={franchisesData.map((franchise) => ({
         id: franchise.id,
         cells: [
@@ -39,6 +58,7 @@ export default function FranchisesPage() {
           franchise.city,
           franchise.region,
           franchise.phone,
+          franchise.whatsapp,
         ],
       }))}
     />

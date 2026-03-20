@@ -19,6 +19,8 @@ const toInitials = (fullName: string) =>
 
 export default function TherapistsPage() {
   const tableConfig = tableViewConfigs.therapists;
+  const therapistNameOptions = therapistsData.map((therapist) => therapist.full_name);
+  const specialtyOptions = Array.from(new Set(therapistsData.map((therapist) => therapist.specialty)));
 
   return (
     <ManagementPageLayout
@@ -32,6 +34,18 @@ export default function TherapistsPage() {
       ]}
       columns={tableConfig.columns}
       centeredBodyColumns={tableConfig.centeredBodyColumns}
+      formFieldConfigs={{
+        Name: {
+          type: "typeahead",
+          options: therapistNameOptions,
+          placeholder: "Type therapist name...",
+          debounceMs: 250,
+        },
+        Specialty: {
+          type: "select",
+          options: specialtyOptions,
+        },
+      }}
       rows={therapistsData.map((therapist) => ({
         id: therapist.id,
         cells: [

@@ -30,8 +30,12 @@ const pageMeta: Record<string, { title: string; subtitle: string }> = {
     title: "Appointment Details",
     subtitle: "Monitor upcoming sessions and scheduling operations.",
   },
+  "/feedback": {
+    title: "Feedback Collection",
+    subtitle: "Monitor patient sessions and improving the service accordingly.",
+  },
   "/billing": {
-    title: "Billing Overview",
+    title: "Billing & Invoice",
     subtitle: "Track invoices, payment status, and financial summaries.",
   },
   "/ai-insights": {

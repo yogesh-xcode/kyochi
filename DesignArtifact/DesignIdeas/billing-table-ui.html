@@ -1,0 +1,440 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300;400;500;600&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#d4af35",
+              "background-light": "#f8f7f6",
+              "background-dark": "#201d12",
+            },
+            fontFamily: {
+              display: ["Manrope"],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+              lg: "1rem",
+              xl: "1.5rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Manrope", sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen"
+  >
+    <div class="layout-container flex h-full grow flex-col">
+      <!-- Top Navigation -->
+      <header
+        class="flex items-center justify-between border-b border-primary/10 bg-white dark:bg-background-dark px-6 md:px-10 py-4 sticky top-0 z-50"
+      >
+        <div class="flex items-center gap-4">
+          <div
+            class="size-8 bg-primary rounded-lg flex items-center justify-center text-white"
+          >
+            <span class="material-symbols-outlined">payments</span>
+          </div>
+          <h2
+            class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight"
+          >
+            Kyochi Billing
+          </h2>
+        </div>
+        <div class="flex flex-1 justify-end gap-6 items-center">
+          <nav class="hidden md:flex items-center gap-8">
+            <a
+              class="text-slate-600 dark:text-slate-400 text-sm font-semibold hover:text-primary transition-colors"
+              href="#"
+              >Invoices</a
+            >
+            <a
+              class="text-slate-600 dark:text-slate-400 text-sm font-semibold hover:text-primary transition-colors"
+              href="#"
+              >Payments</a
+            >
+            <a
+              class="text-slate-600 dark:text-slate-400 text-sm font-semibold hover:text-primary transition-colors"
+              href="#"
+              >Reports</a
+            >
+          </nav>
+          <div class="flex gap-3">
+            <button
+              class="flex items-center justify-center rounded-full size-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 transition-all"
+            >
+              <span class="material-symbols-outlined text-xl"
+                >notifications</span
+              >
+            </button>
+            <button
+              class="flex items-center justify-center rounded-full size-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/20 transition-all"
+            >
+              <span class="material-symbols-outlined text-xl"
+                >account_circle</span
+              >
+            </button>
+          </div>
+        </div>
+      </header>
+      <main
+        class="flex-1 max-w-7xl mx-auto w-full p-6 md:p-10 flex flex-col gap-8"
+      >
+        <!-- Hero / Header Section -->
+        <div
+          class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6"
+        >
+          <div class="max-w-2xl">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="size-2 rounded-full bg-primary animate-pulse"></div>
+              <span
+                class="text-xs font-bold uppercase tracking-widest text-primary"
+                >Provider Portal</span
+              >
+            </div>
+            <h1
+              class="text-slate-900 dark:text-white text-4xl font-extrabold leading-tight tracking-tight mb-3"
+            >
+              Billing &amp; Invoices
+            </h1>
+            <p class="text-slate-500 dark:text-slate-400 text-lg">
+              Centralized management for auto-generated therapy invoices and
+              appointment settlements.
+            </p>
+          </div>
+          <div class="flex gap-3 w-full md:w-auto">
+            <button
+              class="flex-1 md:flex-none flex items-center justify-center gap-2 bg-primary text-white px-6 py-3 rounded-xl font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+            >
+              <span class="material-symbols-outlined">add</span>
+              New Invoice
+            </button>
+          </div>
+        </div>
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div
+            class="bg-white dark:bg-slate-800/50 p-6 rounded-2xl border border-primary/5 shadow-sm"
+          >
+            <p
+              class="text-slate-500 dark:text-slate-400 text-sm font-semibold mb-1"
+            >
+              Total Outstanding
+            </p>
+            <p class="text-3xl font-bold text-slate-900 dark:text-white">
+              $4,250.00
+            </p>
+          </div>
+          <div
+            class="bg-white dark:bg-slate-800/50 p-6 rounded-2xl border border-primary/5 shadow-sm"
+          >
+            <p
+              class="text-slate-500 dark:text-slate-400 text-sm font-semibold mb-1"
+            >
+              Pending Invoices
+            </p>
+            <p class="text-3xl font-bold text-slate-900 dark:text-white">12</p>
+          </div>
+          <div
+            class="bg-white dark:bg-slate-800/50 p-6 rounded-2xl border border-primary/5 shadow-sm"
+          >
+            <p
+              class="text-slate-500 dark:text-slate-400 text-sm font-semibold mb-1"
+            >
+              Settled this Month
+            </p>
+            <p class="text-3xl font-bold text-primary">$18,920.00</p>
+          </div>
+        </div>
+        <!-- Filter Tabs -->
+        <div class="flex border-b border-slate-200 dark:border-slate-800">
+          <button
+            class="px-6 py-4 border-b-2 border-primary text-primary text-sm font-bold transition-all"
+          >
+            All Invoices
+          </button>
+          <button
+            class="px-6 py-4 border-b-2 border-transparent text-slate-500 dark:text-slate-400 hover:text-primary text-sm font-bold transition-all"
+          >
+            Pending
+          </button>
+          <button
+            class="px-6 py-4 border-b-2 border-transparent text-slate-500 dark:text-slate-400 hover:text-primary text-sm font-bold transition-all"
+          >
+            Paid
+          </button>
+        </div>
+        <!-- Invoices Table Container -->
+        <div
+          class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm"
+        >
+          <div class="overflow-x-auto @container">
+            <table class="w-full text-left">
+              <thead class="bg-slate-50 dark:bg-slate-800/50">
+                <tr>
+                  <th
+                    class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider"
+                  >
+                    Therapy Name
+                  </th>
+                  <th
+                    class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider"
+                  >
+                    Duration
+                  </th>
+                  <th
+                    class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider"
+                  >
+                    Price
+                  </th>
+                  <th
+                    class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider"
+                  >
+                    Status
+                  </th>
+                  <th
+                    class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-right"
+                  >
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                <!-- Invoice Row 1 -->
+                <tr
+                  class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors"
+                >
+                  <td class="px-6 py-5">
+                    <div class="flex flex-col">
+                      <span class="text-slate-900 dark:text-white font-bold"
+                        >Cognitive Behavioral Therapy</span
+                      >
+                      <span class="text-xs text-slate-500">ID: #INV-92831</span>
+                    </div>
+                  </td>
+                  <td
+                    class="px-6 py-5 text-slate-600 dark:text-slate-300 font-medium"
+                  >
+                    50 mins
+                  </td>
+                  <td
+                    class="px-6 py-5 text-slate-900 dark:text-white font-bold"
+                  >
+                    $150.00
+                  </td>
+                  <td class="px-6 py-5">
+                    <span
+                      class="inline-flex items-center gap-1.5 py-1 px-3 rounded-full text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                    >
+                      <span class="size-1.5 rounded-full bg-green-500"></span>
+                      Paid
+                    </span>
+                  </td>
+                  <td class="px-6 py-5">
+                    <div class="flex items-center justify-end gap-4">
+                      <button
+                        class="text-primary text-sm font-bold hover:underline"
+                      >
+                        Generate Receipt
+                      </button>
+                      <button
+                        class="text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                      >
+                        <span class="material-symbols-outlined">more_vert</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Invoice Row 2 -->
+                <tr
+                  class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors"
+                >
+                  <td class="px-6 py-5">
+                    <div class="flex flex-col">
+                      <span class="text-slate-900 dark:text-white font-bold"
+                        >Deep Tissue Massage</span
+                      >
+                      <span class="text-xs text-slate-500">ID: #INV-92834</span>
+                    </div>
+                  </td>
+                  <td
+                    class="px-6 py-5 text-slate-600 dark:text-slate-300 font-medium"
+                  >
+                    60 mins
+                  </td>
+                  <td
+                    class="px-6 py-5 text-slate-900 dark:text-white font-bold"
+                  >
+                    $120.00
+                  </td>
+                  <td class="px-6 py-5">
+                    <span
+                      class="inline-flex items-center gap-1.5 py-1 px-3 rounded-full text-xs font-bold bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
+                    >
+                      <span class="size-1.5 rounded-full bg-red-500"></span>
+                      Pending
+                    </span>
+                  </td>
+                  <td class="px-6 py-5">
+                    <div class="flex items-center justify-end gap-3">
+                      <button
+                        class="bg-primary/10 text-primary px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-primary hover:text-white transition-all"
+                      >
+                        Accept Payment
+                      </button>
+                      <button
+                        class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all"
+                      >
+                        Close Appointment
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Invoice Row 3 -->
+                <tr
+                  class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors"
+                >
+                  <td class="px-6 py-5">
+                    <div class="flex flex-col">
+                      <span class="text-slate-900 dark:text-white font-bold"
+                        >Family Counseling</span
+                      >
+                      <span class="text-xs text-slate-500">ID: #INV-92837</span>
+                    </div>
+                  </td>
+                  <td
+                    class="px-6 py-5 text-slate-600 dark:text-slate-300 font-medium"
+                  >
+                    90 mins
+                  </td>
+                  <td
+                    class="px-6 py-5 text-slate-900 dark:text-white font-bold"
+                  >
+                    $200.00
+                  </td>
+                  <td class="px-6 py-5">
+                    <span
+                      class="inline-flex items-center gap-1.5 py-1 px-3 rounded-full text-xs font-bold bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
+                    >
+                      <span class="size-1.5 rounded-full bg-red-500"></span>
+                      Pending
+                    </span>
+                  </td>
+                  <td class="px-6 py-5">
+                    <div class="flex items-center justify-end gap-3">
+                      <button
+                        class="bg-primary/10 text-primary px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-primary hover:text-white transition-all"
+                      >
+                        Accept Payment
+                      </button>
+                      <button
+                        class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all"
+                      >
+                        Close Appointment
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Invoice Row 4 -->
+                <tr
+                  class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors border-t border-slate-100 dark:border-slate-800"
+                >
+                  <td class="px-6 py-5">
+                    <div class="flex flex-col">
+                      <span class="text-slate-900 dark:text-white font-bold"
+                        >Acupuncture Session</span
+                      >
+                      <span class="text-xs text-slate-500">ID: #INV-92840</span>
+                    </div>
+                  </td>
+                  <td
+                    class="px-6 py-5 text-slate-600 dark:text-slate-300 font-medium"
+                  >
+                    45 mins
+                  </td>
+                  <td
+                    class="px-6 py-5 text-slate-900 dark:text-white font-bold"
+                  >
+                    $95.00
+                  </td>
+                  <td class="px-6 py-5">
+                    <span
+                      class="inline-flex items-center gap-1.5 py-1 px-3 rounded-full text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                    >
+                      <span class="size-1.5 rounded-full bg-green-500"></span>
+                      Paid
+                    </span>
+                  </td>
+                  <td class="px-6 py-5">
+                    <div class="flex items-center justify-end gap-4">
+                      <button
+                        class="text-primary text-sm font-bold hover:underline"
+                      >
+                        Generate Receipt
+                      </button>
+                      <button
+                        class="text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                      >
+                        <span class="material-symbols-outlined">more_vert</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Footer Pagination -->
+        <div class="flex items-center justify-between mt-4">
+          <p class="text-sm text-slate-500 dark:text-slate-400">
+            Showing 1-10 of 42 invoices
+          </p>
+          <div class="flex gap-2">
+            <button
+              class="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold hover:bg-slate-50 transition-all"
+            >
+              Previous
+            </button>
+            <button
+              class="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold hover:bg-slate-50 transition-all"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

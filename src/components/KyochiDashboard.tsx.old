@@ -1,0 +1,1166 @@
+"use client";
+
+import { useState } from "react";
+import {
+  ArrowRight,
+  BarChart3,
+  Bell,
+  Calendar,
+  ChartNoAxesColumn,
+  Download,
+  Lightbulb,
+  MoreHorizontal,
+  Search,
+  Settings,
+  Sparkles,
+  UserRound,
+  Users,
+  Wallet,
+  TrendingUp,
+  Activity,
+  Clock,
+  Star,
+} from "lucide-react";
+
+// ── DESIGN TOKENS (from kyochi-globals.css) ─────────────────
+const T = {
+  gold400: "#d4af35",
+  gold300: "#ecc84f",
+  gold200: "#f3dc8a",
+  gold100: "#f9edbe",
+  gold50: "#fdf8e7",
+  gold500: "#b8941f",
+  gold600: "#9a7a10",
+  gold700: "#7a5f0a",
+  gold800: "#5c4507",
+  gold900: "#3d2d04",
+  cream50: "#fdfcfa",
+  cream100: "#f8f7f4",
+  cream200: "#f2efe9",
+  cream300: "#e8e3d8",
+  cream400: "#d9d1c2",
+  cream600: "#a89880",
+  cream800: "#6b5e4c",
+  green400: "#3fa060",
+  green50: "#eef7f0",
+  green700: "#144826",
+  red400: "#ef4444",
+  red50: "#fef2f2",
+  red600: "#b91c1c",
+  text: "#241e15",
+  textMuted: "#6b5e4c",
+  textFaint: "#a89880",
+  bg: "#f8f7f4",
+  surface: "#ffffff",
+  border: "#e8e3d8",
+  shadowGold: "0 4px 20px rgba(212,175,53,0.25)",
+  shadowSm: "0 2px 8px rgba(107,81,42,0.08)",
+  shadowMd: "0 4px 16px rgba(107,81,42,0.10)",
+};
+
+// ── DATA ──────────────────────────────────────────────────────
+const scoreCards = [
+  {
+    label: "Today's Revenue",
+    value: "₹2,485",
+    delta: "+12.4%",
+    tone: "positive",
+    icon: Wallet,
+    sub: "vs ₹2,210 yesterday",
+  },
+  {
+    label: "Appointments",
+    value: "32",
+    delta: "+5 vs yesterday",
+    tone: "positive",
+    icon: Calendar,
+    sub: "8 remaining today",
+  },
+  {
+    label: "Wellness Score Avg",
+    value: "7.8",
+    delta: "+0.4 trend",
+    tone: "positive",
+    icon: Sparkles,
+    sub: "Across 32 sessions",
+  },
+  {
+    label: "Pending Billing",
+    value: "₹472",
+    delta: "6 pending",
+    tone: "negative",
+    icon: BarChart3,
+    sub: "Needs attention",
+  },
+];
+
+const therapyMix = [
+  { name: "Relaxation", pct: 82, color: T.gold400 },
+  { name: "De-stress", pct: 68, color: T.gold500 },
+  { name: "Femme Cycle", pct: 44, color: T.green400 },
+  { name: "Holistic", pct: 36, color: T.cream600 },
+];
+
+const therapists = [
+  {
+    name: "Dr. Priya Menon",
+    initials: "PM",
+    speciality: "Relaxation",
+    sessions: 12,
+    rating: "4.9",
+    status: "Active",
+    load: 84,
+  },
+  {
+    name: "Arjun Kumar",
+    initials: "AK",
+    speciality: "De-stress",
+    sessions: 10,
+    rating: "4.7",
+    status: "Active",
+    load: 76,
+  },
+  {
+    name: "Sana Joseph",
+    initials: "SJ",
+    speciality: "Femme Cycle",
+    sessions: 8,
+    rating: "4.8",
+    status: "In Session",
+    load: 62,
+  },
+];
+
+const recentAppointments = [
+  { patient: "Neha Kapoor", therapy: "Relaxation", time: "10:30 AM", tone: "positive" },
+  { patient: "Rohan Menon", therapy: "De-stress", time: "11:00 AM", tone: "neutral" },
+  { patient: "Mira Jain", therapy: "Femme Cycle", time: "11:30 AM", tone: "negative" },
+  { patient: "Ayaan Bedi", therapy: "Holistic", time: "12:00 PM", tone: "neutral" },
+];
+
+const weekTrends = [
+  { day: "Mon", booked: 42, completed: 38 },
+  { day: "Tue", booked: 48, completed: 41 },
+  { day: "Wed", booked: 36, completed: 30 },
+  { day: "Thu", booked: 54, completed: 47 },
+  { day: "Fri", booked: 58, completed: 52 },
+];
+
+const navItems = [
+  { section: "Overview", items: [{ icon: ChartNoAxesColumn, label: "Analytics", active: true }] },
+  {
+    section: "Operations",
+    items: [
+      { icon: Calendar, label: "Appointments" },
+      { icon: Wallet, label: "Billing" },
+    ],
+  },
+  {
+    section: "People",
+    items: [
+      { icon: Users, label: "Patients" },
+      { icon: UserRound, label: "Therapists" },
+    ],
+  },
+  { section: "System", items: [{ icon: Settings, label: "Settings" }] },
+];
+
+// ── SUB-COMPONENTS ────────────────────────────────────────────
+
+function Avatar({ initials, size = "md", gold = false }) {
+  const sizes = { sm: { wh: 32, fs: 11 }, md: { wh: 40, fs: 13 }, lg: { wh: 48, fs: 16 } };
+  const s = sizes[size];
+  return (
+    <div
+      style={{
+        width: s.wh,
+        height: s.wh,
+        borderRadius: "50%",
+        background: T.cream200,
+        border: `2px solid ${gold ? T.gold400 : T.border}`,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: s.fs,
+        fontWeight: 800,
+        color: T.gold700,
+        flexShrink: 0,
+        letterSpacing: "0.02em",
+      }}
+    >
+      {initials}
+    </div>
+  );
+}
+
+function Badge({ children, tone = "gold" }) {
+  const styles = {
+    gold: { bg: "rgba(212,175,53,0.12)", color: T.gold700, border: "rgba(212,175,53,0.3)" },
+    positive: { bg: T.green50, color: T.green700, border: "rgba(63,160,96,0.3)" },
+    negative: { bg: T.red50, color: T.red600, border: "rgba(239,68,68,0.3)" },
+    muted: { bg: T.cream200, color: T.textMuted, border: T.border },
+    session: { bg: "rgba(212,175,53,0.18)", color: T.gold800, border: "rgba(212,175,53,0.4)" },
+  };
+  const s = styles[tone] || styles.gold;
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 4,
+        fontSize: 11,
+        fontWeight: 700,
+        padding: "3px 10px",
+        borderRadius: 999,
+        background: s.bg,
+        color: s.color,
+        border: `1px solid ${s.border}`,
+        whiteSpace: "nowrap",
+      }}
+    >
+      {children}
+    </span>
+  );
+}
+
+function ProgressBar({ value, color = T.gold400, color2 = T.gold300, height = 6 }) {
+  return (
+    <div
+      style={{
+        width: "100%",
+        height,
+        background: T.cream300,
+        borderRadius: 999,
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          width: `${value}%`,
+          height: "100%",
+          background: `linear-gradient(90deg, ${color}, ${color2})`,
+          borderRadius: 999,
+          transition: "width 0.6s ease",
+        }}
+      />
+    </div>
+  );
+}
+
+function DotIndicator({ tone }) {
+  const colors = { positive: T.green400, negative: T.red400, neutral: T.gold400 };
+  return (
+    <div
+      style={{
+        width: 9,
+        height: 9,
+        borderRadius: "50%",
+        background: colors[tone] || T.gold400,
+        flexShrink: 0,
+        boxShadow: `0 0 0 3px ${colors[tone] || T.gold400}22`,
+      }}
+    />
+  );
+}
+
+function Card({ children, style = {}, gold = false }) {
+  return (
+    <div
+      style={{
+        background: T.surface,
+        border: `1px solid ${gold ? "rgba(212,175,53,0.35)" : T.border}`,
+        borderRadius: 20,
+        boxShadow: gold ? T.shadowGold : T.shadowSm,
+        overflow: "hidden",
+        ...style,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function SectionLabel({ children }) {
+  return (
+    <p
+      style={{
+        fontSize: 10,
+        fontWeight: 700,
+        letterSpacing: "0.1em",
+        textTransform: "uppercase",
+        color: "rgba(212,175,53,0.55)",
+        padding: "16px 16px 6px",
+      }}
+    >
+      {children}
+    </p>
+  );
+}
+
+function NavItem({ icon: Icon, label, active }) {
+  return (
+    <button
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 10,
+        width: "100%",
+        padding: "9px 14px",
+        borderRadius: 12,
+        border: "none",
+        cursor: "pointer",
+        fontSize: 13,
+        fontWeight: 600,
+        textAlign: "left",
+        background: active ? "rgba(212,175,53,0.16)" : "transparent",
+        color: active ? T.gold300 : "rgba(253,248,231,0.65)",
+        transition: "all 0.15s ease",
+      }}
+    >
+      <Icon size={15} style={{ flexShrink: 0 }} />
+      {label}
+    </button>
+  );
+}
+
+function ScoreCard({ label, value, delta, tone, icon: Icon, sub }) {
+  const isPos = tone === "positive";
+  return (
+    <Card>
+      <div style={{ padding: "22px 24px", position: "relative" }}>
+        {/* Icon chip */}
+        <div
+          style={{
+            position: "absolute",
+            top: 20,
+            right: 20,
+            width: 36,
+            height: 36,
+            borderRadius: 10,
+            background: isPos ? "rgba(212,175,53,0.1)" : "rgba(239,68,68,0.08)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: isPos ? T.gold500 : T.red400,
+          }}
+        >
+          <Icon size={16} />
+        </div>
+
+        <p
+          style={{
+            fontSize: 10,
+            fontWeight: 700,
+            letterSpacing: "0.09em",
+            textTransform: "uppercase",
+            color: T.textFaint,
+            marginBottom: 10,
+          }}
+        >
+          {label}
+        </p>
+        <p
+          style={{
+            fontSize: 30,
+            fontWeight: 800,
+            color: T.text,
+            letterSpacing: "-0.03em",
+            lineHeight: 1,
+            marginBottom: 8,
+          }}
+        >
+          {value}
+        </p>
+        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <span
+            style={{
+              fontSize: 11,
+              fontWeight: 700,
+              color: isPos ? T.green400 : T.red400,
+            }}
+          >
+            {isPos ? "▲" : "▼"} {delta}
+          </span>
+          <span style={{ fontSize: 11, color: T.textFaint }}>{sub}</span>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+function WellnessRing({ value, max = 10, color, label, size = 72 }) {
+  const r = 28;
+  const circ = 2 * Math.PI * r;
+  const pct = value / max;
+  const offset = circ * (1 - pct);
+  return (
+    <div style={{ textAlign: "center" }}>
+      <div style={{ position: "relative", width: size, height: size, margin: "0 auto" }}>
+        <svg width={size} height={size} viewBox="0 0 72 72" style={{ transform: "rotate(-90deg)" }}>
+          <circle cx="36" cy="36" r={r} fill="none" stroke={T.cream300} strokeWidth="7" />
+          <circle
+            cx="36"
+            cy="36"
+            r={r}
+            fill="none"
+            stroke={color}
+            strokeWidth="7"
+            strokeDasharray={circ}
+            strokeDashoffset={offset}
+            strokeLinecap="round"
+          />
+        </svg>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <span style={{ fontSize: 16, fontWeight: 800, color: T.text, lineHeight: 1 }}>
+            {value}
+          </span>
+          <span style={{ fontSize: 8, fontWeight: 700, color: T.textFaint, marginTop: 2 }}>
+            {label}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── MAIN COMPONENT ────────────────────────────────────────────
+export default function KyochiDashboard() {
+  const [activeTab, setActiveTab] = useState("Today");
+  const tabs = ["Today", "This Week", "This Month"];
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        minHeight: "100vh",
+        background: T.bg,
+        fontFamily: "'Manrope', system-ui, sans-serif",
+        color: T.text,
+      }}
+    >
+      {/* ── SIDEBAR ─────────────────────────────────────────── */}
+      <aside
+        style={{
+          width: 240,
+          flexShrink: 0,
+          background: "linear-gradient(180deg, #241e15 0%, #3d2d04 100%)",
+          display: "flex",
+          flexDirection: "column",
+          borderRight: "1px solid rgba(212,175,53,0.15)",
+          position: "sticky",
+          top: 0,
+          height: "100vh",
+          overflow: "hidden",
+        }}
+      >
+        {/* Logo */}
+        <div
+          style={{
+            padding: "24px 20px 20px",
+            borderBottom: "1px solid rgba(212,175,53,0.15)",
+          }}
+        >
+          {/* Wordmark */}
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+            <div
+              style={{
+                width: 32,
+                height: 32,
+                borderRadius: 9,
+                background: "rgba(212,175,53,0.2)",
+                border: "1px solid rgba(212,175,53,0.35)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 16,
+              }}
+            >
+              ✦
+            </div>
+            <div>
+              <p
+                style={{
+                  fontSize: 17,
+                  fontWeight: 800,
+                  color: T.gold100,
+                  letterSpacing: "-0.01em",
+                  lineHeight: 1,
+                }}
+              >
+                Kyochi
+              </p>
+              <p
+                style={{
+                  fontSize: 9,
+                  fontWeight: 700,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: T.gold400,
+                  marginTop: 2,
+                }}
+              >
+                Admin Portal
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Nav */}
+        <nav style={{ flex: 1, padding: "8px 10px", overflowY: "auto" }}>
+          {navItems.map(({ section, items }) => (
+            <div key={section}>
+              <SectionLabel>{section}</SectionLabel>
+              {items.map(({ icon, label, active }) => (
+                <NavItem key={label} icon={icon} label={label} active={active} />
+              ))}
+            </div>
+          ))}
+        </nav>
+
+        {/* User chip */}
+        <div style={{ padding: "14px 12px", borderTop: "1px solid rgba(212,175,53,0.15)" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+              padding: "10px 12px",
+              borderRadius: 14,
+              background: "rgba(255,255,255,0.05)",
+              border: "1px solid rgba(212,175,53,0.2)",
+            }}
+          >
+            <Avatar initials="AK" size="sm" gold />
+            <div style={{ minWidth: 0 }}>
+              <p style={{ fontSize: 12, fontWeight: 700, color: T.gold100, lineHeight: 1 }}>
+                Arun Kumar
+              </p>
+              <p style={{ fontSize: 10, color: T.gold400, marginTop: 2 }}>Frontdesk Admin</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      {/* ── MAIN ─────────────────────────────────────────────── */}
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0 }}>
+
+        {/* Header */}
+        <header
+          style={{
+            position: "sticky",
+            top: 0,
+            zIndex: 20,
+            background: "rgba(248,247,244,0.92)",
+            backdropFilter: "blur(12px)",
+            borderBottom: `1px solid ${T.border}`,
+            padding: "0 32px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            height: 60,
+            gap: 16,
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+            <h1
+              style={{
+                fontSize: 17,
+                fontWeight: 800,
+                letterSpacing: "-0.02em",
+                color: T.text,
+                whiteSpace: "nowrap",
+              }}
+            >
+              Business Intelligence
+            </h1>
+            {/* Search */}
+            <div style={{ position: "relative" }}>
+              <Search
+                size={14}
+                style={{
+                  position: "absolute",
+                  left: 11,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  color: T.textFaint,
+                  pointerEvents: "none",
+                }}
+              />
+              <input
+                placeholder="Search analytics..."
+                style={{
+                  width: 240,
+                  padding: "7px 12px 7px 32px",
+                  borderRadius: 10,
+                  border: `1px solid ${T.border}`,
+                  background: T.surface,
+                  fontSize: 12,
+                  fontFamily: "inherit",
+                  color: T.text,
+                  outline: "none",
+                }}
+              />
+            </div>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <button
+              style={{
+                width: 36,
+                height: 36,
+                borderRadius: 10,
+                border: `1px solid ${T.border}`,
+                background: T.surface,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                color: T.textMuted,
+                position: "relative",
+              }}
+            >
+              <Bell size={15} />
+              <span
+                style={{
+                  position: "absolute",
+                  top: 7,
+                  right: 7,
+                  width: 7,
+                  height: 7,
+                  borderRadius: "50%",
+                  background: T.red400,
+                  border: "1.5px solid white",
+                }}
+              />
+            </button>
+            <button
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                padding: "8px 16px",
+                borderRadius: 10,
+                border: "none",
+                background: T.gold900,
+                color: T.gold200,
+                fontSize: 12,
+                fontWeight: 700,
+                fontFamily: "inherit",
+                cursor: "pointer",
+                boxShadow: T.shadowGold,
+              }}
+            >
+              <Download size={13} />
+              Export Report
+            </button>
+          </div>
+        </header>
+
+        {/* Content */}
+        <div style={{ flex: 1, padding: "28px 32px", display: "flex", flexDirection: "column", gap: 24 }}>
+
+          {/* Page title + date filters */}
+          <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
+            <div>
+              <h2
+                style={{
+                  fontSize: 28,
+                  fontWeight: 800,
+                  letterSpacing: "-0.03em",
+                  color: T.text,
+                  lineHeight: 1.1,
+                }}
+              >
+                Clinic Performance
+              </h2>
+              <p style={{ fontSize: 13, color: T.textFaint, marginTop: 4 }}>
+                Karaikudi outlet · Last updated: March 18, 2026
+              </p>
+            </div>
+
+            {/* Tab switcher */}
+            <div
+              style={{
+                display: "flex",
+                gap: 4,
+                background: T.cream200,
+                padding: 4,
+                borderRadius: 12,
+                border: `1px solid ${T.border}`,
+              }}
+            >
+              {tabs.map((t) => (
+                <button
+                  key={t}
+                  onClick={() => setActiveTab(t)}
+                  style={{
+                    padding: "6px 14px",
+                    borderRadius: 8,
+                    border: "none",
+                    cursor: "pointer",
+                    fontSize: 12,
+                    fontWeight: 700,
+                    fontFamily: "inherit",
+                    background: activeTab === t ? T.surface : "transparent",
+                    color: activeTab === t ? T.text : T.textFaint,
+                    boxShadow: activeTab === t ? T.shadowSm : "none",
+                    transition: "all 0.15s ease",
+                  }}
+                >
+                  {t}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Score Cards */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: 16,
+            }}
+          >
+            {scoreCards.map((card) => (
+              <ScoreCard key={card.label} {...card} />
+            ))}
+          </div>
+
+          {/* Mid Row: Therapy Mix + Session Trends */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 16 }}>
+
+            {/* Therapy Mix */}
+            <Card>
+              <div style={{ padding: "20px 24px" }}>
+                <p style={{ fontSize: 14, fontWeight: 700, color: T.text, marginBottom: 2 }}>
+                  Revenue by Therapy
+                </p>
+                <p style={{ fontSize: 12, color: T.textFaint, marginBottom: 20 }}>
+                  Today's contribution split
+                </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                  {therapyMix.map((item) => (
+                    <div key={item.name}>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          marginBottom: 6,
+                        }}
+                      >
+                        <span style={{ fontSize: 12, fontWeight: 600, color: T.textMuted }}>
+                          {item.name}
+                        </span>
+                        <span style={{ fontSize: 12, fontWeight: 800, color: item.color }}>
+                          {item.pct}%
+                        </span>
+                      </div>
+                      <ProgressBar value={item.pct} color={item.color} color2={item.color + "aa"} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Card>
+
+            {/* Session Trends */}
+            <Card>
+              <div style={{ padding: "20px 24px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
+                    marginBottom: 20,
+                  }}
+                >
+                  <div>
+                    <p style={{ fontSize: 14, fontWeight: 700, color: T.text, marginBottom: 2 }}>
+                      Session Trends
+                    </p>
+                    <p style={{ fontSize: 12, color: T.textFaint }}>
+                      Bookings vs completions this week
+                    </p>
+                  </div>
+                  <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                      <div
+                        style={{
+                          width: 10,
+                          height: 10,
+                          borderRadius: 3,
+                          background: T.gold400,
+                        }}
+                      />
+                      <span style={{ fontSize: 11, color: T.textFaint, fontWeight: 600 }}>
+                        Booked
+                      </span>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                      <div
+                        style={{
+                          width: 10,
+                          height: 10,
+                          borderRadius: 3,
+                          background: T.green400,
+                        }}
+                      />
+                      <span style={{ fontSize: 11, color: T.textFaint, fontWeight: 600 }}>
+                        Completed
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    background: T.cream100,
+                    borderRadius: 14,
+                    border: `1px solid ${T.border}`,
+                    padding: "16px 20px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 12,
+                  }}
+                >
+                  {weekTrends.map((row) => (
+                    <div
+                      key={row.day}
+                      style={{ display: "grid", gridTemplateColumns: "36px 1fr", gap: 12, alignItems: "center" }}
+                    >
+                      <span
+                        style={{
+                          fontSize: 11,
+                          fontWeight: 700,
+                          color: T.textFaint,
+                          textAlign: "right",
+                        }}
+                      >
+                        {row.day}
+                      </span>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                        <ProgressBar value={row.booked} color={T.gold400} color2={T.gold300} height={5} />
+                        <ProgressBar value={row.completed} color={T.green400} color2="#72be8a" height={5} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Bottom Row: Therapists + Appointments + Wellness Rings */}
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 16 }}>
+
+            {/* Therapist Table */}
+            <Card>
+              <div style={{ padding: "20px 24px 0" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: 16,
+                  }}
+                >
+                  <p style={{ fontSize: 14, fontWeight: 700, color: T.text }}>
+                    Therapist Performance
+                  </p>
+                  <button
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 4,
+                      fontSize: 12,
+                      fontWeight: 700,
+                      color: T.gold500,
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      fontFamily: "inherit",
+                    }}
+                  >
+                    See all <ArrowRight size={13} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Table */}
+              <div style={{ overflowX: "auto" }}>
+                <table style={{ width: "100%", borderCollapse: "collapse" }}>
+                  <thead>
+                    <tr
+                      style={{
+                        borderTop: `1px solid ${T.border}`,
+                        borderBottom: `1px solid ${T.border}`,
+                        background: T.cream100,
+                      }}
+                    >
+                      {["Therapist", "Sessions", "Rating", "Status", "Load"].map((h) => (
+                        <th
+                          key={h}
+                          style={{
+                            padding: "10px 20px",
+                            textAlign: "left",
+                            fontSize: 10,
+                            fontWeight: 700,
+                            letterSpacing: "0.07em",
+                            textTransform: "uppercase",
+                            color: T.textFaint,
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {h}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {therapists.map((t, i) => (
+                      <tr
+                        key={t.name}
+                        style={{
+                          borderBottom: i < therapists.length - 1 ? `1px solid ${T.border}` : "none",
+                          transition: "background 0.15s ease",
+                        }}
+                      >
+                        <td style={{ padding: "14px 20px" }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                            <Avatar initials={t.initials} size="sm" gold />
+                            <div>
+                              <p style={{ fontSize: 13, fontWeight: 700, color: T.text }}>
+                                {t.name}
+                              </p>
+                              <p style={{ fontSize: 11, color: T.textFaint }}>{t.speciality}</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td style={{ padding: "14px 20px", fontSize: 14, fontWeight: 700, color: T.text }}>
+                          {t.sessions}
+                        </td>
+                        <td style={{ padding: "14px 20px" }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                            <Star size={12} style={{ color: T.gold400, fill: T.gold400 }} />
+                            <span style={{ fontSize: 13, fontWeight: 700, color: T.text }}>
+                              {t.rating}
+                            </span>
+                          </div>
+                        </td>
+                        <td style={{ padding: "14px 20px" }}>
+                          <Badge tone={t.status === "In Session" ? "session" : "positive"}>
+                            {t.status}
+                          </Badge>
+                        </td>
+                        <td style={{ padding: "14px 20px" }}>
+                          <div style={{ width: 80 }}>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                marginBottom: 4,
+                              }}
+                            >
+                              <span style={{ fontSize: 10, fontWeight: 700, color: T.textFaint }}>
+                                {t.load}%
+                              </span>
+                            </div>
+                            <ProgressBar
+                              value={t.load}
+                              color={t.load > 80 ? T.gold400 : T.green400}
+                              color2={t.load > 80 ? T.gold300 : "#72be8a"}
+                              height={5}
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Card>
+
+            {/* Right column: Appointments + Wellness Rings */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+
+              {/* Recent Appointments */}
+              <Card>
+                <div style={{ padding: "20px 20px 16px" }}>
+                  <p style={{ fontSize: 14, fontWeight: 700, color: T.text, marginBottom: 14 }}>
+                    Recent Appointments
+                  </p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                    {recentAppointments.map((appt) => (
+                      <div
+                        key={appt.patient}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 10,
+                          padding: "10px 12px",
+                          background: T.cream100,
+                          border: `1px solid ${T.border}`,
+                          borderRadius: 12,
+                        }}
+                      >
+                        <DotIndicator tone={appt.tone} />
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <p
+                            style={{
+                              fontSize: 12,
+                              fontWeight: 700,
+                              color: T.text,
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                            }}
+                          >
+                            {appt.patient}
+                          </p>
+                          <p style={{ fontSize: 10, color: T.textFaint }}>{appt.therapy}</p>
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 4,
+                            color: T.textFaint,
+                          }}
+                        >
+                          <Clock size={10} />
+                          <span style={{ fontSize: 10, fontWeight: 600 }}>{appt.time}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Card>
+
+              {/* Wellness Rings */}
+              <Card>
+                <div style={{ padding: "20px" }}>
+                  <p style={{ fontSize: 14, fontWeight: 700, color: T.text, marginBottom: 4 }}>
+                    Wellness Scores
+                  </p>
+                  <p style={{ fontSize: 11, color: T.textFaint, marginBottom: 16 }}>
+                    Avg across today's sessions
+                  </p>
+                  <div style={{ display: "flex", justifyContent: "space-around" }}>
+                    <WellnessRing value={7.8} color={T.gold400} label="Overall" />
+                    <WellnessRing value={8.6} color={T.green400} label="Post-session" />
+                    <WellnessRing value={4.2} color={T.red400} label="Stress" max={10} />
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-around",
+                      marginTop: 8,
+                    }}
+                  >
+                    <span style={{ fontSize: 10, fontWeight: 700, color: T.textFaint }}>Current</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: T.green400 }}>▲ +0.8</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: T.textFaint }}>Before</span>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+
+          {/* AI Insight Banner */}
+          <div
+            style={{
+              background: "linear-gradient(135deg, #241e15 0%, #3d2d04 60%, #5c4507 100%)",
+              border: "1px solid rgba(212,175,53,0.28)",
+              borderRadius: 20,
+              padding: "22px 28px",
+              boxShadow: T.shadowGold,
+              display: "flex",
+              alignItems: "center",
+              gap: 20,
+              flexWrap: "wrap",
+            }}
+          >
+            <div
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 12,
+                background: "rgba(212,175,53,0.18)",
+                border: "1px solid rgba(212,175,53,0.35)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+                fontSize: 18,
+              }}
+            >
+              ✦
+            </div>
+            <div style={{ flex: 1, minWidth: 240 }}>
+              <p
+                style={{
+                  fontSize: 9,
+                  fontWeight: 700,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: T.gold300,
+                  marginBottom: 5,
+                }}
+              >
+                AI Insight · Powered by Claude
+              </p>
+              <p style={{ fontSize: 13, color: T.gold100, lineHeight: 1.65 }}>
+                Stress relief outcomes are strongest for{" "}
+                <strong style={{ color: T.gold300 }}>Relaxation</strong> therapy in repeat patients
+                this week. Consider scheduling a follow-up touchpoint after session 3 to improve
+                retention.
+              </p>
+            </div>
+            <div style={{ display: "flex", gap: 8, flexShrink: 0 }}>
+              <button
+                style={{
+                  padding: "8px 18px",
+                  borderRadius: 10,
+                  border: "none",
+                  background: T.gold400,
+                  color: T.gold900,
+                  fontSize: 12,
+                  fontWeight: 700,
+                  fontFamily: "inherit",
+                  cursor: "pointer",
+                  boxShadow: "0 2px 10px rgba(212,175,53,0.4)",
+                }}
+              >
+                View Details
+              </button>
+              <button
+                style={{
+                  padding: "8px 18px",
+                  borderRadius: 10,
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  background: "rgba(255,255,255,0.08)",
+                  color: T.gold200,
+                  fontSize: 12,
+                  fontWeight: 700,
+                  fontFamily: "inherit",
+                  cursor: "pointer",
+                }}
+              >
+                Refresh
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+}

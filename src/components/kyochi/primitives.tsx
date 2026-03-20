@@ -1,7 +1,8 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { KIcon } from "@/components/kyochi/icons";
-import type { AlertTone, AppointmentStatus, IconKey } from "@/types";
+import { Circle } from "lucide-react";
+import type { AlertTone, IconKey } from "@/types";
 
 type InitialsAvatarProps = {
   initials: string;
@@ -17,21 +18,31 @@ export function InitialsAvatar({ initials, className = "" }: InitialsAvatarProps
 }
 
 type StatusPillProps = {
-  status: AppointmentStatus;
+  status: string;
 };
 
 export function StatusPill({ status }: StatusPillProps) {
-  const styles: Record<AppointmentStatus, string> = {
-    Completed: "k-status-completed !text-white",
-    "In Progress": "k-status-progress animate-pulse",
-    Waiting: "k-status-waiting",
+  const toneByStatus: Record<string, string> = {
+    completed: "bg-[#dcfce7] text-[#16a34a]",
+    paid: "bg-[#dcfce7] text-[#16a34a]",
+    submitted: "bg-[#dcfce7] text-[#16a34a]",
+    active: "bg-[#dcfce7] text-[#16a34a]",
+    "in progress": "bg-[#fef3c7] text-[#b45309]",
+    waiting: "bg-[#fee2e2] text-[#ef4444]",
+    pending: "bg-[#fee2e2] text-[#ef4444]",
+    overdue: "bg-[#fee2e2] text-[#ef4444]",
+    inactive: "bg-[#fee2e2] text-[#ef4444]",
+    cancelled: "bg-[#fee2e2] text-[#ef4444]",
   };
+  const normalizedStatus = status.trim().toLowerCase();
+  const toneClass = toneByStatus[normalizedStatus] ?? "bg-[#fee2e2] text-[#ef4444]";
 
   return (
     <Badge
       variant="outline"
-      className={`h-auto border-transparent px-2 py-0.5 text-[10px] font-bold rounded-full ${styles[status]}`}
+      className={`inline-flex h-auto items-center gap-1 rounded-full border-transparent px-2.5 py-0.5 text-[11px] font-semibold ${toneClass}`}
     >
+      <Circle className="size-2 fill-current stroke-none" />
       {status}
     </Badge>
   );

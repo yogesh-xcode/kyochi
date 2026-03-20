@@ -175,6 +175,58 @@
     --sidebar-ring:          43 67% 52%;
     --sidebar-width:         260px;
     --sidebar-width-collapsed: 64px;
+
+    /* ── DASHBOARD SEMANTIC TOKENS ── */
+    --k-shell-bg:            36 22% 96%;
+    --k-surface:             0 0% 100%;
+    --k-surface-muted:       36 18% 95%;
+    --k-border-soft:         36 18% 88%;
+    --k-text-strong:         223 52% 13%;
+    --k-text-body:           215 31% 39%;
+    --k-text-subtle:         218 17% 64%;
+    --k-brand:               43 67% 52%;
+    --k-brand-strong:        43 71% 38%;
+    --k-brand-soft:          43 67% 92%;
+    --k-notify:              0 89% 69%;
+    --k-cta:                 221 68% 52%;
+    --k-cta-hover:           221 66% 46%;
+    --k-avatar-bg:           220 14% 94%;
+
+    /* ── DASHBOARD COLOR TOKENS (HEX/RGBA SAFE) ── */
+    --k-color-shell-bg:         #f8f7f6;
+    --k-color-surface:          #ffffff;
+    --k-color-surface-muted:    #f3f0e6;
+    --k-color-border-soft:      #e5dfd1;
+    --k-color-text-strong:      #0f1b3d;
+    --k-color-text-body:        #516887;
+    --k-color-text-subtle:      #8d9bb2;
+    --k-color-brand:            #d4af35;
+    --k-color-brand-strong:     #b8941f;
+    --k-color-brand-soft:       #f9edbe;
+    --k-color-brand-border:     rgba(212, 175, 53, 0.25);
+    --k-color-brand-soft-tint:  rgba(249, 237, 190, 0.45);
+    --k-color-row-hover:        #f3f0e6;
+    --k-color-notify:           #ff6a6a;
+    --k-color-cta:              #2f66db;
+    --k-color-cta-hover:        #2a5ccd;
+    --k-color-avatar-bg:        #f1f1f1;
+    --k-color-overlay:          rgba(15, 27, 61, 0.30);
+
+    --k-color-status-positive-bg: #d8f3e4;
+    --k-color-status-positive-fg: #11835e;
+    --k-color-status-progress-bg: #f9edbe;
+    --k-color-status-progress-fg: #9a7a10;
+    --k-color-status-waiting-bg:  #eceff4;
+    --k-color-status-waiting-fg:  #6c7f99;
+
+    --k-color-alert-amber-bg:   #fdf4df;
+    --k-color-alert-amber-fg:   #b8941f;
+    --k-color-alert-red-bg:     #fee8e8;
+    --k-color-alert-red-fg:     #dc2626;
+    --k-color-alert-blue-bg:    #e8f1ff;
+    --k-color-alert-blue-fg:    #2563eb;
+    --k-color-alert-slate-bg:   #eef1f5;
+    --k-color-alert-slate-fg:   #64748b;
   }
 
   /* ── DARK MODE TOKENS ── */
@@ -223,6 +275,43 @@
     --sidebar-accent:        43 30% 16%;
     --sidebar-accent-foreground: 43 67% 65%;
     --sidebar-border:        24 10% 18%;
+
+    --k-shell-bg:            24 10% 10%;
+    --k-surface:             24 10% 12%;
+    --k-surface-muted:       24 10% 16%;
+    --k-border-soft:         24 10% 20%;
+    --k-text-strong:         36 20% 90%;
+    --k-text-body:           36 16% 74%;
+    --k-text-subtle:         36 12% 58%;
+
+    --k-color-shell-bg:         #1c1916;
+    --k-color-surface:          #24211e;
+    --k-color-surface-muted:    #2c2824;
+    --k-color-border-soft:      #3b352f;
+    --k-color-text-strong:      #ece6d8;
+    --k-color-text-body:        #c8bfa9;
+    --k-color-text-subtle:      #9c927d;
+    --k-color-brand-soft:       #3b3119;
+    --k-color-brand-soft-tint:  rgba(59, 49, 25, 0.45);
+    --k-color-row-hover:        #2c2824;
+    --k-color-avatar-bg:        #35312c;
+    --k-color-overlay:          rgba(0, 0, 0, 0.40);
+
+    --k-color-status-positive-bg: #153828;
+    --k-color-status-positive-fg: #78d8ae;
+    --k-color-status-progress-bg: #3b3119;
+    --k-color-status-progress-fg: #f0d77d;
+    --k-color-status-waiting-bg:  #2c3138;
+    --k-color-status-waiting-fg:  #a0b0c5;
+
+    --k-color-alert-amber-bg:   #3b3119;
+    --k-color-alert-amber-fg:   #f0d77d;
+    --k-color-alert-red-bg:     #3a1f1f;
+    --k-color-alert-red-fg:     #ff9f9f;
+    --k-color-alert-blue-bg:    #1b2940;
+    --k-color-alert-blue-fg:    #9ec3ff;
+    --k-color-alert-slate-bg:   #2c3138;
+    --k-color-alert-slate-fg:   #b3c0d1;
   }
   * {
     @apply border-border outline-ring/50;
@@ -352,6 +441,41 @@
 
 /* ── LAYER: COMPONENT TOKENS ─────────────────────────────── */
 @layer components {
+  .k-shell-bg { background: var(--k-color-shell-bg); }
+  .k-surface { background: var(--k-color-surface); }
+  .k-surface-muted { background: var(--k-color-surface-muted); }
+  .k-border-soft { border-color: var(--k-color-border-soft); }
+  .k-text-strong { color: var(--k-color-text-strong); }
+  .k-text-body { color: var(--k-color-text-body); }
+  .k-text-subtle { color: var(--k-color-text-subtle); }
+  .k-brand { color: var(--k-color-brand); }
+  .k-brand-strong { color: var(--k-color-brand-strong); }
+  .k-brand-bg { background: var(--k-color-brand); }
+  .k-brand-soft-bg { background: var(--k-color-brand-soft); }
+  .k-brand-soft-tint-bg { background: var(--k-color-brand-soft-tint); }
+  .k-brand-border-soft { border-color: var(--k-color-brand-border); }
+  .k-row-hover:hover { background: var(--k-color-row-hover); }
+  .k-brand-bg-hover:hover { background: var(--k-color-brand); }
+  .k-brand-soft-bg-hover:hover { background: var(--k-color-brand-soft); }
+  .k-primary-foreground { color: hsl(var(--primary-foreground)); }
+  .k-notify-bg { background: var(--k-color-notify); }
+  .k-cta-bg { background: var(--k-color-cta); }
+  .k-cta-bg:hover { background: var(--k-color-cta-hover); }
+  .k-avatar-bg { background: var(--k-color-avatar-bg); }
+  .k-overlay { background: var(--k-color-overlay); }
+
+  .k-delta-positive { background: var(--k-color-status-positive-bg); color: var(--k-color-status-positive-fg); }
+  .k-delta-neutral { background: transparent; color: var(--k-color-text-subtle); }
+  .k-delta-warning { background: var(--k-color-status-progress-bg); color: var(--k-color-status-progress-fg); }
+
+  .k-status-completed { background: var(--k-color-status-positive-bg); color: var(--k-color-status-positive-fg); }
+  .k-status-progress { background: var(--k-color-status-progress-bg); color: var(--k-color-status-progress-fg); }
+  .k-status-waiting { background: var(--k-color-status-waiting-bg); color: var(--k-color-status-waiting-fg); }
+
+  .k-tone-amber { background: var(--k-color-alert-amber-bg); color: var(--k-color-alert-amber-fg); }
+  .k-tone-red { background: var(--k-color-alert-red-bg); color: var(--k-color-alert-red-fg); }
+  .k-tone-blue { background: var(--k-color-alert-blue-bg); color: var(--k-color-alert-blue-fg); }
+  .k-tone-slate { background: var(--k-color-alert-slate-bg); color: var(--k-color-alert-slate-fg); }
 
   /* ── CARD ── */
   .k-card {

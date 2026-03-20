@@ -27,11 +27,11 @@ export function RecentAppointmentsTable({ appointments }: RecentAppointmentsTabl
       <CardContent className="p-0">
         <Table className="min-w-[560px]">
           <TableHeader>
-            <TableRow className="text-left k-surface-muted border-b-0 hover:bg-transparent">
-              <TableHead className="px-3.5 md:px-4 py-2 type-label text-[9px] k-text-subtle h-auto">Time</TableHead>
-              <TableHead className="px-3.5 md:px-4 py-2 type-label text-[9px] k-text-subtle h-auto">Patient</TableHead>
-              <TableHead className="px-3.5 md:px-4 py-2 type-label text-[9px] k-text-subtle h-auto">Session</TableHead>
-              <TableHead className="px-3.5 md:px-4 py-2 type-label text-[9px] k-text-subtle h-auto">Status</TableHead>
+            <TableRow className="k-surface-muted border-b-0 hover:bg-transparent">
+              <TableHead className="px-3.5 md:px-4 py-2 type-label text-[9px] text-center k-text-subtle h-auto">Time</TableHead>
+              <TableHead className="px-3.5 md:px-4 py-2 type-label text-[9px] text-center k-text-subtle h-auto">Patient</TableHead>
+              <TableHead className="px-3.5 md:px-4 py-2 type-label text-[9px] text-center k-text-subtle h-auto">Session</TableHead>
+              <TableHead className="px-3.5 md:px-4 py-2 type-label text-[9px] text-center k-text-subtle h-auto">Status</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

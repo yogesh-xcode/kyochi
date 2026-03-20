@@ -1,29 +1,26 @@
 "use client";
 
-import { Circle, EllipsisVertical } from "lucide-react";
+import { Check, EllipsisVertical, ReceiptText, X } from "lucide-react";
 
 import appointmentsData from "@/data/appointments.json";
 import billingData from "@/data/billing.json";
-import patientsData from "@/data/patients.json";
 import therapiesData from "@/data/therapies.json";
 
-import { KyochiDataTable, type KyochiTableRow } from "@/components/kyochi/KyochiDataTable";
+import { ManagementPageLayout } from "@/components/kyochi/ManagementPageLayout";
+import { type KyochiTableRow } from "@/components/kyochi/KyochiDataTable";
+import { StatusPill } from "@/components/kyochi/primitives";
 import { tableViewConfigs } from "@/components/kyochi/tableConfigs";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const patientById = new Map(patientsData.map((patient) => [patient.id, patient]));
 const appointmentById = new Map(appointmentsData.map((appointment) => [appointment.id, appointment]));
 const therapyById = new Map(therapiesData.map((therapy) => [therapy.id, therapy]));
 
-const toCurrency = (amount: number, currency: string) =>
-  new Intl.NumberFormat("en-US", { style: "currency", currency, maximumFractionDigits: 0 }).format(amount);
-
-const statusClassByInvoiceStatus: Record<string, string> = {
-  paid: "bg-[#dcfce7] text-[#16a34a]",
-  pending: "bg-[#fee2e2] text-[#ef4444]",
-  overdue: "bg-[#fee2e2] text-[#ef4444]",
-};
+const toCurrency = (amount: number) =>
+  new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 0,
+  }).format(amount);
 
 const formatInvoiceStatus = (status: string) => {
   if (status === "paid") {
@@ -41,40 +38,48 @@ const formatInvoiceStatus = (status: string) => {
 const billingRows: KyochiTableRow[] = billingData.map((invoice) => {
   const appointment = appointmentById.get(invoice.appointment_id);
   const therapy = appointment ? therapyById.get(appointment.therapy_id) : undefined;
-  const patient = patientById.get(invoice.patient_id);
   const status = formatInvoiceStatus(invoice.status);
 
   return {
     id: invoice.id,
     sortValues: [
+      invoice.id.toUpperCase(),
       therapy?.name ?? "Therapy Session",
       therapy?.duration_min ?? 45,
       invoice.amount,
       status,
     ],
     cells: [
-      <div key={`${invoice.id}-therapy`} className="flex flex-col gap-0.5">
-        <span className="font-semibold text-[#1e293b]">{therapy?.name ?? "Therapy Session"}</span>
-        <span className="text-[11px] text-[#94a3b8]">ID: #{invoice.id.toUpperCase()} • {patient?.full_name ?? "Unknown Patient"}</span>
-      </div>,
-      `${therapy?.duration_min ?? 45} mins`,
-      toCurrency(invoice.amount, invoice.currency),
-      <span
-        key={`${invoice.id}-status`}
-        className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${statusClassByInvoiceStatus[invoice.status] ?? "k-status-waiting"}`}
-      >
-        <Circle className="size-2 fill-current stroke-none" />
-        {status}
+      <span key={`${invoice.id}-id`} className="font-medium text-[#334155]">
+        {invoice.id.toUpperCase()}
       </span>,
+      <span key={`${invoice.id}-therapy`} className="font-semibold text-[#1e293b]">
+        {therapy?.name ?? "Therapy Session"}
+      </span>,
+      `${therapy?.duration_min ?? 45} mins`,
+      toCurrency(invoice.amount),
+      <StatusPill key={`${invoice.id}-status`} status={status} />,
     ],
     actions: (
       <div className="inline-flex items-center gap-2">
         {invoice.status === "paid" ? (
           <>
-            <Button type="button" variant="link" size="xs" className="h-auto px-0 text-[11px]">
-              Generate Receipt
+            <Button
+              type="button"
+              variant="outline"
+              size="icon-xs"
+              aria-label="Generate Receipt"
+              title="Generate Receipt"
+            >
+              <ReceiptText className="size-3.5" />
             </Button>
-            <Button type="button" variant="outline" size="icon-xs">
+            <Button
+              type="button"
+              variant="outline"
+              size="icon-xs"
+              aria-label="More Actions"
+              title="More Actions"
+            >
               <EllipsisVertical className="size-3.5" />
             </Button>
           </>
@@ -83,16 +88,20 @@ const billingRows: KyochiTableRow[] = billingData.map((invoice) => {
             <Button
               type="button"
               variant="default"
-              size="xs"
+              size="icon-xs"
+              aria-label="Accept Payment"
+              title="Accept Payment"
             >
-              Accept Payment
+              <Check className="size-3.5" />
             </Button>
             <Button
               type="button"
               variant="destructive-outline"
-              size="xs"
+              size="icon-xs"
+              aria-label="Close Appointment"
+              title="Close Appointment"
             >
-              Close Appointment
+              <X className="size-3.5" />
             </Button>
           </>
         )}
@@ -103,24 +112,51 @@ const billingRows: KyochiTableRow[] = billingData.map((invoice) => {
 
 export default function BillingPage() {
   const tableConfig = tableViewConfigs.billing;
+  const therapyOptions = therapiesData.map((therapy) => therapy.name);
+  const durationOptions = Array.from(new Set(therapiesData.map((therapy) => `${therapy.duration_min} mins`)));
+  const billingStatusOptions = ["Paid", "Pending", "Overdue"];
+  const paidInvoices = billingData.filter((invoice) => invoice.status === "paid");
+  const pendingInvoices = billingData.filter((invoice) => invoice.status === "pending");
+  const overdueInvoices = billingData.filter((invoice) => invoice.status === "overdue");
+  const totalRevenue = paidInvoices.reduce((sum, invoice) => sum + invoice.amount, 0);
+  const outstandingAmount = [...pendingInvoices, ...overdueInvoices].reduce(
+    (sum, invoice) => sum + invoice.amount,
+    0,
+  );
+  const collectionRate = billingData.length > 0 ? Math.round((paidInvoices.length / billingData.length) * 100) : 0;
 
   return (
-    <div className="space-y-4">
-      <Card className="k-surface rounded-xl border k-border-soft shadow-sm py-0 ring-0 gap-0">
-        <CardHeader className="px-5 py-4 border-b k-border-soft">
-          <CardTitle className="type-h3 text-[18px] k-text-strong">Billing & Invoices</CardTitle>
-        </CardHeader>
-        <CardContent className="p-5">
-          <KyochiDataTable
-            columns={tableConfig.columns}
-            rows={billingRows}
-            minTableWidthClassName="min-w-[760px]"
-            centeredBodyColumns={tableConfig.centeredBodyColumns}
-            showSelection={false}
-            tone="soft"
-          />
-        </CardContent>
-      </Card>
-    </div>
+    <ManagementPageLayout
+      title="Billing & Invoices"
+      searchPlaceholder="Search invoices..."
+      kpis={[
+        { label: "Total Invoices", value: billingData.length.toString(), delta: "Live", helper: "All generated invoices" },
+        { label: "Collected Revenue", value: toCurrency(totalRevenue), delta: `${paidInvoices.length} Paid`, helper: "Revenue from paid invoices" },
+        { label: "Outstanding", value: toCurrency(outstandingAmount), delta: `${pendingInvoices.length + overdueInvoices.length} Due`, helper: "Pending and overdue balance" },
+        { label: "Collection Rate", value: `${collectionRate}%`, delta: "Verified", helper: "Paid invoice ratio" },
+      ]}
+      columns={tableConfig.columns}
+      centeredBodyColumns={tableConfig.centeredBodyColumns}
+      formFieldConfigs={{
+        "Therapy Name": {
+          type: "select",
+          options: therapyOptions,
+        },
+        Duration: {
+          type: "select",
+          options: durationOptions,
+        },
+        Price: {
+          type: "text",
+          placeholder: "Enter amount in INR",
+        },
+        Status: {
+          type: "select",
+          options: billingStatusOptions,
+          defaultValue: billingStatusOptions[0],
+        },
+      }}
+      rows={billingRows}
+    />
   );
 }

@@ -2,6 +2,7 @@
 
 import appointmentsData from "@/data/appointments.json";
 import patientsData from "@/data/patients.json";
+import therapiesData from "@/data/therapies.json";
 import therapistsData from "@/data/therapists.json";
 
 import { ManagementPageLayout } from "@/components/kyochi/ManagementPageLayout";
@@ -11,6 +12,7 @@ import { getActiveRole, getActiveTherapistId, scopeAppointmentsByRole } from "@/
 
 const patientById = new Map(patientsData.map((patient) => [patient.id, patient]));
 const therapistById = new Map(therapistsData.map((therapist) => [therapist.id, therapist]));
+const therapyById = new Map(therapiesData.map((therapy) => [therapy.id, therapy]));
 
 const toStatus = (status: string) => {
   if (status === "completed") {
@@ -46,6 +48,10 @@ export default function AppointmentsPage() {
   const completionRate =
     scopedAppointments.length > 0 ? Math.round((completedCount / scopedAppointments.length) * 100) : 0;
   const tableConfig = tableViewConfigs.appointments;
+  const patientOptions = patientsData.map((patient) => patient.full_name);
+  const therapistOptions = therapistsData.map((therapist) => therapist.full_name);
+  const therapyOptions = therapiesData.map((therapy) => therapy.name);
+  const statusOptions = ["Waiting", "In Progress", "Completed"];
 
   return (
     <ManagementPageLayout
@@ -59,12 +65,40 @@ export default function AppointmentsPage() {
       ]}
       columns={tableConfig.columns}
       centeredBodyColumns={tableConfig.centeredBodyColumns}
+      formFieldConfigs={{
+        Patient: {
+          type: "typeahead",
+          options: patientOptions,
+          placeholder: "Type patient name...",
+          debounceMs: 250,
+        },
+        Therapist: {
+          type: "select",
+          options: therapistOptions,
+        },
+        Therapy: {
+          type: "select",
+          options: therapyOptions,
+        },
+        Date: {
+          type: "date",
+        },
+        Time: {
+          type: "time",
+        },
+        Status: {
+          type: "select",
+          options: statusOptions,
+          defaultValue: statusOptions[0],
+        },
+      }}
       rows={scopedAppointments.map((appointment) => ({
         id: appointment.id,
         cells: [
           appointment.id,
           patientById.get(appointment.patient_id)?.full_name ?? "Unknown",
           therapistById.get(appointment.therapist_id)?.full_name ?? "Unknown",
+          therapyById.get(appointment.therapy_id)?.name ?? "Therapy Session",
           toDateLabel(appointment.starts_at),
           toTimeLabel(appointment.starts_at),
           <StatusPill key={`${appointment.id}-status`} status={toStatus(appointment.status)} />,

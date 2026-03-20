@@ -1,0 +1,35 @@
+import { Sparkles } from "lucide-react";
+
+type AiInsightBannerProps = {
+  title: string;
+  body: string;
+  primaryAction: string;
+  secondaryAction: string;
+};
+
+export function AiInsightBanner({ title, body, primaryAction, secondaryAction }: AiInsightBannerProps) {
+  return (
+    <section className="bg-linear-to-r from-[#201d12] to-slate-800 rounded-xl p-8 text-white relative overflow-hidden">
+      <div className="relative z-10 max-w-2xl">
+        <div className="flex items-center gap-2 mb-4">
+          <Sparkles className="size-4 text-[#d4af35]" />
+          <span className="text-xs font-bold tracking-widest uppercase text-[#d4af35]/80">
+            Kyochi AI Insight
+          </span>
+        </div>
+        <h3 className="text-2xl font-bold mb-3">{title}</h3>
+        <p className="text-slate-300 text-sm leading-relaxed mb-6">{body}</p>
+        <div className="flex gap-4">
+          <button className="px-6 py-2.5 bg-[#d4af35] text-[#201d12] font-bold text-sm rounded-lg hover:brightness-110 transition-all">
+            {primaryAction}
+          </button>
+          <button className="px-6 py-2.5 bg-white/10 text-white font-bold text-sm rounded-lg hover:bg-white/20 transition-all">
+            {secondaryAction}
+          </button>
+        </div>
+      </div>
+      <div className="absolute -right-20 -top-20 size-80 bg-[#d4af35]/20 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute right-20 bottom-10 size-40 bg-[#e5c366]/10 blur-[60px] rounded-full pointer-events-none" />
+    </section>
+  );
+}

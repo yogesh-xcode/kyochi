@@ -30,9 +30,9 @@ const patientById = new Map(
 );
 
 const toCurrency = (amount: number) =>
-  new Intl.NumberFormat("en-US", {
+  new Intl.NumberFormat("en-IN", {
     style: "currency",
-    currency: "USD",
+    currency: "INR",
     maximumFractionDigits: 0,
   }).format(amount);
 
@@ -254,6 +254,7 @@ const adminNavSections: NavSection[] = [
       { icon: "calendar_today", label: "Appointments", href: "/appointments" },
       { icon: "group", label: "Patients", href: "/patients" },
       { icon: "payments", label: "Billing", href: "/billing" },
+      { icon: "feedback", label: "Feedback", href: "/feedback" },
     ],
   },
   {
@@ -267,7 +268,7 @@ const adminNavSections: NavSection[] = [
     label: "Intelligence",
     items: [
       { icon: "psychology", label: "AI Strategy", href: "/ai-insights", pulse: true },
-      { icon: "analytics", label: "Analytics", href: "/analytics" },
+      // { icon: "analytics", label: "Analytics", href: "/analytics" },
     ],
   },
   {
@@ -287,6 +288,7 @@ const franchiseeNavSections: NavSection[] = [
       { icon: "calendar_today", label: "Appointments", href: "/appointments" },
       { icon: "group", label: "Patients", href: "/patients" },
       { icon: "payments", label: "Billing", href: "/billing" },
+      { icon: "feedback", label: "Feedback", href: "/feedback" },
     ],
   },
   {
@@ -300,7 +302,7 @@ const franchiseeNavSections: NavSection[] = [
     label: "Intelligence",
     items: [
       { icon: "psychology", label: "AI Strategy", href: "/ai-insights", pulse: true },
-      { icon: "analytics", label: "Analytics", href: "/analytics" },
+      // { icon: "analytics", label: "Analytics", href: "/analytics" },
     ],
   },
 ];
@@ -319,7 +321,7 @@ const therapistNavSections: NavSection[] = [
   },
   {
     label: "Actions",
-    items: [{ icon: "feedback", label: "Add Feedback", href: "/add-feedback" }],
+    items: [{ icon: "feedback", label: "Feedback", href: "/feedback" }],
   },
 ];
 

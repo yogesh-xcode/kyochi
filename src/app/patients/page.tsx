@@ -29,6 +29,8 @@ export default function PatientsPage() {
   const highRiskCount = scopedPatients.filter((patient) => patient.wellness_score < 70).length;
   const activeCount = scopedPatients.filter((patient) => patient.status === "active").length;
   const tableConfig = tableViewConfigs.patients;
+  const patientNameOptions = scopedPatients.map((patient) => patient.full_name);
+  const wellnessOptions = ["60", "65", "70", "75", "80", "85", "90", "95", "100"];
 
   return (
     <ManagementPageLayout
@@ -47,6 +49,19 @@ export default function PatientsPage() {
       ]}
       columns={tableConfig.columns}
       centeredBodyColumns={tableConfig.centeredBodyColumns}
+      formFieldConfigs={{
+        Name: {
+          type: "typeahead",
+          options: patientNameOptions,
+          placeholder: "Type patient name...",
+          debounceMs: 250,
+        },
+        Wellness: {
+          type: "select",
+          options: wellnessOptions,
+          defaultValue: wellnessOptions[3],
+        },
+      }}
       rows={scopedPatients.map((patient) => ({
         id: patient.id,
         cells: [

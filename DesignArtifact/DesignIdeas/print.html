@@ -1,0 +1,947 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appointment Schedule</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --black: #0a0a0a;
+        --off-black: #111111;
+        --charcoal: #1e1e1e;
+        --mid-gray: #555;
+        --light-gray: #e8e8e8;
+        --ultra-light: #f5f5f5;
+        --white: #ffffff;
+        --accent: #c8a96e;
+      }
+
+      body {
+        font-family: "Source Sans 3", sans-serif;
+        background: #d4d4d4;
+        color: var(--black);
+        padding: 40px 20px;
+      }
+
+      .page {
+        max-width: 960px;
+        margin: 0 auto;
+        background: var(--white);
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+      }
+
+      /* ── HEADER ── */
+      .header {
+        background: var(--black);
+        color: var(--white);
+        padding: 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 80px,
+          rgba(255, 255, 255, 0.015) 80px,
+          rgba(255, 255, 255, 0.015) 81px
+        );
+        pointer-events: none;
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: stretch;
+        position: relative;
+        z-index: 1;
+      }
+
+      .header-brand {
+        flex: 1;
+        padding: 36px 40px 30px;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .clinic-name {
+        font-family: "Playfair Display", serif;
+        font-size: 28px;
+        font-weight: 900;
+        letter-spacing: 0.02em;
+        line-height: 1.1;
+        color: var(--white);
+      }
+
+      .clinic-sub {
+        font-size: 10px;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-top: 6px;
+        font-weight: 600;
+      }
+
+      .header-meta {
+        padding: 36px 40px 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 8px;
+        min-width: 240px;
+      }
+
+      .doc-label {
+        font-family: "Playfair Display", serif;
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: var(--white);
+      }
+
+      .doc-detail {
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.45);
+        font-weight: 300;
+      }
+
+      .header-strip {
+        background: var(--accent);
+        height: 4px;
+      }
+
+      /* ── COLUMN HEADERS ── */
+      .col-headers {
+        background: var(--off-black);
+        display: grid;
+        grid-template-columns: 70px 1fr 1fr 1fr 100px 90px 90px;
+        padding: 0 30px;
+        gap: 0;
+      }
+
+      .col-headers span {
+        font-size: 9px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.5);
+        padding: 12px 10px;
+      }
+
+      /* ── TABLE BODY ── */
+      .table-body {
+        padding: 0 30px;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 70px 1fr 1fr 1fr 100px 90px 90px;
+        border-bottom: 1px solid var(--light-gray);
+        align-items: center;
+        gap: 0;
+        transition: background 0.1s;
+      }
+
+      .row:nth-child(even) {
+        background: var(--ultra-light);
+      }
+
+      .row:last-child {
+        border-bottom: none;
+      }
+
+      .cell {
+        padding: 11px 10px;
+        font-size: 12.5px;
+        font-weight: 400;
+        color: var(--black);
+        line-height: 1.4;
+      }
+
+      .cell.id {
+        font-family: "Source Sans 3", sans-serif;
+        font-weight: 600;
+        font-size: 11px;
+        letter-spacing: 0.05em;
+        color: var(--mid-gray);
+      }
+
+      .cell.patient {
+        font-weight: 600;
+        font-size: 13px;
+        color: var(--black);
+      }
+
+      .cell.therapist {
+        font-size: 12px;
+        color: #333;
+      }
+
+      .cell.therapy {
+        font-size: 11.5px;
+        color: #444;
+        font-style: italic;
+      }
+
+      .cell.date {
+        font-size: 12px;
+        font-weight: 600;
+        color: #222;
+        letter-spacing: 0.02em;
+      }
+
+      .cell.time {
+        font-size: 12px;
+        color: #444;
+      }
+
+      .cell.status {
+        display: flex;
+        align-items: center;
+      }
+
+      .status-badge {
+        display: inline-block;
+        font-size: 9px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 600;
+        padding: 3px 8px;
+        background: var(--light-gray);
+        color: var(--mid-gray);
+        border-radius: 2px;
+      }
+
+      /* ── FOOTER ── */
+      .footer {
+        background: var(--off-black);
+        padding: 18px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .footer-left {
+        font-size: 10px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.35);
+      }
+
+      .footer-right {
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.25);
+      }
+
+      .total-count {
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      /* ── PRINT ── */
+      @media print {
+        body {
+          background: white;
+          padding: 0;
+        }
+        .page {
+          box-shadow: none;
+        }
+        .print-btn {
+          display: none !important;
+        }
+        .row {
+          break-inside: avoid;
+        }
+      }
+
+      /* ── PRINT BUTTON ── */
+      .print-btn {
+        display: block;
+        margin: 28px auto 0;
+        padding: 12px 36px;
+        background: var(--black);
+        color: var(--white);
+        border: none;
+        font-family: "Source Sans 3", sans-serif;
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .print-btn:hover {
+        background: var(--charcoal);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <!-- HEADER -->
+      <div class="header">
+        <div class="header-inner">
+          <div class="header-brand">
+            <div class="clinic-name">Serenity<br />Reflexology Clinic</div>
+            <div class="clinic-sub">Wellness &amp; Therapeutic Care</div>
+          </div>
+          <div class="header-meta">
+            <div class="doc-label">Appointment Schedule</div>
+            <div class="doc-detail">
+              Document Date &nbsp;·&nbsp; March 20, 2026
+            </div>
+            <div class="doc-detail">
+              Total Records &nbsp;·&nbsp; 54 Appointments
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="header-strip"></div>
+
+      <!-- COLUMN HEADERS -->
+      <div class="col-headers">
+        <span>ID</span>
+        <span>Patient</span>
+        <span>Therapist</span>
+        <span>Therapy</span>
+        <span>Date</span>
+        <span>Time</span>
+        <span>Status</span>
+      </div>
+
+      <!-- TABLE ROWS -->
+      <div class="table-body">
+        <div class="row">
+          <div class="cell id">AP01</div>
+          <div class="cell patient">Eleanor Shellstrop</div>
+          <div class="cell therapist">Dr. Aris Menon</div>
+          <div class="cell therapy">Relaxation Reflexology</div>
+          <div class="cell date">18/02/2026</div>
+          <div class="cell time">09:00 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP02</div>
+          <div class="cell patient">Tahani Al-Jamil</div>
+          <div class="cell therapist">Dr. Mira Kapoor</div>
+          <div class="cell therapy">Relaxation Reflexology</div>
+          <div class="cell date">20/02/2026</div>
+          <div class="cell time">10:30 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP03</div>
+          <div class="cell patient">Chidi Anagonye</div>
+          <div class="cell therapist">Dr. Aris Menon</div>
+          <div class="cell therapy">De-Stress Reflexology</div>
+          <div class="cell date">22/02/2026</div>
+          <div class="cell time">11:45 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP04</div>
+          <div class="cell patient">Janet Rivera</div>
+          <div class="cell therapist">Dr. Priya Menon</div>
+          <div class="cell therapy">Chronic Pain Reflexology</div>
+          <div class="cell date">24/02/2026</div>
+          <div class="cell time">02:00 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP05</div>
+          <div class="cell patient">Marcus Lin</div>
+          <div class="cell therapist">Dr. Samir Das</div>
+          <div class="cell therapy">Sole Serenity Therapy</div>
+          <div class="cell date">26/02/2026</div>
+          <div class="cell time">04:30 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP06</div>
+          <div class="cell patient">Nora Patel</div>
+          <div class="cell therapist">Dr. Priya Menon</div>
+          <div class="cell therapy">Chronic Pain Reflexology</div>
+          <div class="cell date">01/03/2026</div>
+          <div class="cell time">08:15 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP07</div>
+          <div class="cell patient">Ibrahim Khan</div>
+          <div class="cell therapist">Dr. Samir Das</div>
+          <div class="cell therapy">De-Stress Reflexology</div>
+          <div class="cell date">03/03/2026</div>
+          <div class="cell time">12:00 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP08</div>
+          <div class="cell patient">Sofia Morales</div>
+          <div class="cell therapist">Dr. Mira Kapoor</div>
+          <div class="cell therapy">Relaxation Reflexology</div>
+          <div class="cell date">05/03/2026</div>
+          <div class="cell time">03:00 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP09</div>
+          <div class="cell patient">Eleanor Shellstrop</div>
+          <div class="cell therapist">Dr. Aris Menon</div>
+          <div class="cell therapy">Relaxation Reflexology</div>
+          <div class="cell date">08/03/2026</div>
+          <div class="cell time">09:30 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP10</div>
+          <div class="cell patient">Tahani Al-Jamil</div>
+          <div class="cell therapist">Dr. Priya Menon</div>
+          <div class="cell therapy">Chronic Pain Reflexology</div>
+          <div class="cell date">10/03/2026</div>
+          <div class="cell time">01:15 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP11</div>
+          <div class="cell patient">Nora Patel</div>
+          <div class="cell therapist">Dr. Priya Menon</div>
+          <div class="cell therapy">Chronic Pain Reflexology</div>
+          <div class="cell date">14/03/2026</div>
+          <div class="cell time">05:00 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP12</div>
+          <div class="cell patient">Marcus Lin</div>
+          <div class="cell therapist">Dr. Samir Das</div>
+          <div class="cell therapy">Sole Serenity Therapy</div>
+          <div class="cell date">17/03/2026</div>
+          <div class="cell time">06:45 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP13</div>
+          <div class="cell patient">Janet Rivera</div>
+          <div class="cell therapist">Dr. Mira Kapoor</div>
+          <div class="cell therapy">De-Stress Reflexology</div>
+          <div class="cell date">19/03/2026</div>
+          <div class="cell time">10:00 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP14</div>
+          <div class="cell patient">Chidi Anagonye</div>
+          <div class="cell therapist">Dr. Aris Menon</div>
+          <div class="cell therapy">De-Stress Reflexology</div>
+          <div class="cell date">19/03/2026</div>
+          <div class="cell time">11:30 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP15</div>
+          <div class="cell patient">Aarav Sharma</div>
+          <div class="cell therapist">Dr. Diya Nair</div>
+          <div class="cell therapy">Relaxation Reflexology</div>
+          <div class="cell date">21/03/2026</div>
+          <div class="cell time">09:00 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP16</div>
+          <div class="cell patient">Ananya Sharma</div>
+          <div class="cell therapist">Dr. Arjun Singh</div>
+          <div class="cell therapy">De-Stress Reflexology</div>
+          <div class="cell date">22/03/2026</div>
+          <div class="cell time">10:30 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP17</div>
+          <div class="cell patient">Vihaan Iyer</div>
+          <div class="cell therapist">Dr. Isha Kapoor</div>
+          <div class="cell therapy">Chronic Pain Reflexology</div>
+          <div class="cell date">23/03/2026</div>
+          <div class="cell time">11:00 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP18</div>
+          <div class="cell patient">Diya Iyer</div>
+          <div class="cell therapist">Dr. Reyansh Khan</div>
+          <div class="cell therapy">Sole Serenity Therapy</div>
+          <div class="cell date">24/03/2026</div>
+          <div class="cell time">12:30 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP19</div>
+          <div class="cell patient">Arjun Menon</div>
+          <div class="cell therapist">Dr. Meera Das</div>
+          <div class="cell therapy">Relaxation Reflexology</div>
+          <div class="cell date">25/03/2026</div>
+          <div class="cell time">01:00 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP20</div>
+          <div class="cell patient">Isha Menon</div>
+          <div class="cell therapist">Dr. Kabir Gupta</div>
+          <div class="cell therapy">De-Stress Reflexology</div>
+          <div class="cell date">26/03/2026</div>
+          <div class="cell time">02:30 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP21</div>
+          <div class="cell patient">Reyansh Patel</div>
+          <div class="cell therapist">Dr. Naina Joshi</div>
+          <div class="cell therapy">Chronic Pain Reflexology</div>
+          <div class="cell date">27/03/2026</div>
+          <div class="cell time">03:00 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP22</div>
+          <div class="cell patient">Meera Patel</div>
+          <div class="cell therapist">Dr. Rohan Verma</div>
+          <div class="cell therapy">Sole Serenity Therapy</div>
+          <div class="cell date">28/03/2026</div>
+          <div class="cell time">04:30 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP23</div>
+          <div class="cell patient">Kabir Rao</div>
+          <div class="cell therapist">Dr. Aditi Bose</div>
+          <div class="cell therapy">Relaxation Reflexology</div>
+          <div class="cell date">01/04/2026</div>
+          <div class="cell time">05:00 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP24</div>
+          <div class="cell patient">Naina Rao</div>
+          <div class="cell therapist">Dr. Dev Malhotra</div>
+          <div class="cell therapy">De-Stress Reflexology</div>
+          <div class="cell date">02/04/2026</div>
+          <div class="cell time">09:30 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP25</div>
+          <div class="cell patient">Rohan Nair</div>
+          <div class="cell therapist">Dr. Saanvi Chopra</div>
+          <div class="cell therapy">Chronic Pain Reflexology</div>
+          <div class="cell date">03/04/2026</div>
+          <div class="cell time">10:00 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP26</div>
+          <div class="cell patient">Aditi Nair</div>
+          <div class="cell therapist">Dr. Ishan Pillai</div>
+          <div class="cell therapy">Sole Serenity Therapy</div>
+          <div class="cell date">04/04/2026</div>
+          <div class="cell time">11:30 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP27</div>
+          <div class="cell patient">Dev Singh</div>
+          <div class="cell therapist">Dr. Kavya Bhat</div>
+          <div class="cell therapy">Relaxation Reflexology</div>
+          <div class="cell date">05/04/2026</div>
+          <div class="cell time">12:00 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP28</div>
+          <div class="cell patient">Saanvi Singh</div>
+          <div class="cell therapist">Dr. Varun Saxena</div>
+          <div class="cell therapy">De-Stress Reflexology</div>
+          <div class="cell date">06/04/2026</div>
+          <div class="cell time">01:30 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP29</div>
+          <div class="cell patient">Ishan Kapoor</div>
+          <div class="cell therapist">Dr. Maya Sen</div>
+          <div class="cell therapy">Chronic Pain Reflexology</div>
+          <div class="cell date">07/04/2026</div>
+          <div class="cell time">02:00 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP30</div>
+          <div class="cell patient">Kavya Kapoor</div>
+          <div class="cell therapist">Dr. Neel Sharma</div>
+          <div class="cell therapy">Sole Serenity Therapy</div>
+          <div class="cell date">08/04/2026</div>
+          <div class="cell time">03:30 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP31</div>
+          <div class="cell patient">Varun Khan</div>
+          <div class="cell therapist">Dr. Tara Iyer</div>
+          <div class="cell therapy">Relaxation Reflexology</div>
+          <div class="cell date">09/04/2026</div>
+          <div class="cell time">04:00 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP32</div>
+          <div class="cell patient">Maya Khan</div>
+          <div class="cell therapist">Dr. Aarav Menon</div>
+          <div class="cell therapy">De-Stress Reflexology</div>
+          <div class="cell date">10/04/2026</div>
+          <div class="cell time">05:30 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP33</div>
+          <div class="cell patient">Neel Das</div>
+          <div class="cell therapist">Dr. Ananya Patel</div>
+          <div class="cell therapy">Chronic Pain Reflexology</div>
+          <div class="cell date">11/04/2026</div>
+          <div class="cell time">09:00 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP34</div>
+          <div class="cell patient">Tara Das</div>
+          <div class="cell therapist">Dr. Vihaan Rao</div>
+          <div class="cell therapy">Sole Serenity Therapy</div>
+          <div class="cell date">12/04/2026</div>
+          <div class="cell time">10:30 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP35</div>
+          <div class="cell patient">Aarav Gupta</div>
+          <div class="cell therapist">Dr. Diya Nair</div>
+          <div class="cell therapy">Relaxation Reflexology</div>
+          <div class="cell date">13/04/2026</div>
+          <div class="cell time">11:00 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP36</div>
+          <div class="cell patient">Ananya Gupta</div>
+          <div class="cell therapist">Dr. Arjun Singh</div>
+          <div class="cell therapy">De-Stress Reflexology</div>
+          <div class="cell date">14/04/2026</div>
+          <div class="cell time">12:30 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP37</div>
+          <div class="cell patient">Vihaan Joshi</div>
+          <div class="cell therapist">Dr. Isha Kapoor</div>
+          <div class="cell therapy">Chronic Pain Reflexology</div>
+          <div class="cell date">15/04/2026</div>
+          <div class="cell time">01:00 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP38</div>
+          <div class="cell patient">Diya Joshi</div>
+          <div class="cell therapist">Dr. Reyansh Khan</div>
+          <div class="cell therapy">Sole Serenity Therapy</div>
+          <div class="cell date">16/04/2026</div>
+          <div class="cell time">02:30 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP39</div>
+          <div class="cell patient">Arjun Verma</div>
+          <div class="cell therapist">Dr. Meera Das</div>
+          <div class="cell therapy">Relaxation Reflexology</div>
+          <div class="cell date">17/04/2026</div>
+          <div class="cell time">03:00 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP40</div>
+          <div class="cell patient">Isha Verma</div>
+          <div class="cell therapist">Dr. Kabir Gupta</div>
+          <div class="cell therapy">De-Stress Reflexology</div>
+          <div class="cell date">18/04/2026</div>
+          <div class="cell time">04:30 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP41</div>
+          <div class="cell patient">Reyansh Bose</div>
+          <div class="cell therapist">Dr. Naina Joshi</div>
+          <div class="cell therapy">Chronic Pain Reflexology</div>
+          <div class="cell date">19/04/2026</div>
+          <div class="cell time">05:00 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP42</div>
+          <div class="cell patient">Meera Bose</div>
+          <div class="cell therapist">Dr. Rohan Verma</div>
+          <div class="cell therapy">Sole Serenity Therapy</div>
+          <div class="cell date">20/04/2026</div>
+          <div class="cell time">09:30 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP43</div>
+          <div class="cell patient">Kabir Malhotra</div>
+          <div class="cell therapist">Dr. Aditi Bose</div>
+          <div class="cell therapy">Relaxation Reflexology</div>
+          <div class="cell date">21/04/2026</div>
+          <div class="cell time">10:00 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP44</div>
+          <div class="cell patient">Naina Malhotra</div>
+          <div class="cell therapist">Dr. Dev Malhotra</div>
+          <div class="cell therapy">De-Stress Reflexology</div>
+          <div class="cell date">22/04/2026</div>
+          <div class="cell time">11:30 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP45</div>
+          <div class="cell patient">Rohan Chopra</div>
+          <div class="cell therapist">Dr. Saanvi Chopra</div>
+          <div class="cell therapy">Chronic Pain Reflexology</div>
+          <div class="cell date">23/04/2026</div>
+          <div class="cell time">12:00 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP46</div>
+          <div class="cell patient">Aditi Chopra</div>
+          <div class="cell therapist">Dr. Ishan Pillai</div>
+          <div class="cell therapy">Sole Serenity Therapy</div>
+          <div class="cell date">24/04/2026</div>
+          <div class="cell time">01:30 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP47</div>
+          <div class="cell patient">Dev Pillai</div>
+          <div class="cell therapist">Dr. Kavya Bhat</div>
+          <div class="cell therapy">Relaxation Reflexology</div>
+          <div class="cell date">25/04/2026</div>
+          <div class="cell time">02:00 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP48</div>
+          <div class="cell patient">Saanvi Pillai</div>
+          <div class="cell therapist">Dr. Varun Saxena</div>
+          <div class="cell therapy">De-Stress Reflexology</div>
+          <div class="cell date">26/04/2026</div>
+          <div class="cell time">03:30 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP49</div>
+          <div class="cell patient">Ishan Bhat</div>
+          <div class="cell therapist">Dr. Maya Sen</div>
+          <div class="cell therapy">Chronic Pain Reflexology</div>
+          <div class="cell date">27/04/2026</div>
+          <div class="cell time">04:00 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP50</div>
+          <div class="cell patient">Kavya Bhat</div>
+          <div class="cell therapist">Dr. Neel Sharma</div>
+          <div class="cell therapy">Sole Serenity Therapy</div>
+          <div class="cell date">28/04/2026</div>
+          <div class="cell time">05:30 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP51</div>
+          <div class="cell patient">Varun Saxena</div>
+          <div class="cell therapist">Dr. Tara Iyer</div>
+          <div class="cell therapy">Relaxation Reflexology</div>
+          <div class="cell date">01/05/2026</div>
+          <div class="cell time">09:00 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP52</div>
+          <div class="cell patient">Maya Saxena</div>
+          <div class="cell therapist">Dr. Aarav Menon</div>
+          <div class="cell therapy">De-Stress Reflexology</div>
+          <div class="cell date">02/05/2026</div>
+          <div class="cell time">10:30 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP53</div>
+          <div class="cell patient">Neel Sen</div>
+          <div class="cell therapist">Dr. Ananya Patel</div>
+          <div class="cell therapy">Chronic Pain Reflexology</div>
+          <div class="cell date">03/05/2026</div>
+          <div class="cell time">11:00 am</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell id">AP54</div>
+          <div class="cell patient">Tara Sen</div>
+          <div class="cell therapist">Dr. Vihaan Rao</div>
+          <div class="cell therapy">Sole Serenity Therapy</div>
+          <div class="cell date">04/05/2026</div>
+          <div class="cell time">12:30 pm</div>
+          <div class="cell status">
+            <span class="status-badge">Pending</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer">
+        <div class="footer-left">
+          Serenity Reflexology Clinic &nbsp;·&nbsp; Confidential Document
+        </div>
+        <div class="footer-right">
+          Total: <span class="total-count">54</span> Appointments &nbsp;·&nbsp;
+          Generated 20 Mar 2026
+        </div>
+      </div>
+    </div>
+
+    <button class="print-btn" onclick="window.print()">
+      ⊞ &nbsp; Print Document
+    </button>
+  </body>
+</html>

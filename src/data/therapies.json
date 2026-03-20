@@ -1,0 +1,92 @@
+[
+  {
+    "id": "THP01",
+    "name": "Relaxation Reflexology",
+    "category": "Relaxation",
+    "duration_min": 60,
+    "session_count": 6,
+    "status": "active",
+    "description": "A gentle rhythmic treatment targeting key reflex points to release muscle tension, ease anxiety, and calm the nervous system."
+  },
+  {
+    "id": "THP02",
+    "name": "De-Stress Reflexology",
+    "category": "Stress Relief",
+    "duration_min": 50,
+    "session_count": 6,
+    "status": "active",
+    "description": "Focused on stress-sensitive zones to regulate breathing, reduce cortisol response, and restore mental clarity."
+  },
+  {
+    "id": "THP03",
+    "name": "Chronic Pain Reflexology",
+    "category": "Pain Management",
+    "duration_min": 60,
+    "session_count": 8,
+    "status": "active",
+    "description": "Designed for long-term pain conditions by stimulating reflex points linked to inflammation, nerves, and joint function."
+  },
+  {
+    "id": "THP04",
+    "name": "Sole Serenity Therapy",
+    "category": "Foot Wellness",
+    "duration_min": 45,
+    "session_count": 5,
+    "status": "active",
+    "description": "A deeply grounding foot-focused session to revitalize tired feet and support full-body harmony."
+  },
+  {
+    "id": "THP05",
+    "name": "Detox Reflexology",
+    "category": "Detox",
+    "duration_min": 55,
+    "session_count": 6,
+    "status": "active",
+    "description": "Targets liver, kidneys, and lymphatic pathways to support circulation and natural toxin elimination."
+  },
+  {
+    "id": "THP06",
+    "name": "Femme Cycle Reflexology",
+    "category": "Women's Wellness",
+    "duration_min": 50,
+    "session_count": 8,
+    "status": "active",
+    "description": "Supports menstrual and hormonal balance by stimulating reproductive and endocrine reflex zones."
+  },
+  {
+    "id": "THP07",
+    "name": "Face Detox Reflexology",
+    "category": "Facial Reflexology",
+    "duration_min": 40,
+    "session_count": 5,
+    "status": "active",
+    "description": "Combines acupressure and lymphatic activation to improve skin tone, reduce puffiness, and relieve facial tension."
+  },
+  {
+    "id": "THP08",
+    "name": "Little Feet Reflexology (Kids)",
+    "category": "Pediatric",
+    "duration_min": 30,
+    "session_count": 6,
+    "status": "active",
+    "description": "A gentle child-safe reflexology session aimed at sleep, digestion, and emotional calm for children aged 3-12."
+  },
+  {
+    "id": "THP09",
+    "name": "Nasal Reflexology",
+    "category": "Respiratory",
+    "duration_min": 35,
+    "session_count": 5,
+    "status": "active",
+    "description": "Focuses on sinus-clearing points to improve airflow, ease congestion, and support respiratory comfort."
+  },
+  {
+    "id": "THP10",
+    "name": "Vita Flex Reflexology",
+    "category": "Energy Therapy",
+    "duration_min": 45,
+    "session_count": 6,
+    "status": "active",
+    "description": "A Tibetan-inspired rolling reflex technique often paired with oils to stimulate energy flow and deep reset."
+  }
+]
