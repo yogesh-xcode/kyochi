@@ -70,21 +70,21 @@ export function ManagementPageLayout({
         <CardHeader className="p-5 pb-3 border-b k-border-soft">
           <CardTitle className="type-h3 k-text-strong">{title}</CardTitle>
         </CardHeader>
-        <CardContent className="p-5 space-y-4">
-          <div className="grid grid-cols-1 gap-3 xl:grid-cols-[auto_1fr_auto] xl:items-center">
-            <div className="flex flex-wrap items-center gap-2">
+        <CardContent className="px-5 pb-5 pt-3 space-y-4">
+          <div className="grid grid-cols-1 gap-2 xl:grid-cols-[auto_1fr_auto] xl:items-center">
+            <div className="flex items-center gap-2 min-w-0">
               <Input
-                className="h-11 w-full max-w-md border k-border-soft bg-[var(--k-color-surface-muted)] rounded-lg focus-visible:border-[var(--k-color-brand)] focus-visible:ring-[var(--k-color-brand)]/25"
+                className="h-11 w-full sm:w-[340px] border k-border-soft bg-(--k-color-surface-muted) rounded-lg focus-visible:border-(--k-color-brand) focus-visible:ring-(--k-color-brand)/25"
                 placeholder={searchPlaceholder}
               />
-              <Button variant="outline" className="h-11 px-3 border k-border-soft bg-[var(--k-color-surface)]">
+              <Button variant="outline" className="h-11 px-3 border k-border-soft bg-(--k-color-surface)">
                 <SlidersHorizontal className="size-4" />
                 Filters
               </Button>
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-2">
-              <Button variant="outline" className="h-11 px-3 border k-border-soft bg-[var(--k-color-surface)]">
+              <Button variant="outline" className="h-11 px-3 border k-border-soft bg-(--k-color-surface)">
                 <Upload className="size-4" />
                 Upload
               </Button>
@@ -92,7 +92,7 @@ export function ManagementPageLayout({
                 <Download className="size-4" />
                 Export
               </Button>
-              <Button variant="outline" className="h-11 px-3 border k-border-soft bg-[var(--k-color-surface)]">
+              <Button variant="outline" className="h-11 px-3 border k-border-soft bg-(--k-color-surface)">
                 <Printer className="size-4" />
                 Print
               </Button>

@@ -1440,3 +1440,19 @@ This file is maintained for every code change.
     - Restored top breathing space above page content/KPI sections by adding inner top padding while preserving the fixed 62px header offset.
 - Why changed:
     - Reported missing space above KPI cards after header row alignment update.
+
+## 2026-03-20 06:42:00 IST (+0530)
+
+- DateTime: `2026-03-20 06:42:00 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/ManagementPageLayout.tsx`
+    - diff lines: `73-80`
+    - file: `CHANGELOG.md`
+    - diff lines: `1418-1428`
+    - file: `error.log`
+    - diff lines: `242-245`
+- What changed:
+    - Tightened toolbar top spacing below section title.
+    - Kept `Filters` on the same row next to the search input (no drop to next line on desktop).
+- Why changed:
+    - Reported extra gap and misalignment in toolbar row.
