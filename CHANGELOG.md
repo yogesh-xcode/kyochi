@@ -1691,3 +1691,20 @@ This file is maintained for every code change.
     - Reduced the shared table row system by 25% (`56/84` to `42/63`) and aligned recent appointments row cells vertically.
 - Why changed:
     - Requested all rows to be Y-axis centered and row height reduced by one-fourth.
+
+## 2026-03-20 08:58:15 IST (+0530)
+
+- DateTime: `2026-03-20 08:58:15 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/KyochiDataTable.tsx`
+    - diff lines: `98`
+    - file: `src/components/kyochi/RecentAppointmentsTable.tsx`
+    - diff lines: `40,43-44`
+    - file: `CHANGELOG.md`
+    - diff lines: `end`
+    - file: `error.log`
+    - diff lines: `end`
+- What changed:
+    - Reduced table body text size for shared data tables and recent appointments rows to a smaller, denser scale (`12px` with tightened line-height).
+- Why changed:
+    - Requested decreasing table column body text size.

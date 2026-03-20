@@ -95,7 +95,7 @@ export function KyochiDataTable({
               centeredBodyColumns.includes(index) ? "justify-center text-center" : "justify-start text-left"
             }`}
           >
-            <div className="w-full type-body k-text-strong whitespace-normal break-words leading-snug [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] group-hover:[-webkit-line-clamp:3] overflow-hidden">
+            <div className="w-full text-[12px] leading-[1.35] k-text-strong whitespace-normal break-words [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] group-hover:[-webkit-line-clamp:3] overflow-hidden">
               {row.original.cells[index]}
             </div>
           </div>

@@ -37,11 +37,11 @@ export function RecentAppointmentsTable({ appointments }: RecentAppointmentsTabl
           <TableBody>
             {appointments.map((appt) => (
               <TableRow key={appt.id} className="h-[42px] border-t k-border-soft k-row-hover transition-colors hover:bg-transparent">
-                <TableCell className="align-middle px-3.5 md:px-4 py-2 type-small font-semibold k-text-body">
+                <TableCell className="align-middle px-3.5 md:px-4 py-2 text-[12px] leading-[1.3] font-semibold k-text-body">
                   {appt.time} <span className="type-label normal-case tracking-normal k-text-subtle text-[10px]">{appt.period}</span>
                 </TableCell>
-                <TableCell className="align-middle px-3.5 md:px-4 py-2 type-small font-semibold k-text-strong">{appt.name}</TableCell>
-                <TableCell className="align-middle px-3.5 md:px-4 py-2 type-small k-text-body">{appt.detail}</TableCell>
+                <TableCell className="align-middle px-3.5 md:px-4 py-2 text-[12px] leading-[1.3] font-semibold k-text-strong">{appt.name}</TableCell>
+                <TableCell className="align-middle px-3.5 md:px-4 py-2 text-[12px] leading-[1.3] k-text-body">{appt.detail}</TableCell>
                 <TableCell className="align-middle px-3.5 md:px-4 py-2">
                   <StatusPill status={appt.status} />
                 </TableCell>
