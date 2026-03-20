@@ -138,7 +138,7 @@ export function KyochiDataTable({
     initialState: {
       pagination: {
         pageIndex: 0,
-        pageSize: 4,
+        pageSize: 7,
       },
     },
     getCoreRowModel: getCoreRowModel(),
@@ -150,8 +150,28 @@ export function KyochiDataTable({
     pagination: { pageIndex, pageSize },
   } = table.getState();
   const totalRows = rows.length;
+  const totalPages = table.getPageCount();
+  const currentPage = pageIndex + 1;
   const start = totalRows === 0 ? 0 : pageIndex * pageSize + 1;
   const end = Math.min((pageIndex + 1) * pageSize, totalRows);
+
+  const getPageItems = (pages: number, current: number): Array<number | "..."> => {
+    if (pages <= 7) {
+      return Array.from({ length: pages }, (_, index) => index + 1);
+    }
+
+    if (current <= 4) {
+      return [1, 2, 3, "...", pages - 2, pages - 1, pages];
+    }
+
+    if (current >= pages - 3) {
+      return [1, 2, 3, "...", pages - 2, pages - 1, pages];
+    }
+
+    return [1, 2, "...", current - 1, current, current + 1, "...", pages - 1, pages];
+  };
+
+  const pageItems = getPageItems(totalPages, currentPage);
 
   return (
     <div className="space-y-3">
@@ -247,21 +267,24 @@ export function KyochiDataTable({
           >
             <ChevronLeft className="size-4" />
           </Button>
-          {Array.from({ length: Math.min(table.getPageCount(), 3) }, (_, index) => {
-            const active = index === pageIndex;
-            return (
+          {pageItems.map((item, index) =>
+            item === "..." ? (
+              <span key={`ellipsis-${index}`} className="inline-flex size-7 items-center justify-center type-small k-text-subtle">
+                ...
+              </span>
+            ) : (
               <Button
-                key={`page-${index + 1}`}
+                key={`page-${item}`}
                 type="button"
-                variant={active ? "default" : "outline"}
+                variant={item === currentPage ? "default" : "outline"}
                 size="icon-xs"
-                className={`type-small font-bold ${active ? "" : "k-text-strong"}`}
-                onClick={() => table.setPageIndex(index)}
+                className={`type-small font-bold ${item === currentPage ? "" : "k-text-strong"}`}
+                onClick={() => table.setPageIndex(item - 1)}
               >
-                {index + 1}
+                {item}
               </Button>
-            );
-          })}
+            ),
+          )}
           <Button
             type="button"
             variant="outline"

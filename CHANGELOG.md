@@ -1899,3 +1899,20 @@ This file is maintained for every code change.
     - Updated delete row action, clear-all-resolved action, and close-appointment action to destructive styling.
 - Why changed:
     - Requested applying destructive styling to identified destructive actions.
+
+## 2026-03-20 09:47:52 IST (+0530)
+
+- DateTime: `2026-03-20 09:47:52 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/KyochiDataTable.tsx`
+    - diff lines: `141,153,158-176,270-286`
+    - file: `CHANGELOG.md`
+    - diff lines: `end`
+    - file: `error.log`
+    - diff lines: `end`
+- What changed:
+    - Increased shared table pagination size to `7` rows per page.
+    - Reworked page-number rendering to ellipsis pattern (e.g. `1 2 3 ... 7 8 9`) when pages are large.
+    - Kept active page highlighted using primary button variant.
+- Why changed:
+    - Requested pagination pattern with ellipsis and 7 rows per page.
