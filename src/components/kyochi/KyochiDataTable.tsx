@@ -69,12 +69,12 @@ export function KyochiDataTable({
             id: "select",
             enableSorting: false,
             header: () => (
-              <div className="w-12 text-center px-4 py-3">
+              <div className="flex h-full w-full items-center justify-center px-4">
                 <input type="checkbox" aria-label="Select all rows" />
               </div>
             ),
             cell: ({ row }: { row: { original: KyochiTableRow } }) => (
-              <div className="h-full text-center px-4 py-3 overflow-hidden">
+              <div className="h-full text-center px-4 overflow-hidden flex items-center justify-center">
                 <input type="checkbox" aria-label={`Select ${row.original.id}`} />
               </div>
             ),
@@ -91,11 +91,11 @@ export function KyochiDataTable({
         ),
         cell: ({ row }: { row: { original: KyochiTableRow } }) => (
           <div
-            className={`h-full overflow-hidden px-4 py-3 ${
-              centeredBodyColumns.includes(index) ? "text-center" : "text-left"
+            className={`flex h-full w-full items-center overflow-hidden px-4 ${
+              centeredBodyColumns.includes(index) ? "justify-center text-center" : "justify-start text-left"
             }`}
           >
-            <div className="type-body k-text-strong whitespace-normal break-words leading-snug [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] group-hover:[-webkit-line-clamp:3] overflow-hidden">
+            <div className="w-full type-body k-text-strong whitespace-normal break-words leading-snug [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] group-hover:[-webkit-line-clamp:3] overflow-hidden">
               {row.original.cells[index]}
             </div>
           </div>
@@ -110,7 +110,7 @@ export function KyochiDataTable({
           </span>
         ),
         cell: ({ row }) => (
-          <div className="h-full overflow-hidden px-4 py-3 text-center whitespace-normal break-words">
+          <div className="flex h-full w-full items-center justify-center overflow-hidden px-4 text-center whitespace-normal break-words">
             {row.original.actions ?? (
               <div className="inline-flex items-center gap-1.5">
                 <Button type="button" variant="ghost" size="icon-sm" aria-label={`Edit ${row.original.id}`}>
@@ -202,14 +202,14 @@ export function KyochiDataTable({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  className={`group h-[56px] max-h-[56px] hover:h-[84px] hover:max-h-[84px] ${
+                  className={`group h-[42px] max-h-[42px] align-middle hover:h-[63px] hover:max-h-[63px] ${
                     tone === "soft" ? "border-b border-[#edf1f6] hover:bg-[#fbfcfe]" : "k-row-hover"
                   } transition-[height,background-color] duration-200`}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
-                      className="p-0 align-middle h-[56px] max-h-[56px] overflow-hidden group-hover:h-[84px] group-hover:max-h-[84px] transition-[height] duration-200"
+                      className="p-0 align-middle h-[42px] max-h-[42px] overflow-hidden group-hover:h-[63px] group-hover:max-h-[63px] transition-[height] duration-200"
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>

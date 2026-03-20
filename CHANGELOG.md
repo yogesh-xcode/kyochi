@@ -1673,3 +1673,21 @@ This file is maintained for every code change.
     - Updated Add CTA to compact gold button treatment consistent with reference rhythm.
 - Why changed:
     - Requested trying toolbar layout/style from provided design artifact.
+
+## 2026-03-20 08:56:12 IST (+0530)
+
+- DateTime: `2026-03-20 08:56:12 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/KyochiDataTable.tsx`
+    - diff lines: `72,77,94-98,113,205,212`
+    - file: `src/components/kyochi/RecentAppointmentsTable.tsx`
+    - diff lines: `39-45`
+    - file: `CHANGELOG.md`
+    - diff lines: `end`
+    - file: `error.log`
+    - diff lines: `end`
+- What changed:
+    - Centered table row content on the Y-axis using full-height flex alignment in shared table cells and action/select columns.
+    - Reduced the shared table row system by 25% (`56/84` to `42/63`) and aligned recent appointments row cells vertically.
+- Why changed:
+    - Requested all rows to be Y-axis centered and row height reduced by one-fourth.

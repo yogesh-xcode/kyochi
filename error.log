@@ -283,3 +283,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-20 08:46:41 IST (+0530)
 # Toolbar Reference Styling status: Fixed (management toolbar now matches kyochi_toolbar compact pattern with icon-search and grouped actions)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-20 08:56:12 IST (+0530)
+# Table Row Vertical Alignment + Density status: Fixed (all shared table rows are Y-axis centered; row height reduced by 25% to 42px base and 63px hover)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
