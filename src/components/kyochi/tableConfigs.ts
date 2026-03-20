@@ -21,9 +21,9 @@ export const tableViewConfigs: Record<TableViewKey, TableViewConfig> = {
     excludedDataFields: ["status", "phone", "city", "region", "created_at"],
   },
   appointments: {
-    columns: ["ID", "Patient", "Therapist", "Date & Time", "Status"],
-    centeredBodyColumns: [0, 4],
-    includedDataFields: ["id", "patient_name", "therapist_name", "starts_at", "status"],
+    columns: ["ID", "Patient", "Therapist", "Date", "Time", "Status"],
+    centeredBodyColumns: [0, 3, 4, 5],
+    includedDataFields: ["id", "patient_name", "therapist_name", "date", "time", "status"],
     excludedDataFields: ["patient_id", "therapist_id", "therapy_id", "created_at"],
   },
   franchises: {

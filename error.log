@@ -247,3 +247,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-20 06:46:53 IST (+0530)
 # Billing Table Theme status: Fixed (soft header/rows, status chips with dot indicators, reference-style action controls, and selection column hidden for billing)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-20 06:52:23 IST (+0530)
+# Appointments Date/Time Alignment status: Fixed (Date and Time body columns now centered)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.

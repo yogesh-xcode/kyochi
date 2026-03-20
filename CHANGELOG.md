@@ -1491,3 +1491,18 @@ This file is maintained for every code change.
     - Hid selection checkbox column for billing table and enabled soft table tone.
 - Why changed:
     - Requested table theme to match the provided billing reference style while preserving project theme.
+
+## 2026-03-20 06:52:23 IST (+0530)
+
+- DateTime: `2026-03-20 06:52:23 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/tableConfigs.ts`
+    - diff lines: `25`
+    - file: `CHANGELOG.md`
+    - diff lines: `1456-1465`
+    - file: `error.log`
+    - diff lines: `254-257`
+- What changed:
+    - Updated appointments table centered-body mapping to include `Date` and `Time` columns.
+- Why changed:
+    - Requested date and time values to be centered in appointments table.
