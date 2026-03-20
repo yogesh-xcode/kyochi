@@ -66,19 +66,19 @@ export function KyochiDataTable({
     () => [
       ...(showSelection
         ? [{
-            id: "select",
-            enableSorting: false,
-            header: () => (
-              <div className="flex h-full w-full items-center justify-center px-4">
-                <input type="checkbox" aria-label="Select all rows" />
-              </div>
-            ),
-            cell: ({ row }: { row: { original: KyochiTableRow } }) => (
-              <div className="h-full text-center px-4 overflow-hidden flex items-center justify-center">
-                <input type="checkbox" aria-label={`Select ${row.original.id}`} />
-              </div>
-            ),
-          } satisfies ColumnDef<KyochiTableRow>]
+          id: "select",
+          enableSorting: false,
+          header: () => (
+            <div className="flex h-full w-full items-center justify-center px-4">
+              <input type="checkbox" aria-label="Select all rows" />
+            </div>
+          ),
+          cell: ({ row }: { row: { original: KyochiTableRow } }) => (
+            <div className="h-full text-center px-4 overflow-hidden flex items-center justify-center">
+              <input type="checkbox" aria-label={`Select ${row.original.id}`} />
+            </div>
+          ),
+        } satisfies ColumnDef<KyochiTableRow>]
         : []),
       ...columns.map((column, index) => ({
         id: `column-${index}`,
@@ -91,9 +91,8 @@ export function KyochiDataTable({
         ),
         cell: ({ row }: { row: { original: KyochiTableRow } }) => (
           <div
-            className={`flex h-full w-full items-center overflow-hidden px-4 ${
-              centeredBodyColumns.includes(index) ? "justify-center text-center" : "justify-start text-left"
-            }`}
+            className={`flex h-full w-full items-center overflow-hidden px-4 ${centeredBodyColumns.includes(index) ? "justify-center text-center" : "justify-start text-left"
+              }`}
           >
             <div className="w-full text-[12px] leading-[1.35] k-text-strong whitespace-normal break-words [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] group-hover:[-webkit-line-clamp:3] overflow-hidden">
               {row.original.cells[index]}
@@ -175,7 +174,7 @@ export function KyochiDataTable({
 
   return (
     <div className="space-y-3">
-      <div className={`${tone === "soft" ? "bg-transparent" : "rounded-xl k-surface"}`}>
+      <div className={`overflow-hidden rounded-2xl ${tone === "soft" ? "bg-transparent" : "k-surface"}`}>
         <Table className={`${minTableWidthClassName} table-fixed`}>
           <colgroup>
             {showSelection && <col style={{ width: `${selectColumnWidth}px` }} />}
@@ -198,9 +197,8 @@ export function KyochiDataTable({
                         variant="ghost"
                         size="xs"
                         onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
-                        className={`inline-flex h-auto w-full items-center justify-center gap-1 border-0 bg-transparent px-0 py-0 hover:bg-transparent ${
-                          header.column.getCanSort() ? "cursor-pointer" : "cursor-default"
-                        }`}
+                        className={`inline-flex h-auto w-full items-center justify-center gap-1 border-0 bg-transparent px-0 py-0 hover:bg-transparent ${header.column.getCanSort() ? "cursor-pointer" : "cursor-default"
+                          }`}
                       >
                         {flexRender(header.column.columnDef.header, header.getContext())}
                         {header.column.getCanSort() && header.column.getIsSorted() === "asc" && (
@@ -224,11 +222,10 @@ export function KyochiDataTable({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  className={`group h-[42px] max-h-[42px] align-middle hover:h-[63px] hover:max-h-[63px] ${
-                    tone === "soft"
+                  className={`group h-[42px] max-h-[42px] align-middle hover:h-[63px] hover:max-h-[63px] ${tone === "soft"
                       ? `${row.index % 2 === 0 ? "bg-white" : "bg-[#fbf8ef]"} border-b border-[var(--k-color-border-soft)] hover:bg-[#f7f2df]`
                       : "k-row-hover"
-                  } transition-[height,background-color] duration-200`}
+                    } transition-[height,background-color] duration-200`}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell

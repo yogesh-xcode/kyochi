@@ -1916,3 +1916,19 @@ This file is maintained for every code change.
     - Kept active page highlighted using primary button variant.
 - Why changed:
     - Requested pagination pattern with ellipsis and 7 rows per page.
+
+## 2026-03-20 09:52:35 IST (+0530)
+
+- DateTime: `2026-03-20 09:52:35 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/KyochiDataTable.tsx`
+    - diff lines: `178`
+    - file: `CHANGELOG.md`
+    - diff lines: `end`
+    - file: `error.log`
+    - diff lines: `end`
+- What changed:
+    - Made shared table container corners rounded (`rounded-2xl`) with clipping (`overflow-hidden`) so the table appears rounded.
+    - Preserved pagination behavior at 7 rows per page.
+- Why changed:
+    - Requested rounded table styling.
