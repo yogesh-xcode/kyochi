@@ -1657,3 +1657,19 @@ This file is maintained for every code change.
     - Added KPI delta text-tone mapping for inline value-support text in management cards while preserving existing semantic behavior.
 - Why changed:
     - Requested KPI cards to follow the provided reference design.
+
+## 2026-03-20 08:46:41 IST (+0530)
+
+- DateTime: `2026-03-20 08:46:41 IST (+0530)`
+- File changes:
+    - file: `src/components/kyochi/ManagementPageLayout.tsx`
+    - diff lines: `3,68-103`
+    - file: `CHANGELOG.md`
+    - diff lines: `1571-1580`
+    - file: `error.log`
+    - diff lines: `286-289`
+- What changed:
+    - Applied toolbar style from `kyochi_toolbar.html` to shared management toolbar: compact 36px controls, search field with leading icon, grouped action buttons, and separator before export/print controls.
+    - Updated Add CTA to compact gold button treatment consistent with reference rhythm.
+- Why changed:
+    - Requested trying toolbar layout/style from provided design artifact.

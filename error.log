@@ -279,3 +279,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-20 08:43:24 IST (+0530)
 # KPI Card Reference Styling status: Fixed (dashboard + management KPI cards updated to kpi-card reference structure and rhythm)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-20 08:46:41 IST (+0530)
+# Toolbar Reference Styling status: Fixed (management toolbar now matches kyochi_toolbar compact pattern with icon-search and grouped actions)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.

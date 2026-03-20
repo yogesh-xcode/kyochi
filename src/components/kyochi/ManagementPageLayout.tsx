@@ -1,6 +1,6 @@
 "use client";
 
-import { Download, Plus, Printer, SlidersHorizontal, Upload } from "lucide-react";
+import { Download, Plus, Printer, Search, SlidersHorizontal, Upload } from "lucide-react";
 
 import { KyochiDataTable, type KyochiTableRow } from "@/components/kyochi/KyochiDataTable";
 import { KIcon } from "@/components/kyochi/icons";
@@ -79,29 +79,38 @@ export function ManagementPageLayout({
       </div>
 
       <Card className="k-surface rounded-2xl border k-border-soft shadow-sm py-0 ring-0 gap-0 overflow-hidden">
-        <CardHeader className="p-5 border-b k-border-soft">
-          <div className="flex flex-wrap items-center gap-2 xl:justify-end">
-            <Input
-              className="h-11 w-full sm:w-75 border k-border-soft bg-(--k-color-surface-muted) rounded-lg focus-visible:border-(--k-color-brand) focus-visible:ring-(--k-color-brand)/25"
-              placeholder={searchPlaceholder}
-            />
-            <Button variant="outline" className="h-11 px-3 border k-border-soft bg-(--k-color-surface)">
+        <CardHeader className="p-4 border-b k-border-soft">
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="relative flex-1 min-w-[220px] max-w-md">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-3.5 k-brand" />
+              <Input
+                className="h-9 w-full pl-8 pr-3 border k-border-soft bg-(--k-color-surface) rounded-md text-[13px] focus-visible:border-(--k-color-brand) focus-visible:ring-(--k-color-brand)/20"
+                placeholder={searchPlaceholder}
+              />
+            </div>
+
+            <Button variant="outline" className="h-9 px-3 rounded-md border k-border-soft bg-(--k-color-surface) text-[13px] font-semibold">
               <SlidersHorizontal className="size-4" />
               Filters
             </Button>
-            <Button variant="outline" className="h-11 px-3 border k-border-soft bg-(--k-color-surface)">
+
+            <Button variant="outline" className="h-9 px-3 rounded-md border k-border-soft bg-(--k-color-surface) text-[13px] font-semibold">
               <Upload className="size-4" />
               Upload
             </Button>
-            <Button className="h-11 px-3 bg-[var(--kyochi-gold-400)] text-[var(--kyochi-gold-900)] hover:bg-[var(--kyochi-gold-500)]">
+
+            <div className="h-5 w-px bg-[var(--k-color-border-soft)] mx-0.5" />
+
+            <Button variant="outline" className="h-9 px-3 rounded-md border k-border-soft bg-(--k-color-surface) text-[13px] font-semibold k-text-body">
               <Download className="size-4" />
               Export
             </Button>
-            <Button variant="outline" className="h-11 px-3 border k-border-soft bg-(--k-color-surface)">
+            <Button variant="outline" className="h-9 px-3 rounded-md border k-border-soft bg-(--k-color-surface) text-[13px] font-semibold k-text-body">
               <Printer className="size-4" />
               Print
             </Button>
-            <Button className="h-11 px-3 bg-[var(--kyochi-gold-400)] text-[var(--kyochi-gold-900)] hover:bg-[var(--kyochi-gold-500)]">
+
+            <Button className="h-9 px-3.5 rounded-md bg-[var(--kyochi-gold-500)] text-white hover:bg-[var(--kyochi-gold-600)] text-[13px] font-semibold">
               <Plus className="size-4" />
               Add
             </Button>
