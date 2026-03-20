@@ -1594,3 +1594,31 @@ This file is maintained for every code change.
     - Added subtle multi-layer gold atmospheric background treatment to `.k-shell-bg` so theme reads throughout the full application.
 - Why changed:
     - Requested application-wide gold theme treatment similar to provided reference mood.
+
+## 2026-03-20 08:35:33 IST (+0530)
+
+- DateTime: `2026-03-20 08:35:33 IST (+0530)`
+- File changes:
+    - file: `src/app/globals.css`
+    - diff lines: `65-88,166-206,434`
+    - file: `src/components/kyochi/Sidebar.tsx`
+    - diff lines: `43-53,81`
+    - file: `src/components/kyochi/DashboardHeader.tsx`
+    - diff lines: `76`
+    - file: `src/components/kyochi/KpiGrid.tsx`
+    - diff lines: `16-20`
+    - file: `src/components/kyochi/ManagementPageLayout.tsx`
+    - diff lines: `53-56,86,94,98`
+    - file: `src/components/kyochi/RevenueSnapshot.tsx`
+    - diff lines: `25-28`
+    - file: `CHANGELOG.md`
+    - diff lines: `1527-1544`
+    - file: `error.log`
+    - diff lines: `274-277`
+- What changed:
+    - Refined app-wide gold theme toward the provided CRM reference feel: neutral shell + white surfaces with controlled gold accents.
+    - Updated sidebar styling (logo treatment, active gradient pill, softer chrome) and compacted KPI/action card accents.
+    - Retuned primary action buttons to lighter gold with dark text for better contrast balance and reference-like tone.
+    - Added compact legend treatment in revenue chart header for a cleaner dashboard-analytics look.
+- Why changed:
+    - Requested trying the provided reference style across the application while keeping Kyochi branding.

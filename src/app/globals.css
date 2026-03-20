@@ -56,8 +56,8 @@
     --kyochi-red-600: #b91c1c;
 
     /* ── SHADCN SEMANTIC TOKENS — LIGHT MODE ── */
-    --background:          44 35% 95%;        /* warm gold-canvas */
-    --foreground:          28 22% 14%;        /* warm deep ink */
+    --background:          42 22% 96%;
+    --foreground:          28 18% 14%;
 
     --card:                0 0% 100%;
     --card-foreground:     24 8% 15%;
@@ -71,8 +71,8 @@
     --secondary:           36 20% 92%;        /* warm cream */
     --secondary-foreground: 24 8% 25%;
 
-    --muted:               42 28% 92%;
-    --muted-foreground:    33 16% 42%;
+    --muted:               40 18% 93%;
+    --muted-foreground:    32 12% 44%;
 
     --accent:              43 50% 95%;        /* light gold tint */
     --accent-foreground:   43 67% 30%;
@@ -80,8 +80,8 @@
     --destructive:         0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border:              43 30% 82%;
-    --input:               43 30% 82%;
+    --border:              40 22% 86%;
+    --input:               40 22% 86%;
     --ring:                43 67% 52%;
 
     /* ── WELLNESS SEMANTIC TOKENS ── */
@@ -155,13 +155,13 @@
     --sidebar-width-collapsed: 64px;
 
     /* ── DASHBOARD SEMANTIC TOKENS ── */
-    --k-shell-bg:            44 38% 93%;
-    --k-surface:             44 42% 98%;
-    --k-surface-muted:       43 42% 92%;
-    --k-border-soft:         42 34% 80%;
-    --k-text-strong:         28 24% 16%;
-    --k-text-body:           32 18% 32%;
-    --k-text-subtle:         34 13% 52%;
+    --k-shell-bg:            40 22% 96%;
+    --k-surface:             0 0% 100%;
+    --k-surface-muted:       40 24% 95%;
+    --k-border-soft:         40 18% 86%;
+    --k-text-strong:         30 16% 15%;
+    --k-text-body:           31 12% 34%;
+    --k-text-subtle:         31 10% 57%;
     --k-brand:               43 67% 52%;
     --k-brand-strong:        43 71% 38%;
     --k-brand-soft:          43 67% 92%;
@@ -171,19 +171,19 @@
     --k-avatar-bg:           220 14% 94%;
 
     /* ── DASHBOARD COLOR TOKENS (HEX/RGBA SAFE) ── */
-    --k-color-shell-bg:         #f4efd9;
-    --k-color-surface:          #fffdf6;
-    --k-color-surface-muted:    #f6efd7;
-    --k-color-border-soft:      #e5d8ab;
-    --k-color-text-strong:      #2f2614;
-    --k-color-text-body:        #5f4f31;
-    --k-color-text-subtle:      #95835f;
+    --k-color-shell-bg:         #f8f7f4;
+    --k-color-surface:          #ffffff;
+    --k-color-surface-muted:    #f5f2ea;
+    --k-color-border-soft:      #e9e3d5;
+    --k-color-text-strong:      #2c2519;
+    --k-color-text-body:        #6b5e4c;
+    --k-color-text-subtle:      #a89880;
     --k-color-brand:            #d4af35;
     --k-color-brand-strong:     #b8941f;
     --k-color-brand-soft:       #f9edbe;
     --k-color-brand-border:     rgba(212, 175, 53, 0.25);
     --k-color-brand-soft-tint:  rgba(249, 237, 190, 0.45);
-    --k-color-row-hover:        #f8f1dc;
+    --k-color-row-hover:        #f8f5ee;
     --k-color-notify:           #ff6a6a;
     --k-color-cta:              #2f66db;
     --k-color-cta-hover:        #2a5ccd;
@@ -427,13 +427,7 @@
 
 /* ── LAYER: COMPONENT TOKENS ─────────────────────────────── */
 @layer components {
-  .k-shell-bg {
-    background-color: var(--k-color-shell-bg);
-    background-image:
-      radial-gradient(circle at 12% 8%, rgba(212, 175, 53, 0.18), transparent 38%),
-      radial-gradient(circle at 88% 12%, rgba(236, 200, 79, 0.14), transparent 40%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0));
-  }
+  .k-shell-bg { background: var(--k-color-shell-bg); }
   .k-surface { background: var(--k-color-surface); }
   .k-surface-muted { background: var(--k-color-surface-muted); }
   .k-border-soft { border-color: var(--k-color-border-soft); }

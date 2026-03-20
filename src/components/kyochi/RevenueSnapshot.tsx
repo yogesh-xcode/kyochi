@@ -26,6 +26,10 @@ export function RevenueSnapshot({
         </select>
       </CardHeader>
       <CardContent className="px-4 pb-4 pt-0">
+      <div className="mb-2 flex items-center gap-3 type-label text-[8px] tracking-wide">
+        <span className="inline-flex items-center gap-1 k-text-body"><span className="size-1.5 rounded-full bg-[var(--kyochi-gold-400)]" />Revenue</span>
+        <span className="inline-flex items-center gap-1 k-text-subtle"><span className="size-1.5 rounded-full bg-[var(--kyochi-gold-200)]" />Forecast</span>
+      </div>
       <div className="h-40 w-full flex items-end gap-1 px-1">
         {revenueBars.map((bar, i) => (
           <div

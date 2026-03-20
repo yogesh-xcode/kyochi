@@ -42,13 +42,13 @@ export function Sidebar({ navSections, role, mobileOpen = false, onMobileClose }
         aria-hidden="true"
       />
       <aside
-        className={`w-60 k-surface border-r k-border-soft flex flex-col fixed h-full z-40 transition-transform duration-300 ease-out ${
+        className={`w-60 k-surface border-r k-border-soft flex flex-col fixed h-full z-40 transition-transform duration-300 ease-out shadow-sm ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0`}
       >
       <div className="h-[62px] px-3.5 shrink-0 flex items-center gap-2 border-b k-border-soft">
-        <div className="size-8 rounded-full k-brand-bg flex items-center justify-center text-white shadow-sm">
-          <Leaf className="size-4" />
+        <div className="size-8 rounded-full k-brand-soft-bg border k-brand-border-soft flex items-center justify-center k-brand shadow-sm">
+          <Leaf className="size-4" strokeWidth={2.2} />
         </div>
         <div className="min-w-0">
           <h1 className="text-[1rem] font-bold k-text-strong leading-none">Kyochi</h1>
@@ -79,9 +79,9 @@ export function Sidebar({ navSections, role, mobileOpen = false, onMobileClose }
                   key={item.label}
                   href={item.href}
                   onClick={onMobileClose}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-all text-[12px] font-semibold ${
+                  className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-[12px] font-semibold ${
                     isItemActive(item.href)
-                      ? "k-brand-soft-bg k-brand-strong border k-brand-border-soft"
+                      ? "bg-[linear-gradient(90deg,rgba(212,175,53,0.18),rgba(212,175,53,0.04))] k-brand-strong border k-brand-border-soft"
                       : "k-text-body hover:bg-[var(--k-color-surface-muted)] border border-transparent"
                   }`}
                 >

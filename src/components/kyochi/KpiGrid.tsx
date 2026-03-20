@@ -13,11 +13,11 @@ export function KpiGrid({ cards }: KpiGridProps) {
       {cards.map((card) => (
         <Card
           key={card.label}
-          className="k-surface rounded-xl shadow-sm border-b-4 k-brand-border-soft py-0 ring-0"
+          className="k-surface rounded-xl shadow-sm border k-border-soft py-0 ring-0"
         >
           <CardContent className="p-4">
           <div className="flex items-center justify-between mb-3">
-            <div className="p-1.5 k-brand-soft-bg rounded-lg k-brand">
+            <div className="p-1.5 k-brand-soft-bg rounded-md k-brand">
               <KIcon name={card.icon} className="size-4" />
             </div>
             <Badge variant="outline" className={`h-auto border-transparent type-label normal-case tracking-normal px-2 py-0.5 rounded-full ${card.deltaColor}`}>
