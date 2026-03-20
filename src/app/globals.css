@@ -567,6 +567,12 @@
     height: 30px;
     border-radius: 6px;
   }
+  .k-btn-md {
+    font-size: 12px;
+    padding: 0 18px;
+    height: 36px;
+    border-radius: var(--radius-md);
+  }
   .k-btn-lg {
     font-size: 15px;
     padding: 12px 28px;
@@ -586,6 +592,23 @@
   }
   .k-btn-icon:hover {
     background: color-mix(in srgb, var(--kyochi-gold-500) 10%, transparent);
+  }
+  .k-btn-icon-md {
+    width: 36px;
+    height: 36px;
+  }
+  .k-btn-icon-sm {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+  }
+  .k-btn-destructive-outline {
+    background: transparent;
+    color: #c0392b;
+    border: 1px solid #c0392b;
+  }
+  .k-btn-destructive-outline:hover {
+    background: color-mix(in srgb, #c0392b 8%, transparent);
   }
 
   /* ── BADGE ── */

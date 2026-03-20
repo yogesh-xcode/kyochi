@@ -319,3 +319,7 @@ Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s b
 Updated: 2026-03-20 09:38:56 IST (+0530)
 # Row Actions status: Fixed (table row actions now use compact outline action-button pattern consistently)
 Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.
+
+Updated: 2026-03-20 09:42:12 IST (+0530)
+# Button Standardization status: Fixed (shared shadcn Button now implements kyochi_button_system standard variants and size scale)
+Verification: pnpm -s lint (passes with existing TanStack warning) and pnpm -s build passed.

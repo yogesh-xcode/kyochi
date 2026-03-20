@@ -1860,3 +1860,22 @@ This file is maintained for every code change.
     - Updated billing row action overflow button to use the same outline icon action style.
 - Why changed:
     - Requested fixing row actions to follow the shared button pattern.
+
+## 2026-03-20 09:42:12 IST (+0530)
+
+- DateTime: `2026-03-20 09:42:12 IST (+0530)`
+- File changes:
+    - file: `src/app/globals.css`
+    - diff lines: `570-575,596-612`
+    - file: `src/components/ui/button.tsx`
+    - diff lines: `17,19,26-27,30-31`
+    - file: `CHANGELOG.md`
+    - diff lines: `end`
+    - file: `error.log`
+    - diff lines: `end`
+- What changed:
+    - Rewrote the shared shadcn `Button` system to match `kyochi_button_system.html` standards for size scale and variant coverage.
+    - Added medium button size token (`36px`), icon size tokens (`40/36/30`), and destructive-outline variant in global button styles.
+    - Extended shared `Button` API with `tertiary`, `destructive-outline`, and normalized size mapping (`default=40`, `sm/md=36`, `xs=30`).
+- Why changed:
+    - Requested making the Kyochi button system reference the standard for the shared shadcn button component.
