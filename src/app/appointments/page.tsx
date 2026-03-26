@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { 
   CalendarDays, 
   CheckCircle2, 
@@ -80,7 +80,7 @@ const toIsoFromDateAndTime = (dateText: string, timeText: string) => {
   return new Date(`${normalizedDate}T${normalizedTime || "00:00"}:00`).toISOString();
 };
 
-export default function AppointmentsPage() {
+function AppointmentsContent() {
   const { data, reload, isLoading: isBootstrapLoading } = useBootstrapData();
   const searchParams = useSearchParams();
   const openAddOnMount = searchParams.get("new") === "true";
@@ -328,5 +328,13 @@ export default function AppointmentsPage() {
         </SheetContent>
       </Sheet>
     </div>
+  );
+}
+
+export default function AppointmentsPage() {
+  return (
+    <Suspense fallback={<div>Loading appointments...</div>}>
+      <AppointmentsContent />
+    </Suspense>
   );
 }

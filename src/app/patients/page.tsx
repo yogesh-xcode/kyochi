@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import {
   CalendarDays,
   CheckCircle2,
@@ -203,7 +203,7 @@ type FlashState = {
   message: string;
 };
 
-export default function PatientsPage() {
+function PatientsContent() {
   const { data, isLoading: isBootstrapLoading } = useBootstrapData();
   const router = useRouter();
   const pathname = usePathname();
@@ -978,5 +978,13 @@ export default function PatientsPage() {
         </SheetContent>
       </Sheet>
     </>
+  );
+}
+
+export default function PatientsPage() {
+  return (
+    <Suspense fallback={<div>Loading patients...</div>}>
+      <PatientsContent />
+    </Suspense>
   );
 }
