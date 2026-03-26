@@ -1,7 +1,0 @@
-[
-  {"id":"an_001","metric":"daily_sessions","period":"2026-02-20","value":4,"unit":"count"},
-  {"id":"an_002","metric":"daily_sessions","period":"2026-02-27","value":5,"unit":"count"},
-  {"id":"an_003","metric":"daily_sessions","period":"2026-03-05","value":6,"unit":"count"},
-  {"id":"an_004","metric":"daily_sessions","period":"2026-03-12","value":5,"unit":"count"},
-  {"id":"an_005","metric":"daily_sessions","period":"2026-03-19","value":3,"unit":"count"}
-]

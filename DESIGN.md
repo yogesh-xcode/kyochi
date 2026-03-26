@@ -22,8 +22,7 @@ Required visual feel:
 - Styling: Tailwind v4 + token utilities from `globals.css`
 - Icons: Lucide only
 - Fonts loaded in layout:
-  - Manrope (`--font-manrope`) as primary sans
-  - DM Serif Display (`--font-dm-serif`) for limited display/brand text
+  - Manrope (`--font-manrope`) for all text, including display and brand.
 
 ## Layout Contract
 - Shared shell is handled by `AppShell` in root layout.
@@ -70,8 +69,8 @@ Dashboard and pages should derive display content from local datasets:
 - `data/therapies.json`
 - `data/appointments.json`
 - `data/billing.json`
-- `data/ai_insights.json`
-- `data/analytics.json`
+- `data/feedback.json`
+- `data/franchises.json`
 
 Do not hardcode KPIs when data mapping exists.
 
@@ -129,7 +128,7 @@ Do not hardcode KPIs when data mapping exists.
 ### Typography Tokens
 - Fonts:
   - `--font-sans` => Manrope
-  - `--font-display` => DM Serif Display
+  - `--font-display` => Manrope
 - Font size tokens:
   - `--text-xs`, `--text-sm`, `--text-base`, `--text-lg`, `--text-xl`, `--text-2xl`, `--text-3xl`, `--text-4xl`
 
@@ -145,7 +144,7 @@ Prefer these over raw Tailwind color literals.
 - Other: `k-avatar-bg`, `k-overlay`
 
 ## Typography Contract (Exact Intent)
-- Display / brand: DM Serif only when needed
+- Display / brand: Manrope 800
 - H1: Manrope 800, ~30px (`type-h1`)
 - H2: Manrope 700, ~24px (`type-h2`)
 - H3: Manrope 700, ~20px (`type-h3`)
@@ -193,4 +192,4 @@ Use shadcn primitives first, then apply Kyochi classes.
 - Don’t hardcode hex colors when token class exists.
 
 ## Stitch AI Prompt (Ready to Paste)
-Build UI using shadcn primitives and Kyochi token utilities from `src/app/globals.css`. Preserve Kyochi’s warm clinical style: cream surfaces, gold accents, slate-blue readable text, rounded-xl cards, and subtle shadows. Use Manrope as primary typography and DM Serif Display only for display/brand moments. Use Lucide icons only. Keep shared app shell (sidebar + top strip header), maintain route structure, and keep content data-driven from `data/*.json` where applicable. Do not introduce new color systems or visual language.
+Build UI using shadcn primitives and Kyochi token utilities from `src/app/globals.css`. Preserve Kyochi’s warm clinical style: cream surfaces, gold accents, slate-blue readable text, rounded-xl cards, and subtle shadows. Use Manrope for all typography, including display and brand moments. Use Lucide icons only. Keep shared app shell (sidebar + top strip header), maintain route structure, and keep content data-driven from `data/*.json` where applicable. Do not introduce new color systems or visual language.

@@ -1,0 +1,427 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --gold:#d4af35;--gold-50:#fdf8e7;--gold-100:#f9edbe;--gold-200:#f3dc8a;--gold-300:#ecc84f;
+  --gold-600:#9a7a10;--gold-700:#7a5f0a;--gold-900:#3d2d04;
+  --cream-100:#f8f7f4;--cream-200:#f2efe9;--cream-300:#e8e3d8;
+  --text:#241e15;--text-2:#6b5e4c;--text-3:#a89880;
+  --green:#3fa060;--green-50:#eef7f0;--green-dark:#144826;
+  --red:#ef4444;--red-50:#fef2f2;--red-dark:#b91c1c;
+  --surface:#ffffff;--border:#e8e3d8;--dark:#241e15;
+  --font-sans:'Manrope',system-ui,sans-serif;
+  --font-display:'DM Serif Display',Georgia,serif;
+}
+body{font-family:var(--font-sans);background:var(--cream-200);min-height:100vh;}
+
+/* ── SIDEBAR ── */
+.layout{display:flex;min-height:100vh;}
+.sidebar{width:220px;background:var(--dark);display:flex;flex-direction:column;padding:0;flex-shrink:0;}
+.sb-logo{padding:24px 20px 20px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.sb-logo-eye{font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-300);margin-bottom:3px;}
+.sb-logo-name{font-family:var(--font-display);font-size:20px;color:#fdf8e7;font-style:italic;}
+.sb-logo-sub{font-size:9px;color:rgba(253,248,231,0.3);margin-top:1px;}
+
+.sb-patient{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:10px;}
+.sb-av{width:36px;height:36px;border-radius:50%;background:rgba(212,175,53,0.18);border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--gold-200);flex-shrink:0;}
+.sb-pname{font-size:12px;font-weight:700;color:#fdf8e7;}
+.sb-psub{font-size:9px;color:rgba(253,248,231,0.35);margin-top:1px;}
+
+.sb-nav{padding:12px 12px;flex:1;}
+.sb-section{font-size:8px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(253,248,231,0.25);padding:8px 8px 6px;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;cursor:pointer;margin-bottom:2px;transition:all 0.15s;}
+.nav-item:hover{background:rgba(255,255,255,0.05);}
+.nav-item.on{background:rgba(212,175,53,0.12);border:1px solid rgba(212,175,53,0.2);}
+.nav-icon{width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.nav-lbl{font-size:12px;font-weight:600;color:rgba(253,248,231,0.45);}
+.nav-item.on .nav-lbl{color:var(--gold-200);font-weight:700;}
+.nav-badge{margin-left:auto;padding:1px 6px;border-radius:99px;background:rgba(212,175,53,0.2);font-size:9px;font-weight:800;color:var(--gold-300);}
+
+.sb-bottom{padding:14px 20px;border-top:1px solid rgba(255,255,255,0.06);}
+.sb-score-row{display:flex;align-items:center;gap:8px;}
+.sb-score-ring{position:relative;width:38px;height:38px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sb-score-ring svg{position:absolute;top:0;left:0;transform:rotate(-90deg);}
+.sb-score-in{text-align:center;z-index:1;font-size:10px;font-weight:800;color:#fdf8e7;}
+.sb-score-lbl{font-size:10px;font-weight:700;color:rgba(253,248,231,0.4);}
+.sb-score-val{font-size:13px;font-weight:800;color:var(--gold);}
+
+/* ── MAIN ── */
+.main{flex:1;overflow:auto;padding:24px;}
+
+/* topbar */
+.main-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
+.mt-left{}
+.mt-greeting{font-size:12px;font-weight:600;color:var(--text-3);}
+.mt-title{font-family:var(--font-display);font-size:26px;color:var(--text);font-style:italic;line-height:1.1;}
+.mt-right{display:flex;align-items:center;gap:10px;}
+.mt-date{font-size:11px;font-weight:600;color:var(--text-3);padding:6px 12px;background:var(--surface);border:1px solid var(--border);border-radius:99px;}
+.mt-btn{padding:8px 16px;border:none;border-radius:10px;background:var(--gold);color:var(--gold-900);font-size:12px;font-weight:800;cursor:pointer;font-family:var(--font-sans);}
+
+/* hero row */
+.hero-row{display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-bottom:14px;}
+
+.hero-card{background:var(--dark);border-radius:20px;padding:20px;border:1px solid rgba(212,175,53,0.15);display:flex;align-items:center;gap:16px;}
+.hero-ring{position:relative;width:88px;height:88px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.hero-ring svg{position:absolute;top:0;left:0;transform:rotate(-90deg);}
+.hr-in{text-align:center;z-index:1;}
+.hr-num{font-size:24px;font-weight:800;color:#fdf8e7;line-height:1;}
+.hr-sub{font-size:9px;font-weight:700;color:var(--gold-300);}
+.hero-text{}
+.hero-eye{font-size:8px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-300);margin-bottom:4px;}
+.hero-title{font-family:var(--font-display);font-size:16px;color:#fdf8e7;font-style:italic;line-height:1.3;margin-bottom:8px;}
+.hero-change{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:99px;background:rgba(63,160,96,0.18);border:1px solid rgba(63,160,96,0.28);font-size:10px;font-weight:700;color:#72be8a;}
+.hero-bar-track{width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:99px;overflow:hidden;margin-top:8px;}
+.hero-bar-fill{height:100%;background:var(--gold);border-radius:99px;width:78%;}
+
+.next-card{background:var(--surface);border-radius:20px;padding:18px;border:1px solid var(--border);display:flex;flex-direction:column;justify-content:space-between;}
+.nc-eye{font-size:8px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:8px;}
+.nc-therapy{font-size:14px;font-weight:800;color:var(--text);margin-bottom:3px;}
+.nc-meta{font-size:10px;color:var(--text-3);}
+.nc-date{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;background:var(--gold-50);border:1px solid rgba(212,175,53,0.25);border-radius:99px;font-size:11px;font-weight:700;color:var(--gold-700);margin:10px 0;}
+.nc-btn{width:100%;padding:9px;border:none;border-radius:10px;background:var(--dark);color:var(--gold-200);font-size:11px;font-weight:800;cursor:pointer;font-family:var(--font-sans);}
+
+/* kpi row */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px;}
+.kc{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;transition:all 0.15s;}
+.kc:hover{border-color:rgba(212,175,53,0.35);}
+.kc.on{border-color:var(--gold);box-shadow:0 4px 16px rgba(212,175,53,0.18);}
+.kr{position:relative;width:60px;height:60px;display:flex;align-items:center;justify-content:center;}
+.kr svg{position:absolute;top:0;left:0;transform:rotate(-90deg);}
+.kr-in{text-align:center;z-index:1;}
+.kr-num{font-size:15px;font-weight:800;color:var(--text);line-height:1;}
+.kr-unit{font-size:7px;font-weight:700;color:var(--text-3);}
+.kc-lbl{font-size:9px;font-weight:700;color:var(--text-2);text-align:center;line-height:1.3;}
+.kc-d{font-size:8px;font-weight:700;padding:2px 7px;border-radius:99px;}
+.dg{background:var(--green-50);color:var(--green-dark);}
+.da{background:var(--gold-50);color:var(--gold-700);}
+
+/* bottom row */
+.bottom-row{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;margin-bottom:14px;}
+
+/* trend */
+.trend-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:18px;}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
+.card-title{font-size:13px;font-weight:700;color:var(--text);}
+.card-sub{font-size:10px;color:var(--text-3);margin-top:1px;}
+.cbadge{padding:3px 9px;border-radius:99px;font-size:9px;font-weight:700;}
+.cbadge-g{background:var(--green-50);color:var(--green-dark);}
+.cbadge-a{background:var(--gold-50);color:var(--gold-700);}
+.bars{display:flex;align-items:flex-end;gap:8px;height:72px;margin-bottom:6px;}
+.bc{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;}
+.bar{width:100%;border-radius:4px 4px 0 0;}
+.bar-muted{background:var(--cream-300);}
+.bar-gold{background:var(--gold);}
+.bar-green{background:var(--green);}
+.bv{font-size:8px;font-weight:800;color:var(--text-2);}
+.bl{font-size:8px;font-weight:600;color:var(--text-3);}
+.trend-foot{display:flex;justify-content:space-between;font-size:9px;color:var(--text-3);border-top:1px solid var(--cream-300);padding-top:7px;}
+
+/* history */
+.hist-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:18px;}
+.sess-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--cream-200);}
+.sess-item:last-child{border-bottom:none;padding-bottom:0;}
+.si-icon{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.si-g{background:var(--gold-50);}
+.si-gr{background:var(--green-50);}
+.si-info{flex:1;}
+.si-name{font-size:11px;font-weight:700;color:var(--text);}
+.si-meta{font-size:9px;color:var(--text-3);margin-top:1px;}
+.si-right{display:flex;flex-direction:column;align-items:flex-end;gap:3px;}
+.si-score{font-size:13px;font-weight:800;color:var(--gold);}
+.si-date{font-size:9px;color:var(--text-3);}
+.sp{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:99px;font-size:8px;font-weight:700;background:var(--green-50);color:var(--green-dark);}
+.sp-dot{width:4px;height:4px;border-radius:50%;background:var(--green);}
+
+/* drawer */
+.drawer{background:var(--dark);border-radius:14px;padding:14px 16px;margin-bottom:14px;border:1px solid rgba(212,175,53,0.14);}
+.dr-lbl{font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-300);margin-bottom:8px;}
+.dr-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.dr-cell{background:rgba(255,255,255,0.04);border-radius:10px;padding:10px 8px;text-align:center;}
+.dr-val{font-size:14px;font-weight:800;color:var(--gold-200);line-height:1;}
+.dr-val.g{color:#72be8a;}
+.dr-val.w{color:#f87171;}
+.dr-k{font-size:9px;color:rgba(253,248,231,0.35);margin-top:3px;}
+
+/* ai */
+.ai-card{background:var(--dark);border:1px solid rgba(212,175,53,0.2);border-radius:20px;padding:18px;display:flex;align-items:flex-start;gap:14px;}
+.ai-icon{width:34px;height:34px;background:rgba(212,175,53,0.18);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;margin-top:2px;}
+.ai-content{flex:1;}
+.ai-eye{font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-300);margin-bottom:4px;}
+.ai-text{font-size:12px;color:rgba(253,248,231,0.65);line-height:1.7;}
+.ai-text strong{color:var(--gold-300);}
+.ai-btns{display:flex;gap:8px;margin-top:12px;}
+.ai-btn-p{padding:8px 16px;border:none;border-radius:9px;background:var(--gold);color:var(--gold-900);font-size:11px;font-weight:800;cursor:pointer;font-family:var(--font-sans);}
+.ai-btn-g{padding:8px 14px;border:1px solid rgba(255,255,255,0.1);border-radius:9px;background:rgba(255,255,255,0.05);color:rgba(253,248,231,0.5);font-size:11px;font-weight:700;cursor:pointer;font-family:var(--font-sans);}
+</style>
+
+<div class="layout">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sb-logo">
+      <div class="sb-logo-eye">Kyochi</div>
+      <div class="sb-logo-name">Wellness</div>
+      <div class="sb-logo-sub">Foot Reflexology</div>
+    </div>
+
+    <div class="sb-patient">
+      <div class="sb-av">ES</div>
+      <div>
+        <div class="sb-pname">Eleanor S.</div>
+        <div class="sb-psub">Premium member</div>
+      </div>
+    </div>
+
+    <div class="sb-nav">
+      <div class="sb-section">Main</div>
+      <div class="nav-item on">
+        <div class="nav-icon">◈</div>
+        <div class="nav-lbl">Dashboard</div>
+      </div>
+      <div class="nav-item">
+        <div class="nav-icon">◎</div>
+        <div class="nav-lbl">My Wellness</div>
+      </div>
+      <div class="nav-item">
+        <div class="nav-icon">◷</div>
+        <div class="nav-lbl">Sessions</div>
+        <div class="nav-badge">3</div>
+      </div>
+      <div class="nav-item">
+        <div class="nav-icon">✦</div>
+        <div class="nav-lbl">AI Insights</div>
+      </div>
+      <div class="sb-section" style="margin-top:8px;">Account</div>
+      <div class="nav-item">
+        <div class="nav-icon">⊞</div>
+        <div class="nav-lbl">Book Session</div>
+      </div>
+      <div class="nav-item">
+        <div class="nav-icon">◻</div>
+        <div class="nav-lbl">Settings</div>
+      </div>
+    </div>
+
+    <div class="sb-bottom">
+      <div class="sb-score-row">
+        <div class="sb-score-ring">
+          <svg width="38" height="38" viewBox="0 0 38 38">
+            <circle cx="19" cy="19" r="15" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+            <circle cx="19" cy="19" r="15" fill="none" stroke="#d4af35" stroke-width="4" stroke-dasharray="94.2" stroke-dashoffset="20" stroke-linecap="round"/>
+          </svg>
+          <div class="sb-score-in">78</div>
+        </div>
+        <div>
+          <div class="sb-score-lbl">Wellness score</div>
+          <div class="sb-score-val">78.0%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="main">
+
+    <div class="main-top">
+      <div>
+        <div class="mt-greeting">Good morning, Eleanor</div>
+        <div class="mt-title">Your wellness dashboard</div>
+      </div>
+      <div class="mt-right">
+        <div class="mt-date">22 March 2026</div>
+        <button class="mt-btn">+ Book session</button>
+      </div>
+    </div>
+
+    <!-- Hero row -->
+    <div class="hero-row">
+      <div class="hero-card">
+        <div class="hero-ring">
+          <svg width="88" height="88" viewBox="0 0 88 88">
+            <circle cx="44" cy="44" r="36" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="8"/>
+            <circle cx="44" cy="44" r="36" fill="none" stroke="#d4af35" stroke-width="8" stroke-dasharray="226.2" stroke-dashoffset="49" stroke-linecap="round"/>
+          </svg>
+          <div class="hr-in">
+            <div class="hr-num">78%</div>
+            <div class="hr-sub">wellness</div>
+          </div>
+        </div>
+        <div class="hero-text">
+          <div class="hero-eye">Overall wellness score</div>
+          <div class="hero-title">You're making great<br>progress, Eleanor</div>
+          <div class="hero-change">↑ +6% this month</div>
+          <div class="hero-bar-track"><div class="hero-bar-fill"></div></div>
+        </div>
+      </div>
+
+      <div class="next-card">
+        <div>
+          <div class="nc-eye">Next recommended session</div>
+          <div class="nc-therapy">De-stress Reflexology</div>
+          <div class="nc-meta">Dr. Aris Menon · 60 min · KO City Tower</div>
+          <div class="nc-date">📅 Suggested: 28 Mar 2026</div>
+        </div>
+        <button class="nc-btn">Book this session →</button>
+      </div>
+    </div>
+
+    <!-- 4 KPI rings -->
+    <div class="kpi-row">
+      <div class="kc on" id="k0" onclick="sel(0)">
+        <div class="kr">
+          <svg width="60" height="60" viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="24" fill="none" stroke="#e8e3d8" stroke-width="5"/>
+            <circle cx="30" cy="30" r="24" fill="none" stroke="#d4af35" stroke-width="5" stroke-dasharray="150.8" stroke-dashoffset="39" stroke-linecap="round"/>
+          </svg>
+          <div class="kr-in"><div class="kr-num">7.4</div><div class="kr-unit">/ 10</div></div>
+        </div>
+        <div class="kc-lbl">Wellness score</div>
+        <div class="kc-d da">↑ +0.6</div>
+      </div>
+      <div class="kc" id="k1" onclick="sel(1)">
+        <div class="kr">
+          <svg width="60" height="60" viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="24" fill="none" stroke="#e8e3d8" stroke-width="5"/>
+            <circle cx="30" cy="30" r="24" fill="none" stroke="#3fa060" stroke-width="5" stroke-dasharray="150.8" stroke-dashoffset="22" stroke-linecap="round"/>
+          </svg>
+          <div class="kr-in"><div class="kr-num" style="color:#3fa060;">−4.2</div><div class="kr-unit">pts</div></div>
+        </div>
+        <div class="kc-lbl">Relief delta</div>
+        <div class="kc-d dg">↓ best yet</div>
+      </div>
+      <div class="kc" id="k2" onclick="sel(2)">
+        <div class="kr">
+          <svg width="60" height="60" viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="24" fill="none" stroke="#e8e3d8" stroke-width="5"/>
+            <circle cx="30" cy="30" r="24" fill="none" stroke="#d4af35" stroke-width="5" stroke-dasharray="150.8" stroke-dashoffset="75" stroke-linecap="round"/>
+          </svg>
+          <div class="kr-in"><div class="kr-num">3</div><div class="kr-unit">sessions</div></div>
+        </div>
+        <div class="kc-lbl">Session streak</div>
+        <div class="kc-d da">● active</div>
+      </div>
+      <div class="kc" id="k3" onclick="sel(3)">
+        <div class="kr">
+          <svg width="60" height="60" viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="24" fill="none" stroke="#e8e3d8" stroke-width="5"/>
+            <circle cx="30" cy="30" r="24" fill="none" stroke="#3fa060" stroke-width="5" stroke-dasharray="150.8" stroke-dashoffset="45" stroke-linecap="round"/>
+          </svg>
+          <div class="kr-in"><div class="kr-num" style="color:#3fa060;">+18</div><div class="kr-unit">%</div></div>
+        </div>
+        <div class="kc-lbl">Progress</div>
+        <div class="kc-d dg">↑ trending</div>
+      </div>
+    </div>
+
+    <!-- KPI detail drawer -->
+    <div class="drawer">
+      <div class="dr-lbl" id="dr-lbl">Wellness score — breakdown</div>
+      <div class="dr-cols" id="dr-cols">
+        <div class="dr-cell"><div class="dr-val g">8.0</div><div class="dr-k">Last session</div></div>
+        <div class="dr-cell"><div class="dr-val">7.4</div><div class="dr-k">All-time avg</div></div>
+        <div class="dr-cell"><div class="dr-val g">8.5</div><div class="dr-k">Best ever</div></div>
+        <div class="dr-cell"><div class="dr-val" style="font-size:10px;color:rgba(253,248,231,0.3);">Calm + rested</div><div class="dr-k">Based on</div></div>
+      </div>
+    </div>
+
+    <!-- Bottom row -->
+    <div class="bottom-row">
+
+      <div class="trend-card">
+        <div class="card-top">
+          <div>
+            <div class="card-title">Wellness over time</div>
+            <div class="card-sub">All therapies · 5 sessions</div>
+          </div>
+          <span class="cbadge cbadge-g">+18% overall</span>
+        </div>
+        <div class="bars">
+          <div class="bc"><div class="bv">6.2</div><div class="bar bar-muted" style="height:38px;"></div><div class="bl">S1</div></div>
+          <div class="bc"><div class="bv">6.8</div><div class="bar bar-muted" style="height:46px;"></div><div class="bl">S2</div></div>
+          <div class="bc"><div class="bv">7.1</div><div class="bar bar-gold" style="height:52px;"></div><div class="bl">S3</div></div>
+          <div class="bc"><div class="bv">7.4</div><div class="bar bar-gold" style="height:58px;"></div><div class="bl">S4</div></div>
+          <div class="bc"><div class="bv" style="color:#3fa060;">8.0</div><div class="bar bar-green" style="height:70px;"></div><div class="bl" style="color:#3fa060;font-weight:800;">Now</div></div>
+        </div>
+        <div class="trend-foot">
+          <span>Started 6.2</span>
+          <span>3 therapies</span>
+          <span style="color:var(--green);font-weight:700;">Now 8.0 ↑</span>
+        </div>
+      </div>
+
+      <div class="hist-card">
+        <div class="card-top">
+          <div>
+            <div class="card-title">Session history</div>
+            <div class="card-sub">3 completed</div>
+          </div>
+          <span class="cbadge cbadge-a">All done</span>
+        </div>
+        <div class="sess-item">
+          <div class="si-icon si-g">🌿</div>
+          <div class="si-info">
+            <div class="si-name">Relaxation</div>
+            <div class="si-meta">Dr. Aris · 21 Mar</div>
+          </div>
+          <div class="si-right">
+            <div class="si-score">8.0</div>
+            <div class="sp"><div class="sp-dot"></div>done</div>
+          </div>
+        </div>
+        <div class="sess-item">
+          <div class="si-icon si-gr">🌸</div>
+          <div class="si-info">
+            <div class="si-name">Femme Cycle</div>
+            <div class="si-meta">Dr. Aris · 21 Mar</div>
+          </div>
+          <div class="si-right">
+            <div class="si-score">7.4</div>
+            <div class="sp"><div class="sp-dot"></div>done</div>
+          </div>
+        </div>
+        <div class="sess-item">
+          <div class="si-icon si-g">🌿</div>
+          <div class="si-info">
+            <div class="si-name">Relaxation</div>
+            <div class="si-meta">Dr. Aris · 09 Mar</div>
+          </div>
+          <div class="si-right">
+            <div class="si-score">6.2</div>
+            <div class="sp"><div class="sp-dot"></div>done</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- AI Insight -->
+    <div class="ai-card">
+      <div class="ai-icon">✦</div>
+      <div class="ai-content">
+        <div class="ai-eye">AI insight · Powered by Claude</div>
+        <div class="ai-text">Your stress relief has improved by <strong>42%</strong> across 3 sessions. Based on your Femme Cycle and Relaxation history, we recommend adding a <strong>De-stress</strong> session this week to maintain your upward trend.</div>
+        <div class="ai-btns">
+          <button class="ai-btn-p">Book De-stress →</button>
+          <button class="ai-btn-g">View full report</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const kpis=[
+  {lbl:'Wellness score — breakdown',cells:[['8.0','Last session','g'],['7.4','All-time avg',''],['8.5','Best ever','g'],['Calm + rested','Based on','d']]},
+  {lbl:'Relief delta — breakdown',cells:[['7.2','Stress before','w'],['3.0','Stress after','g'],['−4.2 pts','Avg drop','g'],['Relaxation','Therapy','d']]},
+  {lbl:'Session streak — breakdown',cells:[['3','Total sessions','g'],['3','This month','g'],['0','Missed','g'],['7 days','Next due','d']]},
+  {lbl:'Progress trend — breakdown',cells:[['+18%','Overall','g'],['100%','Consistency','g'],['Weekly','Cadence','d'],['5','Tracked','']]}
+];
+function sel(n){
+  document.querySelectorAll('.kc').forEach((c,i)=>c.classList.toggle('on',i===n));
+  const d=kpis[n];
+  document.getElementById('dr-lbl').textContent=d.lbl;
+  document.getElementById('dr-cols').innerHTML=d.cells.map(c=>`<div class="dr-cell"><div class="dr-val ${c[2]}" style="${c[2]==='d'?'font-size:10px;color:rgba(253,248,231,0.3);':''}">${c[0]}</div><div class="dr-k">${c[1]}</div></div>`).join('');
+}
+</script>

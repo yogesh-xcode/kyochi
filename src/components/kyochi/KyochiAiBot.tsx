@@ -14,6 +14,7 @@ type ChatMessage = {
   role: "user" | "assistant";
   text: string;
   meta?: string;
+  details?: string;
 };
 
 const starterPrompts = [
@@ -22,12 +23,27 @@ const starterPrompts = [
   "How should Kyochi increase Google review volume?",
 ];
 
-const formatAssistantText = (response: SimulatedAiResponse) => {
-  const rationale = response.rationale.map((point) => `- ${point}`).join("\n");
-  const actions = response.nextActions
-    .map((step, index) => `${index + 1}. ${step}`)
-    .join("\n");
-  return `${response.summary}\n\nWhy:\n${rationale}\n\nNext steps:\n${actions}`;
+const isTechnicalRationale = (line: string) =>
+  /gemini|request failed|search issues|timeout|aborted|api key|failed/i.test(line);
+
+const buildAssistantDetails = (response: SimulatedAiResponse) => {
+  const rationale = response.rationale.map((point) => point.trim()).filter(Boolean);
+  const nextActions = response.nextActions.map((step) => step.trim()).filter(Boolean);
+
+  const hasOnlyTechnicalRationale =
+    rationale.length > 0 && rationale.every((line) => isTechnicalRationale(line));
+  if (hasOnlyTechnicalRationale && nextActions.length === 0) {
+    return "";
+  }
+
+  const rationaleBlock =
+    rationale.length > 0 ? `Why:\n${rationale.map((point) => `- ${point}`).join("\n")}` : "";
+  const actionsBlock =
+    nextActions.length > 0
+      ? `Next steps:\n${nextActions.map((step, index) => `${index + 1}. ${step}`).join("\n")}`
+      : "";
+
+  return [rationaleBlock, actionsBlock].filter(Boolean).join("\n\n");
 };
 
 export function KyochiAiBot() {
@@ -70,11 +86,13 @@ export function KyochiAiBot() {
 
     try {
       const response = await simulateAiStrategyResponse(trimmed);
+      const details = buildAssistantDetails(response);
       const assistantMessage: ChatMessage = {
         id: `assistant-${Date.now()}`,
         role: "assistant",
-        text: formatAssistantText(response),
+        text: response.summary,
         meta: `${response.model} · ${response.confidence}% confidence · ${response.simulatedLatencyMs}ms`,
+        details: details || undefined,
       };
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
@@ -151,16 +169,26 @@ export function KyochiAiBot() {
                 className={`max-w-[92%] whitespace-pre-wrap rounded-xl px-3 py-2 text-xs leading-relaxed ${
                   message.role === "assistant"
                     ? "bg-[var(--k-color-surface-muted)] text-[var(--k-color-text-strong)]"
-                    : "ml-auto bg-[#b8960c] text-white"
+                    : "ml-auto bg-primary text-primary-foreground"
                 }`}
               >
                 {message.text}
+                {message.details ? (
+                  <details className="mt-2 rounded-md border border-[var(--k-color-border-soft)] bg-white/70 px-2 py-1 text-[10px] text-[var(--k-color-text-subtle)]">
+                    <summary className="cursor-pointer select-none text-[10px] font-medium text-[var(--k-color-text-subtle)]">
+                      Show details
+                    </summary>
+                    <pre className="mt-1 whitespace-pre-wrap font-sans leading-relaxed">
+                      {message.details}
+                    </pre>
+                  </details>
+                ) : null}
                 {message.meta ? (
                   <p
                     className={`mt-1 text-[10px] ${
                       message.role === "assistant"
                         ? "text-[var(--k-color-text-subtle)]"
-                        : "text-[#f6ebc6]"
+                        : "text-primary-foreground/80"
                     }`}
                   >
                     {message.meta}
@@ -196,12 +224,12 @@ export function KyochiAiBot() {
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
                 placeholder="Ask anything about Kyochi..."
-                className="h-9 flex-1 rounded-lg border border-[var(--k-color-border-soft)] px-3 text-xs text-[var(--k-color-text-strong)] outline-none focus:border-[#b8960c]"
+                className="h-9 flex-1 rounded-lg border border-[var(--k-color-border-soft)] px-3 text-xs text-[var(--k-color-text-strong)] outline-none focus:border-primary"
               />
               <button
                 type="submit"
                 disabled={!canSend}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#b8960c] text-white disabled:cursor-not-allowed disabled:opacity-60"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground disabled:cursor-not-allowed disabled:opacity-60"
                 aria-label="Send chat message"
               >
                 <Send className="h-4 w-4" />

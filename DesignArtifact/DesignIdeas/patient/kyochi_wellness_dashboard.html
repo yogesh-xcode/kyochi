@@ -1,0 +1,689 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap");
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: "DM Sans", sans-serif;
+    background: #f7f4ee;
+    padding: 24px 28px;
+    min-height: 100vh;
+  }
+
+  /* HERO BANNER */
+  .hero {
+    background: #fff;
+    border: 0.5px solid #ddd8cc;
+    border-radius: 14px;
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 28px;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .hero-ring {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    flex-shrink: 0;
+  }
+  .hero-ring svg {
+    width: 110px;
+    height: 110px;
+  }
+  .hero-ring-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-pct {
+    font-family: "DM Serif Display", serif;
+    font-size: 26px;
+    color: #2c2416;
+    line-height: 1;
+  }
+  .hero-sub {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #a09080;
+    margin-top: 2px;
+  }
+  .hero-mid {
+  }
+  .hero-eyebrow {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #c8993a;
+    margin-bottom: 6px;
+  }
+  .hero-greeting {
+    font-family: "DM Serif Display", serif;
+    font-style: italic;
+    font-size: 22px;
+    color: #2c2416;
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .progress-track {
+    height: 6px;
+    background: #ede8dc;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #c8993a, #e8c970);
+    border-radius: 3px;
+    width: 100%;
+  }
+  .hero-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .pill.cream {
+    background: #f0ede6;
+    color: #7a6a52;
+  }
+  .pill.sage {
+    background: #d4e8d8;
+    color: #3a6a50;
+  }
+  .pill.rose {
+    background: #f5dede;
+    color: #995050;
+  }
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 260px;
+  }
+  .upcoming-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #a09080;
+    margin-bottom: 4px;
+  }
+  .upcoming-title {
+    font-family: "DM Serif Display", serif;
+    font-size: 18px;
+    color: #2c2416;
+    line-height: 1.2;
+    margin-bottom: 3px;
+  }
+  .upcoming-meta {
+    font-size: 12px;
+    color: #7a6a52;
+    margin-bottom: 8px;
+  }
+  .upcoming-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #eaf0ff;
+    color: #3a5ab5;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 5px 11px;
+    border-radius: 7px;
+    margin-bottom: 10px;
+  }
+  .upcoming-time svg {
+    width: 12px;
+    height: 12px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+  }
+  .book-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #2c2416;
+    color: #f7f4ee;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 9px;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    transition: background 0.15s;
+    width: 100%;
+  }
+  .book-btn:hover {
+    background: #c8993a;
+  }
+
+  /* METRIC CARDS */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .mcard {
+    background: #fff;
+    border: 0.5px solid #ddd8cc;
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .mring {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    margin-bottom: 12px;
+  }
+  .mring svg {
+    width: 72px;
+    height: 72px;
+  }
+  .mring-val {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .mval {
+    font-family: "DM Serif Display", serif;
+    font-size: 17px;
+    color: #2c2416;
+    line-height: 1;
+  }
+  .munit {
+    font-size: 8px;
+    color: #a09080;
+    margin-top: 1px;
+  }
+  .mlbl {
+    font-size: 12px;
+    font-weight: 500;
+    color: #2c2416;
+    margin-bottom: 4px;
+  }
+  .mtag {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+  .mtag.up {
+    background: #d4e8d8;
+    color: #3a6a50;
+  }
+  .mtag.down {
+    background: #f5dede;
+    color: #995050;
+  }
+  .mtag.active {
+    background: #fdf3dc;
+    color: #a07020;
+  }
+  .mtag.trend {
+    background: #d4ebf0;
+    color: #2a6a7c;
+  }
+
+  /* BOTTOM GRID */
+  .bottom {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 14px;
+  }
+
+  /* Wellness over time */
+  .card {
+    background: #fff;
+    border: 0.5px solid #ddd8cc;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .ch {
+    padding: 14px 18px;
+    border-bottom: 0.5px solid #ede8dc;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .ct {
+    font-size: 13px;
+    font-weight: 500;
+    color: #2c2416;
+  }
+  .cs {
+    font-size: 11px;
+    color: #a09080;
+    margin-top: 2px;
+  }
+  .cl {
+    font-size: 11px;
+    font-weight: 500;
+    color: #c8993a;
+  }
+
+  .chart-area {
+    padding: 20px 18px 14px;
+  }
+  .bars {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    height: 140px;
+    margin-bottom: 8px;
+  }
+  .bar-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  .bar-num {
+    font-size: 11px;
+    font-weight: 500;
+    color: #6a5e50;
+  }
+  .bar {
+    width: 100%;
+    border-radius: 6px 6px 0 0;
+    transition: height 0.3s;
+  }
+  .bar.green {
+    background: #5a9a6a;
+  }
+  .bar.muted {
+    background: #e8e4da;
+  }
+  .bar-label {
+    font-size: 10px;
+    color: #a09080;
+    margin-top: 4px;
+  }
+  .chart-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 18px;
+    border-top: 0.5px solid #f0ede6;
+    background: #fdfcf9;
+  }
+  .cf-item {
+    font-size: 11px;
+    color: #7a6a52;
+  }
+  .cf-item span {
+    color: #2c2416;
+    font-weight: 500;
+  }
+
+  /* Session history */
+  .sess-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    border-bottom: 0.5px solid #f0ede6;
+    transition: background 0.15s;
+    cursor: pointer;
+  }
+  .sess-item:last-child {
+    border-bottom: none;
+  }
+  .sess-item:hover {
+    background: #fdfcf9;
+  }
+  .sess-ico {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: #f0ede6;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    font-size: 16px;
+  }
+  .sess-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #2c2416;
+  }
+  .sess-meta {
+    font-size: 11px;
+    color: #a09080;
+    margin-top: 2px;
+  }
+  .sess-right {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+  .sess-score {
+    font-family: "DM Serif Display", serif;
+    font-size: 18px;
+    color: #c8993a;
+    line-height: 1;
+  }
+  .sess-done {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 500;
+    color: #3a6a50;
+  }
+  .sess-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #3a6a50;
+  }
+</style>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-ring">
+    <svg viewBox="0 0 110 110">
+      <circle
+        cx="55"
+        cy="55"
+        r="46"
+        fill="none"
+        stroke="#EDE8DC"
+        stroke-width="10"
+      />
+      <circle
+        cx="55"
+        cy="55"
+        r="46"
+        fill="none"
+        stroke="#C8993A"
+        stroke-width="10"
+        stroke-linecap="round"
+        stroke-dasharray="289"
+        stroke-dashoffset="0"
+        transform="rotate(-90 55 55)"
+      />
+    </svg>
+    <div class="hero-ring-label">
+      <div class="hero-pct">100%</div>
+      <div class="hero-sub">wellness</div>
+    </div>
+  </div>
+
+  <div class="hero-mid">
+    <div class="hero-eyebrow">Overall Wellness Score</div>
+    <div class="hero-greeting">You're making great<br />progress, Zendon</div>
+    <div class="progress-track"><div class="progress-fill"></div></div>
+    <div class="hero-pills">
+      <span class="pill cream">3 sessions completed</span>
+      <span class="pill cream">Last: 22 Mar 2026</span>
+      <span class="pill rose">−50% this month</span>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div>
+      <div class="upcoming-label">Upcoming Session</div>
+      <div class="upcoming-title">Relaxation Reflexology</div>
+      <div class="upcoming-meta">Dr. Aris Menon · 60 min · KO City Tower</div>
+      <div class="upcoming-time">
+        <svg viewBox="0 0 12 12">
+          <rect x="1" y="2" width="10" height="9" rx="1" />
+          <line x1="4" y1="1" x2="4" y2="3" />
+          <line x1="8" y1="1" x2="8" y2="3" />
+          <line x1="1" y1="5" x2="11" y2="5" />
+        </svg>
+        Upcoming: 22 Mar 2026, 02:10 pm
+      </div>
+    </div>
+    <button class="book-btn">Book another session →</button>
+  </div>
+</div>
+
+<!-- METRIC CARDS -->
+<div class="metrics">
+  <div class="mcard">
+    <div class="mring">
+      <svg viewBox="0 0 72 72">
+        <circle
+          cx="36"
+          cy="36"
+          r="28"
+          fill="none"
+          stroke="#EDE8DC"
+          stroke-width="7"
+        />
+        <circle
+          cx="36"
+          cy="36"
+          r="28"
+          fill="none"
+          stroke="#C8993A"
+          stroke-width="7"
+          stroke-linecap="round"
+          stroke-dasharray="175.9"
+          stroke-dashoffset="105.5"
+          transform="rotate(-90 36 36)"
+        />
+      </svg>
+      <div class="mring-val">
+        <div class="mval">4.0</div>
+        <div class="munit">/10</div>
+      </div>
+    </div>
+    <div class="mlbl">Wellness score</div>
+    <span class="mtag up">↑ −2.7</span>
+  </div>
+  <div class="mcard">
+    <div class="mring">
+      <svg viewBox="0 0 72 72">
+        <circle
+          cx="36"
+          cy="36"
+          r="28"
+          fill="none"
+          stroke="#EDE8DC"
+          stroke-width="7"
+        />
+        <circle
+          cx="36"
+          cy="36"
+          r="28"
+          fill="none"
+          stroke="#4E8060"
+          stroke-width="7"
+          stroke-linecap="round"
+          stroke-dasharray="175.9"
+          stroke-dashoffset="70.4"
+          transform="rotate(-90 36 36)"
+        />
+      </svg>
+      <div class="mring-val">
+        <div class="mval">−4.0</div>
+        <div class="munit">pts</div>
+      </div>
+    </div>
+    <div class="mlbl">Relief delta</div>
+    <span class="mtag down">↓ best yet</span>
+  </div>
+  <div class="mcard">
+    <div class="mring">
+      <svg viewBox="0 0 72 72">
+        <circle
+          cx="36"
+          cy="36"
+          r="28"
+          fill="none"
+          stroke="#EDE8DC"
+          stroke-width="7"
+        />
+        <circle
+          cx="36"
+          cy="36"
+          r="28"
+          fill="none"
+          stroke="#C8993A"
+          stroke-width="7"
+          stroke-linecap="round"
+          stroke-dasharray="175.9"
+          stroke-dashoffset="52.8"
+          transform="rotate(-90 36 36)"
+        />
+      </svg>
+      <div class="mring-val">
+        <div class="mval">3</div>
+        <div class="munit">sessions</div>
+      </div>
+    </div>
+    <div class="mlbl">Session streak</div>
+    <span class="mtag active">● active</span>
+  </div>
+  <div class="mcard">
+    <div class="mring">
+      <svg viewBox="0 0 72 72">
+        <circle
+          cx="36"
+          cy="36"
+          r="28"
+          fill="none"
+          stroke="#EDE8DC"
+          stroke-width="7"
+        />
+        <circle
+          cx="36"
+          cy="36"
+          r="28"
+          fill="none"
+          stroke="#3A7A8C"
+          stroke-width="7"
+          stroke-linecap="round"
+          stroke-dasharray="175.9"
+          stroke-dashoffset="87.95"
+          transform="rotate(-90 36 36)"
+        />
+      </svg>
+      <div class="mring-val">
+        <div class="mval">−50</div>
+        <div class="munit">%</div>
+      </div>
+    </div>
+    <div class="mlbl">Progress</div>
+    <span class="mtag trend">↑ trending</span>
+  </div>
+</div>
+
+<!-- BOTTOM: Chart + Session History -->
+<div class="bottom">
+  <div class="card">
+    <div class="ch">
+      <div>
+        <div class="ct">Wellness over time</div>
+        <div class="cs">All therapies · 3 sessions</div>
+      </div>
+      <span class="cl">−50% overall</span>
+    </div>
+    <div class="chart-area">
+      <div class="bars">
+        <div class="bar-col">
+          <div class="bar-num">8.0</div>
+          <div class="bar green" style="height: 112px"></div>
+          <div class="bar-label">S1</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-num">8.0</div>
+          <div class="bar green" style="height: 112px"></div>
+          <div class="bar-label">S2</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-num">4.0</div>
+          <div class="bar muted" style="height: 56px"></div>
+          <div class="bar-label" style="color: #c8993a; font-weight: 500">
+            Now
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chart-footer">
+      <div class="cf-item">Started <span>8.0</span></div>
+      <div class="cf-item">2 therapies</div>
+      <div class="cf-item" style="color: #c8993a; font-weight: 500">
+        Now 4.0 ↑
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch">
+      <div>
+        <div class="ct">Session history</div>
+        <div class="cs">3 completed</div>
+      </div>
+      <span class="cl">All done</span>
+    </div>
+    <div class="sess-item">
+      <div class="sess-ico">🌿</div>
+      <div>
+        <div class="sess-name">Sole Serenity Therapy</div>
+        <div class="sess-meta">Dr. Aris Menon · 22 Mar</div>
+      </div>
+      <div class="sess-right">
+        <div class="sess-score">4.0</div>
+        <div class="sess-done"><span class="sess-dot"></span>done</div>
+      </div>
+    </div>
+    <div class="sess-item">
+      <div class="sess-ico">🌿</div>
+      <div>
+        <div class="sess-name">Relaxation Reflexology</div>
+        <div class="sess-meta">Dr. Aris Menon · 22 Mar</div>
+      </div>
+      <div class="sess-right">
+        <div class="sess-score">8.0</div>
+        <div class="sess-done"><span class="sess-dot"></span>done</div>
+      </div>
+    </div>
+    <div class="sess-item">
+      <div class="sess-ico">🌿</div>
+      <div>
+        <div class="sess-name">Relaxation Reflexology</div>
+        <div class="sess-meta">Dr. Aris Menon · 22 Mar</div>
+      </div>
+      <div class="sess-right">
+        <div class="sess-score">8.0</div>
+        <div class="sess-done"><span class="sess-dot"></span>done</div>
+      </div>
+    </div>
+  </div>
+</div>

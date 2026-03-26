@@ -2,16 +2,19 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Leaf, Settings, X } from "lucide-react";
+import { Leaf, LogOut, X } from "lucide-react";
 
 import { KIcon } from "@/components/kyochi/icons";
 import { InitialsAvatar } from "@/components/kyochi/primitives";
 import { Button } from "@/components/ui/button";
+import type { CurrentUserDisplay } from "@/lib/roleScope";
 import type { NavSection, UserRole } from "@/types";
 
 type SidebarProps = {
   navSections: NavSection[];
   role: UserRole;
+  currentUser: CurrentUserDisplay;
+  onSignOut?: () => void;
   mobileOpen?: boolean;
   onMobileClose?: () => void;
 };
@@ -20,9 +23,17 @@ const roleLabels: Record<UserRole, string> = {
   admin: "System Admin",
   franchisee: "Franchise Manager",
   therapist: "Therapist",
+  patient: "Patient",
 };
 
-export function Sidebar({ navSections, role, mobileOpen = false, onMobileClose }: SidebarProps) {
+export function Sidebar({
+  navSections,
+  role,
+  currentUser,
+  onSignOut,
+  mobileOpen = false,
+  onMobileClose,
+}: SidebarProps) {
   const pathname = usePathname();
 
   const isItemActive = (href: string) => {
@@ -95,13 +106,13 @@ export function Sidebar({ navSections, role, mobileOpen = false, onMobileClose }
 
         <div className="p-3 border-t k-border-soft">
           <div className="flex items-center gap-2 p-1.5 rounded-xl k-surface-muted">
-            <InitialsAvatar initials="AK" className="size-8 text-[12px]" />
+            <InitialsAvatar initials={currentUser.initials} className="size-8 text-[12px]" />
             <div className="flex-1 min-w-0">
-              <p className="text-[12px] font-bold k-text-strong truncate">Alex Kyochi</p>
+              <p className="text-[12px] font-bold k-text-strong truncate">{currentUser.name}</p>
               <p className="text-[10px] k-text-body truncate">{roleLabels[role]}</p>
             </div>
-            <Button variant="ghost" size="icon-sm">
-              <Settings className="size-4" />
+            <Button variant="ghost" size="icon-sm" onClick={onSignOut} title="Sign out">
+              <LogOut className="size-4" />
             </Button>
           </div>
         </div>

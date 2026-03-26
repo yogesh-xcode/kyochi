@@ -28,11 +28,16 @@ export function StatusPill({ status }: StatusPillProps) {
     submitted: "bg-[#dcfce7] text-[#16a34a]",
     active: "bg-[#dcfce7] text-[#16a34a]",
     "in progress": "bg-[#fef3c7] text-[#b45309]",
-    waiting: "bg-[#fee2e2] text-[#ef4444]",
-    pending: "bg-[#fee2e2] text-[#ef4444]",
-    overdue: "bg-[#fee2e2] text-[#ef4444]",
+    in_progress: "bg-[#fef3c7] text-[#b45309]",
+    scheduled: "bg-[#dbeafe] text-[#1d4ed8]",
+    waiting: "bg-[#f3f4f6] text-[#4b5563]",
+    pending: "bg-[#ede9fe] text-[#6d28d9]",
+    unpaid: "bg-[#fef3c7] text-[#b45309]",
+    due: "bg-[#ffedd5] text-[#c2410c]",
+    overdue: "bg-[#fee2e2] text-[#dc2626]",
+    declined: "bg-[#fee2e2] text-[#dc2626]",
     inactive: "bg-[#fee2e2] text-[#ef4444]",
-    cancelled: "bg-[#fee2e2] text-[#ef4444]",
+    cancelled: "bg-[#f3f4f6] text-[#4b5563]",
   };
   const normalizedStatus = status.trim().toLowerCase();
   const toneClass = toneByStatus[normalizedStatus] ?? "bg-[#fee2e2] text-[#ef4444]";

@@ -19,7 +19,7 @@ export type IconKey =
   | "auto_awesome";
 
 export type AlertTone = "amber" | "red" | "blue" | "slate";
-export type AppointmentStatus = "Completed" | "In Progress" | "Waiting";
+export type AppointmentStatus = "Completed" | "In Progress" | "Scheduled" | "Waiting";
 
 export type KpiCard = {
   icon: IconKey;
@@ -67,7 +67,7 @@ export type NavSection = {
   items: NavItem[];
 };
 
-export type UserRole = "admin" | "franchisee" | "therapist";
+export type UserRole = "admin" | "franchisee" | "therapist" | "patient";
 
 export type RevenueRange = "Weekly" | "Monthly";
 

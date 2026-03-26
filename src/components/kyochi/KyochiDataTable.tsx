@@ -1,10 +1,11 @@
 "use client";
 "use no memo";
 
-import { isValidElement, useMemo, useState } from "react";
+import { isValidElement, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowDown, ArrowUp, ArrowUpDown, ChevronLeft, ChevronRight, Pencil, Trash2 } from "lucide-react";
 import {
   type ColumnDef,
+  type RowSelectionState,
   type SortingState,
   flexRender,
   getCoreRowModel,
@@ -21,6 +22,8 @@ export type KyochiTableRow = {
   cells: React.ReactNode[];
   sortValues?: Array<string | number>;
   actions?: React.ReactNode;
+  canEdit?: boolean;
+  canDelete?: boolean;
 };
 
 type KyochiDataTableProps = {
@@ -32,6 +35,8 @@ type KyochiDataTableProps = {
   tone?: "default" | "soft";
   onEditRow?: (row: KyochiTableRow) => void;
   onDeleteRow?: (row: KyochiTableRow) => void;
+  onRowClick?: (row: KyochiTableRow) => void;
+  onSelectionChange?: (rows: KyochiTableRow[]) => void;
 };
 
 const nodeToText = (node: React.ReactNode): string => {
@@ -60,8 +65,12 @@ export function KyochiDataTable({
   tone = "default",
   onEditRow,
   onDeleteRow,
+  onRowClick,
+  onSelectionChange,
 }: KyochiDataTableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+  const allRowsCheckboxRef = useRef<HTMLInputElement>(null);
   const selectColumnWidth = showSelection ? 56 : 0;
   const actionsColumnWidth = 148;
   const dynamicColumnWidth = columns.length > 0 ? `calc((100% - ${selectColumnWidth + actionsColumnWidth}px) / ${columns.length})` : "auto";
@@ -72,14 +81,26 @@ export function KyochiDataTable({
         ? [{
           id: "select",
           enableSorting: false,
-          header: () => (
+          header: ({ table }) => (
             <div className="flex h-full w-full items-center justify-center px-4">
-              <input type="checkbox" aria-label="Select all rows" />
+              <input
+                ref={allRowsCheckboxRef}
+                type="checkbox"
+                aria-label="Select all rows"
+                checked={table.getIsAllRowsSelected()}
+                onChange={table.getToggleAllRowsSelectedHandler()}
+              />
             </div>
           ),
-          cell: ({ row }: { row: { original: KyochiTableRow } }) => (
+          cell: ({ row }) => (
             <div className="h-full text-center px-4 overflow-hidden flex items-center justify-center">
-              <input type="checkbox" aria-label={`Select ${row.original.id}`} />
+              <input
+                type="checkbox"
+                aria-label={`Select ${row.original.id}`}
+                checked={row.getIsSelected()}
+                onChange={row.getToggleSelectedHandler()}
+                disabled={!row.getCanSelect()}
+              />
             </div>
           ),
         } satisfies ColumnDef<KyochiTableRow>]
@@ -89,7 +110,13 @@ export function KyochiDataTable({
         accessorFn: (row: KyochiTableRow) =>
           row.sortValues?.[index] ?? nodeToText(row.cells[index]),
         header: () => (
-          <span className="inline-flex items-center justify-center text-center type-label uppercase tracking-wider k-text-subtle whitespace-normal break-words leading-tight">
+          <span
+            className={`inline-flex w-full items-center type-label uppercase tracking-wider k-text-subtle whitespace-normal break-words leading-tight ${
+              centeredBodyColumns.includes(index)
+                ? "justify-center text-center"
+                : "justify-start text-left"
+            }`}
+          >
             {column}
           </span>
         ),
@@ -118,27 +145,36 @@ export function KyochiDataTable({
               {row.original.actions}
               {(onEditRow || onDeleteRow) && (
                 <>
-                  {row.original.actions ? <span className="mx-1 h-4 w-px bg-[var(--k-color-border-soft)]" /> : null}
                   <div className="inline-flex items-center gap-1">
-                    {onEditRow ? (
+                    {onEditRow && row.original.canEdit !== false ? (
                       <Button
                         type="button"
                         variant="outline"
                         size="icon-xs"
                         className="inline-flex items-center justify-center rounded-l-md"
                         aria-label={`Edit ${row.original.id}`}
-                        onClick={() => onEditRow(row.original)}
+                        title={`Edit ${row.original.id}`}
+                        onClick={(event) => {
+                          event.preventDefault();
+                          event.stopPropagation();
+                          onEditRow(row.original);
+                        }}
                       >
                         <Pencil className="size-3.5" />
                       </Button>
                     ) : null}
-                    {onDeleteRow ? (
+                    {onDeleteRow && row.original.canDelete !== false ? (
                       <Button
                         type="button"
                         variant="destructive-outline"
                         size="icon-xs"
                         aria-label={`Delete ${row.original.id}`}
-                        onClick={() => onDeleteRow(row.original)}
+                        title={`Delete ${row.original.id}`}
+                        onClick={(event) => {
+                          event.preventDefault();
+                          event.stopPropagation();
+                          onDeleteRow(row.original);
+                        }}
                       >
                         <Trash2 className="size-3.5" />
                       </Button>
@@ -157,14 +193,18 @@ export function KyochiDataTable({
   const table = useReactTable({
     data: rows,
     columns: columnDefs,
+    getRowId: (row) => row.id,
+    enableRowSelection: showSelection,
     state: {
       sorting,
+      rowSelection,
     },
     onSortingChange: setSorting,
+    onRowSelectionChange: setRowSelection,
     initialState: {
       pagination: {
         pageIndex: 0,
-        pageSize: 7,
+        pageSize: 8,
       },
     },
     getCoreRowModel: getCoreRowModel(),
@@ -172,15 +212,24 @@ export function KyochiDataTable({
     getSortedRowModel: getSortedRowModel(),
   });
 
+  useEffect(() => {
+    if (!allRowsCheckboxRef.current) {
+      return;
+    }
+    allRowsCheckboxRef.current.indeterminate =
+      table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected();
+  }, [rowSelection, table]);
+
+  useEffect(() => {
+    onSelectionChange?.(table.getSelectedRowModel().rows.map((row) => row.original));
+  }, [onSelectionChange, rowSelection, table]);
+
   const {
     pagination: { pageIndex, pageSize },
   } = table.getState();
   const visibleRows = table.getRowModel().rows;
-  const totalRows = rows.length;
   const totalPages = table.getPageCount();
   const currentPage = pageIndex + 1;
-  const start = totalRows === 0 ? 0 : pageIndex * pageSize + 1;
-  const end = Math.min((pageIndex + 1) * pageSize, totalRows);
   const placeholderRowCount = Math.max(0, pageSize - visibleRows.length);
 
   const getPageItems = (pages: number, current: number): Array<number | "..."> => {
@@ -201,6 +250,10 @@ export function KyochiDataTable({
   };
 
   const pageItems = getPageItems(totalPages, currentPage);
+  const pagerBaseClass =
+    "border-[var(--kyochi-gold-500)] text-[var(--kyochi-gold-600)] focus-visible:ring-[var(--kyochi-gold-500)] focus-visible:border-[var(--kyochi-gold-500)]";
+  const pagerActiveClass =
+    "bg-[var(--kyochi-gold-500)] border-[var(--kyochi-gold-500)] text-white hover:bg-[var(--kyochi-gold-600)]";
   const getSoftRowClass = (visualIndex: number, interactive: boolean) => {
     const base = visualIndex % 2 === 0 ? "bg-white" : "bg-[#fbf8ef]";
     const hover = interactive ? "hover:bg-[#f7f2df]" : "";
@@ -208,7 +261,7 @@ export function KyochiDataTable({
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       <div className={`overflow-hidden rounded-2xl ${tone === "soft" ? "bg-transparent" : "k-surface"}`}>
         <Table className={`${minTableWidthClassName} table-fixed`}>
           <colgroup>
@@ -225,15 +278,29 @@ export function KyochiDataTable({
                 className={`${tone === "soft" ? "bg-[#f5f2e8] border-b border-[var(--k-color-border-soft)]" : "k-surface-muted"} hover:bg-transparent`}
               >
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id} className="align-middle text-center h-12">
+                  <TableHead key={header.id} className="align-middle h-12">
                     {header.isPlaceholder ? null : (
+                      (() => {
+                        const columnMatch = header.column.id.match(/^column-(\d+)$/);
+                        const columnIndex = columnMatch ? Number(columnMatch[1]) : -1;
+                        const isDataColumn = columnIndex >= 0;
+                        const isCenteredColumn =
+                          columnIndex >= 0 && centeredBodyColumns.includes(columnIndex);
+                        const alignmentClass = isDataColumn
+                          ? isCenteredColumn
+                            ? "justify-center px-0"
+                            : "justify-start px-4"
+                          : "justify-center px-0";
+
+                        return (
                       <Button
                         type="button"
                         variant="ghost"
                         size="xs"
                         onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
-                        className={`inline-flex h-auto w-full items-center justify-center gap-0.5 border-0 bg-transparent px-0 py-0 hover:bg-transparent ${header.column.getCanSort() ? "cursor-pointer" : "cursor-default"
-                          }`}
+                        className={`inline-flex h-auto w-full items-center gap-0.5 border-0 bg-transparent py-0 hover:bg-transparent ${alignmentClass} ${
+                          header.column.getCanSort() ? "cursor-pointer" : "cursor-default"
+                        }`}
                       >
                         {flexRender(header.column.columnDef.header, header.getContext())}
                         {header.column.getCanSort() && header.column.getIsSorted() === "asc" && (
@@ -246,6 +313,8 @@ export function KyochiDataTable({
                           <ArrowUpDown className="size-3.5 k-text-subtle" />
                         )}
                       </Button>
+                        );
+                      })()
                     )}
                   </TableHead>
                 ))}
@@ -257,10 +326,18 @@ export function KyochiDataTable({
               visibleRows.map((row) => (
                 <TableRow
                   key={row.id}
+                  onClick={
+                    onRowClick
+                      ? (event) => {
+                          event.preventDefault();
+                          onRowClick(row.original);
+                        }
+                      : undefined
+                  }
                   className={`group h-[42px] max-h-[42px] align-middle hover:h-[63px] hover:max-h-[63px] ${tone === "soft"
-                      ? getSoftRowClass(row.index, true)
-                      : "k-row-hover"
-                    } transition-[height,background-color] duration-200`}
+                    ? getSoftRowClass(row.index, true)
+                    : "k-row-hover"
+                    } transition-[height,background-color] duration-200 ${onRowClick ? "cursor-pointer" : ""}`}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
@@ -304,17 +381,13 @@ export function KyochiDataTable({
         </Table>
       </div>
 
-      <div className="flex flex-col gap-2 border-t k-border-soft pt-3 md:flex-row md:items-center md:justify-between">
-        <p className="type-small k-text-body">
-          Showing <span className="font-bold k-text-strong">{start} - {end}</span> of{" "}
-          <span className="font-bold k-text-strong">{totalRows}</span> records
-        </p>
-        <div className="flex items-center gap-2">
+      <div className="flex justify-center border-t k-border-soft pt-2">
+        <div className="flex items-center gap-1.5">
           <Button
             type="button"
             variant="outline"
             size="icon-xs"
-            className="disabled:opacity-40"
+            className={`disabled:opacity-40 ${pagerBaseClass}`}
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
@@ -340,7 +413,7 @@ export function KyochiDataTable({
                   type="button"
                   variant="outline"
                   size="icon-xs"
-                  className="type-small font-bold k-text-subtle"
+                  className={`type-small font-bold k-text-subtle ${pagerBaseClass}`}
                   onClick={() => table.setPageIndex(targetPage - 1)}
                   aria-label={`Jump to page ${targetPage}`}
                   title={`Jump to page ${targetPage}`}
@@ -356,7 +429,9 @@ export function KyochiDataTable({
                 type="button"
                 variant={item === currentPage ? "default" : "outline"}
                 size="icon-xs"
-                className={`type-small font-bold ${item === currentPage ? "" : "k-text-strong"}`}
+                className={`type-small font-bold ${
+                  item === currentPage ? pagerActiveClass : `${pagerBaseClass} k-text-strong`
+                }`}
                 onClick={() => table.setPageIndex(item - 1)}
               >
                 {item}
@@ -367,7 +442,7 @@ export function KyochiDataTable({
             type="button"
             variant="outline"
             size="icon-xs"
-            className="disabled:opacity-40"
+            className={`disabled:opacity-40 ${pagerBaseClass}`}
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >

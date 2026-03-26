@@ -1,0 +1,270 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#F7F4EE;padding:26px 30px;min-height:100vh;color:#2C2416}
+
+/* PAGE HEADER */
+.page-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px}
+.page-title{font-family:'DM Serif Display',serif;font-size:28px;color:#2C2416;line-height:1}
+.page-sub{font-size:12px;color:#A09080;margin-top:4px}
+.live-badge{display:inline-flex;align-items:center;gap:7px;background:#fff;border:0.5px solid #DDD8CC;border-radius:20px;padding:6px 14px;font-size:11px;font-weight:500;color:#2C2416}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#4E8060;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.live-stat{color:#A09080;margin-left:2px}
+.live-divider{width:1px;height:12px;background:#DDD8CC}
+
+/* ROLE SWITCHER */
+.role-row{display:flex;align-items:center;gap:8px;margin-bottom:20px}
+.role-label{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#A09080}
+.role-btn{font-size:11px;font-weight:500;padding:5px 13px;border-radius:20px;border:0.5px solid #DDD8CC;background:#fff;color:#7A6A52;cursor:pointer;font-family:inherit;transition:all .15s}
+.role-btn.active{background:#2C2416;color:#F7F4EE;border-color:#2C2416}
+
+/* VERDICT BANNER */
+.verdict{background:#fff;border:0.5px solid #DDD8CC;border-radius:14px;padding:20px 24px;margin-bottom:16px;position:relative;overflow:hidden}
+.verdict::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,#C8993A,#E8C970)}
+.verdict-top{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.verdict-eye{font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#C8993A}
+.verdict-date{font-size:10px;color:#A09080;background:#F7F4EE;padding:2px 8px;border-radius:10px}
+.verdict-text{font-size:13.5px;color:#2C2416;line-height:1.65;margin-bottom:14px}
+.verdict-text .crit{color:#B85555;font-weight:500}
+.verdict-text .warn{color:#C8993A;font-weight:500}
+.verdict-text .info{color:#3A7A8C;font-weight:500}
+.verdict-actions{display:flex;gap:8px;flex-wrap:wrap}
+.vbtn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;border:0.5px solid #DDD8CC;background:#fff;color:#2C2416;font-family:inherit;transition:all .15s}
+.vbtn:hover{background:#F0EDE6;border-color:#C9BFA8}
+.vbtn.primary{background:#2C2416;color:#F7F4EE;border-color:#2C2416}
+.vbtn.primary:hover{background:#C8993A;border-color:#C8993A}
+.vbtn svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* MAIN GRID */
+.main-grid{display:grid;grid-template-columns:1fr 380px;gap:14px;margin-bottom:14px}
+
+/* SECTION LABEL */
+.sec-label{font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#A09080;margin-bottom:10px}
+
+/* SIGNAL CARDS */
+.signals{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sig-card{background:#fff;border:0.5px solid #DDD8CC;border-radius:11px;padding:16px 18px;cursor:pointer;transition:all .15s;position:relative}
+.sig-card:hover{border-color:#C9BFA8;box-shadow:0 2px 12px rgba(44,36,22,0.06)}
+.sig-card.critical{border-left:3px solid #B85555}
+.sig-card.warning{border-left:3px solid #C8993A}
+.sig-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.sig-ico{width:30px;height:30px;border-radius:7px;display:grid;place-items:center}
+.sig-ico svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.sig-ico.crit{background:#F5DEDE;color:#B85555}
+.sig-ico.warn{background:#FDF3DC;color:#C8993A}
+.sig-tag{font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:10px}
+.sig-tag.crit{background:#F5DEDE;color:#995050}
+.sig-tag.warn{background:#FDF3DC;color:#A07020}
+.sig-num{font-family:'DM Serif Display',serif;font-size:28px;color:#2C2416;line-height:1;margin-bottom:3px}
+.sig-name{font-size:12.5px;font-weight:500;color:#2C2416;margin-bottom:5px}
+.sig-desc{font-size:11px;color:#A09080;line-height:1.5}
+.sig-arrow{position:absolute;bottom:14px;right:16px;font-size:14px;color:#DDD8CC}
+
+/* RECOMMENDATIONS */
+.rec-list{display:flex;flex-direction:column;gap:8px}
+.rec-item{background:#fff;border:0.5px solid #DDD8CC;border-radius:11px;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .15s}
+.rec-item:hover{border-color:#C9BFA8;background:#FDFCF9}
+.rec-num{font-family:'DM Serif Display',serif;font-size:18px;color:#EDE8DC;width:22px;flex-shrink:0}
+.rec-text{font-size:13px;font-weight:400;color:#2C2416;flex:1;line-height:1.4}
+.rec-tag{font-size:10px;font-weight:500;padding:3px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0}
+.rec-tag.green{background:#D4E8D8;color:#3A6A50}
+.rec-tag.gold{background:#FDF3DC;color:#A07020}
+.rec-tag.teal{background:#D4EBF0;color:#2A6A7C}
+.rec-tag.stone{background:#F0EDE6;color:#7A6A52}
+.rec-arrow{color:#C9BFA8;font-size:14px;flex-shrink:0}
+
+/* BOTTOM GRID */
+.bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+/* GENERIC CARD */
+.card{background:#fff;border:0.5px solid #DDD8CC;border-radius:12px;overflow:hidden}
+.ch{padding:13px 18px;border-bottom:0.5px solid #EDE8DC;display:flex;align-items:center;justify-content:space-between}
+.ct{font-size:13px;font-weight:500;color:#2C2416}
+.cs{font-size:11px;color:#A09080}
+
+/* FRANCHISE LIST */
+.fr-item{display:flex;align-items:center;gap:10px;padding:10px 18px;border-bottom:0.5px solid #F0EDE6}
+.fr-item:last-child{border-bottom:none}
+.fr-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.fr-name{font-size:13px;color:#2C2416;flex:1}
+.fr-count{font-size:11px;color:#A09080;white-space:nowrap;margin-right:10px}
+.fr-track{width:80px;height:5px;background:#EDE8DC;border-radius:3px;overflow:hidden;flex-shrink:0}
+.fr-fill{height:100%;border-radius:3px;background:#C8993A}
+
+/* THERAPY DEMAND */
+.th-item{display:flex;align-items:center;gap:10px;padding:10px 18px;border-bottom:0.5px solid #F0EDE6}
+.th-item:last-child{border-bottom:none}
+.th-name{font-size:13px;color:#2C2416;flex:1}
+.th-bar-wrap{width:100px;height:5px;background:#EDE8DC;border-radius:3px;overflow:hidden;flex-shrink:0}
+.th-bar{height:100%;border-radius:3px;background:#5A9A6A}
+.th-num{font-size:12px;font-weight:500;color:#2C2416;width:20px;text-align:right;flex-shrink:0}
+</style>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div>
+    <div class="page-title">Wellness Intelligence</div>
+    <div class="page-sub">Kyochi · AI Strategy · March 2026</div>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px">
+    <div class="live-badge">
+      <span class="live-dot"></span>
+      Live
+      <span class="live-divider"></span>
+      <span>54 appointments</span>
+      <span class="live-divider"></span>
+      <span>48 patients</span>
+      <span class="live-divider"></span>
+      <span>25 franchises</span>
+    </div>
+    <div class="role-row">
+      <span class="role-label">View as</span>
+      <button class="role-btn active" onclick="setRole('franchiser',this)">Franchiser</button>
+      <button class="role-btn" onclick="setRole('admin',this)">Admin</button>
+    </div>
+  </div>
+</div>
+
+<!-- VERDICT BANNER -->
+<div class="verdict">
+  <div class="verdict-top">
+    <span class="verdict-eye">AI Verdict · Today</span>
+    <span class="verdict-date">22 March 2026</span>
+  </div>
+  <div class="verdict-text" id="verdict-text">
+    Kyochi is growing fast but leaking in three places: <span class="crit">Rs 3,200 in uncollected invoices</span>, <span class="warn">7 patients stalling before rebooking</span>, and <span class="info">36 completed sessions with zero feedback collected</span>. Fix these this week to protect cash flow and your 4.9 star rating.
+  </div>
+  <div class="verdict-actions">
+    <button class="vbtn primary">
+      <svg viewBox="0 0 14 14"><path d="M2 11l2-2 2 2 3-4 3 3"/><circle cx="11" cy="3" r="2"/></svg>
+      Send payment reminders
+    </button>
+    <button class="vbtn">
+      <svg viewBox="0 0 14 14"><path d="M7 2v10M2 7h10"/></svg>
+      Design feedback flow
+    </button>
+    <button class="vbtn">
+      <svg viewBox="0 0 14 14"><circle cx="7" cy="5" r="2.5"/><path d="M2 12c0-2.76 2.24-5 5-5s5 2.24 5 5"/></svg>
+      Re-engage waiting patients
+    </button>
+  </div>
+</div>
+
+<!-- MAIN GRID -->
+<div class="main-grid">
+  <div>
+    <div class="sec-label">Business signals · click any to deep dive</div>
+    <div class="signals">
+      <div class="sig-card critical">
+        <div class="sig-top">
+          <div class="sig-ico crit"><svg viewBox="0 0 14 14"><rect x="2" y="3" width="10" height="9" rx="1"/><path d="M5 3V2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1"/><line x1="5" y1="7" x2="9" y2="7"/></svg></div>
+          <span class="sig-tag crit">Critical</span>
+        </div>
+        <div class="sig-num">Rs 3,200</div>
+        <div class="sig-name">Uncollected revenue</div>
+        <div class="sig-desc">12 overdue invoices. 22% of all revenue raised is sitting unpaid.</div>
+        <span class="sig-arrow">↗</span>
+      </div>
+      <div class="sig-card warning">
+        <div class="sig-top">
+          <div class="sig-ico warn"><svg viewBox="0 0 14 14"><circle cx="7" cy="5" r="2.5"/><path d="M2 12c0-2.76 2.24-5 5-5s5 2.24 5 5"/><line x1="10" y1="10" x2="12" y2="12"/></svg></div>
+          <span class="sig-tag warn">Warning</span>
+        </div>
+        <div class="sig-num">7</div>
+        <div class="sig-name">Patients dropping off</div>
+        <div class="sig-desc">Stalled in waiting with no next booking. Each is Rs 800–1,500 LTV at risk.</div>
+        <span class="sig-arrow">↗</span>
+      </div>
+      <div class="sig-card critical">
+        <div class="sig-top">
+          <div class="sig-ico crit"><svg viewBox="0 0 14 14"><path d="M2 10V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v6"/><path d="M1 10h12"/><line x1="7" y1="6" x2="7" y2="8"/></svg></div>
+          <span class="sig-tag crit">Critical</span>
+        </div>
+        <div class="sig-num">36</div>
+        <div class="sig-name">Missing feedback</div>
+        <div class="sig-desc">Sessions completed with no review collected. 4.9 star rating is stalling.</div>
+        <span class="sig-arrow">↗</span>
+      </div>
+      <div class="sig-card warning">
+        <div class="sig-top">
+          <div class="sig-ico warn"><svg viewBox="0 0 14 14"><rect x="2" y="2" width="10" height="10" rx="1.5"/><line x1="5" y1="7" x2="9" y2="7"/><line x1="7" y1="5" x2="7" y2="9"/></svg></div>
+          <span class="sig-tag warn">Warning</span>
+        </div>
+        <div class="sig-num">25</div>
+        <div class="sig-name">Franchises, zero data</div>
+        <div class="sig-desc">No cross-location visibility. Biggest strategic blind spot in the business.</div>
+        <span class="sig-arrow">↗</span>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="sec-label">Strategic recommendations · next 30 days</div>
+    <div class="rec-list">
+      <div class="rec-item">
+        <div class="rec-num">1</div>
+        <div class="rec-text">Automate post-session feedback via WhatsApp</div>
+        <span class="rec-tag green">+20–30 reviews/mo</span>
+        <span class="rec-arrow">↗</span>
+      </div>
+      <div class="rec-item">
+        <div class="rec-num">2</div>
+        <div class="rec-text">Launch a 5-session prepaid membership bundle</div>
+        <span class="rec-tag gold">3x LTV uplift</span>
+        <span class="rec-arrow">↗</span>
+      </div>
+      <div class="rec-item">
+        <div class="rec-num">3</div>
+        <div class="rec-text">Close one corporate wellness deal in Chennai this month</div>
+        <span class="rec-tag teal">New B2B stream</span>
+        <span class="rec-arrow">↗</span>
+      </div>
+      <div class="rec-item">
+        <div class="rec-num">4</div>
+        <div class="rec-text">Build franchise reporting before adding new locations</div>
+        <span class="rec-tag stone">Foundation for scale</span>
+        <span class="rec-arrow">↗</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM GRID -->
+<div class="bottom-grid">
+  <div class="card">
+    <div class="ch">
+      <div class="ct">Franchise footprint</div>
+      <span class="cs">25 locations</span>
+    </div>
+    <div class="fr-item"><span class="fr-dot" style="background:#C8993A"></span><span class="fr-name">Chennai</span><span class="fr-count">11 locations</span><div class="fr-track"><div class="fr-fill" style="width:88%"></div></div></div>
+    <div class="fr-item"><span class="fr-dot" style="background:#6A8C72"></span><span class="fr-name">Coimbatore</span><span class="fr-count">4 locations</span><div class="fr-track"><div class="fr-fill" style="width:32%;background:#6A8C72"></div></div></div>
+    <div class="fr-item"><span class="fr-dot" style="background:#3A7A8C"></span><span class="fr-name">Madurai / Trichy / Salem</span><span class="fr-count">1 each</span><div class="fr-track"><div class="fr-fill" style="width:8%;background:#3A7A8C"></div></div></div>
+    <div class="fr-item"><span class="fr-dot" style="background:#DDD8CC"></span><span class="fr-name">6 other cities</span><span class="fr-count">1 each</span><div class="fr-track"><div class="fr-fill" style="width:6%;background:#A09080"></div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch">
+      <div class="ct">Therapy demand</div>
+      <span class="cs">This month</span>
+    </div>
+    <div class="th-item"><span class="th-name">Relaxation Reflexology</span><div class="th-bar-wrap"><div class="th-bar" style="width:100%"></div></div><span class="th-num">16</span></div>
+    <div class="th-item"><span class="th-name">De-Stress Reflexology</span><div class="th-bar-wrap"><div class="th-bar" style="width:87%"></div></div><span class="th-num">14</span></div>
+    <div class="th-item"><span class="th-name">Chronic Pain</span><div class="th-bar-wrap"><div class="th-bar" style="width:87%"></div></div><span class="th-num">14</span></div>
+    <div class="th-item"><span class="th-name">Sole Serenity</span><div class="th-bar-wrap"><div class="th-bar" style="width:12%;background:#DDD8CC"></div></div><span class="th-num" style="color:#A09080">2</span></div>
+  </div>
+</div>
+
+<script>
+function setRole(role, btn){
+  document.querySelectorAll('.role-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const vt = document.getElementById('verdict-text');
+  if(role==='admin'){
+    vt.innerHTML = 'System health is stable across all 25 franchises. Key admin actions: <span class="crit">resolve 12 overdue invoices totalling Rs 3,200</span>, <span class="warn">assign feedback automation to 36 unreviewed sessions</span>, and <span class="info">enable cross-franchise reporting for full operational visibility</span>.';
+  } else {
+    vt.innerHTML = 'Kyochi is growing fast but leaking in three places: <span class="crit">Rs 3,200 in uncollected invoices</span>, <span class="warn">7 patients stalling before rebooking</span>, and <span class="info">36 completed sessions with zero feedback collected</span>. Fix these this week to protect cash flow and your 4.9 star rating.';
+  }
+}
+</script>

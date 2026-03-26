@@ -13,8 +13,8 @@ export function RevenueSnapshot({
   onRevenueRangeChange,
 }: RevenueSnapshotProps) {
   return (
-    <Card className="k-surface rounded-xl shadow-sm border k-border-soft py-0 ring-0 gap-0">
-      <CardHeader className="px-4 py-4 border-b-0 flex flex-row items-center justify-between">
+    <Card className="k-surface rounded-xl shadow-sm border k-border-soft py-0 ring-0 gap-0 h-full">
+      <CardHeader className="px-4 py-3.5 border-b-0 flex min-h-[56px] flex-row items-center justify-between">
         <CardTitle className="type-h3 text-[18px] k-text-strong">Revenue Snapshot</CardTitle>
         <select
           value={revenueRange}
@@ -25,12 +25,12 @@ export function RevenueSnapshot({
           <option>Monthly</option>
         </select>
       </CardHeader>
-      <CardContent className="px-4 pb-4 pt-0">
+      <CardContent className="flex h-full flex-col px-4 pb-4 pt-0">
       <div className="mb-2 flex items-center gap-3 type-label text-[8px] tracking-wide">
         <span className="inline-flex items-center gap-1 k-text-body"><span className="size-1.5 rounded-full bg-[var(--kyochi-gold-400)]" />Revenue</span>
         <span className="inline-flex items-center gap-1 k-text-subtle"><span className="size-1.5 rounded-full bg-[var(--kyochi-gold-200)]" />Forecast</span>
       </div>
-      <div className="h-40 w-full flex items-end gap-1 px-1">
+      <div className="h-36 w-full flex items-end gap-1 px-1">
         {revenueBars.map((bar, i) => (
           <div
             key={bar.day}
@@ -43,7 +43,7 @@ export function RevenueSnapshot({
           />
         ))}
       </div>
-      <div className="mt-3 grid grid-cols-7 gap-1 px-1 type-label text-[8px] tracking-wide k-text-subtle">
+      <div className="mt-2.5 grid grid-cols-7 gap-1 px-1 type-label text-[8px] tracking-wide k-text-subtle">
         {revenueBars.map((bar) => (
           <span key={bar.day} className="text-center">
             {bar.day}

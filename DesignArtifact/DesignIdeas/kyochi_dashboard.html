@@ -1,0 +1,322 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#F7F4EE;padding:24px 28px;min-height:100vh}
+
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:22px}
+.scard{background:#fff;border:0.5px solid #DDD8CC;border-radius:12px;padding:16px 18px;position:relative;overflow:hidden}
+.scard-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.scard-icon{width:36px;height:36px;border-radius:9px;display:grid;place-items:center;flex-shrink:0}
+.scard-icon svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.scard-icon.gold{background:#FDF3DC;color:#C8993A}
+.scard-icon.teal{background:#D4EBF0;color:#3A7A8C}
+.scard-icon.sage{background:#D4E8D8;color:#4E8060}
+.scard-icon.rose{background:#F5DEDE;color:#B85555}
+.badge{font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px}
+.badge.gold{background:#FDF3DC;color:#A07020}
+.badge.teal{background:#D4EBF0;color:#2A6A7C}
+.badge.sage{background:#D4E8D8;color:#3A6A50}
+.badge.rose{background:#F5DEDE;color:#995050}
+.slbl{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#A09080;margin-bottom:4px}
+.snum{font-family:'DM Serif Display',serif;font-size:28px;color:#2C2416;line-height:1}
+
+.grid2{display:grid;grid-template-columns:1fr 340px;gap:14px;margin-bottom:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:14px}
+.grid22{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+.card{background:#fff;border:0.5px solid #DDD8CC;border-radius:12px;overflow:hidden}
+.card-head{padding:14px 18px;border-bottom:0.5px solid #EDE8DC;display:flex;align-items:center;justify-content:space-between}
+.card-title{font-size:13px;font-weight:500;color:#2C2416}
+.card-sub{font-size:11px;color:#A09080;margin-top:2px}
+.card-link{font-size:11px;font-weight:500;color:#C8993A;cursor:pointer;text-decoration:none}
+.card-body{padding:16px 18px}
+
+/* appt cards */
+.appt-scroll{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:14px 18px}
+.appt{background:#FDFCF9;border:0.5px solid #EDE8DC;border-radius:9px;padding:12px 14px}
+.appt-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.appt-name{font-size:13px;font-weight:500;color:#2C2416}
+.status-pill{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:20px;font-size:10px;font-weight:500}
+.status-pill.sched{background:#EAF0FF;color:#3A5AB5}
+.status-pill.done{background:#D4E8D8;color:#3A6A50}
+.status-pill.pend{background:#F5DEDE;color:#995050}
+.dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+.appt-therapy{font-size:11.5px;color:#6A5E50;margin-bottom:7px}
+.appt-time{display:flex;align-items:center;gap:5px;font-size:11px;color:#A09080}
+.appt-time svg{width:12px;height:12px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+
+/* chart */
+.chart-wrap{padding:14px 18px 10px;position:relative}
+svg.chart{width:100%;overflow:visible}
+
+/* tasks */
+.task-list{display:flex;flex-direction:column;gap:0}
+.task-item{display:flex;align-items:center;gap:12px;padding:11px 18px;border-bottom:0.5px solid #F0EDE6}
+.task-item:last-child{border-bottom:none}
+.task-check{width:17px;height:17px;border-radius:4px;border:1.5px solid #DDD8CC;display:grid;place-items:center;cursor:pointer;flex-shrink:0;transition:all .15s}
+.task-check.done{background:#4E8060;border-color:#4E8060}
+.task-check.done svg{display:block}
+.task-check svg{display:none;width:10px;height:10px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.task-text{font-size:13px;color:#2C2416;flex:1}
+.task-text.done{text-decoration:line-through;color:#A09080}
+.task-due{font-size:11px;color:#A09080;white-space:nowrap}
+
+/* patient list */
+.pt-item{display:flex;align-items:center;gap:10px;padding:10px 18px;border-bottom:0.5px solid #F0EDE6}
+.pt-item:last-child{border-bottom:none}
+.pt-avatar{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:600;color:#fff;flex-shrink:0}
+.pt-name{font-size:13px;font-weight:500;color:#2C2416}
+.pt-therapy{font-size:11px;color:#A09080}
+.pt-badge{margin-left:auto;font-size:10px;font-weight:500;padding:3px 8px;border-radius:20px}
+
+/* upcoming */
+.upcoming-item{display:flex;align-items:flex-start;gap:12px;padding:11px 18px;border-bottom:0.5px solid #F0EDE6}
+.upcoming-item:last-child{border-bottom:none}
+.time-block{background:#F0EDE6;border-radius:7px;padding:6px 10px;text-align:center;min-width:48px;flex-shrink:0}
+.time-h{font-size:13px;font-weight:600;color:#2C2416}
+.time-m{font-size:9px;color:#A09080;font-weight:500}
+.up-name{font-size:13px;font-weight:500;color:#2C2416}
+.up-sub{font-size:11px;color:#A09080;margin-top:2px}
+.up-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
+
+/* feedback */
+.fb-item{padding:12px 18px;border-bottom:0.5px solid #F0EDE6}
+.fb-item:last-child{border-bottom:none}
+.fb-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.fb-name{font-size:12.5px;font-weight:500;color:#2C2416}
+.stars{color:#C8993A;font-size:13px;letter-spacing:1px}
+.fb-text{font-size:12px;color:#6A5E50;line-height:1.55}
+
+/* mini bar chart */
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.bar-lbl{font-size:11px;color:#6A5E50;width:70px;flex-shrink:0}
+.bar-track{flex:1;height:7px;background:#EDE8DC;border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;background:#C8993A;transition:width .4s}
+.bar-val{font-size:11px;font-weight:500;color:#2C2416;width:32px;text-align:right;flex-shrink:0}
+</style>
+
+<!-- STAT CARDS -->
+<div class="stats">
+  <div class="scard">
+    <div class="scard-top">
+      <div class="scard-icon gold"><svg viewBox="0 0 18 18"><circle cx="7" cy="6" r="3"/><path d="M1 16c0-3.3 2.7-6 6-6"/><circle cx="14" cy="8" r="2"/><path d="M11 16c0-2 1.3-3.2 3-3.2s3 1.2 3 3.2"/></svg></div>
+      <span class="badge gold">5 Total</span>
+    </div>
+    <div class="slbl">New patients</div>
+    <div class="snum">6</div>
+  </div>
+  <div class="scard">
+    <div class="scard-top">
+      <div class="scard-icon teal"><svg viewBox="0 0 18 18"><rect x="2" y="4" width="14" height="11" rx="1.5"/><path d="M6 4V2h6v2"/><line x1="6" y1="9" x2="12" y2="9"/><line x1="6" y1="12" x2="10" y2="12"/></svg></div>
+      <span class="badge teal">0 Invoices</span>
+    </div>
+    <div class="slbl">Monthly revenue</div>
+    <div class="snum">₹0</div>
+  </div>
+  <div class="scard">
+    <div class="scard-top">
+      <div class="scard-icon sage"><svg viewBox="0 0 18 18"><circle cx="9" cy="9" r="7"/><polyline points="6,9 8,11 13,6"/></svg></div>
+      <span class="badge sage">2026-03</span>
+    </div>
+    <div class="slbl">Success rate</div>
+    <div class="snum">94.1%</div>
+  </div>
+  <div class="scard">
+    <div class="scard-top">
+      <div class="scard-icon rose"><svg viewBox="0 0 18 18"><path d="M9 2l1.8 5.4H16l-4.5 3.3 1.7 5.3L9 13l-4.2 3 1.7-5.3L2 7.4h5.2z"/></svg></div>
+      <span class="badge rose">High</span>
+    </div>
+    <div class="slbl">Pending feedback</div>
+    <div class="snum">15</div>
+  </div>
+</div>
+
+<!-- ROW 1: Recent Appts + Patient Inflow chart -->
+<div class="grid2" style="margin-bottom:14px">
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">Recent Appointments</div>
+        <div class="card-sub">Latest schedule activity from the last 30 days.</div>
+      </div>
+      <a class="card-link">Open Full Schedule</a>
+    </div>
+    <div class="appt-scroll">
+      <div class="appt">
+        <div class="appt-top"><span class="appt-name">Maya Khan</span><span class="status-pill sched"><span class="dot"></span>Scheduled</span></div>
+        <div class="appt-therapy">Relaxation Reflexology with Dr. Aris Menon</div>
+        <div class="appt-time"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.5"/><line x1="6" y1="3.5" x2="6" y2="6"/><line x1="6" y1="6" x2="8" y2="7"/></svg>06:56 PM</div>
+      </div>
+      <div class="appt">
+        <div class="appt-top"><span class="appt-name">Maya Khan</span><span class="status-pill sched"><span class="dot"></span>Scheduled</span></div>
+        <div class="appt-therapy">Relaxation Reflexology with Dr. Aris Menon</div>
+        <div class="appt-time"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.5"/><line x1="6" y1="3.5" x2="6" y2="6"/><line x1="6" y1="6" x2="8" y2="7"/></svg>06:18 PM</div>
+      </div>
+      <div class="appt">
+        <div class="appt-top"><span class="appt-name">Maya Khan</span><span class="status-pill done"><span class="dot"></span>Completed</span></div>
+        <div class="appt-therapy">Relaxation Reflexology with Dr. Aris Menon</div>
+        <div class="appt-time"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.5"/><line x1="6" y1="3.5" x2="6" y2="6"/><line x1="6" y1="6" x2="8" y2="7"/></svg>05:35 PM</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">Patient Inflow</div>
+      <span class="card-link">Today: +25</span>
+    </div>
+    <div class="chart-wrap">
+      <svg class="chart" viewBox="0 0 300 130">
+        <defs>
+          <linearGradient id="gfill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#C8993A" stop-opacity="0.18"/>
+            <stop offset="100%" stop-color="#C8993A" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <!-- grid lines -->
+        <line x1="0" y1="20" x2="300" y2="20" stroke="#EDE8DC" stroke-width="0.5"/>
+        <line x1="0" y1="55" x2="300" y2="55" stroke="#EDE8DC" stroke-width="0.5"/>
+        <line x1="0" y1="90" x2="300" y2="90" stroke="#EDE8DC" stroke-width="0.5"/>
+        <!-- area fill -->
+        <path d="M0,30 C30,28 60,60 100,65 C140,70 160,80 200,72 C230,66 260,55 300,45 L300,110 L0,110 Z" fill="url(#gfill)"/>
+        <!-- line -->
+        <path d="M0,30 C30,28 60,60 100,65 C140,70 160,80 200,72 C230,66 260,55 300,45" fill="none" stroke="#C8993A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- dots -->
+        <circle cx="0" cy="30" r="3" fill="#C8993A"/><circle cx="100" cy="65" r="3" fill="#C8993A"/>
+        <circle cx="200" cy="72" r="3" fill="#C8993A"/><circle cx="300" cy="45" r="3" fill="#C8993A"/>
+        <!-- x labels -->
+        <text x="0" y="125" font-size="9" fill="#A09080" font-family="DM Sans,sans-serif">08:00</text>
+        <text x="90" y="125" font-size="9" fill="#A09080" font-family="DM Sans,sans-serif">12:00</text>
+        <text x="185" y="125" font-size="9" fill="#A09080" font-family="DM Sans,sans-serif">16:00</text>
+        <text x="275" y="125" font-size="9" fill="#A09080" font-family="DM Sans,sans-serif">20:00</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ROW 2: Upcoming + My Patients + Tasks -->
+<div class="grid3" style="margin-bottom:14px">
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">Upcoming Today</div>
+      <a class="card-link">View all</a>
+    </div>
+    <div class="upcoming-item">
+      <div class="time-block"><div class="time-h">09</div><div class="time-m">30 AM</div></div>
+      <div class="up-dot" style="background:#3A5AB5"></div>
+      <div><div class="up-name">Priya Sharma</div><div class="up-sub">Deep Tissue Massage</div></div>
+    </div>
+    <div class="upcoming-item">
+      <div class="time-block"><div class="time-h">11</div><div class="time-m">00 AM</div></div>
+      <div class="up-dot" style="background:#C8993A"></div>
+      <div><div class="up-name">Rohan Verma</div><div class="up-sub">Aromatherapy Session</div></div>
+    </div>
+    <div class="upcoming-item">
+      <div class="time-block"><div class="time-h">02</div><div class="time-m">15 PM</div></div>
+      <div class="up-dot" style="background:#4E8060"></div>
+      <div><div class="up-name">Ananya Iyer</div><div class="up-sub">Reflexology Consult</div></div>
+    </div>
+    <div class="upcoming-item">
+      <div class="time-block"><div class="time-h">04</div><div class="time-m">00 PM</div></div>
+      <div class="up-dot" style="background:#B85555"></div>
+      <div><div class="up-name">Karan Mehta</div><div class="up-sub">Stress Relief Program</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">My Patients</div>
+      <a class="card-link">See all</a>
+    </div>
+    <div class="pt-item">
+      <div class="pt-avatar" style="background:#7A6A52">MK</div>
+      <div><div class="pt-name">Maya Khan</div><div class="pt-therapy">Reflexology</div></div>
+      <span class="pt-badge" style="background:#D4E8D8;color:#3A6A50">Active</span>
+    </div>
+    <div class="pt-item">
+      <div class="pt-avatar" style="background:#3A7A8C">PS</div>
+      <div><div class="pt-name">Priya Sharma</div><div class="pt-therapy">Deep Tissue</div></div>
+      <span class="pt-badge" style="background:#D4E8D8;color:#3A6A50">Active</span>
+    </div>
+    <div class="pt-item">
+      <div class="pt-avatar" style="background:#C8993A">RV</div>
+      <div><div class="pt-name">Rohan Verma</div><div class="pt-therapy">Aromatherapy</div></div>
+      <span class="pt-badge" style="background:#FDF3DC;color:#A07020">Pending</span>
+    </div>
+    <div class="pt-item">
+      <div class="pt-avatar" style="background:#6A8C72">AI</div>
+      <div><div class="pt-name">Ananya Iyer</div><div class="pt-therapy">Reflexology</div></div>
+      <span class="pt-badge" style="background:#D4E8D8;color:#3A6A50">Active</span>
+    </div>
+    <div class="pt-item">
+      <div class="pt-avatar" style="background:#B85555">KM</div>
+      <div><div class="pt-name">Karan Mehta</div><div class="pt-therapy">Stress Relief</div></div>
+      <span class="pt-badge" style="background:#F5DEDE;color:#995050">Review</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">Tasks</div>
+      <span class="card-link" id="task-count">2 remaining</span>
+    </div>
+    <div class="task-list" id="tasks">
+      <div class="task-item"><div class="task-check done" onclick="toggleTask(this)"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7.5 8,3"/></svg></div><div class="task-text done">Send follow-up to Maya Khan</div><div class="task-due">Done</div></div>
+      <div class="task-item"><div class="task-check" onclick="toggleTask(this)"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7.5 8,3"/></svg></div><div class="task-text">Review pending feedback (15)</div><div class="task-due">Today</div></div>
+      <div class="task-item"><div class="task-check" onclick="toggleTask(this)"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7.5 8,3"/></svg></div><div class="task-text">Update Rohan Verma's plan</div><div class="task-due">Tomorrow</div></div>
+      <div class="task-item"><div class="task-check done" onclick="toggleTask(this)"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7.5 8,3"/></svg></div><div class="task-text done">Confirm Karan's appointment</div><div class="task-due">Done</div></div>
+      <div class="task-item"><div class="task-check" onclick="toggleTask(this)"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7.5 8,3"/></svg></div><div class="task-text">Submit monthly report</div><div class="task-due">Mar 31</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ROW 3: Therapy breakdown + Recent Feedback -->
+<div class="grid22">
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">Therapy Breakdown</div>
+      <span class="card-sub" style="font-size:11px;color:#A09080">This month</span>
+    </div>
+    <div class="card-body">
+      <div class="bar-row"><div class="bar-lbl">Reflexology</div><div class="bar-track"><div class="bar-fill" style="width:82%"></div></div><div class="bar-val">82%</div></div>
+      <div class="bar-row"><div class="bar-lbl">Deep Tissue</div><div class="bar-track"><div class="bar-fill" style="width:64%;background:#6A8C72"></div></div><div class="bar-val">64%</div></div>
+      <div class="bar-row"><div class="bar-lbl">Aromatherapy</div><div class="bar-track"><div class="bar-fill" style="width:47%;background:#3A7A8C"></div></div><div class="bar-val">47%</div></div>
+      <div class="bar-row"><div class="bar-lbl">Stress Relief</div><div class="bar-track"><div class="bar-fill" style="width:35%;background:#B85555"></div></div><div class="bar-val">35%</div></div>
+      <div class="bar-row" style="margin-bottom:0"><div class="bar-lbl">Meditation</div><div class="bar-track"><div class="bar-fill" style="width:21%;background:#7A6A52"></div></div><div class="bar-val">21%</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-title">Recent Feedback</div>
+      <a class="card-link">View all 15</a>
+    </div>
+    <div class="fb-item">
+      <div class="fb-top"><span class="fb-name">Maya Khan</span><span class="stars">★★★★★</span></div>
+      <div class="fb-text">"Dr. Menon was incredibly calming. The session exceeded expectations."</div>
+    </div>
+    <div class="fb-item">
+      <div class="fb-top"><span class="fb-name">Rohan Verma</span><span class="stars">★★★★<span style="color:#DDD8CC">★</span></span></div>
+      <div class="fb-text">"Great aromatherapy experience. Room ambience could be improved."</div>
+    </div>
+    <div class="fb-item">
+      <div class="fb-top"><span class="fb-name">Ananya Iyer</span><span class="stars">★★★★★</span></div>
+      <div class="fb-text">"Absolutely loved it. Will be back next week without a doubt."</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleTask(el){
+  el.classList.toggle('done');
+  el.querySelector('svg').style.display = el.classList.contains('done') ? 'block' : 'none';
+  const txt = el.nextElementSibling;
+  txt.classList.toggle('done');
+  const due = txt.nextElementSibling;
+  if(el.classList.contains('done')) due.textContent='Done';
+  else due.textContent=['Today','Tomorrow','Mar 31'][Math.floor(Math.random()*3)];
+  const remaining = document.querySelectorAll('.task-check:not(.done)').length;
+  document.getElementById('task-count').textContent = remaining+' remaining';
+}
+</script>

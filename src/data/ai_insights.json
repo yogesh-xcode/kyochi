@@ -1,5 +1,0 @@
-[
-  {"id":"INS01","type":"trend","title":"Anxiety Trend Detected","metric":"anxiety_symptoms","change_pct":15,"region":"downtown","detected_on":"2026-02-21"},
-  {"id":"INS02","type":"trend","title":"Sleep Quality Decline","metric":"sleep_quality","change_pct":-9,"region":"north","detected_on":"2026-03-02"},
-  {"id":"INS03","type":"recommendation","title":"Increase Thursday Slots","metric":"wait_time","change_pct":-22,"region":"all","detected_on":"2026-03-12"}
-]

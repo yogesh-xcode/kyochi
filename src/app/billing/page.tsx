@@ -1,162 +1,334 @@
 "use client";
 
-import { Check, EllipsisVertical, ReceiptText, X } from "lucide-react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { Check, Lock, Printer } from "lucide-react";
 
-import appointmentsData from "@/data/appointments.json";
-import billingData from "@/data/billing.json";
-import therapiesData from "@/data/therapies.json";
-
-import { ManagementPageLayout } from "@/components/kyochi/ManagementPageLayout";
 import { type KyochiTableRow } from "@/components/kyochi/KyochiDataTable";
+import { ManagementPageLayout } from "@/components/kyochi/ManagementPageLayout";
 import { StatusPill } from "@/components/kyochi/primitives";
 import { tableViewConfigs } from "@/components/kyochi/tableConfigs";
 import { Button } from "@/components/ui/button";
+import { useBootstrapData } from "@/lib/data/useBootstrapData";
+import { buildBillingKpis } from "@/lib/metrics";
+import { resolveUserContext } from "@/lib/roleScope";
+import { supabase } from "@/lib/supabase/client";
 
-const appointmentById = new Map(appointmentsData.map((appointment) => [appointment.id, appointment]));
-const therapyById = new Map(therapiesData.map((therapy) => [therapy.id, therapy]));
-
-const toCurrency = (amount: number) =>
-  new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  }).format(amount);
-
-const formatInvoiceStatus = (status: string) => {
-  if (status === "paid") {
-    return "Paid";
-  }
-  if (status === "pending") {
-    return "Pending";
-  }
-  if (status === "overdue") {
-    return "Overdue";
-  }
-  return status;
+type BillingRecord = {
+  id: string;
+  appointment_id: string;
+  patient_id: string;
+  franchise_id: string;
+  amount: number;
+  currency: string;
+  due_date: string | null;
+  status: "unpaid" | "paid";
+  patients?: { full_name?: string | null } | null;
+  appointments?:
+    | {
+        therapies?: { name?: string | null } | null;
+      }
+    | {
+        therapies?: { name?: string | null } | null;
+      }[]
+    | null;
 };
 
-const billingRows: KyochiTableRow[] = billingData.map((invoice) => {
-  const appointment = appointmentById.get(invoice.appointment_id);
-  const therapy = appointment ? therapyById.get(appointment.therapy_id) : undefined;
-  const status = formatInvoiceStatus(invoice.status);
+type FlashState = {
+  tone: "success" | "error";
+  message: string;
+};
 
-  return {
-    id: invoice.id,
-    sortValues: [
-      invoice.id.toUpperCase(),
-      therapy?.name ?? "Therapy Session",
-      therapy?.duration_min ?? 45,
-      invoice.amount,
-      status,
-    ],
-    cells: [
-      <span key={`${invoice.id}-id`} className="font-medium text-[#334155]">
-        {invoice.id.toUpperCase()}
-      </span>,
-      <span key={`${invoice.id}-therapy`} className="font-semibold text-[#1e293b]">
-        {therapy?.name ?? "Therapy Session"}
-      </span>,
-      `${therapy?.duration_min ?? 45} mins`,
-      toCurrency(invoice.amount),
-      <StatusPill key={`${invoice.id}-status`} status={status} />,
-    ],
-    actions: (
-      <div className="inline-flex items-center gap-2">
-        {invoice.status === "paid" ? (
-          <>
-            <Button
-              type="button"
-              variant="outline"
-              size="icon-xs"
-              aria-label="Generate Receipt"
-              title="Generate Receipt"
-            >
-              <ReceiptText className="size-3.5" />
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              size="icon-xs"
-              aria-label="More Actions"
-              title="More Actions"
-            >
-              <EllipsisVertical className="size-3.5" />
-            </Button>
-          </>
-        ) : (
-          <>
-            <Button
-              type="button"
-              variant="default"
-              size="icon-xs"
-              aria-label="Accept Payment"
-              title="Accept Payment"
-            >
-              <Check className="size-3.5" />
-            </Button>
-            <Button
-              type="button"
-              variant="destructive-outline"
-              size="icon-xs"
-              aria-label="Close Appointment"
-              title="Close Appointment"
-            >
-              <X className="size-3.5" />
-            </Button>
-          </>
-        )}
-      </div>
-    ),
-  };
-});
+const getTherapyName = (entry: BillingRecord) => {
+  if (Array.isArray(entry.appointments)) {
+    return entry.appointments[0]?.therapies?.name ?? "—";
+  }
+  return entry.appointments?.therapies?.name ?? "—";
+};
+
+const toDueDateLabel = (dueDate: string | null) => {
+  if (!dueDate) {
+    return "—";
+  }
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  }).format(new Date(`${dueDate}T00:00:00`));
+};
+
+const toCurrencyLabel = (amount: number, currency: string | null | undefined) => {
+  const safeCurrency = (currency ?? "USD").toUpperCase();
+  try {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: safeCurrency,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(amount);
+  } catch {
+    return `${safeCurrency} ${amount.toFixed(2)}`;
+  }
+};
+
+const isOverdue = (entry: BillingRecord) => {
+  if (entry.status !== "unpaid" || !entry.due_date) {
+    return false;
+  }
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const due = new Date(`${entry.due_date}T00:00:00`);
+  return due < today;
+};
 
 export default function BillingPage() {
-  const tableConfig = tableViewConfigs.billing;
-  const therapyOptions = therapiesData.map((therapy) => therapy.name);
-  const durationOptions = Array.from(new Set(therapiesData.map((therapy) => `${therapy.duration_min} mins`)));
-  const billingStatusOptions = ["Paid", "Pending", "Overdue"];
-  const paidInvoices = billingData.filter((invoice) => invoice.status === "paid");
-  const pendingInvoices = billingData.filter((invoice) => invoice.status === "pending");
-  const overdueInvoices = billingData.filter((invoice) => invoice.status === "overdue");
-  const totalRevenue = paidInvoices.reduce((sum, invoice) => sum + invoice.amount, 0);
-  const outstandingAmount = [...pendingInvoices, ...overdueInvoices].reduce(
-    (sum, invoice) => sum + invoice.amount,
-    0,
+  const { data, isLoading: isBootstrapLoading } = useBootstrapData();
+  const context = resolveUserContext({
+    users: data.users,
+    currentUser: data.current_user,
+  });
+
+  const role = context.role;
+  const franchiseId = context.franchiseId;
+  const patientId = context.patientId;
+
+  const [billingRowsRaw, setBillingRowsRaw] = useState<BillingRecord[]>([]);
+  const [flash, setFlash] = useState<FlashState | null>(null);
+  const [isPageLoading, setIsPageLoading] = useState(true);
+
+  useEffect(() => {
+    if (!flash) {
+      return;
+    }
+    const timer = window.setTimeout(() => setFlash(null), 2800);
+    return () => window.clearTimeout(timer);
+  }, [flash]);
+
+  const loadBilling = useCallback(async () => {
+    if (!supabase || role === "therapist") {
+      return;
+    }
+
+    let query = supabase
+      .from("billing")
+      .select(`
+        id,
+        appointment_id,
+        patient_id,
+        franchise_id,
+        amount,
+        currency,
+        due_date,
+        status,
+        patients(full_name),
+        appointments(
+          therapy_id,
+          therapies(name)
+        )
+      `)
+      .order("id", { ascending: false });
+
+    if (role === "franchisee") {
+      query = query.eq("franchise_id", franchiseId);
+    } else if (role === "patient") {
+      query = query.eq("patient_id", patientId);
+    }
+
+    const { data: rows, error } = await query;
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    setBillingRowsRaw((rows ?? []) as BillingRecord[]);
+  }, [franchiseId, patientId, role]);
+
+  const printInvoice = useCallback((entry: BillingRecord) => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const patientName = entry.patients?.full_name ?? "Unknown";
+    const therapyName = getTherapyName(entry);
+    const popup = window.open("", "_blank", "noopener,noreferrer,width=860,height=700");
+    if (!popup) {
+      return;
+    }
+    popup.document.write(`
+      <!doctype html>
+      <html><head><meta charset=\"utf-8\"><title>Invoice ${entry.id}</title></head>
+      <body style=\"font-family: 'Manrope', sans-serif; padding: 24px;\">
+        <h1>Invoice ${entry.id}</h1>
+        <p><strong>Patient:</strong> ${patientName}</p>
+        <p><strong>Therapy:</strong> ${therapyName}</p>
+        <p><strong>Amount:</strong> ${toCurrencyLabel(entry.amount, entry.currency)}</p>
+        <p><strong>Due Date:</strong> ${toDueDateLabel(entry.due_date)}</p>
+        <p><strong>Status:</strong> ${entry.status.toUpperCase()}</p>
+      </body></html>
+    `);
+    popup.document.close();
+    popup.focus();
+    popup.print();
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    void loadBilling()
+      .catch((error) => {
+        const message = error instanceof Error ? error.message : "Failed to load billing.";
+        setFlash({ tone: "error", message });
+      })
+      .finally(() => {
+        if (active) {
+          setIsPageLoading(false);
+        }
+      });
+    return () => {
+      active = false;
+    };
+  }, [loadBilling]);
+
+  const markPaid = useCallback(
+    async (entry: BillingRecord) => {
+      if (!supabase || entry.status !== "unpaid") {
+        return;
+      }
+
+      const confirmed = window.confirm("Mark this invoice as paid? This cannot be undone.");
+      if (!confirmed) {
+        return;
+      }
+
+      const { error } = await supabase
+        .from("billing")
+        .update({ status: "paid" })
+        .eq("id", entry.id)
+        .eq("status", "unpaid");
+
+      if (error) {
+        setFlash({ tone: "error", message: error.message });
+        return;
+      }
+
+      await loadBilling();
+      setFlash({ tone: "success", message: "Invoice marked as paid" });
+    },
+    [loadBilling],
   );
-  const collectionRate = billingData.length > 0 ? Math.round((paidInvoices.length / billingData.length) * 100) : 0;
+
+  const kpis = useMemo(() => buildBillingKpis(billingRowsRaw, role), [billingRowsRaw, role]);
+
+  const billingRows: KyochiTableRow[] = useMemo(
+    () =>
+      billingRowsRaw.map((entry) => {
+        const therapyName = getTherapyName(entry);
+        const patientName = entry.patients?.full_name ?? "Unknown";
+        const overdue = isOverdue(entry);
+        const dueDateLabel = toDueDateLabel(entry.due_date);
+        const statusLabel = overdue ? "Overdue" : entry.status === "paid" ? "Paid" : "Unpaid";
+
+        const actions = role === "patient" ? (
+          <Button
+            type="button"
+            variant="outline"
+            size="xs"
+            aria-label="Print Invoice"
+            title="Print Invoice"
+            onClick={() => {
+              printInvoice(entry);
+            }}
+          >
+            <Printer className="size-3.5" />
+            Print
+          </Button>
+        ) : entry.status === "unpaid" ? (
+          <Button
+            type="button"
+            variant="outline"
+            size="xs"
+            aria-label="Mark Paid"
+            title="Mark Paid"
+            onClick={() => {
+              void markPaid(entry);
+            }}
+          >
+            <Check className="size-3.5" />
+            Mark Paid
+          </Button>
+        ) : (
+          <span
+            className="inline-flex items-center justify-center rounded-md border border-[var(--k-color-border-soft)] bg-[#f7f4ea] p-1.5 text-[#8b7a55]"
+            title="Invoice is locked after payment"
+            aria-label="Invoice is locked after payment"
+          >
+            <Lock className="size-3.5" />
+          </span>
+        );
+
+        return {
+          id: entry.id,
+          actions,
+          sortValues: [
+            patientName,
+            therapyName,
+            entry.amount,
+            dueDateLabel,
+            statusLabel,
+          ],
+          cells: [
+            <span key={`${entry.id}-patient`} className="font-semibold text-[#1e293b]">
+              {patientName}
+            </span>,
+            <span key={`${entry.id}-therapy`}>{therapyName}</span>,
+            <span key={`${entry.id}-amount`} className="font-medium text-[#334155]">
+              {toCurrencyLabel(entry.amount, entry.currency)}
+            </span>,
+            <span
+              key={`${entry.id}-due-date`}
+              className={overdue ? "font-semibold text-[#dc2626]" : "text-[#334155]"}
+            >
+              {dueDateLabel}
+            </span>,
+            <StatusPill key={`${entry.id}-status`} status={statusLabel} />,
+          ],
+        };
+      }),
+    [billingRowsRaw, markPaid, printInvoice, role],
+  );
+
+  const tableConfig = tableViewConfigs.billing;
+
+  if (role === "therapist") {
+    return null;
+  }
 
   return (
-    <ManagementPageLayout
-      title="Billing & Invoices"
-      searchPlaceholder="Search invoices..."
-      kpis={[
-        { label: "Total Invoices", value: billingData.length.toString(), delta: "Live", helper: "All generated invoices" },
-        { label: "Collected Revenue", value: toCurrency(totalRevenue), delta: `${paidInvoices.length} Paid`, helper: "Revenue from paid invoices" },
-        { label: "Outstanding", value: toCurrency(outstandingAmount), delta: `${pendingInvoices.length + overdueInvoices.length} Due`, helper: "Pending and overdue balance" },
-        { label: "Collection Rate", value: `${collectionRate}%`, delta: "Verified", helper: "Paid invoice ratio" },
-      ]}
-      columns={tableConfig.columns}
-      centeredBodyColumns={tableConfig.centeredBodyColumns}
-      formFieldConfigs={{
-        "Therapy Name": {
-          type: "select",
-          options: therapyOptions,
-        },
-        Duration: {
-          type: "select",
-          options: durationOptions,
-        },
-        Price: {
-          type: "text",
-          placeholder: "Enter amount in INR",
-        },
-        Status: {
-          type: "select",
-          options: billingStatusOptions,
-          defaultValue: billingStatusOptions[0],
-        },
-      }}
-      rows={billingRows}
-    />
+    <div className="space-y-3">
+      {flash ? (
+        <div
+          className={`rounded-xl border px-4 py-2 text-sm font-medium ${
+            flash.tone === "success"
+              ? "border-[#d1fae5] bg-[#ecfdf5] text-[#065f46]"
+              : "border-[#fecaca] bg-[#fff1f2] text-[#991b1b]"
+          }`}
+        >
+          {flash.message}
+        </div>
+      ) : null}
+
+      <ManagementPageLayout
+        title="Billing"
+        searchPlaceholder="Search billing records..."
+        kpis={kpis}
+        columns={tableConfig.columns}
+        centeredBodyColumns={tableConfig.centeredBodyColumns}
+        showAddAction={false}
+        showUploadAction={false}
+        enableRowEdit={false}
+        enableRowDelete={false}
+        enableBulkDelete={false}
+        showSelection={false}
+        isLoading={isBootstrapLoading || isPageLoading}
+        rows={billingRows}
+      />
+    </div>
   );
 }

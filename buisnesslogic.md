@@ -9,7 +9,8 @@ This document explains what the dashboard currently calculates and how data flow
 - `data/therapies.json`
 - `data/appointments.json`
 - `data/billing.json`
-- `data/ai_insights.json`
+- `data/feedback.json`
+- `data/franchises.json`
 
 These files are treated as the temporary local database.
 
@@ -18,17 +19,17 @@ These files are treated as the temporary local database.
 The KPI cards are computed in `src/components/kyochi/data.ts`.
 
 - New Patients:
-  - Formula: `patients.length`
+  - Formula: `unique(appointments.patient_id in active_month)`
 - Monthly Revenue:
-  - Formula: `sum(billing.amount)`
+  - Formula: `sum(billing.amount where status = paid and due_date in active_month)`
 - Success Rate:
-  - Formula: `(completed_appointments / total_appointments) * 100`
+  - Formula: `(completed_appointments_in_month / total_appointments_in_month) * 100`
   - Display: one decimal place (example `94.8%`)
 - Pending Feedback:
-  - Current logic uses completed appointment count as the pending-feedback number.
+  - Formula: `count(completed_appointments_in_month without submitted feedback row)`
   - Display badge:
-    - `High` if completed count > 0
-    - `Low` if completed count = 0
+    - `High` if pending count > 0
+    - `Low` if pending count = 0
 
 ## 3) Appointment List Logic
 
@@ -76,24 +77,25 @@ Patient inflow uses appointment counts by time bucket.
 Alerts are composed from multiple sources:
 
 - Feedback Pending alert:
-  - Uses completed appointment count
+  - Uses completed appointments that do not yet have submitted feedback
 - Unpaid Invoices alert:
   - Uses first overdue invoice from `billing.json` (if any)
 - AI alerts:
-  - One alert per row from `ai_insights.json`
+  - Derived from formula-based operational signals (collection, utilization, risk) computed from the 7 core datasets
 - System Update alert:
   - Static informational item
 
 ## 7) Bottom AI Insight Banner Logic
 
-Banner content is driven by AI recommendation data.
+Banner content is derived from operational formulas.
 
-- Picks first insight where `type === "recommendation"`
-- Uses it to generate:
+- Priority order:
+  - Pending feedback backlog
+  - Overdue invoice risk
+  - Throughput/capacity optimization
+- Uses the highest-priority signal to generate:
   - banner title
   - banner body
-- If no recommendation exists:
-  - fallback title/body text is shown
 - Action labels are currently static text:
   - `Apply Recommendation`
   - `View Full Analysis`

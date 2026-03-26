@@ -1,0 +1,284 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#F7F4EE;padding:24px 28px}
+
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:20px}
+.scard{background:#fff;border:0.5px solid #DDD8CC;border-radius:12px;padding:16px 18px}
+.scard-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.sico{width:36px;height:36px;border-radius:9px;display:grid;place-items:center}
+.sico svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.sico.gold{background:#FDF3DC;color:#C8993A}
+.sico.teal{background:#D4EBF0;color:#3A7A8C}
+.sico.sage{background:#D4E8D8;color:#4E8060}
+.sico.rose{background:#F5DEDE;color:#B85555}
+.badge{font-size:10px;font-weight:500;padding:3px 8px;border-radius:20px}
+.badge.gold{background:#FDF3DC;color:#A07020}
+.badge.sage{background:#D4E8D8;color:#3A6A50}
+.badge.teal{background:#D4EBF0;color:#2A6A7C}
+.badge.rose{background:#F5DEDE;color:#995050}
+.slbl{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#A09080;margin-bottom:4px}
+.snum{font-family:'DM Serif Display',serif;font-size:26px;color:#2C2416;line-height:1}
+
+.row{display:grid;gap:14px;margin-bottom:14px}
+.row2{grid-template-columns:1fr 1fr}
+.row3{grid-template-columns:1.4fr 1fr 1fr}
+.row21{grid-template-columns:1.6fr 1fr}
+
+.card{background:#fff;border:0.5px solid #DDD8CC;border-radius:12px;overflow:hidden}
+.ch{padding:14px 18px;border-bottom:0.5px solid #EDE8DC;display:flex;align-items:center;justify-content:space-between}
+.ct{font-size:13px;font-weight:500;color:#2C2416}
+.cs{font-size:11px;color:#A09080;margin-top:2px}
+.cl{font-size:11px;font-weight:500;color:#C8993A;cursor:pointer}
+
+/* today's schedule */
+.sched-item{display:flex;align-items:center;gap:12px;padding:11px 18px;border-bottom:0.5px solid #F0EDE6;transition:background .15s;cursor:pointer}
+.sched-item:last-child{border-bottom:none}
+.sched-item:hover{background:#FDFCF9}
+.time-col{min-width:52px;text-align:center;background:#F7F4EE;border-radius:8px;padding:6px 8px;flex-shrink:0}
+.th{font-size:13px;font-weight:600;color:#2C2416;line-height:1}
+.tm{font-size:9px;color:#A09080;font-weight:500;margin-top:1px}
+.sched-bar{width:3px;height:36px;border-radius:2px;flex-shrink:0}
+.pt-name{font-size:13px;font-weight:500;color:#2C2416}
+.pt-sub{font-size:11px;color:#A09080;margin-top:2px}
+.sched-right{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.spill{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:20px;font-size:10px;font-weight:500}
+.spill.sched{background:#EAF0FF;color:#3A5AB5}
+.spill.done{background:#D4E8D8;color:#3A6A50}
+.spill.next{background:#FDF3DC;color:#A07020}
+.sdot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+.sdur{font-size:10px;color:#A09080}
+
+/* patient notes */
+.note-item{padding:12px 18px;border-bottom:0.5px solid #F0EDE6}
+.note-item:last-child{border-bottom:none}
+.note-top{display:flex;align-items:center;gap:9px;margin-bottom:6px}
+.av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:600;color:#fff;flex-shrink:0}
+.n-name{font-size:12.5px;font-weight:500;color:#2C2416}
+.n-date{font-size:10px;color:#A09080;margin-left:auto}
+.n-text{font-size:12px;color:#6A5E50;line-height:1.55;padding-left:37px}
+.n-tag{display:inline-block;margin-top:5px;margin-left:37px;font-size:10px;font-weight:500;padding:2px 7px;border-radius:10px;background:#F0EDE6;color:#7A6A52}
+
+/* session progress ring */
+.ring-wrap{display:flex;align-items:center;justify-content:center;padding:18px}
+.ring-center{text-align:center}
+.ring-num{font-family:'DM Serif Display',serif;font-size:28px;color:#2C2416}
+.ring-lbl{font-size:11px;color:#A09080;margin-top:2px}
+.ring-stats{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:0.5px solid #EDE8DC}
+.rs{padding:10px 18px;text-align:center;border-right:0.5px solid #EDE8DC}
+.rs:last-child{border-right:none}
+.rs-n{font-family:'DM Serif Display',serif;font-size:18px;color:#2C2416}
+.rs-l{font-size:10px;color:#A09080;margin-top:2px}
+
+/* wellness tips */
+.tip-item{display:flex;align-items:flex-start;gap:11px;padding:11px 18px;border-bottom:0.5px solid #F0EDE6}
+.tip-item:last-child{border-bottom:none}
+.tip-ico{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;flex-shrink:0}
+.tip-ico svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.tip-title{font-size:12.5px;font-weight:500;color:#2C2416;margin-bottom:2px}
+.tip-sub{font-size:11px;color:#A09080;line-height:1.45}
+
+/* pending feedback */
+.fb-item{display:flex;align-items:center;gap:12px;padding:11px 18px;border-bottom:0.5px solid #F0EDE6;cursor:pointer;transition:background .15s}
+.fb-item:hover{background:#FDFCF9}
+.fb-item:last-child{border-bottom:none}
+.fb-av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:600;color:#fff;flex-shrink:0}
+.fb-name{font-size:13px;font-weight:500;color:#2C2416}
+.fb-therapy{font-size:11px;color:#A09080;margin-top:2px}
+.fb-right{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.fb-stars{color:#C8993A;font-size:12px;letter-spacing:0.5px}
+.fb-age{font-size:10px;color:#A09080}
+
+/* chart */
+.chart-wrap{padding:14px 18px 10px}
+svg.chart{width:100%;overflow:visible}
+</style>
+
+<!-- STAT CARDS -->
+<div class="stats">
+  <div class="scard">
+    <div class="scard-top">
+      <div class="sico gold"><svg viewBox="0 0 18 18"><rect x="2" y="3" width="14" height="12" rx="1.5"/><path d="M6 3V1h6v2"/><line x1="6" y1="9" x2="12" y2="9"/><line x1="6" y1="12" x2="10" y2="12"/></svg></div>
+      <span class="badge gold">5 Total</span>
+    </div>
+    <div class="slbl">New patients</div>
+    <div class="snum">6</div>
+  </div>
+  <div class="scard">
+    <div class="scard-top">
+      <div class="sico teal"><svg viewBox="0 0 18 18"><path d="M9 2l1.8 5.4H16l-4.5 3.3 1.7 5.3L9 13l-4.2 3 1.7-5.3L2 7.4h5.2z"/></svg></div>
+      <span class="badge teal">0 Invoices</span>
+    </div>
+    <div class="slbl">Monthly revenue</div>
+    <div class="snum">₹0</div>
+  </div>
+  <div class="scard">
+    <div class="scard-top">
+      <div class="sico sage"><svg viewBox="0 0 18 18"><circle cx="9" cy="9" r="7"/><polyline points="6,9 8,11 13,6"/></svg></div>
+      <span class="badge sage">2026-03</span>
+    </div>
+    <div class="slbl">Success rate</div>
+    <div class="snum">94.1%</div>
+  </div>
+  <div class="scard">
+    <div class="scard-top">
+      <div class="sico rose"><svg viewBox="0 0 18 18"><path d="M9 2a2 2 0 0 1 2 2v1h2a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h2V4a2 2 0 0 1 2-2z"/><line x1="7" y1="10" x2="11" y2="10"/></svg></div>
+      <span class="badge rose">High</span>
+    </div>
+    <div class="slbl">Pending feedback</div>
+    <div class="snum">15</div>
+  </div>
+</div>
+
+<!-- ROW 1: Today's Schedule + Session Ring -->
+<div class="row row21" >
+  <div class="card">
+    <div class="ch">
+      <div><div class="ct">Today's Schedule</div><div class="cs">Saturday, 21 Mar 2026</div></div>
+      <span class="cl">Full calendar</span>
+    </div>
+    <div class="sched-item">
+      <div class="time-col"><div class="th">09</div><div class="tm">30 AM</div></div>
+      <div class="sched-bar" style="background:#B85555"></div>
+      <div><div class="pt-name">Maya Khan</div><div class="pt-sub">Relaxation Reflexology · 60 min</div></div>
+      <div class="sched-right"><span class="spill done"><span class="sdot"></span>Completed</span><span class="sdur">60 min</span></div>
+    </div>
+    <div class="sched-item">
+      <div class="time-col"><div class="th">11</div><div class="tm">00 AM</div></div>
+      <div class="sched-bar" style="background:#3A5AB5"></div>
+      <div><div class="pt-name">Priya Sharma</div><div class="pt-sub">Deep Tissue Massage · 45 min</div></div>
+      <div class="sched-right"><span class="spill done"><span class="sdot"></span>Completed</span><span class="sdur">45 min</span></div>
+    </div>
+    <div class="sched-item">
+      <div class="time-col"><div class="th">01</div><div class="tm">30 PM</div></div>
+      <div class="sched-bar" style="background:#C8993A"></div>
+      <div><div class="pt-name">Rohan Verma</div><div class="pt-sub">Aromatherapy Session · 45 min</div></div>
+      <div class="sched-right"><span class="spill next"><span class="sdot"></span>Upcoming</span><span class="sdur">45 min</span></div>
+    </div>
+    <div class="sched-item">
+      <div class="time-col"><div class="th">03</div><div class="tm">15 PM</div></div>
+      <div class="sched-bar" style="background:#4E8060"></div>
+      <div><div class="pt-name">Ananya Iyer</div><div class="pt-sub">Reflexology Consult · 30 min</div></div>
+      <div class="sched-right"><span class="spill sched"><span class="sdot"></span>Scheduled</span><span class="sdur">30 min</span></div>
+    </div>
+    <div class="sched-item">
+      <div class="time-col"><div class="th">05</div><div class="tm">00 PM</div></div>
+      <div class="sched-bar" style="background:#7A6A52"></div>
+      <div><div class="pt-name">Karan Mehta</div><div class="pt-sub">Stress Relief Program · 60 min</div></div>
+      <div class="sched-right"><span class="spill sched"><span class="sdot"></span>Scheduled</span><span class="sdur">60 min</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ct">Sessions Today</div><span class="cl">+25 inflow</span></div>
+    <div class="ring-wrap">
+      <svg width="140" height="140" viewBox="0 0 140 140">
+        <circle cx="70" cy="70" r="54" fill="none" stroke="#EDE8DC" stroke-width="12"/>
+        <circle cx="70" cy="70" r="54" fill="none" stroke="#C8993A" stroke-width="12" stroke-linecap="round"
+          stroke-dasharray="339.3" stroke-dashoffset="101.8" transform="rotate(-90 70 70)"/>
+        <text x="70" y="64" text-anchor="middle" font-family="DM Serif Display,serif" font-size="26" fill="#2C2416">5</text>
+        <text x="70" y="80" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#A09080">of 7 sessions</text>
+      </svg>
+    </div>
+    <div class="ring-stats">
+      <div class="rs"><div class="rs-n">2</div><div class="rs-l">Completed</div></div>
+      <div class="rs"><div class="rs-n">3</div><div class="rs-l">Upcoming</div></div>
+    </div>
+    <div style="padding:14px 18px;border-top:0.5px solid #EDE8DC">
+      <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#A09080;margin-bottom:10px">Weekly load</div>
+      <svg class="chart" viewBox="0 0 240 60">
+        <defs><linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8993A" stop-opacity="0.15"/><stop offset="100%" stop-color="#C8993A" stop-opacity="0"/></linearGradient></defs>
+        <path d="M0,45 L40,35 L80,20 L120,28 L160,15 L200,22 L240,18 L240,60 L0,60Z" fill="url(#wg)"/>
+        <path d="M0,45 L40,35 L80,20 L120,28 L160,15 L200,22 L240,18" fill="none" stroke="#C8993A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="0" y="58" font-size="8" fill="#A09080" font-family="DM Sans">Mon</text>
+        <text x="35" y="58" font-size="8" fill="#A09080" font-family="DM Sans">Tue</text>
+        <text x="73" y="58" font-size="8" fill="#A09080" font-family="DM Sans">Wed</text>
+        <text x="112" y="58" font-size="8" fill="#A09080" font-family="DM Sans">Thu</text>
+        <text x="151" y="58" font-size="8" fill="#A09080" font-family="DM Sans">Fri</text>
+        <text x="191" y="58" font-size="8" fill="#A09080" font-family="DM Sans">Sat</text>
+        <text x="228" y="58" font-size="8" fill="#A09080" font-family="DM Sans">Sun</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ROW 2: Recent Appts + Patient Notes + Pending Feedback -->
+<div class="row row3">
+  <div class="card">
+    <div class="ch"><div class="ct">Recent Appointments</div><span class="cl">Open full schedule</span></div>
+    <div class="sched-item">
+      <div class="time-col"><div class="th">06</div><div class="tm">56 PM</div></div>
+      <div class="sched-bar" style="background:#3A5AB5"></div>
+      <div><div class="pt-name">Maya Khan</div><div class="pt-sub">Relaxation Reflexology · Dr. Aris Menon</div></div>
+      <div class="sched-right"><span class="spill sched"><span class="sdot"></span>Scheduled</span></div>
+    </div>
+    <div class="sched-item">
+      <div class="time-col"><div class="th">06</div><div class="tm">18 PM</div></div>
+      <div class="sched-bar" style="background:#3A5AB5"></div>
+      <div><div class="pt-name">Maya Khan</div><div class="pt-sub">Relaxation Reflexology · Dr. Aris Menon</div></div>
+      <div class="sched-right"><span class="spill sched"><span class="sdot"></span>Scheduled</span></div>
+    </div>
+    <div class="sched-item">
+      <div class="time-col"><div class="th">05</div><div class="tm">35 PM</div></div>
+      <div class="sched-bar" style="background:#4E8060"></div>
+      <div><div class="pt-name">Maya Khan</div><div class="pt-sub">Relaxation Reflexology · Dr. Aris Menon</div></div>
+      <div class="sched-right"><span class="spill done"><span class="sdot"></span>Completed</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ct">Patient Notes</div><span class="cl">Add note</span></div>
+    <div class="note-item">
+      <div class="note-top">
+        <div class="av" style="background:#7A6A52">MK</div>
+        <div class="n-name">Maya Khan</div>
+        <div class="n-date">Today</div>
+      </div>
+      <div class="n-text">Responded well to pressure point therapy. Reduce intensity next session.</div>
+      <span class="n-tag">Reflexology</span>
+    </div>
+    <div class="note-item">
+      <div class="note-top">
+        <div class="av" style="background:#3A7A8C">PS</div>
+        <div class="n-name">Priya Sharma</div>
+        <div class="n-date">Yesterday</div>
+      </div>
+      <div class="n-text">Tension in upper back improving. Continue deep tissue on lumbar.</div>
+      <span class="n-tag">Deep Tissue</span>
+    </div>
+    <div class="note-item">
+      <div class="note-top">
+        <div class="av" style="background:#C8993A">RV</div>
+        <div class="n-name">Rohan Verma</div>
+        <div class="n-date">Mar 19</div>
+      </div>
+      <div class="n-text">First session. Patient anxious. Lavender blend worked well for relaxation.</div>
+      <span class="n-tag">Aromatherapy</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ct">Pending Feedback</div><span style="font-size:11px;background:#F5DEDE;color:#995050;padding:3px 8px;border-radius:20px;font-weight:500">15 new</span></div>
+    <div class="fb-item">
+      <div class="fb-av" style="background:#7A6A52">MK</div>
+      <div><div class="fb-name">Maya Khan</div><div class="fb-therapy">Relaxation Reflexology</div></div>
+      <div class="fb-right"><div class="fb-stars">★★★★★</div><div class="fb-age">2h ago</div></div>
+    </div>
+    <div class="fb-item">
+      <div class="fb-av" style="background:#3A7A8C">PS</div>
+      <div><div class="fb-name">Priya Sharma</div><div class="fb-therapy">Deep Tissue Massage</div></div>
+      <div class="fb-right"><div class="fb-stars">★★★★<span style="color:#DDD8CC">★</span></div><div class="fb-age">5h ago</div></div>
+    </div>
+    <div class="fb-item">
+      <div class="fb-av" style="background:#6A8C72">AI</div>
+      <div><div class="fb-name">Ananya Iyer</div><div class="fb-therapy">Reflexology Consult</div></div>
+      <div class="fb-right"><div class="fb-stars">★★★★★</div><div class="fb-age">Yesterday</div></div>
+    </div>
+    <div class="fb-item">
+      <div class="fb-av" style="background:#B85555">KM</div>
+      <div><div class="fb-name">Karan Mehta</div><div class="fb-therapy">Stress Relief Program</div></div>
+      <div class="fb-right"><div class="fb-stars">★★★<span style="color:#DDD8CC">★★</span></div><div class="fb-age">Mar 19</div></div>
+    </div>
+  </div>
+</div>

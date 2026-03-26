@@ -1,0 +1,657 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem 3rem;
+  background: transparent;
+}
+
+.phone {
+  width: 340px;
+  background: #faf7f2;
+  border-radius: 36px;
+  border: 0.5px solid #d9cbb8;
+  overflow: hidden;
+  font-family: 'Jost', sans-serif;
+}
+
+.statusbar {
+  background: #1c1610;
+  padding: 12px 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.statusbar span { color: #a08c6e; font-size: 11px; font-family: 'Jost', sans-serif; }
+
+.progress-track {
+  height: 2px;
+  background: #e8dece;
+}
+.progress-fill {
+  height: 2px;
+  background: linear-gradient(90deg, #c9a96e, #e8c97a);
+  transition: width 0.5s cubic-bezier(.4,0,.2,1);
+}
+
+.header {
+  background: #1c1610;
+  padding: 20px 22px 22px;
+}
+.header-eyebrow {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #c9a96e;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-weight: 400;
+}
+.header-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 300;
+  color: #f5ede0;
+  line-height: 1.2;
+  font-style: italic;
+}
+.header-sub {
+  font-size: 11px;
+  color: #6b5c47;
+  margin-top: 4px;
+  font-weight: 300;
+}
+
+.body {
+  padding: 24px 22px 16px;
+  min-height: 280px;
+}
+
+.step { display: none; }
+.step.active { display: block; }
+
+.q-num {
+  font-size: 10px;
+  letter-spacing: 1.8px;
+  color: #b89a72;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+
+.q-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  font-weight: 400;
+  color: #2a1f14;
+  line-height: 1.45;
+  margin-bottom: 24px;
+}
+
+/* Dual slider */
+.slider-block { margin-bottom: 20px; }
+.slider-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+.slider-lbl { font-size: 12px; color: #7a6548; font-weight: 400; }
+.slider-val {
+  font-size: 22px;
+  font-family: 'Cormorant Garamond', serif;
+  color: #c9a96e;
+  font-weight: 500;
+  min-width: 28px;
+  text-align: right;
+}
+
+input[type=range].kyo {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3px;
+  background: #e0d4c0;
+  border-radius: 2px;
+  outline: none;
+}
+input[type=range].kyo::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #c9a96e;
+  cursor: pointer;
+  border: 2px solid #faf7f2;
+  box-shadow: 0 0 0 1px #c9a96e;
+}
+.slider-ends {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #b0977a;
+  margin-top: 5px;
+}
+
+.delta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: #f0e8d8;
+  border-radius: 20px;
+  font-size: 12px;
+  color: #7a6548;
+  margin-top: 8px;
+}
+.delta-num { font-weight: 500; color: #3d6b3a; font-size: 13px; }
+
+/* Radio */
+.radio-group { display: flex; flex-direction: column; gap: 10px; }
+.radio-opt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 0.5px solid #ddd0bb;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #3a2e1f;
+  background: #fff;
+  transition: all 0.15s;
+  font-weight: 400;
+}
+.radio-opt.sel {
+  border-color: #c9a96e;
+  background: #fdf5e8;
+}
+.r-circle {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid #d0bfa0;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+}
+.radio-opt.sel .r-circle {
+  border-color: #c9a96e;
+  background: #c9a96e;
+}
+.r-inner { width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+
+/* Scale dots */
+.scale-row {
+  display: flex;
+  gap: 7px;
+  margin-bottom: 10px;
+}
+.sdot {
+  flex: 1;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 0.5px solid #d9cbb8;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  color: #9a8570;
+  cursor: pointer;
+  background: #fff;
+  transition: all 0.15s;
+  font-weight: 400;
+}
+.sdot.sel {
+  background: #c9a96e;
+  border-color: #c9a96e;
+  color: #fff;
+  font-weight: 500;
+}
+.sdot:hover:not(.sel) { border-color: #c9a96e; color: #c9a96e; }
+.scale-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #b0977a;
+  margin-top: 4px;
+}
+
+/* Text area */
+textarea.kyo-area {
+  width: 100%;
+  border: 0.5px solid #ddd0bb;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 13px;
+  font-family: 'Jost', sans-serif;
+  color: #2a1f14;
+  background: #fff;
+  resize: none;
+  line-height: 1.6;
+  outline: none;
+}
+textarea.kyo-area:focus { border-color: #c9a96e; }
+textarea.kyo-area::placeholder { color: #c2b09a; }
+
+.water-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #eef4fb;
+  border-radius: 10px;
+  margin-top: 14px;
+  font-size: 11px;
+  color: #5a7fa0;
+}
+
+/* Footer nav */
+.footer {
+  padding: 12px 22px 22px;
+  display: flex;
+  gap: 10px;
+  border-top: 0.5px solid #e8dece;
+}
+.btn-back {
+  flex: 1;
+  padding: 11px;
+  border: 0.5px solid #d0bfa0;
+  border-radius: 10px;
+  background: transparent;
+  font-size: 13px;
+  color: #7a6548;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+}
+.btn-next {
+  flex: 2;
+  padding: 11px;
+  border: none;
+  border-radius: 10px;
+  background: #1c1610;
+  color: #e8c97a;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  letter-spacing: 0.5px;
+  transition: opacity 0.15s;
+}
+.btn-next:hover { opacity: 0.85; }
+
+/* Intro screen */
+.intro-therapist {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #fff;
+  border: 0.5px solid #e8dece;
+  border-radius: 14px;
+  margin-bottom: 16px;
+}
+.therapist-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: #f0e8d8;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  color: #c9a96e;
+}
+.therapist-name { font-size: 14px; font-weight: 500; color: #2a1f14; }
+.therapist-sub { font-size: 11px; color: #9a8570; margin-top: 2px; }
+
+.wellness-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.w-card {
+  flex: 1;
+  padding: 14px 10px;
+  background: #fff;
+  border: 0.5px solid #e8dece;
+  border-radius: 12px;
+  text-align: center;
+}
+.w-num { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: #2a1f14; font-weight: 400; }
+.w-lbl { font-size: 10px; color: #b0977a; margin-top: 2px; }
+
+.btn-cta {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 12px;
+  background: #1c1610;
+  color: #e8c97a;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.btn-maybe {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background: transparent;
+  font-size: 11px;
+  color: #b0977a;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+}
+
+/* Success */
+.success-body {
+  padding: 32px 22px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.success-ring {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  border: 1.5px solid #c9a96e;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+  color: #c9a96e;
+  font-size: 22px;
+}
+.success-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 300;
+  font-style: italic;
+  color: #2a1f14;
+  margin-bottom: 6px;
+}
+.success-sub { font-size: 12px; color: #9a8570; margin-bottom: 22px; line-height: 1.6; }
+.delta-row { display: flex; gap: 10px; width: 100%; margin-bottom: 22px; }
+.d-card {
+  flex: 1;
+  padding: 14px 8px;
+  background: #fff;
+  border: 0.5px solid #e8dece;
+  border-radius: 12px;
+  text-align: center;
+}
+.d-num { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: #2a1f14; }
+.d-green { color: #3d6b3a; }
+.d-lbl { font-size: 10px; color: #b0977a; margin-top: 3px; }
+.btn-home {
+  width: 100%;
+  padding: 12px;
+  border: 0.5px solid #d0bfa0;
+  border-radius: 12px;
+  background: transparent;
+  font-size: 13px;
+  color: #7a6548;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+}
+
+/* step indicator dots */
+.step-dots {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  padding: 10px 0 0;
+}
+.step-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #e0d4c0;
+  transition: all 0.3s;
+}
+.step-dot.on {
+  background: #c9a96e;
+  width: 16px;
+  border-radius: 3px;
+}
+</style>
+
+<div class="wrap">
+  <div class="phone" id="phone">
+    <div class="statusbar">
+      <span>9:41</span>
+      <span>Kyochi</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="prog" style="width:0%"></div>
+    </div>
+
+    <!-- SCREEN 0: Intro -->
+    <div class="step active" id="st0">
+      <div class="header">
+        <div class="header-eyebrow">Session complete</div>
+        <div class="header-title">Relaxation</div>
+        <div class="header-sub">60 min &nbsp;·&nbsp; Today, 9:00 AM</div>
+      </div>
+      <div class="body" style="min-height:unset;">
+        <div class="intro-therapist">
+          <div class="therapist-avatar">R</div>
+          <div>
+            <div class="therapist-name">Ravi Kumar</div>
+            <div class="therapist-sub">Your therapist today</div>
+          </div>
+        </div>
+        <div class="wellness-row">
+          <div class="w-card">
+            <div class="w-num">8</div>
+            <div class="w-lbl">Sessions done</div>
+          </div>
+          <div class="w-card">
+            <div class="w-num">7.4</div>
+            <div class="w-lbl">Avg wellness</div>
+          </div>
+          <div class="w-card">
+            <div class="w-num">↑</div>
+            <div class="w-lbl">Improving</div>
+          </div>
+        </div>
+        <button class="btn-cta" onclick="goTo(1)">Share my experience</button>
+        <button class="btn-maybe">Maybe later</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 1: Q1 Dual Slider -->
+    <div class="step" id="st1">
+      <div class="header">
+        <div class="header-eyebrow">Question 1 of 4</div>
+        <div class="header-title">Stress level</div>
+      </div>
+      <div class="body">
+        <div class="q-num">Before vs after</div>
+        <div class="q-text">Rate your stress level before and after the session</div>
+        <div class="slider-block">
+          <div class="slider-label-row">
+            <span class="slider-lbl">Before session</span>
+            <span class="slider-val" id="vb">7</span>
+          </div>
+          <input type="range" class="kyo" min="1" max="10" step="1" value="7" id="sb" oninput="updateDelta()">
+          <div class="slider-ends"><span>1 — Low</span><span>High — 10</span></div>
+        </div>
+        <div class="slider-block">
+          <div class="slider-label-row">
+            <span class="slider-lbl">After session</span>
+            <span class="slider-val" id="va">3</span>
+          </div>
+          <input type="range" class="kyo" min="1" max="10" step="1" value="3" id="sa" oninput="updateDelta()">
+          <div class="slider-ends"><span>1 — Low</span><span>High — 10</span></div>
+        </div>
+        <div class="delta-pill">
+          Improvement: <span class="delta-num" id="delta">−4 points</span>
+        </div>
+      </div>
+      <div class="footer">
+        <button class="btn-back" onclick="goTo(0)">Back</button>
+        <button class="btn-next" onclick="goTo(2)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 2: Q2 Radio -->
+    <div class="step" id="st2">
+      <div class="header">
+        <div class="header-eyebrow">Question 2 of 4</div>
+        <div class="header-title">Circulation</div>
+      </div>
+      <div class="body">
+        <div class="q-num">Physical relief</div>
+        <div class="q-text">Did you feel any improvement in circulation or warmth?</div>
+        <div class="radio-group">
+          <div class="radio-opt sel" onclick="selRadio(this)">
+            <div class="r-circle"><div class="r-inner"></div></div>
+            Yes, noticeably warm
+          </div>
+          <div class="radio-opt" onclick="selRadio(this)">
+            <div class="r-circle"></div>
+            Somewhat, a little
+          </div>
+          <div class="radio-opt" onclick="selRadio(this)">
+            <div class="r-circle"></div>
+            Not really
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <button class="btn-back" onclick="goTo(1)">Back</button>
+        <button class="btn-next" onclick="goTo(3)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 3: Q3 Scale -->
+    <div class="step" id="st3">
+      <div class="header">
+        <div class="header-eyebrow">Question 3 of 4</div>
+        <div class="header-title">How rested?</div>
+      </div>
+      <div class="body">
+        <div class="q-num">Rested score</div>
+        <div class="q-text">How rested do you feel compared to when you arrived?</div>
+        <div class="scale-row" id="sdots">
+          <div class="sdot" onclick="selDot(1)">1</div>
+          <div class="sdot" onclick="selDot(2)">2</div>
+          <div class="sdot" onclick="selDot(3)">3</div>
+          <div class="sdot" onclick="selDot(4)">4</div>
+          <div class="sdot" onclick="selDot(5)">5</div>
+          <div class="sdot" onclick="selDot(6)">6</div>
+          <div class="sdot" onclick="selDot(7)">7</div>
+          <div class="sdot sel" onclick="selDot(8)">8</div>
+          <div class="sdot" onclick="selDot(9)">9</div>
+          <div class="sdot" onclick="selDot(10)">10</div>
+        </div>
+        <div class="scale-labels"><span>Not rested</span><span>Deeply rested</span></div>
+      </div>
+      <div class="footer">
+        <button class="btn-back" onclick="goTo(2)">Back</button>
+        <button class="btn-next" onclick="goTo(4)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 4: Q4 Open Text -->
+    <div class="step" id="st4">
+      <div class="header">
+        <div class="header-eyebrow">Question 4 of 4</div>
+        <div class="header-title">Note for Ravi</div>
+      </div>
+      <div class="body">
+        <div class="q-num">Qualitative</div>
+        <div class="q-text">Anything for your therapist to know before next visit?</div>
+        <textarea class="kyo-area" rows="4" placeholder="e.g. left ankle felt tight, prefer lighter pressure next time..."></textarea>
+        <div class="water-hint">
+          💧 &nbsp;Drink plenty of water after your session to aid detox
+        </div>
+      </div>
+      <div class="footer">
+        <button class="btn-back" onclick="goTo(3)">Back</button>
+        <button class="btn-next" onclick="goTo(5)">Submit</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 5: Success -->
+    <div class="step" id="st5">
+      <div class="progress-fill" style="width:100%"></div>
+      <div class="success-body">
+        <div class="success-ring">✓</div>
+        <div class="success-title">Thank you</div>
+        <div class="success-sub">Your feedback helps Ravi give you<br>a better session next time.</div>
+        <div class="delta-row">
+          <div class="d-card">
+            <div class="d-num d-green">−4</div>
+            <div class="d-lbl">Stress drop</div>
+          </div>
+          <div class="d-card">
+            <div class="d-num">8/10</div>
+            <div class="d-lbl">Rested</div>
+          </div>
+          <div class="d-card">
+            <div class="d-num">9</div>
+            <div class="d-lbl">Sessions</div>
+          </div>
+        </div>
+        <button class="btn-home">← Back to home</button>
+      </div>
+    </div>
+
+    <!-- Step dots indicator -->
+    <div class="step-dots" id="stepdots">
+      <div class="step-dot on"></div>
+      <div class="step-dot"></div>
+      <div class="step-dot"></div>
+      <div class="step-dot"></div>
+      <div class="step-dot"></div>
+      <div class="step-dot"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const progVals = [0, 20, 40, 60, 80, 100];
+let cur = 0;
+
+function goTo(n) {
+  document.getElementById('st' + cur).classList.remove('active');
+  document.getElementById('st' + n).classList.add('active');
+  cur = n;
+  document.getElementById('prog').style.width = progVals[n] + '%';
+  const dots = document.querySelectorAll('.step-dot');
+  dots.forEach((d, i) => {
+    d.classList.toggle('on', i === n);
+  });
+  document.getElementById('stepdots').style.display = n === 5 ? 'none' : 'flex';
+}
+
+function updateDelta() {
+  const b = parseInt(document.getElementById('sb').value);
+  const a = parseInt(document.getElementById('sa').value);
+  document.getElementById('vb').textContent = b;
+  document.getElementById('va').textContent = a;
+  const diff = b - a;
+  const el = document.getElementById('delta');
+  if (diff > 0) {
+    el.textContent = '−' + diff + ' points';
+    el.style.color = '#3d6b3a';
+  } else if (diff < 0) {
+    el.textContent = '+' + Math.abs(diff) + ' points';
+    el.style.color = '#b85a2a';
+  } else {
+    el.textContent = 'No change';
+    el.style.color = '#9a8570';
+  }
+}
+
+function selRadio(el) {
+  el.closest('.radio-group').querySelectorAll('.radio-opt').forEach(o => o.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+function selDot(n) {
+  document.querySelectorAll('#sdots .sdot').forEach((d, i) => d.classList.toggle('sel', i + 1 === n));
+}
+</script>

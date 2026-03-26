@@ -37,7 +37,7 @@ function SheetOverlay({ className, ...props }: React.ComponentProps<typeof Sheet
 }
 
 type SheetContentProps = React.ComponentProps<typeof SheetPrimitive.Content> & {
-  side?: "top" | "right" | "bottom" | "left";
+  side?: "top" | "right" | "bottom" | "left" | "center";
 };
 
 function SheetContent({ className, children, side = "right", ...props }: SheetContentProps) {
@@ -47,7 +47,13 @@ function SheetContent({ className, children, side = "right", ...props }: SheetCo
       "inset-y-0 right-0 h-full w-full max-w-md border-l sm:inset-y-auto sm:top-1/2 sm:-translate-y-1/2 sm:h-auto sm:max-h-[90vh] sm:w-[25rem] sm:max-w-[25rem] sm:rounded-l-2xl sm:rounded-r-none",
     bottom: "inset-x-0 bottom-0 border-t",
     left: "inset-y-0 left-0 h-full w-full max-w-md border-r sm:max-w-lg",
+    center:
+      "left-1/2 top-1/2 w-[min(94vw,40rem)] max-h-[90vh] -translate-x-1/2 -translate-y-1/2 rounded-2xl border",
   };
+  const centerMotionClasses =
+    side === "center"
+      ? "data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95 data-[state=open]:slide-in-from-bottom-10 data-[state=closed]:slide-out-to-bottom-6 duration-300"
+      : "";
 
   return (
     <SheetPortal>
@@ -57,6 +63,7 @@ function SheetContent({ className, children, side = "right", ...props }: SheetCo
         className={cn(
           "fixed z-50 k-surface p-6 shadow-xl k-border-soft outline-none overflow-y-auto",
           "data-[state=open]:animate-in data-[state=closed]:animate-out",
+          centerMotionClasses,
           sideClasses[side],
           className,
         )}

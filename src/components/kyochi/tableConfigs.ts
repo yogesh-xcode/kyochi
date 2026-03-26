@@ -14,11 +14,7 @@ export type TableViewConfig = {
   excludedDataFields: string[];
 };
 
-export type FilterControlType =
-  | "id"
-  | "master"
-  | "date_range"
-  | "time_range";
+export type FilterControlType = "id" | "master" | "date_range" | "time_range";
 
 export type TableFilterConfig = {
   controls: Record<string, FilterControlType>;
@@ -26,25 +22,35 @@ export type TableFilterConfig = {
 
 export const tableViewConfigs: Record<TableViewKey, TableViewConfig> = {
   patients: {
-    columns: ["ID", "Name", "Email", "Phone", "Wellness"],
-    centeredBodyColumns: [0, 3, 4],
-    includedDataFields: ["id", "full_name", "email", "phone", "wellness_score"],
-    excludedDataFields: ["status", "city", "region", "created_at"],
+    columns: ["ID", "Full Name", "Email", "Phone", "DOB", "Wellness", "Status"],
+    centeredBodyColumns: [0, 4, 5, 6],
+    includedDataFields: ["id", "full_name", "email", "phone", "dob", "wellness_score", "status"],
+    excludedDataFields: ["franchise_name", "city", "region", "created_at"],
   },
   therapists: {
-    columns: ["ID", "Name", "Specialty", "Email", "License"],
-    centeredBodyColumns: [0],
-    includedDataFields: ["id", "full_name", "specialty", "email", "license_no"],
+    columns: ["ID", "Name", "Franchise", "Specialty", "Email", "Phone", "License"],
+    centeredBodyColumns: [0, 5, 6],
+    includedDataFields: ["id", "full_name", "franchise_name", "specialty", "email", "phone", "license_no"],
     excludedDataFields: ["status", "phone", "city", "region", "created_at"],
   },
   appointments: {
-    columns: ["ID", "Patient", "Therapist", "Therapy", "Date", "Time", "Status"],
-    centeredBodyColumns: [0, 4, 5, 6],
+    columns: [
+      "ID",
+      "Patient",
+      "Therapy",
+      "Therapist",
+      "Franchise",
+      "Date",
+      "Time",
+      "Status",
+    ],
+    centeredBodyColumns: [0, 5, 6, 7],
     includedDataFields: [
       "id",
       "patient_name",
-      "therapist_name",
       "therapy_name",
+      "therapist_name",
+      "franchise_name",
       "date",
       "time",
       "status",
@@ -58,27 +64,21 @@ export const tableViewConfigs: Record<TableViewKey, TableViewConfig> = {
   },
   feedback: {
     columns: [
-      "Feedback ID",
-      "Appointment ID",
       "Patient",
       "Therapist",
-      "Session Date",
-      "Invoice No",
+      "Appointment Date",
       "Rating",
       "Status",
     ],
-    centeredBodyColumns: [0, 1, 5, 6, 7],
+    centeredBodyColumns: [2, 3, 4],
     includedDataFields: [
-      "feedback_id",
-      "appointment_id",
       "patient_name",
       "therapist_name",
-      "session_date",
-      "invoice_id",
+      "appointment_date",
       "rating",
       "status",
     ],
-    excludedDataFields: ["patient_id", "therapist_id", "notes", "created_at"],
+    excludedDataFields: ["id", "appointment_id", "patient_id", "therapist_id", "franchise_id", "notes", "feedback_payload", "attachment_path", "invoice_id", "submitted_at", "created_at"],
   },
   therapies: {
     columns: [
@@ -87,15 +87,19 @@ export const tableViewConfigs: Record<TableViewKey, TableViewConfig> = {
       "Category",
       "Duration",
       "Sessions",
+      "Price",
+      "Description",
       "Status",
     ],
-    centeredBodyColumns: [0, 3, 4, 5],
+    centeredBodyColumns: [0, 3, 4, 5, 7],
     includedDataFields: [
       "id",
       "name",
       "category",
       "duration_min",
       "session_count",
+      "price",
+      "description",
       "status",
     ],
     excludedDataFields: ["created_at"],
@@ -123,22 +127,22 @@ export const tableViewConfigs: Record<TableViewKey, TableViewConfig> = {
     excludedDataFields: ["status", "created_at"],
   },
   billing: {
-    columns: ["Invoice No", "Therapy Name", "Duration", "Price", "Status"],
-    centeredBodyColumns: [0, 2, 3, 4],
+    columns: ["Patient Name", "Therapy Type", "Amount", "Due Date", "Status"],
+    centeredBodyColumns: [2, 3, 4],
     includedDataFields: [
-      "id",
-      "therapy_name",
-      "duration_min",
+      "patient_name",
+      "therapy_type",
       "amount",
+      "due_date",
       "status",
     ],
     excludedDataFields: [
       "id",
       "appointment_id",
       "patient_id",
+      "franchise_id",
       "currency",
       "issued_at",
-      "due_at",
       "created_at",
     ],
   },
@@ -147,25 +151,30 @@ export const tableViewConfigs: Record<TableViewKey, TableViewConfig> = {
 export const tableFilterConfigs: Record<TableViewKey, TableFilterConfig> = {
   patients: {
     controls: {
-      Name: "master",
+      "Full Name": "master",
       Email: "master",
       Phone: "master",
+      DOB: "date_range",
       Wellness: "master",
+      Status: "master",
     },
   },
   therapists: {
     controls: {
       Name: "master",
+      Franchise: "master",
       Specialty: "master",
       Email: "master",
+      Phone: "master",
       License: "master",
     },
   },
   appointments: {
     controls: {
       Patient: "master",
-      Therapist: "master",
       Therapy: "master",
+      Therapist: "master",
+      Franchise: "master",
       Date: "date_range",
       Time: "time_range",
       Status: "master",
@@ -175,8 +184,7 @@ export const tableFilterConfigs: Record<TableViewKey, TableFilterConfig> = {
     controls: {
       Patient: "master",
       Therapist: "master",
-      "Session Date": "date_range",
-      "Invoice No": "master",
+      "Appointment Date": "date_range",
       Rating: "master",
       Status: "master",
     },
@@ -187,6 +195,8 @@ export const tableFilterConfigs: Record<TableViewKey, TableFilterConfig> = {
       Category: "master",
       Duration: "master",
       Sessions: "master",
+      Price: "master",
+      Description: "master",
       Status: "master",
     },
   },
@@ -202,10 +212,10 @@ export const tableFilterConfigs: Record<TableViewKey, TableFilterConfig> = {
   },
   billing: {
     controls: {
-      "Invoice No": "master",
-      "Therapy Name": "master",
-      Duration: "master",
-      Price: "master",
+      "Patient Name": "master",
+      "Therapy Type": "master",
+      Amount: "master",
+      "Due Date": "date_range",
       Status: "master",
     },
   },

@@ -1,0 +1,20 @@
+
+2026-03-20T17:33:33.101Z appointments.delete.not_found_or_blocked {"id":"AP01"}
+2026-03-20T17:47:28.434Z appointments.delete.supabase_error {"id":"AP03","message":"update or delete on table \"appointments\" violates foreign key constraint \"billing_appointment_id_fkey\" on table \"billing\"","details":"Key is still referenced from table \"billing\".","hint":null,"code":"23503"}
+2026-03-20T17:47:45.061Z appointments.delete.supabase_error {"id":"AP14","message":"update or delete on table \"appointments\" violates foreign key constraint \"billing_appointment_id_fkey\" on table \"billing\"","details":"Key is still referenced from table \"billing\".","hint":null,"code":"23503"}
+--
+2026-03-20T17:51:25.342Z appointments.delete.feedback_deleted {"id":"AP03","deletedCount":0}
+2026-03-20T17:51:25.441Z appointments.delete.billing_deleted {"id":"AP03","deletedCount":0}
+2026-03-20T17:51:25.556Z appointments.delete.supabase_error {"id":"AP03","message":"update or delete on table \"appointments\" violates foreign key constraint \"billing_appointment_id_fkey\" on table \"billing\"","details":"Key is still referenced from table \"billing\".","hint":null,"code":"23503"}
+2026-03-20T17:51:32.551Z appointments.delete.feedback_deleted {"id":"AP03","deletedCount":0}
+2026-03-20T17:51:32.668Z appointments.delete.billing_deleted {"id":"AP03","deletedCount":0}
+2026-03-20T17:51:32.766Z appointments.delete.supabase_error {"id":"AP03","message":"update or delete on table \"appointments\" violates foreign key constraint \"billing_appointment_id_fkey\" on table \"billing\"","details":"Key is still referenced from table \"billing\".","hint":null,"code":"23503"}
+2026-03-20T17:53:33.436Z appointments.delete.feedback_deleted {"id":"AP01","deletedCount":1}
+2026-03-20T17:53:33.659Z appointments.delete.billing_deleted {"id":"AP01","deletedCount":1}
+2026-03-20T17:53:34.030Z appointments.delete.success {"id":"AP01","deletedAppointmentCount":1,"deletedBillingCount":1,"deletedFeedbackCount":1}
+2026-03-21T05:45:08.957Z appointments.delete.feedback_deleted {"id":"AP09","deletedCount":0}
+2026-03-21T05:45:09.066Z appointments.delete.billing_deleted {"id":"AP09","deletedCount":0}
+2026-03-21T05:45:09.279Z appointments.delete.blocked_by_dependencies {"id":"AP09","remainingFeedbackCount":1,"remainingBillingCount":0}
+2026-03-21T05:45:18.206Z appointments.delete.feedback_deleted {"id":"AP09","deletedCount":0}
+2026-03-21T05:45:18.314Z appointments.delete.billing_deleted {"id":"AP09","deletedCount":0}
+2026-03-21T05:45:18.510Z appointments.delete.blocked_by_dependencies {"id":"AP09","remainingFeedbackCount":1,"remainingBillingCount":0}
