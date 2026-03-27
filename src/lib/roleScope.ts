@@ -36,18 +36,28 @@ export const resolveUserContext = ({
   authUserId?: string | null;
 }): UserScopeContext => {
   const userById = new Map(users.map((user) => [user.id, user]));
+  
+  // 1. Try to find user by auth ID (the most reliable source)
   const userByAuthId =
     authUserId && authUserId.length > 0
       ? users.find((entry) => entry.auth_user_id === authUserId)
       : undefined;
+      
+  // 2. Fallback to current_user metadata if available
   const userByCurrent =
     currentUser && currentUser.user_id
       ? userById.get(currentUser.user_id)
       : undefined;
+      
+  // 3. Last resort: only pick the first user if there is exactly one (dev mode)
+  // AND we don't have a Supabase config or we are in a "force login" scenario.
+  // Actually, let's be stricter: only auto-pick if NOT in production.
+  const isDev = process.env.NODE_ENV === "development";
   const user =
     userByAuthId ??
     userByCurrent ??
-    (users.length === 1 ? users[0] : undefined);
+    (users.length === 1 && isDev ? users[0] : undefined);
+    
   const userId = user?.id ?? "";
 
   const roleCandidate = user?.role ?? currentUser?.role ?? null;
@@ -70,13 +80,14 @@ export const resolveUserContext = ({
 export const toCurrentUserDisplay = (context: UserScopeContext): CurrentUserDisplay => {
   if (!context.user) {
     return {
-      name: "Unknown User",
-      initials: "UU",
+      name: "Guest",
+      initials: "?",
       role: context.role,
     };
   }
 
-  const initials = context.user.full_name
+  const name = context.user.full_name || "Unknown User";
+  const initials = name
     .split(" ")
     .filter(Boolean)
     .slice(0, 2)
@@ -84,7 +95,7 @@ export const toCurrentUserDisplay = (context: UserScopeContext): CurrentUserDisp
     .join("");
 
   return {
-    name: context.user.full_name,
+    name,
     initials: initials || "UU",
     role: context.user.role,
   };

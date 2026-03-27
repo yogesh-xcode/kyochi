@@ -20,10 +20,11 @@ export function AppShell({
   const pathname = usePathname();
   const router = useRouter();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const [isAuthReady, setIsAuthReady] = useState(!hasSupabaseConfig);
-  const [isAuthenticated, setIsAuthenticated] = useState(!hasSupabaseConfig);
+  const [isAuthReady, setIsAuthReady] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authUserId, setAuthUserId] = useState<string | null>(null);
   const { data, isLoading } = useBootstrapData();
+  
   const context = useMemo(
     () =>
       resolveUserContext({
@@ -33,11 +34,14 @@ export function AppShell({
       }),
     [authUserId, data.current_user, data.users],
   );
+  
   const currentUser = toCurrentUserDisplay(context);
   const navSections = roleNavSections[context.role];
 
   useEffect(() => {
     if (!hasSupabaseConfig) {
+      setIsAuthenticated(false);
+      setIsAuthReady(true);
       return;
     }
 
@@ -52,25 +56,33 @@ export function AppShell({
     };
     void check();
 
-    const subscription = supabase?.auth.onAuthStateChange((_event, session) => {
-      setIsAuthenticated(Boolean(session));
-      setAuthUserId(session?.user.id ?? null);
-      setIsAuthReady(true);
+    const { data: subscription } = supabase!.auth.onAuthStateChange((_event, session) => {
+      if (active) {
+        setIsAuthenticated(Boolean(session));
+        setAuthUserId(session?.user.id ?? null);
+        setIsAuthReady(true);
+      }
     });
 
     return () => {
       active = false;
-      subscription?.data.subscription.unsubscribe();
+      subscription.subscription.unsubscribe();
     };
   }, []);
 
   useEffect(() => {
-    if (!hasSupabaseConfig || !isAuthReady) {
+    if (!isAuthReady) {
       return;
     }
+    
+    // Redirect to login if not authenticated
     if (!isAuthenticated && pathname !== "/login") {
       router.replace("/login");
-    } else if (isAuthenticated && pathname === "/login") {
+      return;
+    } 
+    
+    // Redirect to dashboard if already authenticated and on login page
+    if (isAuthenticated && pathname === "/login") {
       router.replace("/dashboard");
     }
   }, [isAuthReady, isAuthenticated, pathname, router]);
